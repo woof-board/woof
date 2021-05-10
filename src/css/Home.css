@@ -1,6 +1,6 @@
 .background-home {
-    background-image: url('../assets/images/home.jpg');
-    top: 0;
+    background-image: url('../assets/images/home-samson.jpg');
+    top: 7rem;
     left: 0;
     position: fixed;
     width: 100%;
@@ -14,12 +14,14 @@
       color: white;
       font-size: 9rem;
       font-weight: bold;
+      text-shadow: 10px 10px 10px rgb(0,0,0,0.4);
   }
 
   .home-text-small {
       font-size: 2rem;
       color: white;
       font-weight: bold;
+      text-shadow: 10px 10px 20px rgb(0,0,0,1);
   }
 
   .home-content {
@@ -56,7 +58,13 @@
           font-size: 4rem;
       }
 
+      .background-home {
+          top: 10rem;
+          background-image: url('../assets/images/home-pixel.jpg');
+      }
+
       .home-content {
           left: 2rem;
+          top: 13rem;
       }
   }

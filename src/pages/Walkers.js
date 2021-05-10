@@ -13,7 +13,8 @@ function Walkers() {
             <div className="walkers-container">
                 <div></div>
                 <div className="picture-container">
-                    <img alt="" src="http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/blond-haired-man.png"></img></div>
+                    <img alt="" className="walker-list-picture" src="http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/blond-haired-man.png"></img>
+                </div>
                 <div className="walker-content-container">
                     <div>NAME NAME</div>
                     <div>ICONS</div>
