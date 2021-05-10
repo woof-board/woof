@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Jobs from './pages/Jobs';
-import Login from './pages/Jobs';
+import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Signup from './pages/Signup';
 import Walkers from './pages/Walkers';
