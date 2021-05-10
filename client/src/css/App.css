@@ -1,3 +1,11 @@
+:root {
+  --primary: #2C3D5D;
+  --secondary: #9BA790;
+  --tertiary: #325A3A;
+  --quatemary: #754F34;
+  --quinary:  #DBD3D3;
+}
+
 body {
   background-color: rgb(181, 181, 181);
 }
