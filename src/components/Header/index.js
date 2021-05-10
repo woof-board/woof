@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../css/Header.css';
 import Icon from '@iconify/react';
+import Logo from '../../assets/images/woof-logo-black.png';
 
 function Header(props) {
 
@@ -13,7 +14,7 @@ function Header(props) {
     return (
         <nav className="header-container">
             <div className="logo">
-                img here
+                <img className="header-logo" src={Logo} alt=""></img>
             </div>
             <div className="nav-links-container">
                 {links.map((link) => (

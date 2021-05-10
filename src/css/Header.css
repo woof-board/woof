@@ -7,6 +7,13 @@
     z-index: 999;
     position: fixed;
     width: 100%;
+    height: auto;
+    align-items: center;
+}
+
+.header-logo {
+    width: 5rem;
+    height: 5rem;
 }
 
 .logo {
@@ -23,6 +30,7 @@ li {
     display: flex;
     flex-direction: row;
     padding-right: 1rem;
+    background-color: black;
 }
 
 .link {
@@ -54,5 +62,9 @@ li {
 
     .navActive {
         color: black;
+    }
+
+    .header-container {
+        flex-direction: column;
     }
 }
