@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/woof/static/css/main.f00bf5b4.chunk.css",
-    "main.js": "/woof/static/js/main.f24efab0.chunk.js",
-    "main.js.map": "/woof/static/js/main.f24efab0.chunk.js.map",
+    "main.css": "/woof/static/css/main.0c238d0c.chunk.css",
+    "main.js": "/woof/static/js/main.cc3cd8cc.chunk.js",
+    "main.js.map": "/woof/static/js/main.cc3cd8cc.chunk.js.map",
     "runtime-main.js": "/woof/static/js/runtime-main.6329f594.js",
     "runtime-main.js.map": "/woof/static/js/runtime-main.6329f594.js.map",
     "static/js/2.48d51c29.chunk.js": "/woof/static/js/2.48d51c29.chunk.js",
@@ -10,14 +10,15 @@
     "static/js/3.6ecf4aea.chunk.js": "/woof/static/js/3.6ecf4aea.chunk.js",
     "static/js/3.6ecf4aea.chunk.js.map": "/woof/static/js/3.6ecf4aea.chunk.js.map",
     "index.html": "/woof/index.html",
-    "static/css/main.f00bf5b4.chunk.css.map": "/woof/static/css/main.f00bf5b4.chunk.css.map",
+    "static/css/main.0c238d0c.chunk.css.map": "/woof/static/css/main.0c238d0c.chunk.css.map",
     "static/js/2.48d51c29.chunk.js.LICENSE.txt": "/woof/static/js/2.48d51c29.chunk.js.LICENSE.txt",
-    "static/media/Home.css": "/woof/static/media/home.760820c0.jpg"
+    "static/media/Home.css": "/woof/static/media/home.760820c0.jpg",
+    "static/media/woof-logo-black.5120dc34.png": "/woof/static/media/woof-logo-black.5120dc34.png"
   },
   "entrypoints": [
     "static/js/runtime-main.6329f594.js",
     "static/js/2.48d51c29.chunk.js",
-    "static/css/main.f00bf5b4.chunk.css",
-    "static/js/main.f24efab0.chunk.js"
+    "static/css/main.0c238d0c.chunk.css",
+    "static/js/main.cc3cd8cc.chunk.js"
   ]
 }
