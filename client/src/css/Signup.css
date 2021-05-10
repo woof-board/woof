@@ -1,0 +1,33 @@
+.center-card {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10rem;
+    border: 2px solid black;
+    padding: 1rem 2rem 2rem 2rem;
+    box-shadow: 10px 10px 20px rgb(0,0,0,0.55);
+    background-color: white;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+#signup {
+    display: flex;
+    justify-content: center;
+}
+
+#contact-form {
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+label {
+    margin-right: 1rem;
+}
+
+@media screen and (max-width: 650px) {
+    .center-card {
+        margin-top: 12rem;
+    }
+}

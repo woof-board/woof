@@ -1,0 +1,70 @@
+.background-home {
+    background-image: url('../assets/images/home-samson.jpg');
+    top: 7rem;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 2;
+  }
+
+  .home-text {
+      color: white;
+      font-size: 9rem;
+      font-weight: bold;
+      text-shadow: 10px 10px 10px rgb(0,0,0,0.4);
+  }
+
+  .home-text-small {
+      font-size: 2rem;
+      color: white;
+      font-weight: bold;
+      text-shadow: 10px 10px 20px rgb(0,0,0,1);
+  }
+
+  .home-content {
+      position: relative;
+      left: 4rem;
+      top: 10rem;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-content: space-between;
+      height: auto;
+      width: 50%;
+  }
+
+  .button-container {
+      margin-top: 3rem;
+  }
+
+  .button {
+      text-decoration: none;
+      color: white;
+      padding: 1rem;
+      margin: 1rem 1rem 1rem 1rem;
+      border: 2px solid white;
+  }
+
+  .button:hover {
+      color: black;
+      background-color: white;
+  }
+
+  @media screen and (max-width: 650px) {
+      .home-text {
+          font-size: 4rem;
+      }
+
+      .background-home {
+          top: 10rem;
+          background-image: url('../assets/images/home-pixel.jpg');
+      }
+
+      .home-content {
+          left: 2rem;
+          top: 13rem;
+      }
+  }
