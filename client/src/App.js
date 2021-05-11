@@ -5,7 +5,8 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import About from './pages/About';
-import Header from './components/Header/index'
+import Header from './components/Header/index';
+import NoMatch from './pages/NoMatch';
 // npm install --save-dev @iconify/react @iconify-icons/ant-design
 import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 // npm install --save-dev @iconify/react @iconify-icons/ic
@@ -17,8 +18,17 @@ import ApolloClient from 'apollo-boost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const client = new ApolloClient({
+  request: operation => {
+    const token = localStorage.getItem('id_token');
+
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    });
+  },
   uri: '/graphql'
-})
+});
 
 function App() {
 
@@ -48,32 +58,39 @@ function App() {
   const [currentLink, setCurrentLink] = useState(links[0])
 
   return (
-    <body className="page">
-      <div>
-        <Header 
-        links={links}
-        currentLink={currentLink}
-        setCurrentLink={setCurrentLink}
-        />
-      </div>
-      <div>
-        {currentLink.name === links[0].name && (
-          <Home />
-        )}
-        {currentLink.name === links[1].name && (
-          <About />
-        )}
-        {currentLink.name === links[2].name && (
-          <Login />
-        )}
-        {currentLink.name === links[3].name && (
-          <Signup />
-        )}
-      </div>
-      <div>
-        <Footer />
-      </div>
-    </body>
+    <ApolloProvider client={client}>
+      <Router>
+        <body className="page">
+          <div>
+            <Header 
+            links={links}
+            currentLink={currentLink}
+            setCurrentLink={setCurrentLink}
+            />
+          </div>
+          <div>
+            <Switch>
+              {currentLink.name === links[0].name && (
+                <Home />
+              )}
+              {currentLink.name === links[1].name && (
+                <About />
+              )}
+              {currentLink.name === links[2].name && (
+                <Login />
+              )}
+              {currentLink.name === links[3].name && (
+                <Signup />
+              )}
+              <Router component={NoMatch} />
+            </Switch>
+          </div>
+          <div>
+            <Footer />
+          </div>
+        </body>
+      </Router>
+    </ApolloProvider>
   );
 }
 
