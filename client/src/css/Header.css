@@ -41,9 +41,16 @@ li {
     padding: 1rem;
 }
 
+.false {
+    border-radius: 25px;
+    background-color: black;
+}
+
 .navActive {
     background-color: white;
     color: black;
+    transition: 0.7s;
+    border-radius: 25px;
 }
 
 .icon {

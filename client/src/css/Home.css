@@ -26,14 +26,12 @@
 
 .home-content {
     position: relative;
-    top: 7rem;
+    top: 8rem;
     z-index: 3;
     display: flex;
     flex-direction: column;
-    align-content: space-between;
     height: auto;
-    padding-left: 4rem;
-    padding-right: 4rem;
+    align-items: center;
 }
 
 .button-container {
@@ -65,7 +63,7 @@
 
 @media screen and (max-width: 650px) {
     .home-text {
-        font-size: 4rem;
+        font-size: 6rem;
     }
 
     .background-home {

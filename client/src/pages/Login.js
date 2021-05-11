@@ -22,7 +22,6 @@ function Login() {
                     <button>LOGIN</button>
                 </div>
             </div>
-
         </div>
     )
 }
