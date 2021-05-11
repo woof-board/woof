@@ -7,6 +7,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 2;
+    margin-top: 5rem;
 }
 
 .home-text {
@@ -25,13 +26,14 @@
 
 .home-content {
     position: relative;
-    top: 5rem;
+    top: 7rem;
     z-index: 3;
     display: flex;
     flex-direction: column;
     align-content: space-between;
     height: auto;
-    padding: 4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
 }
 
 .button-container {
@@ -72,7 +74,7 @@
 
     .home-content {
         padding: 2rem;
-        top: 13rem;
+        top: 9rem;
     }
 
     .button-container {
