@@ -3,6 +3,7 @@ import '../css/Login.css';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/react-hooks';
 import { LOGIN_USER } from '../utils/mutations'
+import { WALKER_LOGIN_USER } from '../utils/mutations'
 
 const Login = (props) => {
     const [formState, setFormState] = useState({ email: '', password: '' });
@@ -19,7 +20,7 @@ const Login = (props) => {
     };
   
   // submit form
-  const handleFormSubmit = async event => {
+  const handleWalkerFormSubmit = async event => {
     event.preventDefault();
   
     try {
@@ -33,61 +34,80 @@ const Login = (props) => {
       console.error(e);
     }
   };
+
+    // submit form
+    const handleOwnerFormSubmit = async event => {
+        event.preventDefault();
+      
+        try {
+          const { data } = await login({
+            variables: { ...formState }
+          });
+      
+          Auth.login(data.login.token);
+          console.log(data);
+        } catch (e) {
+          console.error(e);
+        }
+      };
+
     return (
         <div className="login-page" id="login">
             <div className="login-container">
                 <div>
-                    <form onSubmit={handleFormSubmit} className="login-card">
+                    <form onSubmit={handleWalkerFormSubmit} className="login-card">
                         <span className>WALKERS</span>
                         <label>Email:</label>
                         <input                 
                             placeholder='Your email'
                             name='email'
                             type='email'
-                            id='email'
-                            value={formState.email}
+                            id='walker-email'
+                            // value={formState.email}
                             onChange={handleChange}
                             />
-                        <label>Pasword:</label>
+                        <label>Password:</label>
                         <input
                             className='form-input'
                             placeholder='******'
                             name='password'
                             type='password'
-                            id='password'
-                            value={formState.password}
+                            id='walker-password'
+                            // value={formState.password}
                             onChange={handleChange}
                         />
                         <button type="submit">LOGIN</button>
+                        {error && <div>Login failed</div>}
                     </form>
-                    {error && <div>Login failed</div>}
+
                 </div>
 
                 <div>
-                    <form onSubmit={handleFormSubmit} className="login-card">
+                    <form onSubmit={handleOwnerFormSubmit} className="login-card">
                         <span className>OWNERS</span>
                         <label>Email:</label>
                         <input                 
                             placeholder='Your email'
                             name='email'
                             type='email'
-                            id='email'
-                            value={formState.email}
+                            id='owner-email'
+                            // value={formState.email}
                             onChange={handleChange}
                             />
-                        <label>Pasword:</label>
+                        <label>Password:</label>
                         <input
                             className='form-input'
                             placeholder='******'
                             name='password'
                             type='password'
-                            id='password'
-                            value={formState.password}
+                            id='owner-password'
+                            // value={formState.password}
                             onChange={handleChange}
                         />
                         <button type="submit">LOGIN</button>
+                        {error && <div>Login failed</div>}
                     </form>
-                    {error && <div>Login failed</div>}
+
                 </div>
             </div>
         </div>
