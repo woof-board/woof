@@ -36,52 +36,59 @@ const Login = (props) => {
     return (
         <div className="login-page" id="login">
             <div className="login-container">
-                <form onSubmit={handleFormSubmit} className="login-card">
-                    <span className>WALKERS</span>
-                    <label>Email:</label>
-                    <input                 
-                        placeholder='Your email'
-                        name='email'
-                        type='email'
-                        id='email'
-                        value={formState.email}
-                        onChange={handleChange}
+                <div>
+                    <form onSubmit={handleFormSubmit} className="login-card">
+                        <span className>WALKERS</span>
+                        <label>Email:</label>
+                        <input                 
+                            placeholder='Your email'
+                            name='email'
+                            type='email'
+                            id='email'
+                            value={formState.email}
+                            onChange={handleChange}
+                            />
+                        <label>Pasword:</label>
+                        <input
+                            className='form-input'
+                            placeholder='******'
+                            name='password'
+                            type='password'
+                            id='password'
+                            value={formState.password}
+                            onChange={handleChange}
                         />
-                    <label>Pasword:</label>
-                    <input
-                        className='form-input'
-                        placeholder='******'
-                        name='password'
-                        type='password'
-                        id='password'
-                        value={formState.password}
-                        onChange={handleChange}
-                    />
-                    <button type="submit">LOGIN</button>
-                </form>
-                <form className="login-card">
-                    <span>OWNERS</span>
-                    <label>Email:</label>
-                    <input                 
-                        placeholder='Your email'
-                        name='email'
-                        type='email'
-                        id='email'
-                        value={formState.email}
-                        onChange={handleChange}
+                        <button type="submit">LOGIN</button>
+                    </form>
+                    {error && <div>Login failed</div>}
+                </div>
+
+                <div>
+                    <form onSubmit={handleFormSubmit} className="login-card">
+                        <span className>OWNERS</span>
+                        <label>Email:</label>
+                        <input                 
+                            placeholder='Your email'
+                            name='email'
+                            type='email'
+                            id='email'
+                            value={formState.email}
+                            onChange={handleChange}
+                            />
+                        <label>Pasword:</label>
+                        <input
+                            className='form-input'
+                            placeholder='******'
+                            name='password'
+                            type='password'
+                            id='password'
+                            value={formState.password}
+                            onChange={handleChange}
                         />
-                    <label>Pasword:</label>
-                    <input
-                        className='form-input'
-                        placeholder='******'
-                        name='password'
-                        type='password'
-                        id='password'
-                        value={formState.password}
-                        onChange={handleChange}
-                    />
-                    <button type="submit">LOGIN</button>
-                </form>
+                        <button type="submit">LOGIN</button>
+                    </form>
+                    {error && <div>Login failed</div>}
+                </div>
             </div>
         </div>
     )
