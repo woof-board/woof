@@ -12,6 +12,14 @@ import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 import loginOutlined from '@iconify-icons/ant-design/login-outlined';
 import personAdd from '@iconify-icons/akar-icons/person-add';
 
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+const client = new ApolloClient({
+  uri: '/graphql'
+})
+
 function App() {
 
   const [links] = useState([
