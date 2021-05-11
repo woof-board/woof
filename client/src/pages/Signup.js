@@ -43,7 +43,30 @@ function Signup() {
     return (
         <div id="signup">
             <div className="center-card">
-                <h1>SIGN-UP</h1>
+                <h1>Owner Sign up</h1>
+                <form id="contact-form" onSubmit={handleSubmit}>
+                    <div className="contact-column">
+                        <label htmlFor="name">Name:</label>
+                        <input type="text" defaultValue={name} onChange={handleChange} name="name" />
+                    </div>
+                    <div className="contact-column">
+                        <label htmlFor="username">Username:</label>
+                        <input type="text" defaultValue={username} onChange={handleChange} name="username" />
+                    </div>
+                    <div className="contact-column">
+                        <label htmlFor="email">Email address:</label>
+                        <input defaultValue={email} onChange={handleChange} type="email" name="email" />
+                    </div>
+                        {errorMessage && (
+                        <div>
+                        <p className="error-text">{errorMessage}</p>
+                        </div>
+                        )}
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div className="center-card">
+                <h1>Walker Sign up</h1>
                 <form id="contact-form" onSubmit={handleSubmit}>
                     <div className="contact-column">
                         <label htmlFor="name">Name:</label>

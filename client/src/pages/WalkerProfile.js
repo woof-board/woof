@@ -1,39 +1,26 @@
 import React, {useState} from 'react';
 import './css/App.css';
-import Home from './pages/Home';
+import WalkerProfile from './pages/WalkerProfile';
+import WalkerHeader from './components/Header/WalkerHeader';
 import Footer from './components/Footer';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
-import About from './pages/About';
-import Header from './components/Header/index'
+import Jobs from './pages/Jobs';
 // npm install --save-dev @iconify/react @iconify-icons/ant-design
 import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 // npm install --save-dev @iconify/react @iconify-icons/ic
-import loginOutlined from '@iconify-icons/ant-design/login-outlined';
-import personAdd from '@iconify-icons/akar-icons/person-add';
+import baselineWorkOutline from '@iconify-icons/ic/baseline-work-outline';
 
 function App() {
 
   const [links] = useState([
     {
-      name: 'Home',
+      name: 'Profile',
       href: '#home',
       icon: homeOutlined
     },
     {
-      name: 'About Us',
-      href: '#about',
-      icon: loginOutlined
-    },
-    {
-      name: 'Log in',
-      href: '#login',
-      icon: loginOutlined
-    },
-    {
-      name: 'Sign up',
-      href: '#signup',
-      icon: personAdd
+      name: 'Jobs',
+      href: '#jobs',
+      icon: baselineWorkOutline
     }
   ])
 
@@ -42,7 +29,7 @@ function App() {
   return (
     <body className="page">
       <div>
-        <Header 
+        <WalkerHeader 
         links={links}
         currentLink={currentLink}
         setCurrentLink={setCurrentLink}
@@ -50,16 +37,10 @@ function App() {
       </div>
       <div>
         {currentLink.name === links[0].name && (
-          <Home />
+          <WalkerProfile />
         )}
         {currentLink.name === links[1].name && (
-          <About />
-        )}
-        {currentLink.name === links[2].name && (
-          <Login />
-        )}
-        {currentLink.name === links[3].name && (
-          <Signup />
+          <Jobs />
         )}
       </div>
       <div>
