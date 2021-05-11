@@ -1,39 +1,26 @@
 import React, {useState} from 'react';
 import './css/App.css';
-import Home from './pages/Home';
+import WalkerProfile from './pages/WalkerProfile';
+import WalkerHeader from './components/Header/WalkerHeader';
 import Footer from './components/Footer';
-import WalkerLogin from './pages/WalkerLogin';
-import OwnerLogin from './pages/OwnerLogin';
-import Signup from './pages/Signup';
+import Jobs from './pages/Jobs';
 // npm install --save-dev @iconify/react @iconify-icons/ant-design
 import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 // npm install --save-dev @iconify/react @iconify-icons/ic
 import baselineWorkOutline from '@iconify-icons/ic/baseline-work-outline';
-import loginOutlined from '@iconify-icons/ant-design/login-outlined';
-import personAdd from '@iconify-icons/akar-icons/person-add';
 
 function App() {
 
   const [links] = useState([
     {
-      name: 'Home',
+      name: 'Profile',
       href: '#home',
       icon: homeOutlined
     },
     {
-      name: 'Walker Login',
-      href: '#walkerlogin',
+      name: 'Jobs',
+      href: '#jobs',
       icon: baselineWorkOutline
-    },
-    {
-      name: 'Owner Login',
-      href: '#ownerlogin',
-      icon: loginOutlined
-    },
-    {
-      name: 'Signup',
-      href: '#signup',
-      icon: personAdd
     }
   ])
 
@@ -42,27 +29,18 @@ function App() {
   return (
     <body className="page">
       <div>
-        {/* <Header 
+        <WalkerHeader 
         links={links}
         currentLink={currentLink}
         setCurrentLink={setCurrentLink}
-        /> */}
+        />
       </div>
       <div>
         {currentLink.name === links[0].name && (
-          <Home 
-          links={links}
-          currentLink={currentLink}
-          setCurrentLink={setCurrentLink}/>
+          <WalkerProfile />
         )}
         {currentLink.name === links[1].name && (
-          <WalkerLogin />
-        )}
-        {currentLink.name === links[2].name && (
-          <OwnerLogin />
-        )}
-        {currentLink.name === links[3].name && (
-          <Signup />
+          <Jobs />
         )}
       </div>
       <div>

@@ -4,7 +4,25 @@ import '../css/Login.css';
 function Login() {
     return (
         <div id="login">
-            LOGIN
+            <div className="login-container">
+                <div className="login-card">
+                    <span className>WALKERS</span>
+                    <label>Username:</label>
+                    <input type="text"></input>
+                    <label>Email:</label>
+                    <input type="text"></input>
+                    <button>LOGIN</button>
+                </div>
+                <div className="login-card">
+                    <span>OWNERS</span>
+                    <label>Username:</label>
+                    <input type="text"></input>
+                    <label>Email:</label>
+                    <input type="text"></input>
+                    <button>LOGIN</button>
+                </div>
+            </div>
+
         </div>
     )
 }

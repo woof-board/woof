@@ -18,8 +18,7 @@ function Header(props) {
             </div>
             <div className="nav-links-container">
                 {links.map((link) => (
-                <li
-                    className="list-link">
+                <li className="list-link">
                     <a href={link.href} className={`link ${currentLink.name === link.name && `navActive`}`} key={link.name} onClick={() => {
                     setCurrentLink(link);
                     }}>{link.name}</a>
