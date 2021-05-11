@@ -2,11 +2,17 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding: 1rem;
+    padding: 1rem 0rem 1rem 0rem;
     background-color: black;
     z-index: 999;
     position: fixed;
     width: 100%;
+    height: auto;
+    align-items: center;
+}
+
+.header-logo {
+    padding: 0 1rem 0 1rem;
 }
 
 .logo {
@@ -23,6 +29,7 @@ li {
     display: flex;
     flex-direction: row;
     padding-right: 1rem;
+    background-color: black;
 }
 
 .link {
@@ -32,9 +39,16 @@ li {
     padding: 1rem;
 }
 
+.false {
+    border-radius: 25px;
+    background-color: black;
+}
+
 .navActive {
     background-color: white;
     color: black;
+    transition: 0.7s;
+    border-radius: 25px;
 }
 
 .icon {
@@ -54,5 +68,9 @@ li {
 
     .navActive {
         color: black;
+    }
+
+    .header-container {
+        flex-direction: column;
     }
 }

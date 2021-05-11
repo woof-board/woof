@@ -1,23 +1,24 @@
 import React, {useState} from 'react';
 import './css/App.css';
 import Home from './pages/Home';
-import Header from './components/Header';
 import Footer from './components/Footer';
-import Jobs from './pages/Jobs';
-import Login from './pages/Jobs';
-import Profile from './pages/Profile';
+import Login from './pages/Login';
 import Signup from './pages/Signup';
-import Walkers from './pages/Walkers';
+import About from './pages/About';
+import Header from './components/Header/index'
 // npm install --save-dev @iconify/react @iconify-icons/ant-design
 import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 // npm install --save-dev @iconify/react @iconify-icons/ic
-import baselineWorkOutline from '@iconify-icons/ic/baseline-work-outline';
 import loginOutlined from '@iconify-icons/ant-design/login-outlined';
 import personAdd from '@iconify-icons/akar-icons/person-add';
-// npm install --save-dev @iconify/react @iconify-icons/icomoon-free
-import profileIcon from '@iconify-icons/icomoon-free/profile';
-// npm install --save-dev @iconify/react @iconify-icons/bx
-import bxWalk from '@iconify-icons/bx/bx-walk';
+
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+const client = new ApolloClient({
+  uri: '/graphql'
+})
 
 function App() {
 
@@ -28,29 +29,19 @@ function App() {
       icon: homeOutlined
     },
     {
-      name: 'Jobs',
-      href: '#jobs',
-      icon: baselineWorkOutline
+      name: 'About Us',
+      href: '#about',
+      icon: loginOutlined
     },
     {
-      name: 'Login',
+      name: 'Log in',
       href: '#login',
       icon: loginOutlined
     },
     {
-      name: 'Signup',
+      name: 'Sign up',
       href: '#signup',
       icon: personAdd
-    },
-    {
-      name: 'Profile',
-      href: '#profile',
-      icon: profileIcon
-    },
-    {
-      name: 'Walkers',
-      href: '#walkers',
-      icon: bxWalk
     }
   ])
 
@@ -70,19 +61,13 @@ function App() {
           <Home />
         )}
         {currentLink.name === links[1].name && (
-          <Jobs />
+          <About />
         )}
         {currentLink.name === links[2].name && (
           <Login />
         )}
         {currentLink.name === links[3].name && (
           <Signup />
-        )}
-        {currentLink.name === links[4].name && (
-          <Profile />
-        )}
-        {currentLink.name === links[5].name && (
-          <Walkers />
         )}
       </div>
       <div>

@@ -1,0 +1,47 @@
+.jobs-container {
+    display: flex;
+    padding: 8rem 5rem 5rem 5rem;
+    flex-direction: column;
+}
+
+.job-card {
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    max-width: 1400px;
+    box-shadow: 10px 10px 20px rgb(0,0,0,0.5);
+}
+
+.job-profile-img {
+    width: 5rem;
+    height: 5rem;
+    margin: 1rem;
+    border-radius: 50%;
+    border: 5px solid rgb(0,0,0,.3);
+    padding: .3rem;
+}
+
+.job-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 1rem;
+    height: 6rem;
+}
+
+.job-title {
+    font-weight: bold;
+}
+
+.job-date {
+    font-size: .9rem;
+    color: blue;
+}
+
+@media screen and (max-width: 650px) {
+    .jobs-container {
+        padding: 10rem 1rem 5rem 1rem;
+    }
+}
