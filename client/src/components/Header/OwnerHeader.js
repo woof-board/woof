@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../css/Header.css';
-import Logo from '../../assets/images/woof-logo-black.png';
+import Logo from '../../assets/images/woof-logo.svg';
 
 function Header(props) {
 
