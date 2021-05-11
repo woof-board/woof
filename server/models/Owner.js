@@ -1,123 +1,70 @@
-const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
+const { Schema } = require('mongoose');
+const bcrypt = require('bcrypt');
+const addressSchema = require('./Address');
+const dogSchema = require('./Dog');
 
-const ownerSchema = new Schema({
-    firstName: {
-        type: String,
-        required: true,
-        trim: true
-      },
-      lastName: {
-        type: String,
-        required: true,
-        trim: true
-      },
-      email: {
-        type: String,
-        required: true,
-        unique: true
-      },
-      password: {
-        type: String,
-        required: true,
-        minlength: 5
-      },
-
-      admin:    {
-        type: Boolean,
-        required: true,
-      },
-
-      address: {
-        type: String,
-        required: true,  
-      },
-
-      city: {
-        type: String,
-        required: true,  
-      },
-
-      neighbourhood: {
-        type: String,
-        required: true,  
-      },
-      Prov: {
-        type: String,
-        required: true,  
-      },
-      postal_code: {
-        type: String,
-        required: true,  
-      },
-      phone: {
-        type: String,
-        required: true, 
-      },
-      dogs: [
-        {
-            name: {
-                type: String,
-                required: true,
-                trim: true
-            },
-
-            breed: {
-                type: String,
-                required: true,
-                trim: true
-            },
-            weight: {
-                type: String,
-                required: true,
-            },
-            treats: {
-                type: Boolean,
-                required: true,
-            },
-        }
-    ],
-      schedule: [
-        {   
-            date: {
-                type: Date,
-                required: true,
-            },
-            time: {
-                type: String,
-                required: true,
-            },
-            owner: {
-                type: Schema.type.OwnerId,
-                ref: 'Owner',
-                required: true,
-            },
-            quantity: {                             // quantity of dogs
-                type: Number,
-                min: 0,
-                default: 0
-            }
-          }
-      ]
-    
-    });
-
-    ownerSchema.pre('save', async function(next) {
-    if (this.isNew || this.isModified('password')) {
-      const saltRounds = 10;
-      this.password = await bcrypt.hash(this.password, saltRounds);
+const ownerSchema = new Schema(
+    {
+        firstName: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        lastName: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+            match: [/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/, 'Must be a valid email address!']
+        },
+        password: {
+            type: String,
+            required: true,
+            minlength: 5
+        },
+        admin: {
+            type: Boolean,
+            required: true,
+            default: false
+        },
+        address: addressSchema,
+        phone: {
+            type: String
+        },
+        dogs: [dogSchema]
+    },
+    {
+      toJSON: {
+        getters: true
+      }
     }
-  
+);
+
+// set up pre-save middleware to create password
+ownerSchema.pre('save', async function (next) {
+    if (this.isNew || this.isModified('password')) {
+        const saltRounds = 10;
+        this.password = await bcrypt.hash(this.password, saltRounds);
+    }
+
     next();
-  });
-  
-  ownerSchema.methods.isCorrectPassword = async function(password) {
+});
+
+// compare the incoming password with the hashed password
+ownerSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
-  };
-  
-  const Owner = mongoose.model('Owner', ownerSchema);
-  
-  module.exports = Owner;
-  
+};
+
+ownerSchema.virtual('dogCount').get(function() {
+    return this.dogs.length;
+});
+
+const Owner = mongoose.model('Owner', ownerSchema);
+
+module.exports = Owner;
 
