@@ -1,5 +1,5 @@
 const Owner = require('./Owner');
 const Walker = require('./Walker');
-const Dog = require('./Dog');
+const Order = require('./Order');
 
-module.exports = { Owner, Walker, Dog };
+module.exports = { Owner, Walker, Order };
