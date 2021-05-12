@@ -21,7 +21,7 @@ db.once('open', async () => {
             weight: '70lb'
         },
         {
-            name: 'Tiger',
+            name: 'Bruen',
             breed: 'Poodle',
             weight: '70lb'
         }
@@ -35,7 +35,8 @@ db.once('open', async () => {
     lastName: 'Washington',
     email: 'pamela@testmail.com',
     password: 'password12345',
-    neighbourhoods: 'East Toronto'
+    neighbourhoods: 'East Toronto',
+    avatar: "/images/user-default.png"
   });
 
   await Walker.create({
@@ -43,7 +44,8 @@ db.once('open', async () => {
     lastName: 'Holt',
     email: 'eholt@testmail.com',
     password: 'password12345',
-    neighbourhoods: 'West Toronto'
+    neighbourhoods: 'West Toronto',
+    avatar: "/images/user-default.png"
   });
 
   await Walker.create({
@@ -51,7 +53,8 @@ db.once('open', async () => {
     lastName: 'Nuvoski',
     email: 'karen@testmail.com',
     password: 'password12345',
-    neighbourhoods: 'North Toronto'
+    neighbourhoods: 'North Toronto',
+    avatar: "/images/user-default.png"
   });
 
   await Walker.create({
@@ -59,15 +62,35 @@ db.once('open', async () => {
     lastName: 'Turnbull',
     email: 'Ryan@testmail.com',
     password: 'password12345',
-    neighbourhoods: 'South Toronto'
+    neighbourhoods: 'South Toronto',
+    avatar: "/images/user-default.png"
   });
 
   await Walker.create({
     firstName: 'Mark',
-    lastName: '',
+    lastName: 'Spencer',
     email: 'Ryan@testmail.com',
     password: 'password12345',
-    neighbourhoods: 'Etobicoke'
+    neighbourhoods: 'Etobicoke',
+    avatar: "/images/user-default.png"
+  });
+
+  await Walker.create({
+    firstName: 'Alexander',
+    lastName: 'Slater',
+    email: 'Ryan@testmail.com',
+    password: 'password12345',
+    neighbourhoods: 'Hamilton',
+    avatar: "/images/user-default.png"
+  });
+
+  await Walker.create({
+    firstName: 'Joe',
+    lastName: 'Smith',
+    email: 'Ryan@testmail.com',
+    password: 'password12345',
+    neighbourhoods: 'Ajax',
+    avatar: "/images/user-default.png"
   });
 
 console.log('walker seeded');
