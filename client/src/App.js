@@ -35,22 +35,22 @@ function App() {
   const [links] = useState([
     {
       name: 'Home',
-      href: '#home',
+      href: '/',
       icon: homeOutlined
     },
     {
       name: 'About Us',
-      href: '#about',
+      href: '/about',
       icon: loginOutlined
     },
     {
       name: 'Log in',
-      href: '#login',
+      href: '/login',
       icon: loginOutlined
     },
     {
       name: 'Sign up',
-      href: '#signup',
+      href: '/signup',
       icon: personAdd
     }
   ])

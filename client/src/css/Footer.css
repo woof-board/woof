@@ -10,6 +10,7 @@
 
 .footer-content {
     color: white;
+    font-family: 'Ubuntu', 'sans-serif';
     display: flex;
     justify-content: center;
     font-weight: bold;
