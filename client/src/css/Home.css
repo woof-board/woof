@@ -11,7 +11,6 @@
 
 .home-text {
     color: var(--secondary);
-    font-family: 'Rokkitt', 'serif';
     font-size: 9rem;
     font-weight: 800;
     text-shadow: 5px 5px 10px rgb(0,0,0,0.6);
@@ -22,8 +21,7 @@
 .home-text-small {
     font-size: 2rem;
     color: var(--quinary);
-    font-family: 'Ubuntu', 'sans-serif';
-    font-weight: bold;
+    font-weight: 500;
     text-shadow: 3px 3px 5px rgb(0,0,0,0.8);
     padding-top: 0;
     margin-top: 0;
