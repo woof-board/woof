@@ -1,14 +1,8 @@
 const db = require('./connection');
 const { Owner, Walker, Dog } = require('../models');
-<<<<<<< HEAD
-
-db.once('open', async () => {   
-
-=======
 ​
 db.once('open', async () => {   
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
     await Dog.deleteMany();
     const dogs = await Dog.insertMany([
         {
@@ -32,17 +26,10 @@ db.once('open', async () => {
             weight: '70lb'
         }
     ]);
-<<<<<<< HEAD
-
-
-  await Walker.deleteMany();
-
-=======
 ​
 ​
   await Walker.deleteMany();
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Walker.create({
     firstName: 'Pamela',
     lastName: 'Washington',
@@ -51,11 +38,7 @@ db.once('open', async () => {
     neighbourhoods: 'East Toronto',
     avatar: "/images/user-default.png"
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Walker.create({
     firstName: 'Elijah',
     lastName: 'Holt',
@@ -64,11 +47,7 @@ db.once('open', async () => {
     neighbourhoods: 'West Toronto',
     avatar: "/images/user-default.png"
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Walker.create({
     firstName: 'Karen',
     lastName: 'Nuvoski',
@@ -77,11 +56,7 @@ db.once('open', async () => {
     neighbourhoods: 'North Toronto',
     avatar: "/images/user-default.png"
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Walker.create({
     firstName: 'Ryan',
     lastName: 'Turnbull',
@@ -90,11 +65,7 @@ db.once('open', async () => {
     neighbourhoods: 'South Toronto',
     avatar: "/images/user-default.png"
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Walker.create({
     firstName: 'Mark',
     lastName: 'Spencer',
@@ -103,11 +74,7 @@ db.once('open', async () => {
     neighbourhoods: 'Etobicoke',
     avatar: "/images/user-default.png"
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Walker.create({
     firstName: 'Alexander',
     lastName: 'Slater',
@@ -116,11 +83,7 @@ db.once('open', async () => {
     neighbourhoods: 'Hamilton',
     avatar: "/images/user-default.png"
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Walker.create({
     firstName: 'Joe',
     lastName: 'Smith',
@@ -129,21 +92,12 @@ db.once('open', async () => {
     neighbourhoods: 'Ajax',
     avatar: "/images/user-default.png"
   });
-<<<<<<< HEAD
-
-console.log('walker seeded');
-
-
-await Owner.deleteMany();
-
-=======
 ​
 console.log('walker seeded');
 ​
 ​
 await Owner.deleteMany();
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Owner.create({
     first_name: 'Eric',
     last_name: 'Normann',
@@ -151,11 +105,7 @@ await Owner.deleteMany();
     password: 'password12345',
     admin:true
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Owner.create({
     first_name: 'Samiul',
     last_name: 'Choudhury',
@@ -163,11 +113,7 @@ await Owner.deleteMany();
     password: 'password12345',
     admin:true
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Owner.create({
     first_name: 'Nathan',
     last_name: 'Chow',
@@ -175,11 +121,7 @@ await Owner.deleteMany();
     password: 'password12345',
     admin:true,
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Owner.create({
     first_name: 'Shamim',
     last_name: 'Imtiaz',
@@ -194,11 +136,7 @@ await Owner.deleteMany();
     password: 'password12345',
     admin:true,
   });
-<<<<<<< HEAD
-
-=======
 ​
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
   await Owner.create({
     firstName: 'Rose',
     lastName: 'Francis',
@@ -235,19 +173,9 @@ await Owner.deleteMany();
         }
       ]
   });
-<<<<<<< HEAD
-
-  console.log('users seeded');
-
-  process.exit();
-
-});
-
-=======
 ​
   console.log('users seeded');
 ​
   process.exit();
 ​
 });
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
