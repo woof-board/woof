@@ -100,7 +100,7 @@ const resolvers = {
         // owner login
         loginOwner: async (parent, { email, password }) => {
             const owner = await Owner.findOne({ email });
-            
+
             if (!owner) {
                 throw new AuthenticationError('Incorrect credentials');
             }
@@ -135,31 +135,46 @@ const resolvers = {
             return { token, walker };
         },
 
-        // addOrder: async (parent, { products }, context) => {
-        // //   console.log(context);
-        //   if (context.user) {
-        //     const order = new Order({ products });
+        // add a dog
+        addDog: async (parent, { input }, context) => {
+            if (context.owner) {
+                const updatedOwner = await Owner.findByIdAndUpdate(
+                    context.owner._id, 
+                    { $push: { dogs: input } },
+                    { new: true, runValidators: true }
+                );
 
-        //     await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+                return updatedOwner;
+            }
 
-        //     return order;
-        //   }
+            throw new AuthenticationError('Not logged in');
+        }
 
-        //   throw new AuthenticationError('Not logged in');
-        // },
-        // updateUser: async (parent, args, context) => {
-        //   if (context.user) {
-        //     return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-        //   }
+            // addOrder: async (parent, { products }, context) => {
+            // //   console.log(context);
+            //   if (context.user) {
+            //     const order = new Order({ products });
 
-        //   throw new AuthenticationError('Not logged in');
-        // },
-        // updateProduct: async (parent, { _id, quantity }) => {
-        //   const decrement = Math.abs(quantity) * -1;
+            //     await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
-        //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-        // },
-    }
-};
+            //     return order;
+            //   }
 
-module.exports = resolvers;
+            //   throw new AuthenticationError('Not logged in');
+            // },
+            // updateUser: async (parent, args, context) => {
+            //   if (context.user) {
+            //     return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+            //   }
+
+            //   throw new AuthenticationError('Not logged in');
+            // },
+            // updateProduct: async (parent, { _id, quantity }) => {
+            //   const decrement = Math.abs(quantity) * -1;
+
+            //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+            // },
+        }
+    };
+
+    module.exports = resolvers;

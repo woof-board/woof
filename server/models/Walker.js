@@ -54,7 +54,7 @@ const walkerSchema = new Schema(
                 slot3pm: Boolean,
                 slot5pm: Boolean,
                 slot7pm: Boolean,
-                slot9pm: Boolean
+                slot9pm: Boolean // may be don't need this one...
             }	
         ]
     },
