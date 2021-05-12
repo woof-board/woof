@@ -50,12 +50,12 @@ const typeDefs = gql`
     
     type AuthOwner {
         token: ID
-        user: Owner
+        owner: Owner
     }
     
     type AuthWalker {
         token: ID
-        user: Walker
+        walker: Walker
     }
 
     input AddressInput {
@@ -76,12 +76,21 @@ const typeDefs = gql`
         phone: String
     }
 
+    input WalkerInput {
+        firstName: String!
+        lastName: String!
+        email: String!
+        password: String!
+    }
+
     type Query {
-        owner: Owner
+        owner_me: Owner
+        walker_me: Walker
     }
 
     type Mutation {
-        addOwner(input: OwnerInput): AuthOwner 
+        addOwner(input: OwnerInput): AuthOwner
+        addWalker(input: WalkerInput): AuthWalker
     }
 
 `;
