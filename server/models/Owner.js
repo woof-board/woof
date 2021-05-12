@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
+=======
+const { Schema, model } = require('mongoose');
+>>>>>>> 983732b0847cf6c2a6034c55a118098497314957
 const bcrypt = require('bcrypt');
 const addressSchema = require('./Address');
 const dogSchema = require('./Dog');
@@ -30,7 +34,6 @@ const ownerSchema = new Schema(
         },
         admin: {
             type: Boolean,
-            required: true,
             default: false
         },
         address: addressSchema,
@@ -65,7 +68,7 @@ ownerSchema.virtual('dogCount').get(function() {
     return this.dogs.length;
 });
 
-const Owner = mongoose.model('Owner', ownerSchema);
+const Owner = model('Owner', ownerSchema);
 
 module.exports = Owner;
 

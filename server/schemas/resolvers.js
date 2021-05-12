@@ -1,117 +1,180 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
-// const { signToken } = require('../utils/auth');
+
+const { Owner, Walker } = require('../models');
+const { signTokenOwner, signTokenWalker } = require('../utils/auth');
+
 // const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
-  Query: {
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
+    Query: {
+        // to get owner's own profile
+        owner_me: async (parent, args, context) => {
+            if (context.owner) {
+                const owner = await Owner.findById(context.owner._id)
+                    .select('-__v -password');
 
-        return user;
-      }
+                return owner;
+            }
 
-      throw new AuthenticationError('Not logged in');
+            throw new AuthenticationError('Not logged in');
+        },
+
+        // to get walker's own profile
+        walker_me: async (parent, args, context) => {
+            if (context.walker) {
+                const walker = await Walker.findById(context.walker._id)
+                    .select('-__v -password');
+
+                return walker;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        // order: async (parent, { _id }, context) => {
+        //   if (context.user) {
+        //     const user = await User.findById(context.user._id).populate({
+        //       path: 'orders.products',
+        //       populate: 'category'
+        //     });
+
+        //     return user.orders.id(_id);
+        //   }
+
+        //   throw new AuthenticationError('Not logged in');
+        // },
+        // checkout: async (parent, args, context) => {
+        //   const url = new URL(context.headers.referer).origin;
+        //   const order = new Order({ products: args.products });
+        //   const line_items = [];
+
+        //   const { products } = await order.populate('products').execPopulate();
+
+        //   for (let i = 0; i < products.length; i++) {
+        //     const product = await stripe.products.create({
+        //       name: products[i].name,
+        //       description: products[i].description,
+        //       images: [`${url}/images/${products[i].image}`]
+        //     });
+
+        //     const price = await stripe.prices.create({
+        //       product: product.id,
+        //       unit_amount: products[i].price * 100,
+        //       currency: 'usd',
+        //     });
+
+        //     line_items.push({
+        //       price: price.id,
+        //       quantity: 1
+        //     });
+        //   }
+
+        //   const session = await stripe.checkout.sessions.create({
+        //     payment_method_types: ['card'],
+        //     line_items,
+        //     mode: 'payment',
+        //     success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+        //     cancel_url: `${url}/`
+        //   });
+
+        //   return { session: session.id };
+        // }
     },
-    // order: async (parent, { _id }, context) => {
-    //   if (context.user) {
-    //     const user = await User.findById(context.user._id).populate({
-    //       path: 'orders.products',
-    //       populate: 'category'
-    //     });
+    Mutation: {
+        // to add a new owner
+        addOwner: async (parent, { input }) => {
+            const owner = await Owner.create(input);
+            const token = signTokenOwner(owner);
 
-    //     return user.orders.id(_id);
-    //   }
+            return { token, owner };
+        },
 
-    //   throw new AuthenticationError('Not logged in');
-    // },
-    // checkout: async (parent, args, context) => {
-    //   const url = new URL(context.headers.referer).origin;
-    //   const order = new Order({ products: args.products });
-    //   const line_items = [];
+        // to add a new walker
+        addWalker: async (parent, { input }) => {
+            const walker = await Walker.create(input);
+            const token = signTokenWalker(walker);
 
-    //   const { products } = await order.populate('products').execPopulate();
+            return { token, walker };
+        },
 
-    //   for (let i = 0; i < products.length; i++) {
-    //     const product = await stripe.products.create({
-    //       name: products[i].name,
-    //       description: products[i].description,
-    //       images: [`${url}/images/${products[i].image}`]
-    //     });
+        // owner login
+        loginOwner: async (parent, { email, password }) => {
+            const owner = await Owner.findOne({ email });
 
-    //     const price = await stripe.prices.create({
-    //       product: product.id,
-    //       unit_amount: products[i].price * 100,
-    //       currency: 'usd',
-    //     });
+            if (!owner) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
 
-    //     line_items.push({
-    //       price: price.id,
-    //       quantity: 1
-    //     });
-    //   }
+            const correctPw = await owner.isCorrectPassword(password);
 
-    //   const session = await stripe.checkout.sessions.create({
-    //     payment_method_types: ['card'],
-    //     line_items,
-    //     mode: 'payment',
-    //     success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-    //     cancel_url: `${url}/`
-    //   });
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
 
-    //   return { session: session.id };
-    // }
-  },
-//   Mutation: {
-    // addUser: async (parent, args) => {
-    //   const user = await User.create(args);
-    //   const token = signToken(user);
+            const token = signTokenOwner(owner);
 
-    //   return { token, user };
-    // },
-    // addOrder: async (parent, { products }, context) => {
-    // //   console.log(context);
-    //   if (context.user) {
-    //     const order = new Order({ products });
+            return { token, owner };
+        },
 
-    //     await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+        // walker login
+        loginWalker: async (parent, { email, password }) => {
+            const walker = await Walker.findOne({ email });
 
-    //     return order;
-    //   }
+            if (!walker) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
 
-    //   throw new AuthenticationError('Not logged in');
-    // },
-    // updateUser: async (parent, args, context) => {
-    //   if (context.user) {
-    //     return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-    //   }
+            const correctPw = await walker.isCorrectPassword(password);
 
-    //   throw new AuthenticationError('Not logged in');
-    // },
-    // updateProduct: async (parent, { _id, quantity }) => {
-    //   const decrement = Math.abs(quantity) * -1;
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
 
-    //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-    // },
-    // login: async (parent, { email, password }) => {
-    //   const user = await User.findOne({ email });
+            const token = signTokenWalker(walker);
 
-    //   if (!user) {
-    //     throw new AuthenticationError('Incorrect credentials');
-    //   }
+            return { token, walker };
+        },
 
-    //   const correctPw = await user.isCorrectPassword(password);
+        // add a dog
+        addDog: async (parent, { input }, context) => {
+            if (context.owner) {
+                const updatedOwner = await Owner.findByIdAndUpdate(
+                    context.owner._id, 
+                    { $push: { dogs: input } },
+                    { new: true, runValidators: true }
+                );
 
-    //   if (!correctPw) {
-    //     throw new AuthenticationError('Incorrect credentials');
-    //   }
+                return updatedOwner;
+            }
 
-    //   const token = signToken(user);
+            throw new AuthenticationError('Not logged in');
+        }
 
-    //   return { token, user };
-    // }
-//   }
-};
+            // addOrder: async (parent, { products }, context) => {
+            // //   console.log(context);
+            //   if (context.user) {
+            //     const order = new Order({ products });
 
-module.exports = resolvers;
+            //     await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+            //     return order;
+            //   }
+
+            //   throw new AuthenticationError('Not logged in');
+            // },
+            // updateUser: async (parent, args, context) => {
+            //   if (context.user) {
+            //     return await User.findByIdAndUpdate(context.user._id, args, { new: true });
+            //   }
+
+            //   throw new AuthenticationError('Not logged in');
+            // },
+            // updateProduct: async (parent, { _id, quantity }) => {
+            //   const decrement = Math.abs(quantity) * -1;
+
+            //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
+            // },
+        }
+    };
+
+    module.exports = resolvers;

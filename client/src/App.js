@@ -35,22 +35,22 @@ function App() {
   const [links] = useState([
     {
       name: 'Home',
-      href: '#home',
+      href: '/',
       icon: homeOutlined
     },
     {
       name: 'About Us',
-      href: '#about',
+      href: '/about',
       icon: loginOutlined
     },
     {
       name: 'Log in',
-      href: '#login',
+      href: '/login',
       icon: loginOutlined
     },
     {
       name: 'Sign up',
-      href: '#signup',
+      href: '/signup',
       icon: personAdd
     }
   ])
@@ -59,6 +59,7 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
+<<<<<<< HEAD
       <Router>
         <body className="page">
           <div>
@@ -90,6 +91,34 @@ function App() {
           </div>
         </body>
       </Router>
+=======
+      <body className="page">
+        <div>
+          <Header 
+          links={links}
+          currentLink={currentLink}
+          setCurrentLink={setCurrentLink}
+          />
+        </div>
+          <Router>
+
+          <div>
+            <Switch>
+              <Route exact path="/" component ={Home} />
+              <Route exact path="/about" component ={About} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Route component={NoMatch} />
+            </Switch>
+
+          </div>
+      </Router>
+
+        <div>
+          <Footer />
+        </div>
+      </body>
+>>>>>>> 983732b0847cf6c2a6034c55a118098497314957
     </ApolloProvider>
   );
 }
