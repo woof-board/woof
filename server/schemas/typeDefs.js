@@ -103,9 +103,21 @@ const typeDefs = gql`
         treats: Boolean!
     }
 
+    input OrderInput {
+        serviceDate: String!
+        serviceTime: String!
+        owner: ID!
+        walker: ID
+        dogs: [DogInput]
+    }
+
     type Query {
         owner_me: Owner
         walker_me: Walker
+        order(order_id: ID): Order
+        orders: [Order]
+        owner_orders(owner_id: ID): [Order]
+        walker_orders(walker_id: ID): [Order]
     }
 
     type Mutation {
@@ -114,6 +126,7 @@ const typeDefs = gql`
         loginOwner(email: String!, password: String!): AuthOwner
         loginWalker(email: String!, password: String!): AuthWalker
         addDog(input: DogInput): Owner
+        addOrder(input: OrderInput): Order
     }
 
 `;

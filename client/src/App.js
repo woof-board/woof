@@ -8,6 +8,8 @@ import About from './pages/About';
 import Header from './components/Header';
 import Walkers from './pages/Walkers'
 import NoMatch from './pages/NoMatch';
+import Walker from './pages/Walker';
+import Owner from './pages/Owner';
 // npm install --save-dev @iconify/react @iconify-icons/ant-design
 import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 // npm install --save-dev @iconify/react @iconify-icons/ic
@@ -34,24 +36,24 @@ const client = new ApolloClient({
 function App() {
 
   const [links] = useState([
-    {
-      name: 'Home',
-      href: '/',
-      icon: homeOutlined
-    },
+    // {
+    //   name: 'Home',
+    //   href: '/',
+    //   icon: homeOutlined
+    // },
     {
       name: 'About Us',
       href: '/about',
       icon: loginOutlined
     },
     {
-      name: 'Log in',
-      href: '/login',
+      name: 'Owner',
+      href: '/owner',
       icon: loginOutlined
     },
     {
-      name: 'Sign up',
-      href: '/signup',
+      name: 'Walker',
+      href: '/walker',
       icon: personAdd
     },
     {
@@ -65,6 +67,7 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
+<<<<<<< HEAD
         <div>
           <Header 
           links={links}
@@ -82,9 +85,31 @@ function App() {
               <Route exact path="/signup" component = {Signup} />
               <Route exact path="/walker" component = {Walkers} />
               <Route component = {NoMatch} />
+=======
+      <Router>
+        <div className="page">
+          <div>
+            <Header 
+            links={links}
+            currentLink={currentLink}
+            setCurrentLink={setCurrentLink}
+            />
+          </div>
+          <div>
+            <Switch>
+              <Route exact path="/owner" component={Owner} />
+              <Route exact path="/about" component ={About} />
+              {/* <Route exact path="/Owner" component={Owner} /> */}
+              <Route exact path="/walker" component={Walker} />
+              <Route component={NoMatch} />
+>>>>>>> develop
             </Switch>
 
           </div>
+          <div>
+            <Footer />
+          </div>
+        </div>
       </Router>
 
         <div>

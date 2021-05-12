@@ -1,0 +1,62 @@
+.background-owner {
+    background-image: url('../assets/images/home-samson.jpg');
+    left: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 5rem;
+}
+
+.owner-text {
+    color: var(--primary);
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.owner-text-small {
+    font-size: 2rem;
+    font-weight: 500;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.owner-content {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    max-width: 1400px;
+    min-width: 500px;
+    justify-content: space-between;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 8rem;
+}
+
+.owner-info-container {
+    background-color: rgba(var(--rgb-secondary), 0.8);
+    box-shadow: 10px 10px 20px rgb(0,0,0,0.6);
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: 25px;
+    width: 25rem;
+}
+
+@media screen and (max-width: 650px) {
+
+    .background-owner {
+        background-image: url('../assets/images/home-pixel.jpg');
+    }
+
+    .owner-content {
+        padding: .15rem;
+        top: 9rem;
+        flex-direction: column;
+    }
+
+    .button-container {
+        flex-direction: column;
+    }
+}

@@ -1,8 +1,9 @@
 const { AuthenticationError } = require('apollo-server-express');
 
-const { Owner, Walker } = require('../models');
+const { Owner, Walker, Order } = require('../models');
 const { signTokenOwner, signTokenWalker } = require('../utils/auth');
 
+const mongoose = require('mongoose');
 // const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
@@ -31,54 +32,32 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        // order: async (parent, { _id }, context) => {
-        //   if (context.user) {
-        //     const user = await User.findById(context.user._id).populate({
-        //       path: 'orders.products',
-        //       populate: 'category'
-        //     });
+        order: async (parent, {order_id}, context) => {
+            return await Order.findById(order_id)
+            .select('-__v')
+            .populate('owner')
+            .populate('walker');
+        },
 
-        //     return user.orders.id(_id);
-        //   }
+        orders: async (parent, args, context) => {
+            return await Order.find({});
+        },
 
-        //   throw new AuthenticationError('Not logged in');
-        // },
-        // checkout: async (parent, args, context) => {
-        //   const url = new URL(context.headers.referer).origin;
-        //   const order = new Order({ products: args.products });
-        //   const line_items = [];
+        // getOrders
+        owner_orders: async (parent, {owner_id}, context) => {
+            return await Order.find({ owner: mongoose.Types.ObjectId(owner_id) })
+            .select('-__v')
+            .populate('owner')
+            .populate('walker');
+        },
 
-        //   const { products } = await order.populate('products').execPopulate();
-
-        //   for (let i = 0; i < products.length; i++) {
-        //     const product = await stripe.products.create({
-        //       name: products[i].name,
-        //       description: products[i].description,
-        //       images: [`${url}/images/${products[i].image}`]
-        //     });
-
-        //     const price = await stripe.prices.create({
-        //       product: product.id,
-        //       unit_amount: products[i].price * 100,
-        //       currency: 'usd',
-        //     });
-
-        //     line_items.push({
-        //       price: price.id,
-        //       quantity: 1
-        //     });
-        //   }
-
-        //   const session = await stripe.checkout.sessions.create({
-        //     payment_method_types: ['card'],
-        //     line_items,
-        //     mode: 'payment',
-        //     success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
-        //     cancel_url: `${url}/`
-        //   });
-
-        //   return { session: session.id };
-        // }
+        walker_orders: async (parent, {walker_id}, context) => {
+            return await Order.find({ walker: mongoose.Types.ObjectId(walker_id) })
+            .select('-__v')
+            .populate('owner')
+            .populate('walker');
+        },
+        
     },
     Mutation: {
         // to add a new owner
@@ -148,33 +127,17 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
-        }
+        },
 
-            // addOrder: async (parent, { products }, context) => {
-            // //   console.log(context);
-            //   if (context.user) {
-            //     const order = new Order({ products });
+        // add an order
+        addOrder: async (parent, { input }, context) => {
+            if (context.owner) {
+                const order = await Order.create(input);
 
-            //     await User.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+                return order;
+            }
+        },
+    }
+};
 
-            //     return order;
-            //   }
-
-            //   throw new AuthenticationError('Not logged in');
-            // },
-            // updateUser: async (parent, args, context) => {
-            //   if (context.user) {
-            //     return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-            //   }
-
-            //   throw new AuthenticationError('Not logged in');
-            // },
-            // updateProduct: async (parent, { _id, quantity }) => {
-            //   const decrement = Math.abs(quantity) * -1;
-
-            //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-            // },
-        }
-    };
-
-    module.exports = resolvers;
+module.exports = resolvers;

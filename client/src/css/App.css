@@ -4,7 +4,14 @@
   --tertiary: #266e34;
   --quatemary: #80471f;
   --quinary:  #DBD3D3;
+  --rgb-primary: 38, 79, 156;
+  --rgb-secondary: 186, 209, 164;
+  --rgb-tertiary: 38, 110, 52;
+  --rgb-quatemary: 128, 71, 31;
+  --rgb-quinary:  219, 211, 211;
 }
+
+/* if adding opacity to VAR, rgb(var(--color), <opacity>); */
 
 body {
   background-color: var(--quinary);
