@@ -1,9 +1,9 @@
-
 const { Schema } = require('mongoose');
 const bcrypt = require('bcrypt');
 const addressSchema = require('./Address');
 const dogSchema = require('./Dog');
 
+const mongoose = require('mongoose');
 const ownerSchema = new Schema(
     {
         firstName: {

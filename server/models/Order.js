@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose');
 const dogSchema = require('./Dog');
-
+const mongoose = require('mongoose');
 const orderSchema = new Schema({
     serviceDate: {
         type: Date,
