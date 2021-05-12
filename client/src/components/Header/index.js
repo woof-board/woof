@@ -32,11 +32,11 @@ function Header(props) {
                 ) : (
                     <>
                 {links.map((link) => (
-                    <li className="list-link">
+                    <li className="list-link" key={link.name}>
                         <a href={link.href} className={`link ${currentLink.name === link.name && `navActive`}`} key={link.name} onClick={() => {
                         setCurrentLink(link);
                         }}>{link.name}</a>
-                        <a href={link.href} className={`icon ${currentLink.name === link.name && `navActive`}`} key={link.name} onClick={() => {
+                        <a href={link.href} className={`icon ${currentLink.name === link.name && `navActive`}`} key={link.icon} onClick={() => {
                         setCurrentLink(link);
                         }}><Icon icon={link.icon}/></a>
                     </li>

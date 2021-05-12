@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import '../css/Login.css';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/react-hooks';
-import { LOGIN_USER } from '../utils/mutations'
-import { WALKER_LOGIN_USER } from '../utils/mutations'
+import { LOGIN_WALKER } from '../utils/mutations'
 
 const Login = (props) => {
     const [formState, setFormState] = useState({ email: '', password: '' });
-    const [login, { error }] = useMutation(LOGIN_USER);
+    // const [login, { error }] = useMutation(LOGIN_USER);
   
     // update state based on form input changes
     const handleChange = (event) => {
@@ -23,32 +22,32 @@ const Login = (props) => {
   const handleWalkerFormSubmit = async event => {
     event.preventDefault();
   
-    try {
-      const { data } = await login({
-        variables: { ...formState }
-      });
+    // try {
+    //   const { data } = await login({
+    //     variables: { ...formState }
+    //   });
   
-      Auth.login(data.login.token);
-      console.log(data);
-    } catch (e) {
-      console.error(e);
-    }
+    //   Auth.login(data.login.token);
+    //   console.log(data);
+    // } catch (e) {
+    //   console.error(e);
+    // }
   };
 
     // submit form
     const handleOwnerFormSubmit = async event => {
         event.preventDefault();
       
-        try {
-          const { data } = await login({
-            variables: { ...formState }
-          });
+        // try {
+        //   const { data } = await login({
+        //     variables: { ...formState }
+        //   });
       
-          Auth.login(data.login.token);
-          console.log(data);
-        } catch (e) {
-          console.error(e);
-        }
+        //   Auth.login(data.login.token);
+        //   console.log(data);
+        // } catch (e) {
+        //   console.error(e);
+        // }
       };
 
     return (
@@ -77,7 +76,7 @@ const Login = (props) => {
                             onChange={handleChange}
                         />
                         <button type="submit">LOGIN</button>
-                        {error && <div>Login failed</div>}
+                        {/* {error && <div>Login failed</div>} */}
                     </form>
 
                 </div>
@@ -105,7 +104,7 @@ const Login = (props) => {
                             onChange={handleChange}
                         />
                         <button type="submit">LOGIN</button>
-                        {error && <div>Login failed</div>}
+                        {/* {error && <div>Login failed</div>} */}
                     </form>
 
                 </div>
