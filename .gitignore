@@ -1,5 +1,6 @@
 # Build and Release Folders
 build
+resources
 .DS_STORE
 # Logs
 logs

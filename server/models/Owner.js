@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 const addressSchema = require('./Address');
 const dogSchema = require('./Dog');
@@ -28,7 +28,6 @@ const ownerSchema = new Schema(
         },
         admin: {
             type: Boolean,
-            required: true,
             default: false
         },
         address: addressSchema,
@@ -63,6 +62,6 @@ ownerSchema.virtual('dogCount').get(function() {
     return this.dogs.length;
 });
 
-const Owner = mongoose.model('Owner', ownerSchema);
+const Owner = model('Owner', ownerSchema);
 
 module.exports = Owner;

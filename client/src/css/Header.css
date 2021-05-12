@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding: 1rem 0rem 1rem 0rem;
-    background-color: black;
+    padding: .5rem 0;
+    background-color: var(--primary);
     z-index: 999;
     position: fixed;
     width: 100%;
@@ -29,26 +29,29 @@ li {
     display: flex;
     flex-direction: row;
     padding-right: 1rem;
-    background-color: black;
 }
 
 .link {
+    font-family: 'Rokkitt', 'serif';
+    font-weight: 600;
+    font-size: 1.2rem;
     text-decoration: none;
-    color: white;
+    color: var(--tertiary);
     font-weight: bold;
     padding: 1rem;
 }
 
 .false {
-    border-radius: 25px;
-    background-color: black;
+    border-radius: 35px;
+    background-color: var(--secondary);
 }
+
 
 .navActive {
     background-color: white;
     color: black;
     transition: 0.7s;
-    border-radius: 25px;
+    border-radius: 35px;
 }
 
 .icon {

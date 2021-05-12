@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../css/Header.css';
 import Icon from '@iconify/react';
-import Logo from '../../assets/images/woof-logo-black.png';
+import Logo from '../../assets/images/woof-logo.svg';
 
 function HomeHeader(props) {
 

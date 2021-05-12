@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../css/Header.css';
 import Icon from '@iconify/react';
-import Logo from '../../assets/images/woof-logo-white.png';
+import Logo from '../../assets/images/woof-logo.svg';
 import Auth from '../../utils/auth';
 import { Link } from 'react-router-dom'
 
@@ -21,7 +21,7 @@ function Header(props) {
     return (
         <nav className="header-container">
             <div className="logo">
-                <img className="header-logo" src={Logo} alt=""></img>
+                <a href="/"><img className="header-logo" src={Logo} alt="" width="84" /></a>
             </div>
             <div className="nav-links-container">
                 {Auth.loggedIn() ? (
