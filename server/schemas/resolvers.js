@@ -124,6 +124,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+        // add an order
         addOrder: async (parent, { input }, context) => {
             if (context.owner) {
                 const order = await Order.create(input);
@@ -131,22 +132,7 @@ const resolvers = {
                 return order;
             }
         },
+    }
+};
 
-            //   throw new AuthenticationError('Not logged in');
-            // },
-            // updateUser: async (parent, args, context) => {
-            //   if (context.user) {
-            //     return await User.findByIdAndUpdate(context.user._id, args, { new: true });
-            //   }
-
-            //   throw new AuthenticationError('Not logged in');
-            // },
-            // updateProduct: async (parent, { _id, quantity }) => {
-            //   const decrement = Math.abs(quantity) * -1;
-
-            //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
-            // },
-        }
-    };
-
-    module.exports = resolvers;
+module.exports = resolvers;
