@@ -62,7 +62,6 @@
     font-size: 2rem;
     position: relative;
     left: 0;
-    width: 7rem;
     grid-column: 1 / span 1;
     grid-row: 1;
 }
@@ -78,7 +77,6 @@
     font-weight: bold;
     font-size: 2rem;
     position: relative;
-    width: 10rem;
     grid-column: 2 / span 1;
     grid-row: 1;
 }
