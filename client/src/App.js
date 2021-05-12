@@ -36,21 +36,18 @@ const client = new ApolloClient({
 function App() {
 
   const [links] = useState([
-    // {
-    //   name: 'Home',
-    //   href: '/',
-    //   icon: homeOutlined
-    // },
+   
+    {
+      name: 'Home',
+      href: '/',
+      icon: homeOutlined
+    },
     {
       name: 'About Us',
       href: '/about',
       icon: loginOutlined
     },
-    {
-      name: 'Owner',
-      href: '/owner',
-      icon: loginOutlined
-    },
+    
     {
       name: 'Walker',
       href: '/walker',
@@ -78,7 +75,7 @@ function App() {
           </div>
           <div>
             <Switch>
-              <Route exact path="/owner" component={Owner} />
+              <Route exact path="/" component={Owner} />
               <Route exact path="/about" component ={About} />
               {/* <Route exact path="/Owner" component={Owner} /> */}
               <Route exact path="/walker" component={Walker} />

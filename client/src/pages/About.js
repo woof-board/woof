@@ -7,7 +7,7 @@ function About() {
     return (
         <>
             <div className="about-imgholder">
-                <img src={process.env.PUBLIC_URL + `/images/banner3.jpg`} className="about-image" alt="image of a dog"/>
+                <img src={process.env.PUBLIC_URL + `/images/banner3.jpg`} className="about-image" alt=""/>
             </div>
             <div>About Woof</div>
             <div className="about-us">
@@ -33,68 +33,68 @@ function About() {
                 <div className="row">
                     
                         <div className="card">
-                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"></img>
+                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"  alt="" />
                             <h3>Name 1</h3>
                             <p>I am who I am</p>
-                            <a href="https://github.com/woof-board" target="_blank"><i className="fab fa-github profile-socialmedia"></i></a>
-                            <a href="https://ca.linkedin.com/" target="_blank"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
+                            <a href="https://github.com/woof-board" target="_blank" rel="noreferrer"><i className="fab fa-github profile-socialmedia"></i></a>
+                            <a href="https://ca.linkedin.com/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
                         </div>
                     
                     
                         <div className="card">
-                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"></img>
+                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"  alt="" />
                             <h3>Name 1</h3>
                             <p>I am who I am</p>
-                            <a href="https://github.com/woof-board" target="_blank"><i className="fab fa-github profile-socialmedia"></i></a>
-                            <a href="https://ca.linkedin.com/" target="_blank"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
+                            <a href="https://github.com/woof-board" target="github"><i className="fab fa-github profile-socialmedia"></i></a>
+                            <a href="https://ca.linkedin.com/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
                         </div>
                     
                         <div className="card">
-                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"></img>
+                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"  alt="" />
                             <h3>Name 1</h3>
                             <p>I am who I am</p>
-                            <a href="https://github.com/woof-board" target="_blank"><i className="fab fa-github profile-socialmedia"></i></a>
-                            <a href="https://ca.linkedin.com/" target="_blank"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
+                            <a href="https://github.com/woof-board" target="_blank" rel="noreferrer"><i className="fab fa-github profile-socialmedia"></i></a>
+                            <a href="https://ca.linkedin.com/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
                         </div>
                     
                         <div className="card">
-                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"></img>
+                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"  alt="" />
                             <h3>Name 1</h3>
                             <p>I am who I am</p>
-                            <a href="https://github.com/woof-board" target="_blank"><i className="fab fa-github profile-socialmedia"></i></a>
-                            <a href="https://ca.linkedin.com/" target="_blank"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
+                            <a href="https://github.com/woof-board" target="_blank" rel="noreferrer"><i className="fab fa-github profile-socialmedia"></i></a>
+                            <a href="https://ca.linkedin.com/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
                         </div>
                     
                         <div className="card">
-                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"></img>
+                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"  alt="" />
                             <h3>Name 1</h3>
                             <p>I am who I am</p>
-                            <a href="https://github.com/woof-board" target="_blank"><i className="fab fa-github profile-socialmedia"></i></a>
-                            <a href="https://ca.linkedin.com/" target="_blank"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
+                            <a href="https://github.com/woof-board" target="_blank" rel="noreferrer"><i className="fab fa-github profile-socialmedia"></i></a>
+                            <a href="https://ca.linkedin.com/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
                         </div>
                     
                         <div className="card">
-                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"></img>
+                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"  alt="" />
                             <h3>Name 1</h3>
                             <p>I am who I am</p>
-                            <a href="https://github.com/woof-board" target="_blank"><i className="fab fa-github profile-socialmedia"></i></a>
-                            <a href="https://ca.linkedin.com/" target="_blank"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
+                            <a href="https://github.com/woof-board" target="_blank" rel="noreferrer"><i className="fab fa-github profile-socialmedia"></i></a>
+                            <a href="https://ca.linkedin.com/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
                         </div>
                     
                         <div className="card">
-                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"></img>
+                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"  alt="" />
                             <h3>Name 1</h3>
                             <p>I am who I am</p>
-                            <a href="https://github.com/woof-board" target="_blank"><i className="fab fa-github profile-socialmedia"></i></a>
-                            <a href="https://ca.linkedin.com/" target="_blank"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
+                            <a href="https://github.com/woof-board" target="_blank" rel="noreferrer"><i className="fab fa-github profile-socialmedia"></i></a>
+                            <a href="https://ca.linkedin.com/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
                         </div>
                     
                         <div className="card">
-                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"></img>
+                            <img src={process.env.PUBLIC_URL + `/images/profile.jpg`} className="profile-picture"  alt="" />
                             <h3>Name 1</h3>
                             <p>I am who I am</p>
-                            <a href="https://github.com/woof-board" target="_blank"><i className="fab fa-github profile-socialmedia"></i></a>
-                            <a href="https://ca.linkedin.com/" target="_blank"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
+                            <a href="https://github.com/woof-board" target="_blank" rel="noreferrer"><i className="fab fa-github profile-socialmedia"></i></a>
+                            <a href="https://ca.linkedin.com/" target="_blank" rel="noreferrer"><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
                         </div>
                     
                 </div>
