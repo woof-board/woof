@@ -54,3 +54,23 @@ export const QUERY_OWNER_ORDERS = gql`
     }
   }
 `;
+
+export const QUERY_WALKER_ORDERS = gql`
+  query walker_orders($owner_id: ID!) {
+    walker_orders (owner_id: $owner_id){
+      _id
+      serviceDate
+      serviceTime
+      owner{
+        _id
+        firstName
+        lastName
+      }
+      walker{
+        _id
+        firstName
+        lastName
+      }
+    }
+  }
+`;
