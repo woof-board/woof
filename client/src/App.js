@@ -67,25 +67,6 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-<<<<<<< HEAD
-        <div>
-          <Header 
-          links={links}
-          currentLink={currentLink}
-          setCurrentLink={setCurrentLink}
-          />
-        </div>
-          <Router currentLink={currentLink}>
-
-          <div>
-            <Switch>
-              <Route exact path="/" component = {Home} />
-              <Route exact path="/about" component = {About} />
-              <Route exact path="/login" component = {Login} />
-              <Route exact path="/signup" component = {Signup} />
-              <Route exact path="/walker" component = {Walkers} />
-              <Route component = {NoMatch} />
-=======
       <Router>
         <div className="page">
           <div>
@@ -102,7 +83,6 @@ function App() {
               {/* <Route exact path="/Owner" component={Owner} /> */}
               <Route exact path="/walker" component={Walker} />
               <Route component={NoMatch} />
->>>>>>> develop
             </Switch>
 
           </div>
