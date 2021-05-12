@@ -33,14 +33,12 @@ function Header(props) {
                     </>
                 ) : (
                     <>
-                {links.map((link) => (
-                    <li className="list-link">
-                        { console.log("Link name: ", link.name)}
-                        { console.log("Path name: ", window.location.pathname)}
-                        <a href={link.href} className={`link ${window.location.pathname === link.href && `navActive`}`} key={link.name} onClick={() => {
+                {links.map((link, index) => (
+                    <li className="list-link" key={index}>
+                        <a href={link.href} className={`link ${window.location.pathname === link.href && `navActive`}`} onClick={() => {
                         setCurrentLink(link);
                         }}>{link.name}</a>
-                        <a href={link.href} className={`icon ${window.location.pathname === link.href && `navActive`}`} key={link.name} onClick={() => {
+                        <a href={link.href} className={`icon ${window.location.pathname === link.href && `navActive`}`} onClick={() => {
                         setCurrentLink(link);
                         }}><Icon icon={link.icon}/></a>
                     </li>

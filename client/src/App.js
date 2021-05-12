@@ -65,7 +65,6 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <body className="page">
         <div>
           <Header 
           links={links}
@@ -91,7 +90,6 @@ function App() {
         <div>
           <Footer />
         </div>
-      </body>
     </ApolloProvider>
   );
 }
