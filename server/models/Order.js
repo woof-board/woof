@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { Schema } = require('mongoose');
 const dogSchema = require('./Dog');
 const mongoose = require('mongoose');
