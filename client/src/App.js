@@ -72,7 +72,7 @@ function App() {
           </div>
           <div>
             <Switch>
-              <Route exact path="/owner" component={Owner} />
+              <Route exact path="/" component={Owner} />
               <Route exact path="/about" component ={About} />
               {/* <Route exact path="/Owner" component={Owner} /> */}
               <Route exact path="/walker" component={Walker} />
