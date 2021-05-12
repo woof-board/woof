@@ -81,14 +81,55 @@ const resolvers = {
         // }
     },
     Mutation: {
+        // to add a new owner
         addOwner: async (parent, { input }) => {
             const owner = await Owner.create(input);
             const token = signTokenOwner(owner);
 
             return { token, owner };
         },
+
+        // to add a new walker
         addWalker: async (parent, { input }) => {
             const walker = await Walker.create(input);
+            const token = signTokenWalker(walker);
+
+            return { token, walker };
+        },
+
+        // owner login
+        loginOwner: async (parent, { email, password }) => {
+            const owner = await Owner.findOne({ email });
+            
+            if (!owner) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const correctPw = await owner.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const token = signTokenOwner(owner);
+
+            return { token, owner };
+        },
+
+        // walker login
+        loginWalker: async (parent, { email, password }) => {
+            const walker = await Walker.findOne({ email });
+
+            if (!walker) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
+            const correctPw = await walker.isCorrectPassword(password);
+
+            if (!correctPw) {
+                throw new AuthenticationError('Incorrect credentials');
+            }
+
             const token = signTokenWalker(walker);
 
             return { token, walker };
@@ -118,23 +159,6 @@ const resolvers = {
 
         //   return await Product.findByIdAndUpdate(_id, { $inc: { quantity: decrement } }, { new: true });
         // },
-        // login: async (parent, { email, password }) => {
-        //   const user = await User.findOne({ email });
-
-        //   if (!user) {
-        //     throw new AuthenticationError('Incorrect credentials');
-        //   }
-
-        //   const correctPw = await user.isCorrectPassword(password);
-
-        //   if (!correctPw) {
-        //     throw new AuthenticationError('Incorrect credentials');
-        //   }
-
-        //   const token = signToken(user);
-
-        //   return { token, user };
-        // }
     }
 };
 

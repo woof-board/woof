@@ -91,6 +91,8 @@ const typeDefs = gql`
     type Mutation {
         addOwner(input: OwnerInput): AuthOwner
         addWalker(input: WalkerInput): AuthWalker
+        loginOwner(email: String!, password: String!): AuthOwner
+        loginWalker(email: String!, password: String!): AuthWalker
     }
 
 `;
