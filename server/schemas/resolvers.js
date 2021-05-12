@@ -1,19 +1,22 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User } = require('../models');
+const { Owner } = require('../models');
 // const { signToken } = require('../utils/auth');
 // const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
-    user: async (parent, args, context) => {
-      if (context.user) {
-        const user = await User.findById(context.user._id);
+    owner: async (parent, args, context) => {
+        const owner = await Owner.find();
+        return owner[0];
+    //   if (context.user) {
+    //     const user = await User.findById(context.user._id);
 
-        return user;
-      }
+    //     return user;
+    //   }
 
-      throw new AuthenticationError('Not logged in');
+    //   throw new AuthenticationError('Not logged in');
     },
+
     // order: async (parent, { _id }, context) => {
     //   if (context.user) {
     //     const user = await User.findById(context.user._id).populate({
@@ -63,7 +66,14 @@ const resolvers = {
     //   return { session: session.id };
     // }
   },
-//   Mutation: {
+  Mutation: {
+    addOwner: async (parent, { input }) => {
+        const owner = await Owner.create(input);
+        // const token = signToken(user);
+  
+        // return { token, user };
+        return owner;
+    },
     // addUser: async (parent, args) => {
     //   const user = await User.create(args);
     //   const token = signToken(user);
@@ -111,7 +121,7 @@ const resolvers = {
 
     //   return { token, user };
     // }
-//   }
+  }
 };
 
 module.exports = resolvers;

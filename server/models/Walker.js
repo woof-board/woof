@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const reviewSchema = new Schema( // Do we need to add createdAt field for review? 
@@ -45,19 +44,17 @@ const walkerSchema = new Schema(
         },
         ratings: [Number],
         reviews: [reviewSchema],
-        earnings: Number, // is this monthly earning? do we need to track this?
+        earnings: Number,
         availability: [ // placeholder, needs further discussion
             {
                 date: Date,
                 slot9am: Boolean,
-                slot10am: Boolean,
                 slot11am: Boolean,
-                slot12pm: Boolean,
                 slot1pm: Boolean,
-                slot2pm: Boolean,
                 slot3pm: Boolean,
-                slot4pm: Boolean,
                 slot5pm: Boolean,
+                slot7pm: Boolean,
+                slot9pm: Boolean
             }	
         ]
     },
@@ -95,6 +92,6 @@ walkerSchema.virtual('averageRating').get(function () {
     return this.ratings.reduce(reducer, 0);
 });
 
-const Walker = mongoose.model('Walker', walkerSchema);
+const Walker = model('Walker', walkerSchema);
 
 module.exports = Walker;
