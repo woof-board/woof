@@ -46,12 +46,16 @@ const resolvers = {
         // getOrders
         owner_orders: async (parent, {owner_id}, context) => {
             return await Order.find({ owner: mongoose.Types.ObjectId(owner_id) })
-            .select('-__v');
+            .select('-__v')
+            .populate('owner')
+            .populate('walker');
         },
 
         walker_orders: async (parent, {walker_id}, context) => {
             return await Order.find({ walker: mongoose.Types.ObjectId(walker_id) })
-            .select('-__v');
+            .select('-__v')
+            .populate('owner')
+            .populate('walker');
         },
         
     },

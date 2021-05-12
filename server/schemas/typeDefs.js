@@ -117,6 +117,7 @@ const typeDefs = gql`
         order(order_id: ID): Order
         orders: [Order]
         owner_orders(owner_id: ID): [Order]
+        walker_orders(walker_id: ID): [Order]
     }
 
     type Mutation {
