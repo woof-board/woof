@@ -30,12 +30,20 @@ const Profile = () => {
     if (loading) {
       return <div>Loading...</div>;
     }
+
+    if (!user?.username) {
+        return (
+          <h4>
+            You need to be logged in to see this page. Use the navigation links above to sign up or log in!
+          </h4>
+        );
+      }
   
     return (
         <div id="profile">
             <div className="proflie-container">
                 <div></div>
-                <div>PICTURE</div>
+                <div>Viewing {userParam ? `${user.username}'s` : 'your'} profile.</div>
                 <div>NAME</div>
                 <div>ICONS</div>
             </div>

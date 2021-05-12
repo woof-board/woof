@@ -5,9 +5,9 @@ import { validateEmail } from '../utils/helpers'
 function Signup() {
 
     const [errorMessage, setErrorMessage] = useState('');
-    const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+    const [formState, setFormState] = useState({ name: '', email: ''});
 
-    const { name, email, username } = formState;
+    const { name, email } = formState;
 
     function handleChange(e) {
         if (e.target.name === 'email') {
@@ -41,19 +41,15 @@ function Signup() {
     console.log(formState);
 
     return (
-        <div id="signup">
-            <div className="center-card">
-                <h1>Owner Sign up</h1>
-                <form id="contact-form" onSubmit={handleSubmit}>
-                    <div className="contact-column">
+        <div className="login-page" id="signup">
+            <div className="login-container">
+                <form className="login-card" onSubmit={handleSubmit}>
+                    <h1>Walker Sign up</h1>
+                    <div>
                         <label htmlFor="name">Name:</label>
                         <input type="text" defaultValue={name} onChange={handleChange} name="name" />
                     </div>
-                    <div className="contact-column">
-                        <label htmlFor="username">Username:</label>
-                        <input type="text" defaultValue={username} onChange={handleChange} name="username" />
-                    </div>
-                    <div className="contact-column">
+                    <div>
                         <label htmlFor="email">Email address:</label>
                         <input defaultValue={email} onChange={handleChange} type="email" name="email" />
                     </div>
@@ -65,18 +61,15 @@ function Signup() {
                     <button type="submit">Submit</button>
                 </form>
             </div>
-            <div className="center-card">
-                <h1>Walker Sign up</h1>
-                <form id="contact-form" onSubmit={handleSubmit}>
-                    <div className="contact-column">
+            <div className="login-container">
+
+                <form className="login-card" onSubmit={handleSubmit}>
+                    <h1>Walker Sign up</h1>
+                    <div>
                         <label htmlFor="name">Name:</label>
                         <input type="text" defaultValue={name} onChange={handleChange} name="name" />
                     </div>
-                    <div className="contact-column">
-                        <label htmlFor="username">Username:</label>
-                        <input type="text" defaultValue={username} onChange={handleChange} name="username" />
-                    </div>
-                    <div className="contact-column">
+                    <div>
                         <label htmlFor="email">Email address:</label>
                         <input defaultValue={email} onChange={handleChange} type="email" name="email" />
                     </div>
