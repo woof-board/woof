@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import About from './pages/About';
 import Header from './components/Header/index';
 import NoMatch from './pages/NoMatch';
+import Walker from './pages/Walker';
 // npm install --save-dev @iconify/react @iconify-icons/ant-design
 import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 // npm install --save-dev @iconify/react @iconify-icons/ic
@@ -49,8 +50,8 @@ function App() {
       icon: loginOutlined
     },
     {
-      name: 'Sign up',
-      href: '/signup',
+      name: 'Walker',
+      href: '/walker',
       icon: personAdd
     }
   ])
@@ -73,7 +74,7 @@ function App() {
               <Route exact path="/" component ={Home} />
               <Route exact path="/about" component ={About} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
+              <Route exact path="/walker" component={Walker} />
               <Route component={NoMatch} />
             </Switch>
 
