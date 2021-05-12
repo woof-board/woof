@@ -7,5 +7,30 @@
 }
 
 body {
-  background-color: rgb(181, 181, 181);
+  background-color: var(--quinary);
+ 
+  font-family: 'Ubuntu', 'sans-serif';
+   /* possible font weights for ubuntu
+  300: light
+  400: regular
+  500: medium
+  700: bold */
+  font-weight:300;
+
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Rokkitt', 'serif';
+
+  /* possible font weights for Rokkit
+  300: light
+  400: regular
+  500: medium
+  600: semi-bold
+  700: bold
+  800: extra bold
+  900: black */
+  font-weight:600;
+
+}
+

@@ -15,7 +15,7 @@ import personAdd from '@iconify-icons/akar-icons/person-add';
 
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const client = new ApolloClient({
   request: operation => {
@@ -35,22 +35,22 @@ function App() {
   const [links] = useState([
     {
       name: 'Home',
-      href: '#home',
+      href: '/',
       icon: homeOutlined
     },
     {
       name: 'About Us',
-      href: '#about',
+      href: '/about',
       icon: loginOutlined
     },
     {
       name: 'Log in',
-      href: '#login',
+      href: '/login',
       icon: loginOutlined
     },
     {
       name: 'Sign up',
-      href: '#signup',
+      href: '/signup',
       icon: personAdd
     }
   ])
@@ -59,37 +59,32 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <Router>
-        <body className="page">
-          <div>
-            <Header 
-            links={links}
-            currentLink={currentLink}
-            setCurrentLink={setCurrentLink}
-            />
-          </div>
+      <body className="page">
+        <div>
+          <Header 
+          links={links}
+          currentLink={currentLink}
+          setCurrentLink={setCurrentLink}
+          />
+        </div>
+          <Router>
+
           <div>
             <Switch>
-              {currentLink.name === links[0].name && (
-                <Home />
-              )}
-              {currentLink.name === links[1].name && (
-                <About />
-              )}
-              {currentLink.name === links[2].name && (
-                <Login />
-              )}
-              {currentLink.name === links[3].name && (
-                <Signup />
-              )}
-              <Router component={NoMatch} />
+              <Route exact path="/" component ={Home} />
+              <Route exact path="/about" component ={About} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/signup" component={Signup} />
+              <Route component={NoMatch} />
             </Switch>
+
           </div>
-          <div>
-            <Footer />
-          </div>
-        </body>
       </Router>
+
+        <div>
+          <Footer />
+        </div>
+      </body>
     </ApolloProvider>
   );
 }

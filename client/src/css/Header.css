@@ -32,6 +32,9 @@ li {
 }
 
 .link {
+    font-family: 'Rokkitt', 'serif';
+    font-weight: 600;
+    font-size: 1.2rem;
     text-decoration: none;
     color: var(--tertiary);
     font-weight: bold;
@@ -39,15 +42,16 @@ li {
 }
 
 .false {
-    border-radius: 25px;
+    border-radius: 35px;
     background-color: var(--secondary);
 }
+
 
 .navActive {
     background-color: white;
     color: black;
     transition: 0.7s;
-    border-radius: 25px;
+    border-radius: 35px;
 }
 
 .icon {
