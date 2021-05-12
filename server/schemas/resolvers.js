@@ -8,6 +8,13 @@ const mongoose = require('mongoose');
 
 const resolvers = {
     Query: {
+        owners: async (parent, args, context) => {
+            const owner = await Owner.find({})
+                .select('-__v -password');
+
+            return owner;
+        },
+
         // to get owner's own profile
         owner_me: async (parent, args, context) => {
             if (context.owner) {
@@ -18,6 +25,13 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
+        },
+
+        walkers: async (parent, args, context) => {
+            const walker = await Walker.find({})
+                .select('-__v -password');
+
+            return walker;
         },
 
         // to get walker's own profile
@@ -136,6 +150,23 @@ const resolvers = {
 
                 return order;
             }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        // add rating to walker
+        addRating: async (parent, { walker_id, rating }, context) => {
+            if(context.owner){
+                const walker = await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $push: { ratings: rating } },
+                    { new: true, runValidators: true }
+                );
+
+                return walker;
+            }
+
+            throw new AuthenticationError('Not logged in');
         },
     }
 };

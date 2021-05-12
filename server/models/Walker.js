@@ -42,7 +42,16 @@ const walkerSchema = new Schema(
             type: [String],
             default: undefined
         },
-        ratings: [Number],
+        ratings: {
+            type: [{type: Number,
+                validate: {
+                    validator: function(rating) {
+                        console.log(rating);
+                        return rating >= 1 && rating <= 5;
+                    },
+                    message: props => `${props.value} is not a valid rating number!`
+                },}]
+        },
         reviews: [reviewSchema],
         earnings: Number,
         availability: [ // placeholder, needs further discussion
@@ -75,6 +84,12 @@ walkerSchema.pre('save', async function (next) {
     next();
 });
 
+walkerSchema.pre('update', async function(next) {
+    console.log('UPDATE hook fired!')
+    console.log(this.getUpdate())
+    next();
+});
+
 // compare the incoming password with the hashed password
 walkerSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
@@ -91,6 +106,8 @@ walkerSchema.virtual('averageRating').get(function () {
 
     return this.ratings.reduce(reducer, 0);
 });
+
+
 
 const Walker = model('Walker', walkerSchema);
 

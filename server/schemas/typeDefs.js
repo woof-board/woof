@@ -112,7 +112,9 @@ const typeDefs = gql`
     }
 
     type Query {
+        owners: [Owner]
         owner_me: Owner
+        walkers: [Walker]
         walker_me: Walker
         order(order_id: ID): Order
         orders: [Order]
@@ -127,6 +129,7 @@ const typeDefs = gql`
         loginWalker(email: String!, password: String!): AuthWalker
         addDog(input: DogInput): Owner
         addOrder(input: OrderInput): Order
+        addRating(walker_id: ID!, rating: Int!): Walker
     }
 
 `;
