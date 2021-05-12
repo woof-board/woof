@@ -21,11 +21,7 @@ function Header(props) {
     return (
         <nav className="header-container">
             <div className="logo">
-<<<<<<< HEAD
-                <img className="header-logo" src={Logo} alt="" width="84"></img>
-=======
                 <a href="/"><img className="header-logo" src={Logo} alt="" width="84" /></a>
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
             </div>
             <div className="nav-links-container">
                 {Auth.loggedIn() ? (

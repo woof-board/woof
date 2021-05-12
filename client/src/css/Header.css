@@ -42,11 +42,7 @@ li {
 }
 
 .false {
-<<<<<<< HEAD
-    border-radius: 25px;
-=======
     border-radius: 35px;
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
     background-color: var(--secondary);
 }
 

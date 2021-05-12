@@ -15,7 +15,7 @@ import personAdd from '@iconify-icons/akar-icons/person-add';
 
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 const client = new ApolloClient({
   request: operation => {
@@ -59,39 +59,6 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-<<<<<<< HEAD
-      <Router>
-        <body className="page">
-          <div>
-            <Header 
-            links={links}
-            currentLink={currentLink}
-            setCurrentLink={setCurrentLink}
-            />
-          </div>
-          <div>
-            <Switch>
-              {currentLink.name === links[0].name && (
-                <Home />
-              )}
-              {currentLink.name === links[1].name && (
-                <About />
-              )}
-              {currentLink.name === links[2].name && (
-                <Login />
-              )}
-              {currentLink.name === links[3].name && (
-                <Signup />
-              )}
-              <Router component={NoMatch} />
-            </Switch>
-          </div>
-          <div>
-            <Footer />
-          </div>
-        </body>
-      </Router>
-=======
       <body className="page">
         <div>
           <Header 
@@ -118,7 +85,6 @@ function App() {
           <Footer />
         </div>
       </body>
->>>>>>> 983732b0847cf6c2a6034c55a118098497314957
     </ApolloProvider>
   );
 }
