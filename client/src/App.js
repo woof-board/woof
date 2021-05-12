@@ -8,6 +8,7 @@ import About from './pages/About';
 import Header from './components/Header/index';
 import NoMatch from './pages/NoMatch';
 import Walker from './pages/Walker';
+import Owner from './pages/Owner';
 // npm install --save-dev @iconify/react @iconify-icons/ant-design
 import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 // npm install --save-dev @iconify/react @iconify-icons/ic
@@ -34,19 +35,19 @@ const client = new ApolloClient({
 function App() {
 
   const [links] = useState([
-    {
-      name: 'Home',
-      href: '/',
-      icon: homeOutlined
-    },
+    // {
+    //   name: 'Home',
+    //   href: '/',
+    //   icon: homeOutlined
+    // },
     {
       name: 'About Us',
       href: '/about',
       icon: loginOutlined
     },
     {
-      name: 'Log in',
-      href: '/login',
+      name: 'Owner',
+      href: '/owner',
       icon: loginOutlined
     },
     {
@@ -71,9 +72,9 @@ function App() {
           </div>
           <div>
             <Switch>
-              <Route exact path="/" component ={Home} />
+              <Route exact path="/owner" component={Owner} />
               <Route exact path="/about" component ={About} />
-              <Route exact path="/login" component={Login} />
+              {/* <Route exact path="/Owner" component={Owner} /> */}
               <Route exact path="/walker" component={Walker} />
               <Route component={NoMatch} />
             </Switch>

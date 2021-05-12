@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import '../css/Walker.css';
-import WalkerLoginForm from '../components/WalkerLoginForm';
+import OwnerLoginForm from '../components/OwnerLoginForm';
 import FormHeader from '../components/LoginSIgnupForm';
-import WalkerSignupForm from '../components/WalkerSignupForm';
+import OwnerSignupForm from '../components/OwnerSignupForm';
 
 
-function Walker(props) {
+function Owner(props) {
 
     const [links] = useState([
         {
@@ -39,10 +39,10 @@ function Walker(props) {
                         setCurrentLink={setCurrentLink}
                     />
                     {currentLink.name === links[0].name && (
-                        <WalkerLoginForm />
+                        <OwnerLoginForm />
                     )}
                     {currentLink.name === links[1].name && (
-                        <WalkerSignupForm />
+                        <OwnerSignupForm />
                     )}
   
                 </div>
@@ -51,4 +51,4 @@ function Walker(props) {
     )
 }
 
-export default Walker;
+export default Owner;
