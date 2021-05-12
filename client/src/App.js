@@ -73,16 +73,16 @@ function App() {
           setCurrentLink={setCurrentLink}
           />
         </div>
-          <Router>
+          <Router currentLink={currentLink}>
 
           <div>
             <Switch>
-              <Route exact path="/" component ={Home} />
-              <Route exact path="/about" component ={About} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/walker" component={Walkers} />
-              <Route component={NoMatch} />
+              <Route exact path="/" component = {Home} />
+              <Route exact path="/about" component = {About} />
+              <Route exact path="/login" component = {Login} />
+              <Route exact path="/signup" component = {Signup} />
+              <Route exact path="/walker" component = {Walkers} />
+              <Route component = {NoMatch} />
             </Switch>
 
           </div>
