@@ -8,19 +8,19 @@ const addressSchema = new Schema(
         },
         city: {
             type: String,
-            required: true,  
+            required: true  
         },
         neighbourhood: {   // is there any list of neighbourhoods with standard wording? 
             type: String,
-            required: true,  
+            required: false,   
         },
         province: {
             type: String,
-            required: true,  
+            required: true  
         },
-        postal_code: {
+        postalCode: {
             type: String,
-            required: true,  
+            required: true  
         }
     }
 );
