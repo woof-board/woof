@@ -45,12 +45,13 @@ const resolvers = {
 
         // getOrders
         owner_orders: async (parent, {owner_id}, context) => {
-            if (context.owner) {
-                // return Order.find({_id: context.owner._id}).sort({ createdAt: -1 });
-                return await Order.find({ owner: mongoose.Types.ObjectId(context.owner._id) }).select('-__v');
-            }
+            return await Order.find({ owner: mongoose.Types.ObjectId(owner_id) })
+            .select('-__v');
+        },
 
-            throw new AuthenticationError('Not logged in');
+        walker_orders: async (parent, {walker_id}, context) => {
+            return await Order.find({ walker: mongoose.Types.ObjectId(walker_id) })
+            .select('-__v');
         },
         
     },
