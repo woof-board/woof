@@ -1,7 +1,7 @@
 {
   "name": "woof-client",
   "version": "1.0.0",
-  "homepage": "https://woof-board.github.io/woof/",
+  "homepage": "https://woof-board.github.io/",
   "private": true,
   "proxy": "http://localhost:3001/",
   "dependencies": {
