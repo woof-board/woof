@@ -43,6 +43,7 @@ const typeDefs = gql`
     }
 
     type Dog {
+        _id: ID
         name: String
         breed: String
         weight: Float
@@ -113,10 +114,11 @@ const typeDefs = gql`
         serviceTime: String!
         owner: ID!
         walker: ID
-        dogs: [DogInput]
+        dogs: [ID]!
     }
 
     input ReviewInput {
+        owner_id: ID!
         walker_id: ID!
         rating: Int!
         reviewText: String

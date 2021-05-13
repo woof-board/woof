@@ -20,7 +20,10 @@ const orderSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Walker'
         },
-        dogs: [dogSchema]
+        dogs: [{
+            type: Schema.Types.ObjectId,
+            ref: 'dogSchema'
+        }]
     },
     {
         toJSON: {

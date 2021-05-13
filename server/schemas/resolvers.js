@@ -149,6 +149,8 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+
+
         // add an order
         addOrder: async (parent, { input }, context) => {
             if (context.owner) {
@@ -162,11 +164,9 @@ const resolvers = {
 
         // add rating to walker
         addReview: async (parent, { input }, context) => {
-
             if(context.owner){
-                const {walker_id, rating, reviewText} = input;   
-                const owner_id = mongoose.Types.ObjectId(context.owner._id);
-                const review = {owner: owner_id, rating: rating, reviewText: reviewText};
+                const {owner_id, walker_id, rating, reviewText} = input;   
+                const review = {owner_id: owner_id, rating: rating, reviewText: reviewText};
 
                 return await Walker.findByIdAndUpdate(
                     walker_id,

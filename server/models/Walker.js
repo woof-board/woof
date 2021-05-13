@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const reviewSchema = new Schema( // Do we need to add createdAt field for review? 
     {
-        owner: {
+        owner_id: {
             type: Schema.Types.ObjectId,
             ref: 'Owner',
             required: true
@@ -19,7 +19,6 @@ const reviewSchema = new Schema( // Do we need to add createdAt field for review
                 },
                 message: props => `${props.value} is not a valid rating number!`
             },
-            
         },
         reviewText: {
             type: String
@@ -83,12 +82,6 @@ walkerSchema.pre('save', async function (next) {
         this.password = await bcrypt.hash(this.password, saltRounds);
     }
 
-    next();
-});
-
-walkerSchema.pre('update', async function(next) {
-    console.log('UPDATE hook fired!')
-    console.log(this.getUpdate())
     next();
 });
 
