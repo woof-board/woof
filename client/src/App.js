@@ -4,10 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import './css/App.css';
-import Home from './pages/Home';
 import Footer from './components/Footer';
-import Login from './pages/Login';
-import Signup from './pages/Signup';
 import About from './pages/About';
 import Header from './components/Header/index';
 import NoMatch from './pages/NoMatch';
