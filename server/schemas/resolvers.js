@@ -8,11 +8,14 @@ const mongoose = require('mongoose');
 
 const resolvers = {
     Query: {
-        owners: async (parent, args, context) => {
-            const owner = await Owner.find({})
-                .select('-__v -password');
+        owner: async (parent, {owner_id}, context) => {
+            return await Owner.findById(owner_id)
+            .select('-__v -password');
+        },
 
-            return owner;
+        owners: async (parent, args, context) => {
+            return await Owner.find({})
+            .select('-__v -password');
         },
 
         // to get owner's own profile
@@ -27,11 +30,14 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        walkers: async (parent, args, context) => {
-            const walker = await Walker.find({})
-                .select('-__v -password');
+        walker: async (parent, {walker_id}, context) => {
+            return await Walker.findById(walker_id)
+            .select('-__v -password');
+        },
 
-            return walker;
+        walkers: async (parent, args, context) => {
+            return await Walker.find({})
+            .select('-__v -password');
         },
 
         // to get walker's own profile
@@ -158,12 +164,10 @@ const resolvers = {
         addReview: async (parent, { input }, context) => {
 
             if(context.owner){
-                const {walker_id, rating, reviewText} = input;
-                
+                const {walker_id, rating, reviewText} = input;   
                 const owner_id = mongoose.Types.ObjectId(context.owner._id);
                 const review = {owner: owner_id, rating: rating, reviewText: reviewText};
 
-                console.log(`${walker_id}, ${rating}, ${reviewText}`)
                 return await Walker.findByIdAndUpdate(
                     walker_id,
                     { $push: { reviews: review } },

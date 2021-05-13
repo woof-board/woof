@@ -123,8 +123,10 @@ const typeDefs = gql`
     }
 
     type Query {
+        owner(owner_id: ID!): Owner
         owners: [Owner]
         owner_me: Owner
+        walker(walker_id: ID!): Walker
         walkers: [Walker]
         walker_me: Walker
         order(order_id: ID): Order
