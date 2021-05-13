@@ -15,8 +15,8 @@ function Header(props) {
             </div>
             <div className="nav-links-container">
                 {links.map((link) => (
-                    <li className="list-link">
-                        <a key={link.name} href={link.href} className="link" 
+                    <li key={link.name} className="list-link">
+                        <a href={link.href} className="link" 
                         >{link.name}</a>
                     </li>
                 ))}
