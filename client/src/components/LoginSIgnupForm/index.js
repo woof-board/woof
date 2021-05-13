@@ -12,7 +12,7 @@ function FormHeader(props) {
     return (
         <div className="walker-form-title">
             {links.map((link) => (
-            <span className={`${link.id} ${currentLink.name === links.name && `linkActive`}`} onClick={() => { setCurrentLink(link);}} id={link.id}>{link.name}</span>
+            <span key={link.name} className={`${link.id} ${currentLink.name === link.name && `linkActive`}`} onClick={() => { setCurrentLink(link);}} id={link.id}>{link.name}</span>
             ))}                 
         </div>
     )

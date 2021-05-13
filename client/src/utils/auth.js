@@ -2,10 +2,31 @@ import decode from 'jwt-decode';
 
 class AuthService {
   getProfile() {
-    return decode(this.getToken());
+    console.log(decode(this.getToken()))
+    const data = decode(this.getToken());
+    const adminCheck = data.data.admin;
+
+    if (adminCheck === false) {
+      console.log(adminCheck)
+      return decode(this.getToken());;
+    } else return false;
+    
+
   }
 
   loggedIn() {
+    // Checks if there is a saved token and it's still valid
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token);
+  }
+
+  OwnerloggedIn() {
+    // Checks if there is a saved token and it's still valid
+    const token = this.getToken();
+    return !!token && !this.isTokenExpired(token);
+  }  
+
+  WalkerloggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token);
