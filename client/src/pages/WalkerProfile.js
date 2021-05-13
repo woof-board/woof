@@ -1,7 +1,6 @@
 import React from 'react';
 import '../css/WalkerProfile.css';
 
-
 function App() {
 
   return (

@@ -3,7 +3,7 @@ import '../../css/Header.css';
 import Icon from '@iconify/react';
 import Logo from '../../assets/images/woof-logo.svg';
 
-function HomeHeader(props) {
+function WalkerHeader(props) {
 
     const {
         headerLinks = [],
@@ -19,7 +19,7 @@ function HomeHeader(props) {
             <div className="nav-links-container">
                 {headerLinks.map((link) => (
                     <li className="list-link">
-                        <a href={link.name} className={`walker-header-link ${currentHeaderLink.name === link.name && `navActive`}`} key={link.name} onClick={() => {setHeaderLink(link);
+                        <a href={link.href} className={`walker-header-link ${currentHeaderLink.name === link.name && `navActive`}`} key={link.name} onClick={() => {setHeaderLink(link);
                         }} >{link.name}</a>
                     </li>                    
                 ))}
@@ -29,4 +29,4 @@ function HomeHeader(props) {
     )
 }
 
-export default HomeHeader;
+export default WalkerHeader;

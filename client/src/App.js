@@ -62,21 +62,11 @@ const client = new ApolloClient({
                         setCurrentLink={setCurrentLink}
                     />
                     <Switch>
-                        {Auth.loggedIn() ? (
-                            <>
-                                <Route exact path="/walker" component={Walker} />
-                                <Route exact path="/owner" component={Owner} />
-                                <Route component={NoMatch} />
-                            </>
-                        ) : (
-                            <>
-                                <Route exact path="/" component={Owner} />
-                                <Route exact path="/about" component={About} />
-                                <Route exact path="/owner" component={Owner} />
-                                <Route exact path="/walker" component={Walker} />
-                                <Route component={NoMatch} />
-                            </>
-                        )}
+                        <Route exact path="/" component={Owner} />
+                        <Route exact path="/about" component={About} />
+                        <Route exact path="/owner" component={Owner} />
+                        <Route exact path="/walker" component={Walker} />
+                        <Route component={NoMatch} />
                     </Switch>
                 </div>
             </Router>
