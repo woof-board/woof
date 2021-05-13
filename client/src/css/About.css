@@ -14,10 +14,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
   color: var(--secondary);
-  font-size: 5rem;
-  font-weight: 800;
+  font-size: 6rem;
+  font-weight: 400;
   text-shadow: 5px 5px 10px rgb(0,0,0,0.6);
-  margin: 120px 0 3px;
+  margin: auto;
   padding: 0;
 }
 .about-caption {
@@ -50,7 +50,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-content: center;
+    justify-content: space-around;
 }
 /*   
   Clear floats after the columns
@@ -63,7 +63,7 @@
   /* Style the counter cards */
   .card {
     /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
-    padding: 16px;
+    padding: 2rem;
     text-align: center;
     background-color: var(--quinary);
 
@@ -82,24 +82,63 @@
   }
 
   /* Responsive columns */
-  @media screen and (max-width: 650px) {
-    .about-image {
-        width: 100%;
-        min-height:20rem;
-        /* text-align: center; */
+  @media screen and (max-width: 1315px) {
+    
+    .about-title {
+      font-size: 5rem;
+      font-weight: 200;
     }
-    .about-us {
-        margin: 2rem; 
+    
+    .card {
+      padding: 1rem;
     }
   }
-  @media screen and (max-width: 1024px) {
+  
+  @media screen and (max-width: 1024px) {   
+    .about-title {
+      font-size: 5rem;
+      font-weight: 200;
+    }
     .about-us {
         margin: 2rem; 
     }
     .leadership {
-        
         margin: 5rem 2rem 5rem 2rem;
     }
+    .card {
+      padding: 2rem;
+    }
   }
-  
+
+  @media screen and (max-width: 900px) {
+    .about-image {
+      opacity: 0;
+      width: 100%;
+      min-height: 5rem;
+    }
+    .about-imageholder {
+      width: 100%;
+    }
+    .about-title {
+      width: 100%;
+      padding-top: 4rem;
+      font-size: 4rem;
+    }
+  }
+
+  @media screen and (max-width: 650px) {
+    .about-image {
+        width: 100%;
+        min-height: 0rem;
+        padding: 5rem 1rem 5rem 1rem;
+    }
+    .about-title {
+      margin: 3rem 0;
+      font-size: 3rem;
+    }
+    .about-caption {
+      font-size: 1.75rem;
+    }
+  }
+
 /*Leadership style ends*/
