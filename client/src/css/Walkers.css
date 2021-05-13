@@ -22,6 +22,7 @@
     border-radius: 25px;
 }
 
+
 .picture-container {
     display: flex;
     justify-content: center;
@@ -57,6 +58,17 @@
 
 .profile-button:hover {
     background-color: black;
+    color: white;
+}
+
+.schedule-container {
+    display: grid;
+    grid-template-columns: 14% 14% 15% 14% 14% 14% 14%;
+    grid-template-rows: auto;
+}
+.schedule-item {
+    border: solid 1px var(--secondary);
+    background-color: var(--tertiary);
     color: white;
 }
 

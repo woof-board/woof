@@ -22,6 +22,15 @@ function WalkerSchedule() {
                         <div className="profile-button"><span>PROFILE</span></div>
                     </div>
                 </div>
+                <div className="schedule-container">
+                    <div className="schedule-item">1</div>
+                    <div className="schedule-item">2</div>
+                    <div className="schedule-item">3</div>
+                    <div className="schedule-item">4</div>
+                    <div className="schedule-item">5</div>
+                    <div className="schedule-item">6</div>
+                    <div className="schedule-item">7</div>  
+                </div>
             </div>
         </div>
     )
