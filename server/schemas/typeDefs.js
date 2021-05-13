@@ -145,6 +145,7 @@ const typeDefs = gql`
         addDog(input: DogInput): Owner
         addOrder(input: OrderInput): Order
         updateOrder(order_id: ID!, input: OrderInput): Order
+        removeOrder(order_id: ID!): Order
         addReview(input: ReviewInput): Walker
         removeReview(walker_id: ID!): Walker
         updateReview(input: ReviewInput): Walker

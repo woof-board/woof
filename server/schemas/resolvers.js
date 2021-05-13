@@ -154,6 +154,7 @@ const resolvers = {
         /* Order mutations
            - addOrder
            - updateOrder
+           - removeOrder
         */
         addOrder: async (parent, { input }, context) => {
             if (context.owner) {
@@ -172,6 +173,16 @@ const resolvers = {
                     input,
                     { new: true, runValidators: true }
                 );
+
+                return order;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        removeOrder: async (parent, {order_id, input }, context) => {
+            if (context.owner) {
+                const order = await Order.findByIdAndDelete(order_id);
 
                 return order;
             }
