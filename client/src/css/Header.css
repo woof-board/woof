@@ -36,7 +36,7 @@ li {
     font-weight: 600;
     font-size: 1.2rem;
     text-decoration: none;
-    color: var(--tertiary);
+    color: var(--secondary);
     font-weight: bold;
     padding: 1rem;
     margin: .5;
@@ -46,13 +46,8 @@ li {
     padding: 1rem;
     border-radius: 35px;
     background-color: var(--secondary);
+    color: var(--tertiary);
 }
-
-.false {
-    border-radius: 35px;
-    background-color: var(--secondary);
-}
-
 
 .navActive {
     background-color: white;

@@ -3,6 +3,8 @@ import '../css/Walker.css';
 import WalkerLoginForm from '../components/WalkerLoginForm';
 import FormHeader from '../components/LoginSIgnupForm';
 import WalkerSignupForm from '../components/WalkerSignupForm';
+import WalkerHeader from '../components/Header/WalkerHeader';
+import Auth from '../utils/auth';
 
 
 function Walker(props) {
@@ -10,22 +12,48 @@ function Walker(props) {
     const [links] = useState([
         {
             name: 'LOGIN',
-            id: 'login-title',
+            id: 'active-title',
             hover: 'login-hover'
         },
         {
             name: 'SIGNUP',
-            id: 'signup-title',
+            id: 'active-title',
             hover: 'login-hover'
         }
     ])
 
+    const [headerLinks] = useState([
+        {
+            name: 'Profile',
+            href: 'walkerprofile'
+        },
+        {
+            name: 'Logout',
+            href: '',
+
+        }
+    ])
+
     const [currentLink, setCurrentLink] = useState(links[0]);
+    const [currentHeaderLink, setHeaderLink] = useState(headerLinks[0]);
 
     return (
         <div id="walker">
             <div className="background-walker">
             </div>
+            {Auth.loggedIn() ? (
+                <>
+                    <WalkerHeader 
+                        headerLinks={headerLinks}
+                        currentHeaderLink={currentHeaderLink}
+                        setHeaderLink={setHeaderLink}
+                    />
+                </>
+            ) : (
+                <>
+                </>
+            )}
+
             <div className="walker-content">
                 <div className="walker-info-container">
                     <p className="walker-text">FIND YOUR PERFECT DOG WALKER</p>

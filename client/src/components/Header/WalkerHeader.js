@@ -5,9 +5,11 @@ import Logo from '../../assets/images/woof-logo.svg';
 
 function HomeHeader(props) {
 
-    const links = [{name: 'Home'}, {name: 'Profile'}]
-
-    console.log(links)
+    const {
+        headerLinks = [],
+        setHeaderLink,
+        currentHeaderLink
+    } = props
 
     return (
         <nav className="header-container">
@@ -15,10 +17,10 @@ function HomeHeader(props) {
                 <img className="header-logo" src={Logo} alt=""></img>
             </div>
             <div className="nav-links-container">
-                {links.map((links) => (
+                {headerLinks.map((link) => (
                     <li className="list-link">
-                        <a href={links.name} key={links.name} onClick={() => {
-                        }}>{links.name}</a>
+                        <a href={link.name} className={`walker-header-link ${currentHeaderLink.name === link.name && `navActive`}`} key={link.name} onClick={() => {setHeaderLink(link);
+                        }} >{link.name}</a>
                     </li>                    
                 ))}
 
