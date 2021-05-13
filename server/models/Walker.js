@@ -8,9 +8,21 @@ const reviewSchema = new Schema( // Do we need to add createdAt field for review
             ref: 'Owner',
             required: true
         },
+        rating: {
+            type: Number,
+            required: true,
+            validate: {
+                
+                validator: function(rating) {
+                    console.log(typeof(rating))
+                    return rating >= 1 && rating <= 5;
+                },
+                message: props => `${props.value} is not a valid rating number!`
+            },
+            
+        },
         reviewText: {
-            type: String,
-            required: true
+            type: String
         }
     }
 );
@@ -41,16 +53,6 @@ const walkerSchema = new Schema(
         neighbourhoods: {
             type: [String],
             default: undefined
-        },
-        ratings: {
-            type: [{type: Number,
-                validate: {
-                    validator: function(rating) {
-                        console.log(rating);
-                        return rating >= 1 && rating <= 5;
-                    },
-                    message: props => `${props.value} is not a valid rating number!`
-                },}]
         },
         reviews: [reviewSchema],
         earnings: Number,
@@ -104,7 +106,7 @@ walkerSchema.virtual('averageRating').get(function () {
         }
     }
 
-    return this.ratings.reduce(reducer, 0);
+    return this.reviews.ratings?.reduce(reducer, 0);
 });
 
 

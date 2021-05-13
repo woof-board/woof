@@ -155,12 +155,30 @@ const resolvers = {
         },
 
         // add rating to walker
-        addRating: async (parent, { walker_id, rating }, context) => {
+        addReview: async (parent, { input }, context) => {
+
             if(context.owner){
-                const walker = await Walker.findByIdAndUpdate(
+                const {walker_id, rating, reviewText} = input;
+                
+                const owner_id = mongoose.Types.ObjectId(context.owner._id);
+                const review = {owner: owner_id, rating: rating, reviewText: reviewText};
+
+                console.log(`${walker_id}, ${rating}, ${reviewText}`)
+                return await Walker.findByIdAndUpdate(
                     walker_id,
-                    { $push: { ratings: rating } },
+                    { $push: { reviews: review } },
                     { new: true, runValidators: true }
+                )
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        clearReview: async (parent, { walker_id }, context) => {
+            if(context.owner){
+                const walker =  await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $set: { reviews:[] } }
                 );
 
                 return walker;

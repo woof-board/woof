@@ -19,8 +19,7 @@ const typeDefs = gql`
         lastName: String
         email: String
         neighbourhoods: [String]
-        ratings: [Int]
-        reviews: [String]
+        reviews: [Review]
         earnings: Float
         averageRating: Float
         availability: [Availability]
@@ -61,6 +60,12 @@ const typeDefs = gql`
         slot9pm: Boolean
     }
     
+    type Review {
+        owner: ID!
+        rating: Int!
+        reviewText: String
+    }
+
     type AuthOwner {
         token: ID
         owner: Owner
@@ -111,6 +116,12 @@ const typeDefs = gql`
         dogs: [DogInput]
     }
 
+    input ReviewInput {
+        walker_id: ID!
+        rating: Int!
+        reviewText: String
+    }
+
     type Query {
         owners: [Owner]
         owner_me: Owner
@@ -129,7 +140,8 @@ const typeDefs = gql`
         loginWalker(email: String!, password: String!): AuthWalker
         addDog(input: DogInput): Owner
         addOrder(input: OrderInput): Order
-        addRating(walker_id: ID!, rating: Int!): Walker
+        addReview(input: ReviewInput): Walker
+        clearReview(walker_id: ID!): Walker
     }
 
 `;
