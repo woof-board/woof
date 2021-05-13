@@ -6,7 +6,7 @@ import '../css/OwnerProfile.css';
 function OwnerProfile() {
     return (
         <>
-        <div className="w3-content w3-margin-top" style="max-width:1400px;">
+        <div className="w3-content w3-margin-top" style={{maxWidth: "1400px"}}>
              <div className="w3-row-padding">
 
                 <div className="w3-third">

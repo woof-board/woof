@@ -1,44 +1,73 @@
 import React, { useState } from 'react';
-import '../../css/Walker.css';
 import { useMutation } from '@apollo/react-hooks';
 import Auth from '../../utils/auth';
-import { LOGIN_WALKER_USER } from '../../utils/mutations';
+import { LOGIN_WALKER } from '../../utils/mutations';
+import '../../css/Walker.css';
 
 function WalkerLoginForm() {
-
     const [formData, setUserFormData] = useState({ email: '', password: '' });
-    const [login] = useMutation(LOGIN_WALKER_USER);
+    const [loginWalker, { error }] = useMutation(LOGIN_WALKER);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setUserFormData({ ...formData, [name]: value})
-    }
+        setUserFormData({ 
+            ...formData, 
+            [name]: value
+        });
+    };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        alert('Walker: '+ formData.email + ' Logged In');
 
         try {
-          const { data } = await login({
+          const { data } = await loginWalker({
             variables: { ...formData }
           });
       
-          Auth.login(data.login.token);
+          Auth.login(data.loginWalker.token);
         } catch (e) {
           console.error(e);
         }
       };
 
-      console.log(formData.email);
-      console.log(formData.password);
-    
     return (
-        <form id="walker-login-form" className="login-form" onSubmit={handleFormSubmit}>
-            <input className="signup-login-input" type="email" placeholder="Enter Email" name="email" onChange={handleInputChange} value={formData.email}></input>
-            <input className="signup-login-input" type="text" placeholder="Enter Password" name="password" onChange={handleInputChange} value={formData.password}></input>
-            <button disabled={!(formData.email && formData.password)} type="submit" variant="success" className="form-button" id="walker-login-button">SUBMIT</button>
+        <form 
+            id="walker-login-form" 
+            className="login-form" 
+            onSubmit={handleFormSubmit}
+        >
+            <input 
+                className="signup-login-input" 
+                type="email" 
+                placeholder="Enter Email" 
+                name="email" 
+                onChange={handleInputChange} 
+                value={formData.email}
+            />
+            <input 
+                className="signup-login-input" 
+                type="password" 
+                placeholder="Enter Password" 
+                name="password" 
+                onChange={handleInputChange} 
+                value={formData.password} 
+            />
+            {
+                error ? <div>
+                    <p className="error-text" >The provided credentials are incorrect</p>
+                </div> : null
+            }
+            <button 
+                disabled={!(formData.email && formData.password)} 
+                type="submit" 
+                variant="success" 
+                className="form-button" 
+                id="walker-login-button"
+            >
+                SUBMIT
+            </button>
          </form>
-    )
+    );
 }
 
 export default WalkerLoginForm;
