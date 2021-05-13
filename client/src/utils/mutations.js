@@ -15,3 +15,18 @@ export const ADD_ORDER = gql`
     }
   }
 `;
+
+export const ADD_REVIEW = gql`
+  mutation addReview( $input: ReviewInput ) {
+    addReview( input: $input ) {
+      _id
+      firstName
+      lastName
+      reviews{
+        owner
+        rating
+        reviewText
+      }
+    }
+  }
+`;
