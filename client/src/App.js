@@ -74,7 +74,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Owner} />
               <Route exact path="/about" component ={About} />
-              {/* <Route exact path="/Owner" component={Owner} /> */}
+              <Route exact path="/Owner" component={Owner} />
               <Route exact path="/walker" component={Walker} />
               <Route component={NoMatch} />
             </Switch>

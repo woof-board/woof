@@ -1,17 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../css/Walker.css';
+import { useMutation } from '@apollo/react-hooks';
+import Auth from '../../utils/auth';
+import { LOGIN_WALKER_USER } from '../../utils/mutations';
 
 function WalkerLoginForm() {
 
-    const walkerLogin = async() => {
-        alert('Walker Logged In');
+    const [formData, setUserFormData] = useState({ email: '', password: '' });
+    const [login] = useMutation(LOGIN_WALKER_USER);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setUserFormData({ ...formData, [name]: value})
     }
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        alert('Walker: '+ formData.email + ' Logged In');
+
+        try {
+          const { data } = await login({
+            variables: { ...formData }
+          });
+      
+          Auth.login(data.login.token);
+        } catch (e) {
+          console.error(e);
+        }
+      };
+
+      console.log(formData.email);
+      console.log(formData.password);
     
     return (
-        <form id="walker-login-form" className="login-form">
-            <input className="signup-login-input" type="email" placeholder="Enter Email"></input>
-            <input className="signup-login-input" type="text" placeholder="Enter Password"></input>
-            <button className="form-button" onClick={walkerLogin} id="walker-login-button">SUBMIT</button>
+        <form id="walker-login-form" className="login-form" onSubmit={handleFormSubmit}>
+            <input className="signup-login-input" type="email" placeholder="Enter Email" name="email" onChange={handleInputChange} value={formData.email}></input>
+            <input className="signup-login-input" type="text" placeholder="Enter Password" name="password" onChange={handleInputChange} value={formData.password}></input>
+            <button disabled={!(formData.email && formData.password)} type="submit" variant="success" className="form-button" id="walker-login-button">SUBMIT</button>
          </form>
     )
 }
