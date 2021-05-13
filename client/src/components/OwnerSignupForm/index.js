@@ -9,7 +9,8 @@ function OwnerSignupForm() {
 
     return (
         <form id="owner-signup-form" className="signup-form">
-            <input className="signup-login-input" type="text" placeholder="Enter Name"></input>
+            <input className="signup-login-input" type="text" placeholder="Enter First Name"></input>
+            <input className="signup-login-input" type="text" placeholder="Enter Last Name"></input>
             <input className="signup-login-input" type="email" placeholder="Enter Email"></input>
             <input className="signup-login-input" type="text" placeholder="Enter Password"></input>
             <button className="form-button" onClick={ownerSignup} id="owner-signup-button">SUBMIT</button>

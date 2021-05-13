@@ -45,6 +45,11 @@
     width: 25rem;
 }
 
+.auto-vh {
+    height: 100%;
+    width: 100%;
+}
+
 .form-container {
     background-color: rgba(var(--rgb-secondary), 0.8);
     box-shadow: 10px 10px 20px rgb(0,0,0,0.6);
@@ -53,8 +58,7 @@
     width: 25rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    height: 23rem;
+    padding-bottom: 6rem;
 }
 
 .login-title {
