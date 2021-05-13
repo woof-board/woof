@@ -6,6 +6,8 @@
     background-color: var(--primary);
     z-index: 999;
     position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: auto;
     align-items: center;
@@ -43,27 +45,28 @@ li {
 }
 
 .link:hover {
-    padding: 1rem;
+    padding: .5rem;
     border-radius: 35px;
     background-color: var(--secondary);
     color: var(--tertiary);
 }
 
 .navActive {
-    background-color: white;
+    background-color: var(--secondary);
     color: black;
     transition: 0.7s;
     border-radius: 35px;
 }
 
-.icon {
-    display: none;
+.listActive {
+    background-color: var(--secondary);
+    color: black;
+    transition: 0.7s;
+    border-radius: 35px;
+    padding: .5rem;
 }
 
 @media screen and (max-width: 650px) {
-    .link {
-        display: none;
-    }
 
     .icon {
         display: block;

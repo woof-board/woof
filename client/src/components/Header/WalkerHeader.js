@@ -1,15 +1,20 @@
 import React from 'react';
 import '../../css/Header.css';
-import Icon from '@iconify/react';
 import Logo from '../../assets/images/woof-logo.svg';
+import Auth from '../../utils/auth';
 
 function WalkerHeader(props) {
 
     const {
-        headerLinks = [],
-        setHeaderLink,
-        currentHeaderLink
+        walkerLinks = [],
+        setWalkerLink,
+        currentWalkerLink
     } = props
+
+    const logout = event => {
+        event.preventDefault();
+        Auth.logout();
+      };
 
     return (
         <nav className="header-container">
@@ -17,13 +22,15 @@ function WalkerHeader(props) {
                 <img className="header-logo" src={Logo} alt=""></img>
             </div>
             <div className="nav-links-container">
-                {headerLinks.map((link) => (
-                    <li className="list-link">
-                        <a href={link.href} className={`walker-header-link ${currentHeaderLink.name === link.name && `navActive`}`} key={link.name} onClick={() => {setHeaderLink(link);
+                {walkerLinks.map((link) => (
+                    <li key={link.name} className="list-link">
+                        <a href={link.href} className={`link ${currentWalkerLink.name === link.name && `listActive`}`} onClick={() => {setWalkerLink(link);
                         }} >{link.name}</a>
-                    </li>                    
+                    </li>       
                 ))}
-
+                <li className="list-link">
+                    <a href="/" onClick={logout} className="link" key="walker-logout">Logout</a>
+                </li> 
             </div>
         </nav>
     )

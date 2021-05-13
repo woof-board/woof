@@ -15,7 +15,7 @@ function Footer(props) {
                 </div>
                 <div>
                 {footerLinks.map((link) => (
-                    <a href={link.href} className="footer-link">{link.name}</a>
+                    <a key={link.name} href={link.href} className="footer-link">{link.name}</a>
                 ))}
                 </div>
             </div>
