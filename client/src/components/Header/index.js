@@ -26,8 +26,8 @@ function Header(props) {
             <div className="nav-links-container">
                 {Auth.loggedIn() ? (
                     <>
-                    <Link to="/#profile">Profile</Link>
-                    <a href="/" onClick={logout}>Logout</a>
+                    <Link className="link" to="/#profile">Profile</Link>
+                    <Link onClick={logout} className="link" to="/">Logout</Link>
                     </>
                 ) : (
                     <>
