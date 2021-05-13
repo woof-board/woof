@@ -176,6 +176,13 @@ const resolvers = {
                 const {owner_id, walker_id, rating, reviewText} = input;   
                 const review = {owner_id: owner_id, rating: rating, reviewText: reviewText};
 
+                // remove current review if exists to make sure only one review can be added by same owner
+                await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $pull: { reviews: { owner_id: owner_id } } },
+                    { new: true, runValidators: true }
+                );
+
                 return await Walker.findByIdAndUpdate(
                     walker_id,
                     { $push: { reviews: review } },
@@ -188,8 +195,6 @@ const resolvers = {
 
         removeReview: async (parent, { walker_id }, context) => {
             if(context.owner){
-                console.log(context.owner._id);
-                console.log(walker_id);
                 return await Walker.findByIdAndUpdate(
                     walker_id,
                     { $pull: { reviews: { owner_id: context.owner._id } } },
@@ -200,26 +205,28 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        // updateReview: async (parent, { input }, context) => {
-        //     if(context.owner){
-        //         const {owner_id, walker_id, rating, reviewText} = input;   
-        //         const review = {owner_id: owner_id, rating: rating, reviewText: reviewText};
+        updateReview: async (parent, { input }, context) => {
+            if(context.owner){
+                const {owner_id, walker_id, rating, reviewText} = input;   
+                const review = {owner_id: owner_id, rating: rating, reviewText: reviewText};
 
-        //         await Walker.findByIdAndUpdate(
-        //             walker_id,
-        //             { $pull: { owner_id: owner_id } },
-        //             { new: true, runValidators: true }
-        //         );
+                // remove current review
+                await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $pull: { reviews: { owner_id: owner_id } } },
+                    { new: true, runValidators: true }
+                );
 
-        //         return await Walker.findByIdAndUpdate(
-        //             walker_id,
-        //             { $push: { reviews: review } },
-        //             { new: true, runValidators: true }
-        //         );
-        //     }
+                // add new review
+                return await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $push: { reviews: review } },
+                    { new: true, runValidators: true }
+                );
+            }
 
-        //     throw new AuthenticationError('Not logged in');
-        // },
+            throw new AuthenticationError('Not logged in');
+        },
 
         clearReview: async (parent, { walker_id }, context) => {
             if(context.owner){

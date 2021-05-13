@@ -144,8 +144,10 @@ const typeDefs = gql`
         loginWalker(email: String!, password: String!): AuthWalker
         addDog(input: DogInput): Owner
         addOrder(input: OrderInput): Order
+        updateOrder(input: OrderInput): Order
         addReview(input: ReviewInput): Walker
         removeReview(walker_id: ID!): Walker
+        updateReview(input: ReviewInput): Walker
         clearReview(walker_id: ID!): Walker
     }
 

@@ -99,7 +99,7 @@ walkerSchema.virtual('averageRating').get(function () {
         }
     }
 
-    return this.reviews.ratings?.reduce(reducer, 0);
+    return this.reviews.map(review => review.rating).reduce(reducer, 0);
 });
 
 
