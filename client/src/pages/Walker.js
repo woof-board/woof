@@ -29,23 +29,23 @@ function Walker(props) {
             <div className="walker-content">
                 <div className="walker-info-container">
                     <p className="walker-text">FIND YOUR PERFECT DOG WALKER</p>
-                    <p className="walker-text-small">At <b><i>Woof</i></b>, we will find the perfect dog walker for your furry best friend. Simploy pick a date and time and we'll match you with a reliable, dog-loving walker who will treat your pup right.  Want to join our team of walkers? <b><strong>Click Here</strong></b> to get started</p>
+                    <p className="walker-text-small">At <b><i>Woof</i></b>, we will find the perfect dog walker for your furry best friend. Simply pick a date and time and we'll match you with a reliable, dog-loving walker who will treat your pup right.  Want to join our team of walkers? <b><strong>Click Here</strong></b> to get started</p>
                 </div>
 
-                <div id="form-container" className="form-container">
-                    <FormHeader 
-                        links={links}
-                        currentLink={currentLink}
-                        setCurrentLink={setCurrentLink}
-                    />
-                    {currentLink.name === links[0].name && (
-                        <WalkerLoginForm />
-                    )}
-                    {currentLink.name === links[1].name && (
-                        <WalkerSignupForm />
-                    )}
-  
-                </div>
+
+                    <div id="form-container" className="form-container">
+                        <FormHeader 
+                            links={links}
+                            currentLink={currentLink}
+                            setCurrentLink={setCurrentLink}
+                        />
+                        {currentLink.name === links[0].name && (
+                            <WalkerLoginForm />
+                        )}
+                        {currentLink.name === links[1].name && (
+                            <WalkerSignupForm />
+                        )}
+                    </div>
             </div>
         </div>
     )

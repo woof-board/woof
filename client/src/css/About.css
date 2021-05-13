@@ -1,85 +1,129 @@
 .about-imgholder {
-    z-index: 0;
+  position: relative;
+  text-align: center;
 }
-
 .about-image {
     width: 100%;
-    max-height:50rem;
+    max-height:30rem;
     text-align: center;
 }
-
+.about-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--secondary);
+  font-size: 6rem;
+  font-weight: 400;
+  text-shadow: 5px 5px 10px rgb(0,0,0,0.6);
+  margin: auto;
+  padding: 0;
+}
+.about-caption {
+  font-size: 2rem;
+  color: var(--quinary);
+  font-weight: 500;
+  text-shadow: 3px 3px 5px rgb(0,0,0,0.8);
+  padding-top: 0;
+  margin-top: 0;
+}
 .about-us {
-    line-height: 1.6;
-    font-size: 120%;
-    margin: 5rem 20rem 5rem 20rem;
-    text-align: justify;
+  line-height: 1.6;
+  font-size: 120%;
+  margin: 5rem 20rem 5rem 20rem;
+  text-align: justify;
 }
 
 /*Leadership style starts*/
 .leadership {
-    text-align: center;
-    margin: 5rem 20rem 5rem 20rem;
+  text-align: center;
+  margin: 5rem 20rem 5rem 20rem;
 }
 .profile-picture {
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+} 
+.about-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
-  
-.row {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
+.about-card {
+  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
+  padding: 2rem;
+  text-align: center;
+  background-color: var(--quinary);
 }
-/*   
-  Clear floats after the columns
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  } */
+.profile-socialmedia {
+  margin: 0 1rem 0 1rem;
+  font-size: 1.5rem;
+  text-decoration: none;
+  color: #000;
+}
+.profile-socialmedia:hover {
+  box-shadow:5px 4px 8px 5px var(--quinary);
+  transition-duration: 1s;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 1315px) {
   
-  /* Style the counter cards */
-  .card {
-    /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
-    padding: 16px;
-    text-align: center;
-    background-color: rgb(181, 181, 181);
+  .about-title {
+    font-size: 5rem;
+    font-weight: 200;
+  }
+  .about-card {
+    padding: 1rem;
+  }
+}
 
+@media screen and (max-width: 1024px) {   
+  .about-title {
+    font-size: 5rem;
+    font-weight: 200;
   }
+  .about-us {
+    margin: 2rem; 
+  }
+  .leadership {
+    margin: 5rem 2rem 5rem 2rem;
+  }
+  .about-card {
+    padding: 2rem;
+  }
+}
 
-  .profile-socialmedia {
-      margin: 0 1rem 0 1rem;
-      font-size: 1.5rem;
-      text-decoration: none;
-      color: #000;
+@media screen and (max-width: 900px) {
+  .about-image {
+    opacity: 0;
+    width: 100%;
+    min-height: 5rem;
   }
+  .about-imageholder {
+    width: 100%;
+  }
+  .about-title {
+    width: 100%;
+    padding-top: 4rem;
+    font-size: 4rem;
+    color: var(--tertiary);
+  }
+}
 
-  .profile-socialmedia:hover {
-    box-shadow:5px 4px 8px 5px var(--quinary);
-    transition-duration: 1s;
+@media screen and (max-width: 650px) {
+  .about-image {
+    width: 100%;
+    min-height: 0rem;
+    padding: 5rem 1rem 5rem 1rem;
   }
-
-  /* Responsive columns */
-  @media screen and (max-width: 650px) {
-    .about-image {
-        width: 100%;
-        min-height:20rem;
-        /* text-align: center; */
-    }
-    .about-us {
-        margin: 2rem; 
-    }
+  .about-title {
+    margin: 3rem 0;
+    font-size: 3rem;
   }
-  @media screen and (max-width: 1024px) {
-    .about-us {
-        margin: 2rem; 
-    }
-    .leadership {
-        
-        margin: 5rem 2rem 5rem 2rem;
-    }
+  .about-caption {
+    font-size: 1.75rem;
   }
-  
+}
 /*Leadership style ends*/
