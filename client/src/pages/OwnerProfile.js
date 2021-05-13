@@ -92,4 +92,4 @@ function OwnerProfile() {
     )
 }
 
-export default About;
+export default OwnerProfile;
