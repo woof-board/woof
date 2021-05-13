@@ -27,9 +27,9 @@ function App() {
   const [currentLink, setCurrentLink] = useState(links[0])
 
   return (
-    <body className="page">
+    <>
       <div>
-        <WalkerHeader 
+        <Header 
         links={links}
         currentLink={currentLink}
         setCurrentLink={setCurrentLink}
@@ -46,7 +46,7 @@ function App() {
       <div>
         <Footer />
       </div>
-    </body>
+    </>
   );
 }
 

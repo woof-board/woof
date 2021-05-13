@@ -10,6 +10,7 @@ import Walkers from './pages/Walkers'
 import NoMatch from './pages/NoMatch';
 import Walker from './pages/Walker';
 import Owner from './pages/Owner';
+import WalkerSchedule from './pages/WalkerSchedule';
 // npm install --save-dev @iconify/react @iconify-icons/ant-design
 import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 // npm install --save-dev @iconify/react @iconify-icons/ic
@@ -47,12 +48,6 @@ function App() {
       href: '/about',
       icon: loginOutlined
     },
-    
-    {
-      name: 'Walker',
-      href: '/walker',
-      icon: personAdd
-    },
     {
       name: 'Walkers',
       href: '/walker',
@@ -65,7 +60,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div className="page">
+        <div>
           <div>
             <Header 
             links={links}
@@ -79,6 +74,7 @@ function App() {
               <Route exact path="/about" component ={About} />
               {/* <Route exact path="/Owner" component={Owner} /> */}
               <Route exact path="/walker" component={Walker} />
+              <Route exact path="/walkerSched" component={WalkerSchedule} />
               <Route component={NoMatch} />
             </Switch>
 
