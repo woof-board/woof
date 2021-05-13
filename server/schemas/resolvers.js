@@ -165,6 +165,20 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+        updateOrder: async (parent, {order_id, input }, context) => {
+            if (context.owner) {
+                const order = await Order.findByIdAndUpdate(
+                    order_id, 
+                    input,
+                    { new: true, runValidators: true }
+                );
+
+                return order;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
         /* Review mutations
            - addReview
            - updateReview
