@@ -10,8 +10,11 @@ function WalkerLoginForm() {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setUserFormData({ ...formData, [name]: value})
-    }
+        setUserFormData({ 
+            ...formData, 
+            [name]: value
+        });
+    };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -64,7 +67,7 @@ function WalkerLoginForm() {
                 SUBMIT
             </button>
          </form>
-    )
+    );
 }
 
 export default WalkerLoginForm;

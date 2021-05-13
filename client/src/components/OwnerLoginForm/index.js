@@ -10,8 +10,11 @@ function OwnerLoginForm() {
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setUserFormData({ ...formData, [name]: value})
-    }
+        setUserFormData({ 
+            ...formData, 
+            [name]: value
+        });
+    };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
@@ -24,7 +27,7 @@ function OwnerLoginForm() {
         } catch (e) {
           console.error(e);
         }
-      };
+    };
     
     return (
         <form 
@@ -63,7 +66,7 @@ function OwnerLoginForm() {
                 SUBMIT
             </button>
          </form>
-    )
+    );
 }
 
 export default OwnerLoginForm;
