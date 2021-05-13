@@ -60,7 +60,9 @@ const resolvers = {
         },
 
         orders: async (parent, args, context) => {
-            return await Order.find({});
+            return await Order.find({})
+            .populate('owner')
+            .populate('walker');
         },
 
         // getOrders
@@ -149,9 +151,10 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-
-
-        // add an order
+        /* Order mutations
+           - addOrder
+           - updateOrder
+        */
         addOrder: async (parent, { input }, context) => {
             if (context.owner) {
                 const order = await Order.create(input);
@@ -162,7 +165,12 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        // add rating to walker
+        /* Review mutations
+           - addReview
+           - updateReview
+           - removeReview
+           - clearReview
+        */
         addReview: async (parent, { input }, context) => {
             if(context.owner){
                 const {owner_id, walker_id, rating, reviewText} = input;   
@@ -172,11 +180,46 @@ const resolvers = {
                     walker_id,
                     { $push: { reviews: review } },
                     { new: true, runValidators: true }
-                )
+                );
             }
 
             throw new AuthenticationError('Not logged in');
         },
+
+        removeReview: async (parent, { walker_id }, context) => {
+            if(context.owner){
+                console.log(context.owner._id);
+                console.log(walker_id);
+                return await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $pull: { reviews: { owner_id: context.owner._id } } },
+                    { new: true, runValidators: true }
+                );
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        // updateReview: async (parent, { input }, context) => {
+        //     if(context.owner){
+        //         const {owner_id, walker_id, rating, reviewText} = input;   
+        //         const review = {owner_id: owner_id, rating: rating, reviewText: reviewText};
+
+        //         await Walker.findByIdAndUpdate(
+        //             walker_id,
+        //             { $pull: { owner_id: owner_id } },
+        //             { new: true, runValidators: true }
+        //         );
+
+        //         return await Walker.findByIdAndUpdate(
+        //             walker_id,
+        //             { $push: { reviews: review } },
+        //             { new: true, runValidators: true }
+        //         );
+        //     }
+
+        //     throw new AuthenticationError('Not logged in');
+        // },
 
         clearReview: async (parent, { walker_id }, context) => {
             if(context.owner){

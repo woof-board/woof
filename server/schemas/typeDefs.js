@@ -62,7 +62,7 @@ const typeDefs = gql`
     }
     
     type Review {
-        owner: ID!
+        owner_id: ID!
         rating: Int!
         reviewText: String
     }
@@ -145,6 +145,7 @@ const typeDefs = gql`
         addDog(input: DogInput): Owner
         addOrder(input: OrderInput): Order
         addReview(input: ReviewInput): Walker
+        removeReview(walker_id: ID!): Walker
         clearReview(walker_id: ID!): Walker
     }
 
