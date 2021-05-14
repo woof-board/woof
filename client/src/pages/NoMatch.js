@@ -1,8 +1,9 @@
 import React from 'react';
+import '../css/App.css';
 
 const NoMatch = () => {
   return (
-    <div>
+    <div className="error-page">
       Oops, we couldn't find that page.
     </div>
   );

@@ -1,4 +1,59 @@
 .page-body {
     position: absolute;
-    top: 15rem;
+    top: 7rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.walker-picture-container {
+    background-color: var(--secondary);
+    height: 10rem;
+    width: 10rem;
+    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+    margin: 0 1rem 1rem 1rem;
+}
+
+.walker-details-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.walker-profile-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+    padding: 1rem;
+    margin: 0rem 1rem 1rem 1rem;
+    min-width: 25rem;
+    background-color: var(--secondary);
+}
+
+.user-update-form {
+    margin-top: 1rem;
+}
+
+.profile-label {
+    font-weight: bold;
+}
+
+.profile-input {
+    border: none;
+    margin: 1rem 0rem 1rem 0rem;
+    padding: 0.25rem;
+}
+
+.row-data {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 650px) {
+    .page-body {
+        flex-direction: column;
+        align-items: center;
+    }
 }
