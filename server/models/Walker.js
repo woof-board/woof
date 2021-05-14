@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const { formatDate }= require('../utils/helpers');
 
 const reviewSchema = new Schema( // Do we need to add createdAt field for review? 
     {
@@ -57,7 +58,11 @@ const walkerSchema = new Schema(
         earnings: Number,
         availability: [ // placeholder, needs further discussion
             {
-                date: Date,
+                // date: {
+                //     type: Date,
+                //     get: timestamp => formatDate(timestamp)
+                // },
+                date: String,
                 slot9am: Boolean,
                 slot11am: Boolean,
                 slot1pm: Boolean,

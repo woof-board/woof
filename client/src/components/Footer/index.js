@@ -6,7 +6,7 @@ function Footer(props) {
 
     const {
         footerLinks
-    } = props
+    } = props;
 
     return (
         <div className="footer-container">

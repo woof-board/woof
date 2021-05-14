@@ -1,19 +1,29 @@
 import decode from 'jwt-decode';
 
 class AuthService {
-  getProfile() {
-
-    if (this.loggedIn() === true) {
-      console.log('logged In')
-      const data = decode(this.getToken());
-      const admin = data.data['admin']
-      if (admin === false) {return 'owner'}
-      else {return 'walker'}
+  getProfileType() {
+    if (this.loggedIn()) {
+        const { data } = decode(this.getToken());
+        return data?.admin === undefined ? "walker" : (data?.admin ? "admin" : "owner");
     } else {
-      console.log('not logged in')
-      return 'guest';
+        return "guest";
     }
+
+    // if (this.loggedIn() === true) {
+    //   console.log('logged In')
+    //   const data = decode(this.getToken());
+    //   const admin = data.data['admin']
+    //   if (admin === false) {return 'owner'}
+    //   else {return 'walker'}
+    // } else {
+    //   console.log('not logged in')
+    //   return 'guest';
+    // }
   
+  }
+
+  getProfile() {
+    return decode(this.getToken());
   }
 
   loggedIn() {
