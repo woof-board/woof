@@ -10,7 +10,7 @@ class AuthService {
       if (admin === false) {return 'owner'}
       else {return 'walker'}
     } else {
-      console.log('not logged in')
+      console.log('not logged in - GUEST')
       return 'guest';
     }
   
