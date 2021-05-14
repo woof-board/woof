@@ -27,8 +27,8 @@ function WalkerProfile() {
 
   const walkerOrders = orderData?.walker_orders || [{ _id: "", serviceData: '', serviceTime: 'Date(11/11/11)', owner: [{ _id: '', firstName: 'Nathan', lastName: ''}] }];
 
-  //data?.walker for walker = _id, firstName, lastName, email, reviews(owner_id, rating, reviewText), averageRating
-  //data?.walker_orders for walker_orders = _id, serviceData, serviceTime, owner(_id, firstName, lastName), walker(_id, firstName, lastName)
+  //reviewData?.walker for walker = _id, firstName, lastName, email, reviews(owner_id, rating, reviewText), averageRating
+  //orderData?.walker_orders for walker_orders = _id, serviceData, serviceTime, owner(_id, firstName, lastName), walker(_id, firstName, lastName)
 
   const totalOrders = walkerOrders.length;
   const totalReviews = walkerReviews[0].reviews.length;
