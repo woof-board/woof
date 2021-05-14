@@ -120,10 +120,10 @@ const client = new ApolloClient({
                         </div>
                     )}
                 </div>
-            </Router>
-            <Footer 
+                <Footer 
             	footerLinks={footerLinks}
-            />
+                />
+            </Router>
         </ApolloProvider>
     );
 }
