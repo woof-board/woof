@@ -32,7 +32,7 @@ const client = new ApolloClient({
 
     function App() {
 		  
-        const [links] = useState([
+        const [headerLinks] = useState([
             {
                 name: 'Owner',
                 href: '/owner',
@@ -67,7 +67,7 @@ const client = new ApolloClient({
         const result = Auth.getProfile();
         console.log(result);
 
-    const [currentLink, setCurrentLink] = useState(links[0])
+    const [currentHeaderLink, setHeaderCurrentLink] = useState(headerLinks[0])
     const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
 	const [currentOwnerLink, setOwnerLink] = useState(ownerLinks[0])
 
@@ -106,9 +106,9 @@ const client = new ApolloClient({
                     {result === 'guest' && (
                         <div className="page">
                         <Header
-                            links={links}
-                            currentLink={currentLink}
-                            setCurrentLink={setCurrentLink}
+                            headerLinks={headerLinks}
+                            currentHeaderLink={currentHeaderLink}
+                            setHeaderCurrentLink={setHeaderCurrentLink}
                         />
                         <Switch>
                             <Route exact path="/" component={Owner} />

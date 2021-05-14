@@ -24,8 +24,8 @@ function Header(props) {
             <div className="nav-links-container">
                 {ownerLinks.map((link) => (
                     <li key={link.name} className="list-link">
-                        <a href={link.href} className={`link ${currentOwnerLink.name === link.name && `listActive`}`} onClick={() => {setOwnerLink(link.href);
-                        }} >{link.name}</a>
+                        <span className={`link ${currentOwnerLink.name === link.name && `listActive`}`} onClick={() => {setOwnerLink(link.href);
+                        }} >{link.name}</span>
                     </li>                     
                 ))}
                 <li className="list-link">

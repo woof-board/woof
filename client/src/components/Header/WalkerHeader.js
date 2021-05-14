@@ -24,8 +24,8 @@ function WalkerHeader(props) {
             <div className="nav-links-container">
                 {walkerLinks.map((link) => (
                     <li key={link.name} className="list-link">
-                        <a href={link.href} className={`link ${currentWalkerLink.name === link.name && `listActive`}`} onClick={() => {setWalkerLink(link);
-                        }} >{link.name}</a>
+                        <span className={`link ${currentWalkerLink.name === link.name && `listActive`}`} onClick={() => {setWalkerLink(link);
+                        }} >{link.name}</span>
                     </li>       
                 ))}
                 <li className="list-link">
