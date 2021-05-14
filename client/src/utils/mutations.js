@@ -35,6 +35,35 @@ export const UPDATE_ORDER = gql`
     }
 `;
 
+/* example query variables
+
+{
+  "order_id": "609d910d1342e402388e2a2f",
+  "status": "IN_PROGRESS"
+}
+
+*/
+
+export const UPDATE_ORDER_STATUS = gql`
+    mutation updateOrderStatus($order_id: ID!, $status: String!) {
+        updateOrderStatus(order_id: $order_id, status: $status) {
+            _id
+            serviceDate
+            serviceTime
+            status
+            owner{
+                _id
+            }
+            walker{
+                _id
+            }
+            dogs{
+                _id
+            }
+        }
+    }
+`;
+
 export const REMOVE_ORDER = gql`
     mutation removeOrder($order_id: ID!) {
         removeOrder(order_id: $order_id) {
