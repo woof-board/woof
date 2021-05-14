@@ -1,91 +1,102 @@
 import React from 'react';
 import '../css/OwnerProfile.css';
 
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import decode from 'jwt-decode';
+import { QUERY_OWNER_ORDERS } from '../utils/queries';
+
 function OwnerProfile() {
+
+    const { loading, data } = useQuery(QUERY_OWNER_ORDERS)
+    console.log(data)
+    // decode token for Owner Data
+    const token = decode(Auth.getToken());
+    const ownerData = token.data;
+    console.log(data);
+  
+    const handleFormSubmit = async () => {
+      alert('Account Updated')
+    }
+
+    const ownerArr = [
+        {
+          display: 'First Name',
+          title: ownerData.firstName,
+          type: 'text'
+        },
+        {
+          display: 'Last Name',
+          title: ownerData.lastName,
+          type: 'text'
+        },
+        {
+          display: 'Email',
+          title: ownerData.email,
+          type: 'email'
+        },
+      ]
+
+
     return (
         <>
-        <div className="w3-content w3-margin-top" style={{maxWidth: "1400px"}}>
-             <div className="w3-row-padding">
-
-                <div className="w3-third">
-
-                    <div className="w3-white w3-text-grey w3-card-4">
-                        <div className="w3-display-container">
-                        {/* <img src="./benspicture.JPG" style="width:100%" alt="Avatar"> */}
-                            <div className="w3-display-bottomleft w3-container w3-text-black">
-                                <h2>Benn Asabir</h2>
+            <div className="page-body">
+                <div className="owner-picture-container">
+                IMG HERE
+                </div>
+                <div className="owner-details-container">
+                    <div className="owner-profile-container">
+                        <div>
+                            My Profile
+                        </div>
+                        <form 
+                            className="user-update-form"
+                            id="owner-update-form"
+                            onSubmit={handleFormSubmit}>
+                            {ownerArr.map((arr) => (
+                            <div key={arr.display} className="row-data">
+                                <label className="profile-label">{arr.display}</label>
+                                <input className="profile-input" placeholder={arr.title} type={arr.type} name={arr.type} defaultValue={arr.title}/>
                             </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div className="w3-twothird">
-                    <div className="w3-container w3-card w3-white w3-margin-bottom">
-
-                        <h2 className="w3-padding-16"><i className="w3-margin-right w3-xxlarge"></i>My Profile</h2>
-
-                        <div className="w3-container">
-                            <h5 className="w3-opacity"><b>Full Name</b></h5>
-                            <p>Cure Insta</p>
-                            <hr></hr>
-                        </div>
-
-                        <div className="w3-container">
-                            <h5 className="w3-opacity"><b>Email</b></h5>
-                            <p>Benny555@gmail.com</p>
-                            <hr></hr>
-                        </div>
-
-                        <div className="w3-container">
-                            <h5 className="w3-opacity"><b>Number</b></h5>
-                            <p>555 5555 5555</p>
-                            <hr></hr>
-                        </div>
-
-                        <div className="w3-container">
-                            <h5 className="w3-opacity"><b>Address</b></h5>
-                            <p>555 Queensway Drive, Etobicoke, ON, L5M6Y7</p>
-                            <hr></hr>
-                        </div>
-  
+                            ))}
+                            <button
+                            type="submit"
+                            className="update-owner-button"
+                            id="update-owner-button"
+                            >UPDATE</button>
+                        </form>
                     </div>
                 </div>
 
-
-                <div className="w3-container w3-card w3-white">
-
-                    <h2 className="w3-padding-16">My Dog/s</h2>
-
-                    <div className="w3-container">
-                        {/* <img src="./home-samson.jpg" alt="" height="200"> */}
+                <div className="dog-picture-container">
+                IMG HERE
+                </div>
+                <div className="dog-details-container">
+                    <div className="dog-profile-container">
+                        <div>
+                            My Profile
+                        </div>
+                        <form 
+                            className="user-update-form"
+                            id="dog-update-form"
+                            onSubmit={handleFormSubmit}>
+                            {dogArr.map((arr) => (
+                            <div key={arr.display} className="row-data">
+                                <label className="profile-label">{arr.display}</label>
+                                <input className="profile-input" placeholder={arr.title} type={arr.type} name={arr.type} defaultValue={arr.title}/>
+                            </div>
+                            ))}
+                            <button
+                            type="submit"
+                            className="update-dog-button"
+                            id="update-dog-button"
+                            >UPDATE</button>
+                        </form>
                     </div>
-
-                    <div className="w3-container">
-                        <h5 className="w3-opacity"><b>Dog Name</b></h5>
-                        <p>Samson</p>
-                        <hr></hr>
-                    </div>
-
-                    <div className="w3-container">
-                        <h5 className="w3-opacity"><b>Dog Age</b></h5>
-                        <p>4</p>
-                        <hr></hr>
-                    </div>
-
-                    <div className="w3-container">
-                        <h5 className="w3-opacity"><b>Dog Weight</b></h5>
-                        <p>...</p>
-                        <hr></hr>
-                    </div>
-
                 </div>
 
-                
-             </div>
-        </div>
+            </div>
+
+
         </>
     )
 }
