@@ -100,6 +100,7 @@ const typeDefs = gql`
         lastName: String!
         email: String!
         password: String!
+        availability: [AvailabilityInput]
     }
 
     input DogInput {
@@ -122,6 +123,17 @@ const typeDefs = gql`
         walker_id: ID!
         rating: Int!
         reviewText: String
+    }
+
+    input AvailabilityInput {
+        date: String!
+        slot9am: Boolean
+        slot11am: Boolean
+        slot1pm: Boolean
+        slot3pm: Boolean
+        slot5pm: Boolean
+        slot7pm: Boolean
+        slot9pm: Boolean
     }
 
     type Query {
@@ -150,6 +162,7 @@ const typeDefs = gql`
         removeReview(walker_id: ID!): Walker
         updateReview(input: ReviewInput): Walker
         clearReview(walker_id: ID!): Walker
+        checkWalkerAvailability(date: String!, time: String!): [Walker]
     }
 
 `;

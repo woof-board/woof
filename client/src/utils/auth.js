@@ -1,19 +1,29 @@
 import decode from 'jwt-decode';
 
 class AuthService {
-  getProfile() {
-
-    if (this.loggedIn() === true) {
-      console.log('logged In')
-      const data = decode(this.getToken());
-      const admin = data.data['admin']
-      if (admin === false) {return 'owner'}
-      else {return 'walker'}
+  getProfileType() {
+    if (this.loggedIn()) {
+        const { data } = decode(this.getToken());
+        return data?.admin === undefined ? "walker" : (data?.admin ? "admin" : "owner");
     } else {
-      console.log('not logged in - GUEST')
-      return 'guest';
+        return "guest";
     }
+
+    // if (this.loggedIn() === true) {
+    //   console.log('logged In')
+    //   const data = decode(this.getToken());
+    //   const admin = data.data['admin']
+    //   if (admin === false) {return 'owner'}
+    //   else {return 'walker'}
+    // } else {
+    //   console.log('not logged in')
+    //   return 'guest';
+    // }
   
+  }
+
+  getProfile() {
+    return decode(this.getToken());
   }
 
   loggedIn() {
@@ -22,17 +32,17 @@ class AuthService {
     return !!token && !this.isTokenExpired(token);
   }
 
-  OwnerloggedIn() {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken();
-    return !!token && !this.isTokenExpired(token);
-  }  
+//   OwnerloggedIn() {
+//     // Checks if there is a saved token and it's still valid
+//     const token = this.getToken();
+//     return !!token && !this.isTokenExpired(token);
+//   }  
 
-  WalkerloggedIn() {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken();
-    return !!token && !this.isTokenExpired(token);
-  }
+//   WalkerloggedIn() {
+//     // Checks if there is a saved token and it's still valid
+//     const token = this.getToken();
+//     return !!token && !this.isTokenExpired(token);
+//   }
 
   isTokenExpired(token) {
     try {
@@ -54,7 +64,7 @@ class AuthService {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
 
-    if (this.getProfile() === 'owner') {
+    if (this.getProfileType() === 'owner' || this.getProfileType() === 'admin') {
       window.location.assign('/ownerprofile');
     } else {
       window.location.assign('/walkerprofile');
