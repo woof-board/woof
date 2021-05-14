@@ -16,6 +16,101 @@ export const ADD_ORDER = gql`
     }
 `;
 
+export const UPDATE_ORDER = gql`
+    mutation updateOrder($order_id: ID!, $input: OrderInput!) {
+        updateOrder(order_id: $order_id, input: $input) {
+            _id
+            serviceDate
+            serviceTime
+            owner{
+                _id
+            }
+            walker{
+                _id
+            }
+            dogs{
+                _id
+            }
+        }
+    }
+`;
+
+export const REMOVE_ORDER = gql`
+    mutation removeOrder($order_id: ID!) {
+        removeOrder(order_id: $order_id) {
+            _id
+            serviceDate
+            serviceTime
+            owner{
+                _id
+            }
+            walker{
+                _id
+            }
+            dogs{
+                _id
+            }
+        }
+    }
+`;
+
+export const ADD_REVIEW = gql`
+  mutation addReview( $input: ReviewInput ) {
+    addReview( input: $input ) {
+      _id
+      firstName
+      lastName
+      reviews{
+        owner
+        rating
+        reviewText
+      }
+    }
+  }
+`;
+
+export const REMOVE_REVIEW = gql`
+    mutation removeReview($walker_id: ID! ) {
+        removeReview(walker_id: $walker_id ) {
+            _id
+            firstName
+            lastName
+            reviews{
+                owner_id
+                rating
+                reviewText
+            }
+        }
+    }
+`;
+
+export const UPDATE_REVIEW = gql`
+    mutation updateReview($input: ReviewInput ) {
+        updateReview(input: $input ) {
+            _id
+            firstName
+            lastName
+            reviews{
+                owner_id
+                rating
+                reviewText
+            }
+        }
+    }
+`;
+
+export const CLEAR_REVIEW = gql`
+    mutation clearReview($walker_id: ID! ) {
+        clearReview(walker_id: $walker_id) {
+            _id
+            firstName
+            lastName
+            reviews
+            averageRating
+        }
+    }
+`;
+
 export const ADD_WALKER = gql`
     mutation addWalker($input: WalkerInput) {
         addWalker(input: $input) {

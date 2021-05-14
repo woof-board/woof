@@ -11,6 +11,10 @@
   --rgb-quinary:  219, 211, 211;
 }
 
+.error-page {
+  padding: 5rem;
+}
+
 /* if adding opacity to VAR, rgb(var(--color), <opacity>); */
 
 body {

@@ -1,53 +1,95 @@
-import React, {useState} from 'react';
-import './css/App.css';
-import WalkerProfile from './pages/WalkerProfile';
-import WalkerHeader from './components/Header/WalkerHeader';
-import Footer from './components/Footer';
-import Jobs from './pages/Jobs';
-// npm install --save-dev @iconify/react @iconify-icons/ant-design
-import homeOutlined from '@iconify-icons/ant-design/home-outlined';
-// npm install --save-dev @iconify/react @iconify-icons/ic
-import baselineWorkOutline from '@iconify-icons/ic/baseline-work-outline';
+import React from 'react';
+import '../css/WalkerProfile.css';
+import Auth from '../utils/auth';
+// import { useParams } from 'react-router-dom';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import decode from 'jwt-decode';
+import { QUERY_WALKER_ORDERS } from '../utils/queries';
 
-function App() {
+function WalkerProfile() {
 
-  const [links] = useState([
+  const { loading, data } = useQuery(QUERY_WALKER_ORDERS)
+  console.log(data)
+  // decode token for Walker Data
+  const token = decode(Auth.getToken());
+  const walkerData = token.data;
+  console.log(data);
+
+  const handleFormSubmit = async () => {
+    alert('Account Updated')
+  }
+
+  const walkerArr = [
     {
-      name: 'Profile',
-      href: '#home',
-      icon: homeOutlined
+      display: 'First Name',
+      title: walkerData.firstName,
+      type: 'text'
     },
     {
-      name: 'Jobs',
-      href: '#jobs',
-      icon: baselineWorkOutline
-    }
-  ])
+      display: 'Last Name',
+      title: walkerData.lastName,
+      type: 'text'
+    },
+    {
+      display: 'Email',
+      title: walkerData.email,
+      type: 'email'
+    },
+  ]
 
-  const [currentLink, setCurrentLink] = useState(links[0])
 
   return (
-    <>
-      <div>
-        <Header 
-        links={links}
-        currentLink={currentLink}
-        setCurrentLink={setCurrentLink}
-        />
+    <div className="page-body">
+      <div className="walker-picture-container">
+        IMG HERE
       </div>
-      <div>
-        {currentLink.name === links[0].name && (
-          <WalkerProfile />
-        )}
-        {currentLink.name === links[1].name && (
-          <Jobs />
-        )}
+      <div className="walker-details-container">
+        <div className="walker-profile-container">
+          <div>
+            My Profile
+          </div>
+          <form 
+            className="user-update-form"
+            id="walker-update-form"
+            onSubmit={handleFormSubmit}>
+            {walkerArr.map((arr) => (
+              <div key={arr.display} className="row-data">
+                <label className="profile-label">{arr.display}</label>
+                <input className="profile-input" placeholder={arr.title} type={arr.type} name={arr.type} defaultValue={arr.title}/>
+              </div>
+            ))}
+            <button
+              type="submit"
+              className="update-walker-button"
+              id="update-walker-button"
+            >UPDATE</button>
+          </form>
+        </div>
+        <div className="walker-profile-container">
+          <div>
+            My Walks
+          </div>
+        </div>
+        <div className="walker-profile-container">
+          <div>
+            My Reviews
+          </div>
+        </div>
+
       </div>
-      <div>
-        <Footer />
-      </div>
-    </>
+
+    </div>
   );
 }
 
-export default App;
+export default WalkerProfile;
+
+// firstname
+// lastname
+// email
+// neighbourhoods
+// rating
+// reviews
+// earnings
+// availability
+
