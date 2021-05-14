@@ -5,14 +5,25 @@ const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const reviewSchema = new Schema( // Do we need to add createdAt field for review? 
     {
-        owner: {
+        owner_id: {
             type: Schema.Types.ObjectId,
             ref: 'Owner',
             required: true
         },
+        rating: {
+            type: Number,
+            required: true,
+            validate: {
+                
+                validator: function(rating) {
+                    console.log(typeof(rating))
+                    return rating >= 1 && rating <= 5;
+                },
+                message: props => `${props.value} is not a valid rating number!`
+            },
+        },
         reviewText: {
-            type: String,
-            required: true
+            type: String
         }
     }
 );
@@ -44,7 +55,6 @@ const walkerSchema = new Schema(
             type: [String],
             default: undefined
         },
-        ratings: [Number],
         reviews: [reviewSchema],
         earnings: Number,
         availability: [ // placeholder, needs further discussion
@@ -93,8 +103,10 @@ walkerSchema.virtual('averageRating').get(function () {
         }
     }
 
-    return this.ratings.reduce(reducer, 0);
+    return this.reviews.map(review => review.rating).reduce(reducer, 0);
 });
+
+
 
 const Walker = model('Walker', walkerSchema);
 

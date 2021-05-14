@@ -8,6 +8,16 @@ const mongoose = require('mongoose');
 
 const resolvers = {
     Query: {
+        owner: async (parent, {owner_id}, context) => {
+            return await Owner.findById(owner_id)
+            .select('-__v -password');
+        },
+
+        owners: async (parent, args, context) => {
+            return await Owner.find({})
+            .select('-__v -password');
+        },
+
         // to get owner's own profile
         owner_me: async (parent, args, context) => {
             if (context.owner) {
@@ -18,6 +28,16 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
+        },
+
+        walker: async (parent, {walker_id}, context) => {
+            return await Walker.findById(walker_id)
+            .select('-__v -password');
+        },
+
+        walkers: async (parent, args, context) => {
+            return await Walker.find({})
+            .select('-__v -password');
         },
 
         // to get walker's own profile
@@ -40,7 +60,9 @@ const resolvers = {
         },
 
         orders: async (parent, args, context) => {
-            return await Order.find({});
+            return await Order.find({})
+            .populate('owner')
+            .populate('walker');
         },
 
         // getOrders
@@ -129,13 +151,119 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        // add an order
+        /* Order mutations
+           - addOrder
+           - updateOrder
+           - removeOrder
+        */
         addOrder: async (parent, { input }, context) => {
             if (context.owner) {
                 const order = await Order.create(input);
 
                 return order;
             }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateOrder: async (parent, {order_id, input }, context) => {
+            if (context.owner) {
+                const order = await Order.findByIdAndUpdate(
+                    order_id, 
+                    input,
+                    { new: true, runValidators: true }
+                );
+
+                return order;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        removeOrder: async (parent, {order_id, input }, context) => {
+            if (context.owner) {
+                const order = await Order.findByIdAndDelete(order_id);
+
+                return order;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        /* Review mutations
+           - addReview
+           - updateReview
+           - removeReview
+           - clearReview
+        */
+        addReview: async (parent, { input }, context) => {
+            if(context.owner){
+                const {owner_id, walker_id, rating, reviewText} = input;   
+                const review = {owner_id: owner_id, rating: rating, reviewText: reviewText};
+
+                // remove current review if exists to make sure only one review can be added by same owner
+                await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $pull: { reviews: { owner_id: owner_id } } },
+                    { new: true, runValidators: true }
+                );
+
+                return await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $push: { reviews: review } },
+                    { new: true, runValidators: true }
+                );
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        removeReview: async (parent, { walker_id }, context) => {
+            if(context.owner){
+                return await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $pull: { reviews: { owner_id: context.owner._id } } },
+                    { new: true, runValidators: true }
+                );
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateReview: async (parent, { input }, context) => {
+            if(context.owner){
+                const {owner_id, walker_id, rating, reviewText} = input;   
+                const review = {owner_id: owner_id, rating: rating, reviewText: reviewText};
+
+                // remove current review
+                await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $pull: { reviews: { owner_id: owner_id } } },
+                    { new: true, runValidators: true }
+                );
+
+                // add new review
+                return await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $push: { reviews: review } },
+                    { new: true, runValidators: true }
+                );
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        clearReview: async (parent, { walker_id }, context) => {
+            if(context.owner){
+                const walker =  await Walker.findByIdAndUpdate(
+                    walker_id,
+                    { $set: { reviews:[] } }
+                );
+
+                return walker;
+            }
+
+            throw new AuthenticationError('Not logged in');
         },
     }
 };
