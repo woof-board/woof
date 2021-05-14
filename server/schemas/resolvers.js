@@ -84,7 +84,7 @@ const resolvers = {
             .populate('walker');
         },
         
-        checkout: async (parent, args, context) => {
+        get_customer_charging_infomation: async (parent, args, context) => {
 
             const stripe = require('stripe')(process.env.STRIPE_KEY||process.env.STRIPE_TEST_SK);
             const url = new URL(context.headers.referer).origin;

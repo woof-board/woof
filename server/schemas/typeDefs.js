@@ -151,7 +151,7 @@ const typeDefs = gql`
         orders: [Order]
         owner_orders(owner_id: ID): [Order]
         walker_orders(walker_id: ID): [Order]
-        checkout: Checkout
+        get_customer_charging_infomation: Checkout
     }
 
     type Mutation {
