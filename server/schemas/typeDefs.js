@@ -77,6 +77,10 @@ const typeDefs = gql`
         walker: Walker
     }
 
+    type Checkout {
+        session: ID
+    }
+
     input AddressInput {
         street: String
         city: String
@@ -147,6 +151,7 @@ const typeDefs = gql`
         orders: [Order]
         owner_orders(owner_id: ID): [Order]
         walker_orders(walker_id: ID): [Order]
+        checkout: Checkout
     }
 
     type Mutation {
