@@ -62,7 +62,12 @@ class AuthService {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
 
-    window.location.assign('/');
+    if (this.getProfile() === 'owner') {
+      window.location.assign('/ownerprofile');
+    } else {
+      window.location.assign('/walkerprofile');
+    }
+    // window.location.assign('/');
   }
 
   logout() {

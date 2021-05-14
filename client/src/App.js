@@ -84,7 +84,6 @@ const client = new ApolloClient({
                             />
                             <Switch>
                                 <Route exact path="/about" component={About} />
-                                <Route exact path="/" component={OwnerProfile} />
                                 <Route exact path="/ownerprofile" component={OwnerProfile} />
                                 <Route component={NoMatch} />
                             </Switch>
@@ -99,7 +98,6 @@ const client = new ApolloClient({
                             />
                             <Switch>
                                 <Route exact path="/about" component={About} />
-                                <Route exact path="/" component={WalkerProfile} />
                                 <Route exact path="/walkerprofile" component={WalkerProfile} />
                                 <Route component={NoMatch} />
                             </Switch>
