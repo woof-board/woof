@@ -71,7 +71,13 @@ const walkerSchema = new Schema(
                 slot7pm: Boolean,
                 slot9pm: Boolean // may be don't need this one...
             }	
-        ]
+        ],
+        status: {
+            type: String,
+            required: true,
+            enum: ["pending_approval", "pending_information", "active", "suspended"],
+            default: "pending_approval"
+        }
     },
     {
         toJSON: {

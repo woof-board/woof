@@ -11,6 +11,7 @@ const typeDefs = gql`
         phone: String
         dogs: [Dog]
         dogCount: Int
+        status: String
     }
 
     type Walker {
@@ -23,6 +24,7 @@ const typeDefs = gql`
         earnings: Float
         averageRating: Float
         availability: [Availability]
+        status: String
     }
 
     type Order {
@@ -93,6 +95,7 @@ const typeDefs = gql`
         admin: Boolean
         address: AddressInput
         phone: String
+        status: String
     }
 
     input WalkerInput {
@@ -101,6 +104,7 @@ const typeDefs = gql`
         email: String!
         password: String!
         availability: [AvailabilityInput]
+        status: String
     }
 
     input DogInput {
