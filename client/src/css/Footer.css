@@ -11,5 +11,12 @@
 .footer-content {
     color: white;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.footer-link {
+    margin-right: 1rem;
+    margin-left: 1rem;
 }
