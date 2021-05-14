@@ -11,30 +11,30 @@ function WalkerProfile() {
   // decode token for walker data
   const token = decode(Auth.getToken());
   // get walker _id from array
-  const walkerData = token.data;
+  const walkerToken = token.data;
 
-  // query walker using walker _id to get array of walker REVIEWS
-  const reviewData = useQuery(QUERY_WALKER, {
-    variables: { walker_id: walkerData._id }
+  const walkerReview = useQuery(QUERY_WALKER, {
+    variables: { walker_id: walkerToken._id }
   })
 
-  const walkerReviews = reviewData?.walker || [{ _id: "", firstName: "", email: "", reviews: [{ owner_id: '', rating: '5', reviewText: 'You are Great'}], averageRating: '' }];
+  const walkerData = walkerReview?.walker || [{ _id: "", firstName: "", email: "", reviews: [{ owner_id: '', rating: '5', reviewText: 'You are Great'}], averageRating: '' }];
 
-  // query walker_orders using walker _id to get array of walker orders
+  console.log(walkerData);
+
   const orderData = useQuery(QUERY_WALKER_ORDERS, {
-    variables: { walker_id: walkerData._id }
+    variables: { walker_id: walkerToken._id }
   })
 
-  const walkerOrders = orderData?.walker_orders || [{ _id: "", serviceData: '', serviceTime: 'Date(11/11/11)', owner: [{ _id: '', firstName: 'Nathan', lastName: ''}] }];
+  const walkerOrders = orderData?.walker_order || [{ _id: "", serviceData: '', serviceTime: 'Date(11/11/11)', owner: [{ _id: '', firstName: 'Nathan', lastName: ''}] }];
 
-  //reviewData?.walker for walker = _id, firstName, lastName, email, reviews(owner_id, rating, reviewText), averageRating
-  //orderData?.walker_orders for walker_orders = _id, serviceData, serviceTime, owner(_id, firstName, lastName), walker(_id, firstName, lastName)
+  console.log(walkerOrders);
+
+  // REVIEWS == walker for walker = _id, firstName, lastName, email, reviews(owner_id, rating, reviewText), averageRating
+  // ORDERS == walker_orders for walker_orders = _id, serviceData, serviceTime, owner(_id, firstName, lastName), walker(_id, firstName, lastName)
 
   const totalOrders = walkerOrders.length;
-  const totalReviews = walkerReviews[0].reviews.length;
-
-  // console.log(totalOrders);
-  // console.log(totalReviews);
+  const index = walkerData.length - 1;
+  const totalReviews = walkerData[index].reviews.length;
 
   const handleFormSubmit = async () => {
     alert('Account Updated')
@@ -105,7 +105,7 @@ function WalkerProfile() {
               : 'You have no past Reviews'}
           </div>
           <div>
-            {walkerReviews[0].reviews.map((arr) => (
+            {walkerData[0].reviews.map((arr) => (
               <div key={arr.owner_id} className="walks">
               <div>Rating: {arr.rating}</div>
               <div>{arr.reviewText}</div> 
@@ -113,9 +113,7 @@ function WalkerProfile() {
             ))}
           </div>
         </div>
-
       </div>
-
     </div>
   );
 }
