@@ -118,8 +118,8 @@ export const QUERY_OWNER_ORDERS = gql`
 `;
 
 export const QUERY_WALKER_ORDERS = gql`
-  query walker_orders($owner_id: ID!) {
-    walker_orders (owner_id: $owner_id){
+  query walker_orders($walker_id: ID!) {
+    walker_orders (walker_id: $walker_id){
       _id
       serviceDate
       serviceTime
