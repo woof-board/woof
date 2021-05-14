@@ -28,44 +28,44 @@ const client = new ApolloClient({
         });
     },
     uri: '/graphql'
-    });
+});
 
-    function App() {
-		  
-        const [headerLinks] = useState([
-            {
-                name: 'Owner',
-                href: '/owner',
-            },
-            {
-                name: 'Walker',
-                href: '/walker',
-            }
-        ])
-
-        const [walkerLinks] = useState([
-            {
-                name: 'Walker Profile',
-                href: '/walkerprofile'
-            }
-        ])
-
-		const [ownerLinks] = useState([
-            {
-                name: 'Owner Profile',
-                href: '/ownerprofile'
-            }
-        ])
-
-        const footerLinks = [
-            {
-                name: 'About',
-                href: '/about'
-            }
-        ]
+function App() {
         
-        const result = Auth.getProfile();
-        console.log(result);
+    const [headerLinks] = useState([
+        {
+            name: 'Owner',
+            href: '/owner',
+        },
+        {
+            name: 'Walker',
+            href: '/walker',
+        }
+    ])
+
+    const [walkerLinks] = useState([
+        {
+            name: 'Walker Profile',
+            href: '/walkerprofile'
+        }
+    ])
+
+    const [ownerLinks] = useState([
+        {
+            name: 'Owner Profile',
+            href: '/ownerprofile'
+        }
+    ])
+
+    const footerLinks = [
+        {
+            name: 'About',
+            href: '/about'
+        }
+    ]
+    
+    const result = Auth.getProfileType();
+    console.log(result);
 
     const [currentHeaderLink, setHeaderCurrentLink] = useState(headerLinks[0])
     const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
