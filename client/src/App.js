@@ -63,6 +63,9 @@ const client = new ApolloClient({
                 href: '/about'
             }
         ]
+        
+        const result = Auth.getProfile();
+        console.log(result);
 
     const [currentLink, setCurrentLink] = useState(links[0])
     const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
@@ -72,55 +75,52 @@ const client = new ApolloClient({
         <ApolloProvider client={client}>
             <Router>
                 <div className="page">
-                    {Auth.loggedIn() ? (
-                        <>
-                        {Auth.getProfile() ? (
-                            <>
-								<OwnerHeader 
-									ownerLinks={ownerLinks}
-									currentOwnerLink={currentOwnerLink}
-									setOwnerLink={setOwnerLink}
-								/>
-								<Switch>
-									<Route exact path="/about" component={About} />
-									<Route exact path="/" component={OwnerProfile} />
-									<Route exact path="/ownerprofile" component={OwnerProfile} />
-									<Route component={NoMatch} />
-								</Switch>
-                            </>
-                        ) : (
-                            <>
-                                <WalkerHeader 
-                                    walkerLinks={walkerLinks}
-                                    currentWalkerLink={currentWalkerLink}
-                                    setWalkerLink={setWalkerLink}
-                                />
-								<Switch>
-									<Route exact path="/about" component={About} />
-									<Route exact path="/" component={WalkerProfile} />
-									<Route exact path="/walkerprofile" component={WalkerProfile} />
-									<Route component={NoMatch} />
-								</Switch>
-                            </>
-                        )}
-                        </>
-                    ) : (
-                        <>
-                            <Header
-                                links={links}
-                                currentLink={currentLink}
-                                setCurrentLink={setCurrentLink}
+                    {result === 'owner' && (
+                        <div className="page">
+							<OwnerHeader 
+                                ownerLinks={ownerLinks}
+                                currentOwnerLink={currentOwnerLink}
+                                setOwnerLink={setOwnerLink}
                             />
                             <Switch>
-                                <Route exact path="/" component={Owner} />
                                 <Route exact path="/about" component={About} />
-                                <Route exact path="/owner" component={Owner} />
-                                <Route exact path="/walker" component={Walker} />
+                                <Route exact path="/" component={OwnerProfile} />
+                                <Route exact path="/ownerprofile" component={OwnerProfile} />
                                 <Route component={NoMatch} />
                             </Switch>
-                        </>
+                        </div>
                     )}
-
+                    {result === 'walker' && (
+                        <div className="page">
+                            <WalkerHeader 
+                                walkerLinks={walkerLinks}
+                                currentWalkerLink={currentWalkerLink}
+                                setWalkerLink={setWalkerLink}
+                            />
+                            <Switch>
+                                <Route exact path="/about" component={About} />
+                                <Route exact path="/" component={WalkerProfile} />
+                                <Route exact path="/walkerprofile" component={WalkerProfile} />
+                                <Route component={NoMatch} />
+                            </Switch>
+                        </div>
+                    )}
+                    {result === 'guest' && (
+                        <div className="page">
+                        <Header
+                            links={links}
+                            currentLink={currentLink}
+                            setCurrentLink={setCurrentLink}
+                        />
+                        <Switch>
+                            <Route exact path="/" component={Owner} />
+                            <Route exact path="/about" component={About} />
+                            <Route exact path="/owner" component={Owner} />
+                            <Route exact path="/walker" component={Walker} />
+                            <Route component={NoMatch} />
+                        </Switch>
+                        </div>
+                    )}
                 </div>
             </Router>
             <Footer 
