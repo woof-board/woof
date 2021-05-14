@@ -4,7 +4,7 @@ import WalkerLoginForm from '../components/WalkerLoginForm';
 import FormHeader from '../components/LoginSIgnupForm';
 import WalkerSignupForm from '../components/WalkerSignupForm';
 
-function Walker(props) {
+function Walker() {
 
     const [links] = useState([
         {

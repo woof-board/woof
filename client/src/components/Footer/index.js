@@ -1,5 +1,6 @@
 import React from 'react';
 import '../../css/Footer.css';
+import { Link } from 'react-router-dom';
 
 function Footer(props) {
 
@@ -15,7 +16,9 @@ function Footer(props) {
                 </div>
                 <div>
                 {footerLinks.map((link) => (
-                    <a key={link.name} href={link.href} className="footer-link">{link.name}</a>
+                    <Link key={link.name} to={link.href}>
+                        <span className="footer-link">{link.name}</span>
+                    </Link>
                 ))}
                 </div>
             </div>

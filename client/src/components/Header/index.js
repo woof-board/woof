@@ -1,12 +1,15 @@
 import React from 'react';
 import '../../css/Header.css';
 import Logo from '../../assets/images/woof-logo.svg';
+import { Link } from 'react-router-dom';
 
-function Header(props) {
+function Header(headerprops) {
 
     const {
-        links = [],
-    } = props
+        headerLinks = [],
+        setHeaderCurrentLink,
+        currentHeaderLink
+    } = headerprops
 
     return (
         <nav className="header-container">
@@ -14,10 +17,12 @@ function Header(props) {
                 <a href="/"><img className="header-logo" src={Logo} alt="" width="84" /></a>
             </div>
             <div className="nav-links-container">
-                {links.map((link) => (
+                {headerLinks.map((link) => (
                     <li key={link.name} className="list-link">
-                        <a href={link.href} className="link" 
-                        >{link.name}</a>
+                        <Link to={link.href}>
+                            <span className={`link ${currentHeaderLink.name === link.name && `listActive`}`} onClick={() => {setHeaderCurrentLink(link);
+                            }}>{link.name}</span>
+                        </Link>
                     </li>
                 ))}
             </div>
