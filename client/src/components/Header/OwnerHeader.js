@@ -2,6 +2,7 @@ import React from 'react';
 import '../../css/Header.css';
 import Logo from '../../assets/images/woof-logo.svg';
 import Auth from '../../utils/auth';
+import { Link } from 'react-router-dom';
 
 function Header(props) {
 
@@ -24,8 +25,10 @@ function Header(props) {
             <div className="nav-links-container">
                 {ownerLinks.map((link) => (
                     <li key={link.name} className="list-link">
-                        <a href={link.href} className={`link ${currentOwnerLink.name === link.name && `listActive`}`} onClick={() => {setOwnerLink(link.href);
-                        }} >{link.name}</a>
+                        <Link to={link.href}>
+                            <span className={`link ${currentOwnerLink.name === link.name && `listActive`}`} onClick={() => {setOwnerLink(link.href);
+                        }} >{link.name}</span>
+                        </Link>
                     </li>                     
                 ))}
                 <li className="list-link">

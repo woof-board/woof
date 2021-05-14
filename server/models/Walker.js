@@ -1,5 +1,10 @@
 
 const { Schema, model } = require('mongoose');
+<<<<<<< HEAD
+=======
+const bcrypt = require('bcrypt');
+const { formatDate }= require('../utils/helpers');
+>>>>>>> c124e5e31c34a652f86adabc677949503b024ebf
 
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
@@ -59,7 +64,11 @@ const walkerSchema = new Schema(
         earnings: Number,
         availability: [ // placeholder, needs further discussion
             {
-                date: Date,
+                // date: {
+                //     type: Date,
+                //     get: timestamp => formatDate(timestamp)
+                // },
+                date: String,
                 slot9am: Boolean,
                 slot11am: Boolean,
                 slot1pm: Boolean,

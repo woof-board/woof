@@ -14,7 +14,6 @@ export const ADD_ORDER = gql`
             }
         }
     }
-  }
 `;
 
 export const UPDATE_ORDER = gql`
@@ -168,4 +167,20 @@ export const LOGIN_OWNER = gql`
             }
         }
 }
+`;
+
+export const CHECK_WALKER_AVAILABILITY = gql`
+    mutation checkWalkerAvailability($date: String!, $time: String!) {
+        checkWalkerAvailability(date: $date, time: $time) {
+            _id
+            firstName
+            lastName
+            email
+            neighbourhoods
+            reviews {
+                reviewText
+            }
+            averageRating
+        }
+    }
 `;
