@@ -46,13 +46,13 @@ function About() {
             name: 'Samiul',
             github: 'https://github.com/woof-board',
             linked: 'https://ca.linkedin.com/',
-            image: '/images/profile.jpg'
+            image: '/images/samiul.jpg'
         },
         {
             name: 'Shamim',
             github: 'https://github.com/shamimimtiaz',
             linked: 'https://www.linkedin.com/in/shamim-imtiaz',
-            image: '/images/profile.jpg'
+            image: '/images/shamim.jpg'
         },
     ]
 
