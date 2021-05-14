@@ -40,6 +40,9 @@ const ownerSchema = new Schema(
             required: true,
             enum: ["pending_information", "active", "suspended"],
             default: "pending_information"
+        },
+        stripe_customer_id: {
+            type: String
         }
     },
     {

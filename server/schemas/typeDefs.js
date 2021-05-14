@@ -12,6 +12,7 @@ const typeDefs = gql`
         dogs: [Dog]
         dogCount: Int
         status: String
+        stripe_customer_id: String
     }
 
     type Walker {
