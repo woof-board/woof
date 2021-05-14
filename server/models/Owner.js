@@ -42,7 +42,8 @@ const ownerSchema = new Schema(
             default: "pending_information"
         },
         stripe_customer_id: {
-            type: String
+            type: String,
+            match: [/^cus_.+/, 'Must be a valid stripe customer id!']
         }
     },
     {

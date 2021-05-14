@@ -90,12 +90,12 @@ const resolvers = {
                 const stripe = require('stripe')(process.env.STRIPE_KEY || process.env.STRIPE_TEST_SK);
                 const url = new URL(context.headers.referer).origin;
 
-                let customer_id = await Owner.findById(context.owner._id).select('-__v -password').customer_id;
-                
+                const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
                 if(!customer_id){
-                    // const customer = 
+                    // if owner customer_id is empty, create a customer through stripe
                     const {id: customer_id} = await stripe.customers.create();
 
+                    // save customer id into owner
                     await Owner.findByIdAndUpdate(
                         context.owner._id,
                         {stripe_customer_id: customer_id},
@@ -103,7 +103,6 @@ const resolvers = {
                     );
                 }
 
-                console.log(customer_id);
                 // const setupIntent = await stripe.setupIntents.create({
                 //     customer: customer.id,
                 // });
