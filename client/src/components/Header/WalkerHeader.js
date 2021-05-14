@@ -2,6 +2,7 @@ import React from 'react';
 import '../../css/Header.css';
 import Logo from '../../assets/images/woof-logo.svg';
 import Auth from '../../utils/auth';
+import { Link } from 'react-router-dom';
 
 function WalkerHeader(props) {
 
@@ -24,8 +25,10 @@ function WalkerHeader(props) {
             <div className="nav-links-container">
                 {walkerLinks.map((link) => (
                     <li key={link.name} className="list-link">
-                        <span className={`link ${currentWalkerLink.name === link.name && `listActive`}`} onClick={() => {setWalkerLink(link);
+                        <Link to={link.href}>
+                            <span className={`link ${currentWalkerLink.name === link.name && `listActive`}`} onClick={() => {setWalkerLink(link);
                         }} >{link.name}</span>
+                        </Link>
                     </li>       
                 ))}
                 <li className="list-link">

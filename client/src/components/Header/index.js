@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../css/Header.css';
 import Logo from '../../assets/images/woof-logo.svg';
+import { Link } from 'react-router-dom';
 
 function Header(headerprops) {
 
@@ -18,8 +19,10 @@ function Header(headerprops) {
             <div className="nav-links-container">
                 {headerLinks.map((link) => (
                     <li key={link.name} className="list-link">
-                        <span className={`link ${currentHeaderLink.name === link.name && `listActive`}`}  onClick={() => {setHeaderCurrentLink(link)}}
-                        >{link.name}</span>
+                        <Link to={link.href}>
+                            <span className={`link ${currentHeaderLink.name === link.name && `listActive`}`} onClick={() => {setHeaderCurrentLink(link);
+                            }}>{link.name}</span>
+                        </Link>
                     </li>
                 ))}
             </div>

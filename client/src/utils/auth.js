@@ -2,14 +2,6 @@ import decode from 'jwt-decode';
 
 class AuthService {
   getProfile() {
-    // console.log(decode(this.getToken()))
-    // const data = decode(this.getToken());
-    // const adminCheck = data.data.admin;
-
-    // if (adminCheck === false) {
-    //   console.log(adminCheck)
-    //   return decode(this.getToken());;
-    // } else return false;
 
     if (this.loggedIn() === true) {
       console.log('logged In')
