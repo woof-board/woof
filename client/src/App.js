@@ -14,11 +14,7 @@ import Walkers from './pages/Walkers'
 import NoMatch from './pages/NoMatch';
 import Walker from './pages/Walker';
 import Owner from './pages/Owner';
-<<<<<<< HEAD
 import WalkerSchedule from './pages/WalkerSchedule';
-=======
-// import OwnerProfile from './pages/OwnerProfile';
->>>>>>> develop
 // npm install --save-dev @iconify/react @iconify-icons/ant-design
 import homeOutlined from '@iconify-icons/ant-design/home-outlined';
 // npm install --save-dev @iconify/react @iconify-icons/ic
@@ -53,7 +49,7 @@ function App() {
         },
         {
             name: 'Owner',
-            href: '/owner',
+            href: '/',
             icon: loginOutlined
         },
         {
@@ -79,6 +75,7 @@ function App() {
                         <Route exact path="/about" component={About} />
                         <Route exact path="/owner" component={Owner} />
                         <Route exact path="/walker" component={Walker} />
+                        <Route exact path="/walkerSchedule" component={WalkerSchedule} />
                         <Route component={NoMatch} />
                     </Switch>
                 </div>

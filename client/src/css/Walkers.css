@@ -1,4 +1,6 @@
-
+:root {
+    --booked: #6740af;
+}
 
 #walkers {
     display: flex;
@@ -20,6 +22,7 @@
     justify-content: center;
     flex-direction: column;
     border-radius: 25px;
+    width: 15%;
 }
 
 
@@ -37,10 +40,11 @@
 
 .walker-list-picture {
     height: auto;
-    width: auto;
+    width: 150px;
     border: 6px solid rgb(0,0,0,.3);
     border-radius: 50%;
     padding: .5rem;
+
 }
 
 .button-profile-container {
@@ -48,6 +52,8 @@
     justify-content: center;
     margin-top: 1rem;
 }
+
+
 
 .profile-button {
     padding: 1rem;
@@ -63,14 +69,71 @@
 
 .schedule-container {
     display: grid;
-    grid-template-columns: 14% 14% 15% 14% 14% 14% 14%;
+    grid-template-columns: 9% 13% 13% 13% 13% 13% 13% 13%;
     grid-template-rows: auto;
+    width: 100%;
 }
 .schedule-item {
-    border: solid 1px var(--secondary);
-    background-color: var(--tertiary);
-    color: white;
+    border: solid 1px var(--quinary);
+    height: 50px;
+    text-align: center;
+    padding: 0 10px;
 }
+
+.times-header, .day-header {
+    color: var(--quinary);
+}
+.times-header h5, .day-header h5 {
+    font-weight: 800;
+}
+.times-header {
+    background-color: var(--tertiary);
+    text-align: left;
+    border-top-left-radius: 15px;
+}
+.time-label {
+    text-align: left;
+    background-color: var(--secondary);
+
+}
+
+.day-header {
+    background-color: var(--primary);
+}
+.top-right {
+    border-top-right-radius: 15px;
+}
+.bottom-left {
+    border-bottom-left-radius: 15px;
+
+}
+.bottom-right {
+    border-bottom-right-radius: 15px;
+}
+.time-detail {
+    border-color: var(--secondary);
+    padding: 0;
+}
+.unavailable, .available, .booked {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    cursor: pointer;
+    font-size: .85rem;
+}
+.unavailable {
+    background-color: #bebebe;
+}
+.available {
+    background-color: var(--quatenary);
+}
+.booked {
+    background-color: var(--booked);
+    color: var(--quinary);
+    line-height: 1.1em;
+    font-weight: 500;
+}
+
 
 @media screen and (max-width: 650px) {
     #walkers {
