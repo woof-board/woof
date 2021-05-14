@@ -32,17 +32,17 @@ class AuthService {
     return !!token && !this.isTokenExpired(token);
   }
 
-  OwnerloggedIn() {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken();
-    return !!token && !this.isTokenExpired(token);
-  }  
+//   OwnerloggedIn() {
+//     // Checks if there is a saved token and it's still valid
+//     const token = this.getToken();
+//     return !!token && !this.isTokenExpired(token);
+//   }  
 
-  WalkerloggedIn() {
-    // Checks if there is a saved token and it's still valid
-    const token = this.getToken();
-    return !!token && !this.isTokenExpired(token);
-  }
+//   WalkerloggedIn() {
+//     // Checks if there is a saved token and it's still valid
+//     const token = this.getToken();
+//     return !!token && !this.isTokenExpired(token);
+//   }
 
   isTokenExpired(token) {
     try {
@@ -64,7 +64,7 @@ class AuthService {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
 
-    if (this.getProfile() === 'owner') {
+    if (this.getProfileType() === 'owner' || this.getProfileType() === 'admin') {
       window.location.assign('/ownerprofile');
     } else {
       window.location.assign('/walkerprofile');
