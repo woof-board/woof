@@ -33,10 +33,6 @@ function WalkerProfile() {
   const totalOrders = walkerOrders.length;
   const totalReviews = walkerReviews[0].reviews.length;
 
-  console.log(walkerOrders.length);
-  console.log(walkerReviews[0].reviews.length);
-
-
   const handleFormSubmit = async () => {
     alert('Account Updated')
   }
