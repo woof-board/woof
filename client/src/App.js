@@ -15,9 +15,10 @@ import Auth from './utils/auth';
 // import OwnerHeader from './components/Header/OwnerHeader.js';
 import OwnerProfile from './pages/OwnerProfile.js';
 import WalkerProfile from './pages/WalkerProfile.js';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 
 const client = new ApolloClient({
-
     request: operation => {
         const token = localStorage.getItem('id_token');
 
@@ -90,32 +91,19 @@ function App() {
                             setOwnerLink={setOwnerLink}
                             result={result}
                         />
+                        
                         <Switch>
-                            {result === 'guest' && (
-                                <>
-                                    <Route exact path="/owner" component={Owner} />         
-                                    <Route exact path="/walker" component={Walker} />
-                                    <Route exact path='/' component={Owner} />
-                                    <Route exact path="/about" component={About} />
-                                    <Route component={NoMatch} />
-                                </>
-                            )}
-                            {result === 'owner' && (
-                                <>
-                                    <Route exact path="/ownerprofile" component={OwnerProfile} />
-                                    <Route exact path="/about" component={About} />
-                                    <Route component={NoMatch} />
-                                </>
-                            )}
-                            {result === 'walker' && (
-                                <>
-                                    <Route exact path="/walkerprofile" component={WalkerProfile} />
-                                    <Route exact path="/about" component={About} />
-                                    <Route component={NoMatch} />
-                                </>
-                            )}
-
+                            <PublicRoute exact path='/' component={Owner} />
+                            <PublicRoute exact path="/owner" component={Owner} />         
+                            <PublicRoute exact path="/walker" component={Walker} />
+                            <Route exact path="/about" component={About} />
+                            <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
+                            <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
+                            <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
+                            <Route component={NoMatch} />
                         </Switch>
+                            
+        
                         </div>
                 </div>
                 <Footer 
