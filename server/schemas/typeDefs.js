@@ -31,6 +31,7 @@ const typeDefs = gql`
         _id: ID
         serviceDate: String
         serviceTime: String
+        status: String
         owner: Owner
         walker: Walker
         dogs: [Dog]  
@@ -161,6 +162,7 @@ const typeDefs = gql`
         addDog(input: DogInput): Owner
         addOrder(input: OrderInput): Order
         updateOrder(order_id: ID!, input: OrderInput): Order
+        updateOrderStatus(order_id: ID!, status: String!): Order
         removeOrder(order_id: ID!): Order
         addReview(input: ReviewInput): Walker
         removeReview(walker_id: ID!): Walker
