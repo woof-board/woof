@@ -6,7 +6,7 @@ const { Owner, Walker, Order } = require('../models');
 const { signTokenOwner, signTokenWalker } = require('../utils/auth');
 const { getTimeSlot } = require('../utils/helpers');
 const mongoose = require('mongoose');
-
+const stripe = require('stripe')(process.env.STRIPE_KEY || process.env.STRIPE_TEST_SK);
 
 
 
@@ -87,7 +87,6 @@ const resolvers = {
         get_customer_charging_infomation: async (parent, args, context) => {
 
             if (context.owner) {
-                const stripe = require('stripe')(process.env.STRIPE_KEY || process.env.STRIPE_TEST_SK);
                 const url = new URL(context.headers.referer).origin;
 
                 const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
@@ -120,7 +119,17 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
-        }
+        },
+
+        get_customer_info_from_stripe: async (parent, args, context) => {
+            if (context.owner) {
+                const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
+                const customer = await stripe.customers.retrieve(customer_id);
+                return customer;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
     },
     Mutation: {
         // to add a new owner

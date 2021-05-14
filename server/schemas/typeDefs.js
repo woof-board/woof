@@ -85,6 +85,27 @@ const typeDefs = gql`
         session: ID
     }
 
+    type stripeAddress {
+        city: String
+        country: String
+        line1: String
+        line2: String
+        postal_code: String
+        state: String
+    }
+
+    type Customer {
+        id: String
+        object: String
+        address: stripeAddress
+        balance: Float
+        currency: String
+        description: String
+        email: String
+        name: String
+        phone: String
+    }
+
     input AddressInput {
         street: String
         city: String
@@ -158,6 +179,7 @@ const typeDefs = gql`
         owner_orders(owner_id: ID): [Order]
         walker_orders(walker_id: ID): [Order]
         get_customer_charging_infomation: Checkout
+        get_customer_info_from_stripe: Customer
     }
 
     type Mutation {
