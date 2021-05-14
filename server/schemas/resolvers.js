@@ -181,6 +181,7 @@ const resolvers = {
         /* Order mutations
            - addOrder
            - updateOrder
+           - updateOrderStatus
            - removeOrder
         */
         addOrder: async (parent, { input }, context) => {
@@ -204,6 +205,20 @@ const resolvers = {
                 return order;
             }
 
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateOrderStatus: async (parent, {order_id, status }, context) => {
+            if (context.owner) {
+                const order = await Order.findByIdAndUpdate(
+                    order_id, 
+                    {status: status},
+                    { new: true, runValidators: true }
+                );
+          
+                return order;
+            }
+          
             throw new AuthenticationError('Not logged in');
         },
 

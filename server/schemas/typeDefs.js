@@ -11,6 +11,7 @@ const typeDefs = gql`
         phone: String
         dogs: [Dog]
         dogCount: Int
+        status: String
     }
 
     type Walker {
@@ -23,12 +24,14 @@ const typeDefs = gql`
         earnings: Float
         averageRating: Float
         availability: [Availability]
+        status: String
     }
 
     type Order {
         _id: ID
         serviceDate: String
         serviceTime: String
+        status: String
         owner: Owner
         walker: Walker
         dogs: [Dog]  
@@ -97,6 +100,7 @@ const typeDefs = gql`
         admin: Boolean
         address: AddressInput
         phone: String
+        status: String
     }
 
     input WalkerInput {
@@ -105,6 +109,7 @@ const typeDefs = gql`
         email: String!
         password: String!
         availability: [AvailabilityInput]
+        status: String
     }
 
     input DogInput {
@@ -162,6 +167,7 @@ const typeDefs = gql`
         addDog(input: DogInput): Owner
         addOrder(input: OrderInput): Order
         updateOrder(order_id: ID!, input: OrderInput): Order
+        updateOrderStatus(order_id: ID!, status: String!): Order
         removeOrder(order_id: ID!): Order
         addReview(input: ReviewInput): Walker
         removeReview(walker_id: ID!): Walker

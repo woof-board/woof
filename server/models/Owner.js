@@ -34,7 +34,13 @@ const ownerSchema = new Schema(
         phone: {
             type: String
         },
-        dogs: [dogSchema]
+        dogs: [dogSchema],
+        status: {
+            type: String,
+            required: true,
+            enum: ["pending_information", "active", "suspended"],
+            default: "pending_information"
+        }
     },
     {
       toJSON: {
