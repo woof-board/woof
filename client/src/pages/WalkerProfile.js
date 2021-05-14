@@ -8,12 +8,19 @@ import { QUERY_WALKER_ORDERS } from '../utils/queries';
 
 function WalkerProfile() {
 
-  const { loading, data } = useQuery(QUERY_WALKER_ORDERS)
-  console.log(data)
-  // decode token for Walker Data
+  // decode token for walker data
   const token = decode(Auth.getToken());
+  // get walker _id from array
   const walkerData = token.data;
-  console.log(data);
+
+
+  // query walker_orders using walker _id to get array of walker orders
+  const { loading, data } = useQuery(QUERY_WALKER_ORDERS, {
+    variables: { walker_id: walkerData._id }
+  })
+  const walkerOrders = data;
+
+  console.log(walkerOrders);
 
   const handleFormSubmit = async () => {
     alert('Account Updated')
