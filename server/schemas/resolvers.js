@@ -1,10 +1,14 @@
+require('dotenv').config();
+
 const { AuthenticationError } = require('apollo-server-express');
 
 const { Owner, Walker, Order } = require('../models');
 const { signTokenOwner, signTokenWalker } = require('../utils/auth');
 const { getTimeSlot } = require('../utils/helpers');
 const mongoose = require('mongoose');
-const stripe = require('stripe')(process.env.STRIPE_KEY||'sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
+
+
 
 const resolvers = {
     Query: {
@@ -82,9 +86,11 @@ const resolvers = {
         
         checkout: async (parent, args, context) => {
 
+            const stripe = require('stripe')(process.env.STRIPE_KEY||process.env.STRIPE_TEST_SK);
             const url = new URL(context.headers.referer).origin;
             const customer = await stripe.customers.create();
-            console.log(customer);
+            // console.log(process.env.STRIPE_TEST_SK);
+            // console.log(customer);
                   
             const setupIntent = await stripe.setupIntents.create({
                 customer: customer.id,
@@ -94,13 +100,10 @@ const resolvers = {
             const session = await stripe.checkout.sessions.create({
               payment_method_types: ['card'],
               mode: 'setup',
+              customer: customer.id,
               success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
               cancel_url: `${url}/`
             });
-
-            stripePromise.then((res) => {
-                res.redirectToCheckout({ sessionId: session.id });
-              });
             
             return { session: session.id };
         }
