@@ -10,12 +10,12 @@ function Owner(props) {
     const [links] = useState([
         {
             name: 'LOGIN',
-            id: 'login-title',
+            id: 'active-title',
             hover: 'login-hover'
         },
         {
             name: 'SIGNUP',
-            id: 'signup-title',
+            id: 'active-title',
             hover: 'login-hover'
         }
     ])

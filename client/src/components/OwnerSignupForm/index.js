@@ -72,6 +72,11 @@ function OwnerSignupForm() {
                 onChange={handleInputChange}
                 value={formData.password}
             />
+            {
+                error ? <div>
+                    <p className="error-text" >The provided credentials are incorrect</p>
+                </div> : null
+            }
             <button
                 disabled={!(formData.email && formData.password && formData.firstName && formData.lastName)}
                 type="submit"
