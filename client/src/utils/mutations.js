@@ -14,7 +14,6 @@ export const ADD_ORDER = gql`
             }
         }
     }
-  }
 `;
 
 export const UPDATE_ORDER = gql`
