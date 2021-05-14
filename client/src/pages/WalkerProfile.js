@@ -2,9 +2,9 @@ import React from 'react';
 import '../css/WalkerProfile.css';
 import Auth from '../utils/auth';
 // import { useParams } from 'react-router-dom';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import decode from 'jwt-decode';
-import { QUERY_WALKER_ORDERS } from '../utils/queries';
+import { QUERY_WALKER_ORDERS, QUERY_WALKER } from '../utils/queries';
 
 function WalkerProfile() {
 
@@ -13,14 +13,29 @@ function WalkerProfile() {
   // get walker _id from array
   const walkerData = token.data;
 
-
-  // query walker_orders using walker _id to get array of walker orders
-  const { loading, data } = useQuery(QUERY_WALKER_ORDERS, {
+  // query walker using walker _id to get array of walker REVIEWS
+  const reviewData = useQuery(QUERY_WALKER, {
     variables: { walker_id: walkerData._id }
   })
-  const walkerOrders = data;
 
-  console.log(walkerOrders);
+  const walkerReviews = reviewData?.walker || [{ _id: "", firstName: "", email: "", reviews: [{ owner_id: '', rating: '5', reviewText: 'You are Great'}], averageRating: '' }];
+
+  // query walker_orders using walker _id to get array of walker orders
+  const orderData = useQuery(QUERY_WALKER_ORDERS, {
+    variables: { walker_id: walkerData._id }
+  })
+
+  const walkerOrders = orderData?.walker_orders || [{ _id: "", serviceData: '', serviceTime: 'Date(11/11/11)', owner: [{ _id: '', firstName: 'Nathan', lastName: ''}] }];
+
+  //data?.walker for walker = _id, firstName, lastName, email, reviews(owner_id, rating, reviewText), averageRating
+  //data?.walker_orders for walker_orders = _id, serviceData, serviceTime, owner(_id, firstName, lastName), walker(_id, firstName, lastName)
+
+  const totalOrders = walkerOrders.length;
+  const totalReviews = walkerReviews[0].reviews.length;
+
+  console.log(walkerOrders.length);
+  console.log(walkerReviews[0].reviews.length);
+
 
   const handleFormSubmit = async () => {
     alert('Account Updated')
@@ -41,9 +56,8 @@ function WalkerProfile() {
       display: 'Email',
       title: walkerData.email,
       type: 'email'
-    },
+    }
   ]
-
 
   return (
     <div className="page-body">
@@ -74,12 +88,30 @@ function WalkerProfile() {
         </div>
         <div className="walker-profile-container">
           <div>
-            My Walks
+            My Walks - {totalOrders ? `Viewing ${totalOrders} past ${totalOrders === 1 ? 'walk' : 'walks'}:`
+            : 'You have no past Walks'}
+          </div>
+          <div>
+            {walkerOrders.map((arr) => (
+              <div key={arr._id} className="walks">
+                <div>{arr.serviceTime}</div>
+                <div>{arr.owner[0].firstName}</div> 
+              </div>
+            ))}
           </div>
         </div>
         <div className="walker-profile-container">
           <div>
-            My Reviews
+            My Reviews - {totalReviews ? `Viewing ${totalReviews} past ${totalReviews === 1 ? 'review' : 'reviews'}:`
+              : 'You have no past Reviews'}
+          </div>
+          <div>
+            {walkerReviews[0].reviews.map((arr) => (
+              <div key={arr.owner_id} className="walks">
+              <div>Rating: {arr.rating}</div>
+              <div>{arr.reviewText}</div> 
+            </div>
+            ))}
           </div>
         </div>
 
@@ -91,12 +123,4 @@ function WalkerProfile() {
 
 export default WalkerProfile;
 
-// firstname
-// lastname
-// email
-// neighbourhoods
-// rating
-// reviews
-// earnings
-// availability
 
