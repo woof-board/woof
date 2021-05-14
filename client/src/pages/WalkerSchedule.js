@@ -72,13 +72,66 @@ const schedule = [
         slot5pm: false,
         slot7pm: true,
         slot9pm: true,
-    } 
+    }, 
+    // {
+    //     date: 'Wed. May 20',
+    //     slot9am: true,
+    //     slot11am: true,
+    //     slot1pm: false,
+    //     slot3pm: false,
+    //     slot5pm: false,
+    //     slot7pm: true,
+    //     slot9pm: true,
+    // }  
  
 ]
 
+const walker = "d45g11r43a333";
+ 
+const scheduledWalks = [
+    {
+        serviceDate: "Mon. May 17",
+        serviceTime: "5pm",
+        owner: "Nathan Chow",
+        walker: "d45g11r43a333",
+        dogs: ["Pixel", "Pudding"]
+    },
+    {
+        serviceDate: "Wed. May 19",
+        serviceTime: "3pm",
+        owner: "Eric Normann",
+        walker: "d45g11r43a333",
+        dogs: ["Pixel", "Pudding"]
+    }
+]
 
 function WalkerSchedule() {
 
+    function handleClick() {
+        console.log("clicked");
+    }
+
+    const findBooking = (booking, today, time) => {
+        
+        for (let i = 0; i < booking.length; i++) {
+            const bookDate = booking[i].serviceDate;
+            const bookTime = booking[i].serviceTime;
+            const todaysDate = today.date;
+            if (bookDate === todaysDate && bookTime === time) {
+                return (
+                    <button className="booked">
+                        Walk booked with<br />
+                        {booking[i].owner}
+                    </button>
+                )
+            }
+        }
+        
+        return ( 
+            <button className="unavailable" id={schedule.date + "U9am"} key={schedule.date + "U9am"}>Unvailable</button>
+        )
+
+    }
 
     return (
         <div id="walkers">
@@ -86,84 +139,83 @@ function WalkerSchedule() {
                 <h1>Your Walking Schedule</h1>
             </div>
             <div className="schedule-container">
+
                 <div>
-                    <div className="schedule-item times-header"><h5>Times</h5></div>
-                    <div className="schedule-item time-label"><h5>9:00am</h5></div>
-                    <div className="schedule-item time-label"><h5>11:00am</h5></div>
-                    <div className="schedule-item time-label"><h5>1:00pm</h5></div>
-                    <div className="schedule-item time-label"><h5>3:00pm</h5></div>
-                    <div className="schedule-item time-label"><h5>5:00pm</h5></div>
-                    <div className="schedule-item time-label"><h5>7:00pm</h5></div>
-                    <div className="schedule-item time-label bottom-left"><h5>9:00pm</h5></div>
+                        <div className="schedule-item times-header"><h5>Time</h5></div>
+                        <div className="schedule-item time-label"><h5>9am</h5></div>
+                        <div className="schedule-item time-label"><h5>11am</h5></div>
+                        <div className="schedule-item time-label"><h5>1pm</h5></div>
+                        <div className="schedule-item time-label"><h5>3pm</h5></div>
+                        <div className="schedule-item time-label"><h5>5pm</h5></div>
+                        <div className="schedule-item time-label"><h5>7pm</h5></div>
+                        <div className="schedule-item time-label bottom-left"><h5>9pm</h5></div>
+                    
+                </div>
+                <div className="schedule-item schedule-arrow-holder" onClick={handleClick}>
+                        <div className="arrow-left"></div>
                 </div>
 
+
+
+                <div className="schedule-days">
                 {schedule.map((schedule, index) => (
 
-
-
-                <div>
-                    <div className={index===6 ? ("top-right schedule-item day-header") : ("schedule-item day-header")}><h5>{schedule.date}</h5></div>
-                    <div className="schedule-item time-detail">
-                        {schedule.slot9am ? (
-                            <button className="available" id={schedule.date + "9am"}>Available</button>
-                        ) : (
-                            <button className="unavailable" id={schedule.date + "9am"}>Unvailable</button>
-                        )}
-                        
+                    <div>
+                        <div className="schedule-item day-header"><h5>{schedule.date}</h5></div>
+                        <div className="schedule-item time-detail">
+                            {schedule.slot9am 
+                                ? <button className="available" id={schedule.date + "9am"} key={schedule.date + "9am"}>Available</button>
+                                : findBooking(scheduledWalks, schedule, "9am")
+                               
+                            }
+                            
+                        </div>
+                        <div className="schedule-item time-detail">
+                            {schedule.slot11am 
+                                ? <button className="available" id={schedule.date + "11am"} key={schedule.date + "11am"}>Available</button> 
+                                : findBooking(scheduledWalks, schedule, "11am")
+                            }
+                            
+                        </div>
+                        <div className="schedule-item time-detail">
+                            {schedule.slot1pm 
+                                ? <button className="available" id={schedule.date + "1pm"} key={schedule.date + "1pm"}>Available</button>   
+                                : findBooking(scheduledWalks, schedule, "1pm")
+                            }
+                            
+                        </div>
+                        <div className="schedule-item time-detail">
+                            {schedule.slot3pm 
+                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
+                            :  findBooking(scheduledWalks, schedule, "3pm")
+                            }     
+                        </div>
+                        <div className="schedule-item time-detail">
+                            {schedule.slot3pm 
+                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
+                            :  findBooking(scheduledWalks, schedule, "5pm")
+                            }     
+                        </div>
+                        <div className="schedule-item time-detail">
+                            {schedule.slot3pm 
+                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
+                            :  findBooking(scheduledWalks, schedule, "7pm")
+                            }     
+                        </div>
+                        <div className="schedule-item time-detail">
+                            {schedule.slot3pm 
+                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
+                            :  findBooking(scheduledWalks, schedule, "9pm")
+                            }     
+                        </div>
                     </div>
-                    <div className="schedule-item time-detail">
-                        {schedule.slot11am ? (
-                            <button className="available" id={schedule.date + "11am"}>Available</button>
-                        ) : (
-                            <button className="unavailable" id={schedule.date + "11am"}>Unvailable</button>
-                        )}
-                        
-                    </div>
-                    <div className="schedule-item time-detail">
-                        {schedule.slot1pm ? (
-                            <button className="available" id={schedule.date + "1pm"}>Available</button>
-                        ) : (
-                            <button className="unavailable" id={schedule.date + "1pm"}>Unvailable</button>
-                        )}
-                        
-                    </div>
-                    <div className="schedule-item time-detail">
-                        {schedule.slot3pm ? (
-                            <button className="available" id={schedule.date + "3pm"}>Available</button>
-                        ) : (
-                            <button className="unavailable" id={schedule.date + "3pm"}>Unvailable</button>
-                        )}
-                        
-                    </div>
-                    <div className="schedule-item time-detail">
-                        {schedule.slot5pm ? (
-                            <button className="available" id={schedule.date + "5pm"}>Available</button>
-                        ) : (
-                            <button className="unavailable" id={schedule.date + "5pm"}>Unvailable</button>
-                        )}
-                        
-                    </div>
-                    <div className="schedule-item time-detail">
-                        {schedule.slot1pm ? (
-                            <button className="available" id={schedule.date + "7pm"}>Available</button>
-                        ) : (
-                            <button className="unavailable" id={schedule.date + "7pm"}>Unvailable</button>
-                        )}
-                        
-                    </div>
-                    <div className={index===6 ? ("bottom-right schedule-item time-detail") : ("schedule-item time-detail")}>
-                        {schedule.slot9pm ? (
-                            <button className={index===6 ? ("bottom-right available") : ("available")} id={schedule.date + "9pm"}>Available</button>
-                        ) : (
-                            <button className={index===6 ? ("bottom-right unavailable") : ("unavailable")} id={schedule.date + "9pm"}>Unvailable</button>
-                        )}
-                        
-                    </div>
+                    ))}
 
                 </div>
-                 ))}
 
-
+                <div className="schedule-item schedule-arrow-holder right-corners" onClick={handleClick}>
+                    <div className="arrow-right"></div>
+                </div>
                 
 
                 

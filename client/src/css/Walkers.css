@@ -69,32 +69,73 @@
 
 .schedule-container {
     display: grid;
-    grid-template-columns: 9% 13% 13% 13% 13% 13% 13% 13%;
-    grid-template-rows: auto;
+    grid-template-columns: 8% 4% 84% 4%;
+    grid-template-rows: 1;
     width: 100%;
 }
+.schedule-days {
+    display: grid;
+    grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.2%;
+    grid-template-rows: 1;
+    width: 100%;
+}
+
+
 .schedule-item {
     border: solid 1px var(--quinary);
-    height: 50px;
     text-align: center;
-    padding: 0 10px;
 }
+.schedule-arrow-holder {
+    background-color: var(--tertiary);
+    color: var(--secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+
+.right-corners {
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.arrow-right, .arrow-left {
+    width: 0; 
+    height: 0; 
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;  
+}
+.arrow-right {
+    border-left: 20px solid var(--quinary);
+    margin-left: 5px;
+}
+
+.arrow-left {
+    border-right:20px solid var(--quinary); 
+    margin-right: 5px;
+}
+
 
 .times-header, .day-header {
     color: var(--quinary);
+    padding: 8px 0;
 }
 .times-header h5, .day-header h5 {
     font-weight: 800;
+    line-height: 1.1em;
 }
 .times-header {
     background-color: var(--tertiary);
     text-align: left;
     border-top-left-radius: 15px;
+    padding-left: 10px;
 }
 .time-label {
     text-align: left;
     background-color: var(--secondary);
-
+    padding: 0 10px;
+    min-height: 50px;
 }
 
 .day-header {
@@ -117,9 +158,11 @@
 .unavailable, .available, .booked {
     width: 100%;
     height: 100%;
-    border: 0;
+    border: none;
     cursor: pointer;
     font-size: .85rem;
+    padding: 0 10px;
+    min-height: 48px;
 }
 .unavailable {
     background-color: #bebebe;
@@ -133,7 +176,13 @@
     line-height: 1.1em;
     font-weight: 500;
 }
-
+@media screen and (max-width: 1125px) {
+    .times-header, .day-header {
+        height:60px;
+        vertical-align: bottom;
+    }
+ 
+}
 
 @media screen and (max-width: 650px) {
     #walkers {

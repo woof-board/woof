@@ -2,21 +2,26 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    background-color: var(--tertiary);
+    background-color: var(--primary);
     width: 100%;
-    padding: 1rem 0 1rem 0;
+    padding: 1rem;
     z-index: 999;
+    color: white;
+
 }
 
-.footer-content {
-    color: white;
-    display: flex;
-    justify-content: flex-end;
-    padding-left: 1rem;
-    padding-right: 1rem;
+.footer-left {
+    text-align: left;
+    width:50%;
+    float: left;
+}
+
+.footer-right {
+    text-align: right;
+    width: 50%;
+    float: left;
 }
 
 .footer-link {
-    margin-right: 1rem;
-    margin-left: 1rem;
+    margin: 0 1rem;
 }

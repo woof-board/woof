@@ -9,15 +9,13 @@ function Footer(props) {
 
     return (
         <div className="footer-container">
-            <div className="footer-content">
-                <div>
+            <div className="footer-left">
                     &copy;2021 by Woof
-                </div>
-                <div>
-                {footerLinks.map((link) => (
+            </div>
+            <div className="footer-right">
+            {footerLinks.map((link) => (
                     <a key={link.name} href={link.href} className="footer-link">{link.name}</a>
                 ))}
-                </div>
             </div>
         </div>
     )
