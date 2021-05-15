@@ -19,16 +19,16 @@ function OwnerLoginForm() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formData);
-        
+        console.log(formData.email, formData.password)
+
         try {
           const { data } = await loginOwner({
             variables: { ...formData }
           });
-      
+        
           Auth.login(data.loginOwner.token);
-        } catch (e) {
-          console.error(e);
+        } catch (error) {
+          console.error(error);
         }
     };
     

@@ -89,7 +89,7 @@ function HomeMock() {
                         )}
                         </>
                     )}
-                    <Link to="/">Learn More</Link>
+                    <Link to="/about">Learn More</Link>
 
             </div>
             </>
