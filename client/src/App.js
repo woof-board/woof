@@ -99,13 +99,12 @@ function App() {
                             <PublicRoute exact path='/' component={Owner} />
                             <PublicRoute exact path="/owner" component={Owner} />         
                             <PublicRoute exact path="/walker" component={Walker} />
-                            <PublicRoute exact path="/walkerschedule" component={WalkerSchedule} />
 
                             <Route exact path="/about" component={About} />
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
                             <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
-                            {/* <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} /> */}
+                            <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
 
                             <Route component={NoMatch} />
                         </Switch>

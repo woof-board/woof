@@ -184,6 +184,7 @@
     #walkers {
         flex-direction: column;
         top: 5rem;
+        padding: 8rem 1rem;
     }
 
     .picture-container {
@@ -194,5 +195,12 @@
     .walker-list-picture {
         height: 50%;
         width: 50%;
+    }
+    .schedule-container {
+        grid-template-columns: 25% 75%;
+    }
+    .schedule-days {
+        grid-template-columns: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%;
+
     }
 }
