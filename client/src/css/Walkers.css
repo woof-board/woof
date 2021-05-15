@@ -94,20 +94,7 @@
     border: solid 1px var(--quinary);
     text-align: center;
 }
-.schedule-arrow-holder {
-    background-color: var(--tertiary);
-    color: var(--secondary);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
 
-}
-
-.right-corners {
-    border-bottom-right-radius: 15px;
-    border-top-right-radius: 15px;
-}
 
 .arrow-right, .arrow-left {
     width: 0; 
