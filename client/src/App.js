@@ -11,13 +11,14 @@ import NoMatch from './pages/NoMatch';
 import Walker from './pages/Walker';
 import Owner from './pages/Owner';
 import Auth from './utils/auth';
-import WalkerHeader from './components/Header/WalkerHeader.js';
-import OwnerHeader from './components/Header/OwnerHeader.js';
+// import WalkerHeader from './components/Header/WalkerHeader.js';
+// import OwnerHeader from './components/Header/OwnerHeader.js';
 import OwnerProfile from './pages/OwnerProfile.js';
 import WalkerProfile from './pages/WalkerProfile.js';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 
 const client = new ApolloClient({
-
     request: operation => {
         const token = localStorage.getItem('id_token');
 
@@ -28,43 +29,49 @@ const client = new ApolloClient({
         });
     },
     uri: '/graphql'
-    });
+});
 
-    function App() {
-		  
-        const [links] = useState([
-            {
-                name: 'Owner',
-                href: '/owner',
-            },
-            {
-                name: 'Walker',
-                href: '/walker',
-            }
-        ])
+function App() {
+        
+    const [headerLinks] = useState([
+        {
+            name: 'Owner',
+            href: '/owner',
+        },
+        {
+            name: 'Walker',
+            href: '/walker',
+        }
+    ])
+
 
         const [walkerLinks] = useState([
             {
                 name: 'Walker Profile',
                 href: '/walkerprofile'
-            }
+            },
         ])
 
-		const [ownerLinks] = useState([
-            {
-                name: 'Owner Profile',
-                href: '/ownerprofile'
-            }
-        ])
 
-        const footerLinks = [
-            {
-                name: 'About',
-                href: '/about'
-            }
-        ]
+    const [ownerLinks] = useState([
+        {
+            name: 'Owner Profile',
+            href: '/ownerprofile'
+        }
+    ])
 
-    const [currentLink, setCurrentLink] = useState(links[0])
+    const footerLinks = [
+        {
+            name: 'About',
+            href: '/about'
+        }
+    ]
+    
+    const result = Auth.getProfileType();
+    console.log(result);
+
+
+    const [currentHeaderLink, setHeaderCurrentLink] = useState(headerLinks[0])
     const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
 	const [currentOwnerLink, setOwnerLink] = useState(ownerLinks[0])
 
@@ -72,60 +79,38 @@ const client = new ApolloClient({
         <ApolloProvider client={client}>
             <Router>
                 <div className="page">
-                    {Auth.loggedIn() ? (
-                        <>
-                        {Auth.getProfile() ? (
-                            <>
-								<OwnerHeader 
-									ownerLinks={ownerLinks}
-									currentOwnerLink={currentOwnerLink}
-									setOwnerLink={setOwnerLink}
-								/>
-								<Switch>
-									<Route exact path="/about" component={About} />
-									<Route exact path="/" component={OwnerProfile} />
-									<Route exact path="/ownerprofile" component={OwnerProfile} />
-									<Route component={NoMatch} />
-								</Switch>
-                            </>
-                        ) : (
-                            <>
-                                <WalkerHeader 
-                                    walkerLinks={walkerLinks}
-                                    currentWalkerLink={currentWalkerLink}
-                                    setWalkerLink={setWalkerLink}
-                                />
-								<Switch>
-									<Route exact path="/about" component={About} />
-									<Route exact path="/" component={WalkerProfile} />
-									<Route exact path="/walkerprofile" component={WalkerProfile} />
-									<Route component={NoMatch} />
-								</Switch>
-                            </>
-                        )}
-                        </>
-                    ) : (
-                        <>
-                            <Header
-                                links={links}
-                                currentLink={currentLink}
-                                setCurrentLink={setCurrentLink}
-                            />
-                            <Switch>
-                                <Route exact path="/" component={Owner} />
-                                <Route exact path="/about" component={About} />
-                                <Route exact path="/owner" component={Owner} />
-                                <Route exact path="/walker" component={Walker} />
-                                <Route component={NoMatch} />
-                            </Switch>
-                        </>
-                    )}
-
+                        <div className="page">
+                        <Header
+                            headerLinks={headerLinks}
+                            currentHeaderLink={currentHeaderLink}
+                            setHeaderCurrentLink={setHeaderCurrentLink}
+                            walkerLinks={walkerLinks}
+                            setWalkerLink={setWalkerLink}
+                            currentWalkerLink={currentWalkerLink}
+                            ownerLinks={ownerLinks}
+                            currentOwnerLink={currentOwnerLink}
+                            setOwnerLink={setOwnerLink}
+                            result={result}
+                        />
+                        
+                        <Switch>
+                            <PublicRoute exact path='/' component={Owner} />
+                            <PublicRoute exact path="/owner" component={Owner} />         
+                            <PublicRoute exact path="/walker" component={Walker} />
+                            <Route exact path="/about" component={About} />
+                            <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
+                            <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
+                            <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
+                            <Route component={NoMatch} />
+                        </Switch>
+                            
+        
+                        </div>
                 </div>
-            </Router>
-            <Footer 
+                <Footer 
             	footerLinks={footerLinks}
-            />
+                />
+            </Router>
         </ApolloProvider>
     );
 }

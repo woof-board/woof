@@ -1,5 +1,26 @@
 import gql from 'graphql-tag';
 
+export const QUERY_OWNER_ME = gql`
+    query {
+        owner_me {
+            _id
+            firstName
+            lastName
+            email
+            admin
+            status
+            address {
+                city
+            }
+            phone
+            dogs {
+                name
+            }
+            dogCount
+        }
+    }
+`;
+
 export const QUERY_OWNER = gql`
   query owner($owner_id: ID!) {
     owner (owner_id: $owner_id){
@@ -27,6 +48,35 @@ export const QUERY_OWNERS = gql`
     }
   }
 `;
+
+export const QUERY_WALKER_ME = gql`
+    query {
+        walker_me {
+            _id
+            firstName
+            lastName
+            email
+            reviews{
+                rating
+                reviewText
+            }
+            earnings
+            averageRating
+            neighbourhoods
+            availability {
+                date
+                slot9am
+                slot11am
+                slot1pm
+                slot3pm
+                slot5pm
+                slot7pm
+                slot9pm
+            }
+        }
+    }
+`;
+
 
 export const QUERY_WALKER = gql`
   query walker($walker_id: ID!) {
@@ -118,8 +168,8 @@ export const QUERY_OWNER_ORDERS = gql`
 `;
 
 export const QUERY_WALKER_ORDERS = gql`
-  query walker_orders($owner_id: ID!) {
-    walker_orders (owner_id: $owner_id){
+  query walker_orders($walker_id: ID!) {
+    walker_orders (walker_id: $walker_id){
       _id
       serviceDate
       serviceTime

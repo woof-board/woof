@@ -14,7 +14,6 @@ export const ADD_ORDER = gql`
             }
         }
     }
-  }
 `;
 
 export const UPDATE_ORDER = gql`
@@ -23,6 +22,35 @@ export const UPDATE_ORDER = gql`
             _id
             serviceDate
             serviceTime
+            owner{
+                _id
+            }
+            walker{
+                _id
+            }
+            dogs{
+                _id
+            }
+        }
+    }
+`;
+
+/* example query variables
+
+{
+  "order_id": "609d910d1342e402388e2a2f",
+  "status": "IN_PROGRESS"
+}
+
+*/
+
+export const UPDATE_ORDER_STATUS = gql`
+    mutation updateOrderStatus($order_id: ID!, $status: String!) {
+        updateOrderStatus(order_id: $order_id, status: $status) {
+            _id
+            serviceDate
+            serviceTime
+            status
             owner{
                 _id
             }
@@ -168,4 +196,20 @@ export const LOGIN_OWNER = gql`
             }
         }
 }
+`;
+
+export const CHECK_WALKER_AVAILABILITY = gql`
+    mutation checkWalkerAvailability($date: String!, $time: String!) {
+        checkWalkerAvailability(date: $date, time: $time) {
+            _id
+            firstName
+            lastName
+            email
+            neighbourhoods
+            reviews {
+                reviewText
+            }
+            averageRating
+        }
+    }
 `;

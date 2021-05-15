@@ -1,8 +1,6 @@
 import React from 'react';
 import '../css/OwnerProfile.css';
 
-
-
 function OwnerProfile() {
     return (
         <>
