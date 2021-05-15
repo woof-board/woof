@@ -20,7 +20,8 @@ const dogSchema = new Schema(
         treats: {
             type: Boolean,
             required: true
-        }
+        },
+        avatar: String
     }
 );
 
