@@ -15,6 +15,13 @@
   padding: 5rem;
 }
 
+.error-text {
+  background-color: black;
+  color: white;
+  padding: 0 .5rem 0 .5rem;
+  border-radius: 25px;
+}
+
 /* if adding opacity to VAR, rgb(var(--color), <opacity>); */
 
 body {

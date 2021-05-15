@@ -7,22 +7,18 @@ import './css/App.css';
 import Footer from './components/Footer';
 import About from './pages/About';
 import Header from './components/Header';
-import Walkers from './pages/Walkers'
 import NoMatch from './pages/NoMatch';
-import Walker from './pages/Walker';
-import Owner from './pages/Owner';
 import Auth from './utils/auth';
 import PaymentScreen from './pages/PaymentScreen';
 import Success from "./pages/Success";
 import WalkerSchedule from './pages/WalkerSchedule';
 
-// import WalkerHeader from './components/Header/WalkerHeader.js';
-// import OwnerHeader from './components/Header/OwnerHeader.js';
 import OwnerProfile from './pages/OwnerProfile.js';
 import WalkerProfile from './pages/WalkerProfile.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
+import HomeMock from './pages/HomeMock';
 
 
 const client = new ApolloClient({
@@ -39,19 +35,7 @@ const client = new ApolloClient({
 });
 
 function App() {
-        
-    const [headerLinks] = useState([
-        {
-            name: 'Owner',
-            href: '/owner',
-        },
-        {
-            name: 'Walker',
-            href: '/walker',
-        }
-    ])
-
-
+    
         const [walkerLinks] = useState([
             {
                 name: 'Walker Profile',
@@ -77,7 +61,6 @@ function App() {
     const result = Auth.getProfileType();
     console.log(result);
 
-    const [currentHeaderLink, setHeaderCurrentLink] = useState(headerLinks[0])
     const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
 	const [currentOwnerLink, setOwnerLink] = useState(ownerLinks[0])
 
@@ -87,23 +70,26 @@ function App() {
                 <StoreProvider>
                 <div className="page">
                         <div className="page">
-                        <Header
-                            headerLinks={headerLinks}
-                            currentHeaderLink={currentHeaderLink}
-                            setHeaderCurrentLink={setHeaderCurrentLink}
-                            walkerLinks={walkerLinks}
-                            setWalkerLink={setWalkerLink}
-                            currentWalkerLink={currentWalkerLink}
-                            ownerLinks={ownerLinks}
-                            currentOwnerLink={currentOwnerLink}
-                            setOwnerLink={setOwnerLink}
-                            result={result}
-                        />
-                        
+
+                        {Auth.getProfileType() === 'owner' && (
+                            <Header
+                                ownerLinks={ownerLinks}
+                                currentOwnerLink={currentOwnerLink}
+                                setOwnerLink={setOwnerLink}
+                                result={result}
+                            />
+                        )}
+                        {Auth.getProfileType() === 'walker' && (
+                            <Header
+                                walkerLinks={walkerLinks}
+                                setWalkerLink={setWalkerLink}
+                                currentWalkerLink={currentWalkerLink}
+                                result={result}
+                            />
+                        )}
+
                         <Switch>
-                            <PublicRoute exact path='/' component={Owner} />
-                            <PublicRoute exact path="/owner" component={Owner} />         
-                            <PublicRoute exact path="/walker" component={Walker} />
+                            <PublicRoute exact path='/' component={HomeMock} />
 
                             <Route exact path="/about" component={About} />
                             <Route exact path="/paymentScreen" component={PaymentScreen} />
