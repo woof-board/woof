@@ -73,9 +73,8 @@ function App() {
     const result = Auth.getProfileType();
     console.log(result);
 
-
-  const [currentHeaderLink, setHeaderCurrentLink] = useState(headerLinks[0])
-  const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
+    const [currentHeaderLink, setHeaderCurrentLink] = useState(headerLinks[0])
+    const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
 	const [currentOwnerLink, setOwnerLink] = useState(ownerLinks[0])
 
     return (
@@ -111,7 +110,6 @@ function App() {
                             <Route component={NoMatch} />
                         </Switch>
                             
-        
                         </div>
                 </div>
                 <Footer 

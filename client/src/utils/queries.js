@@ -63,6 +63,7 @@ export const QUERY_WALKER_ME = gql`
             earnings
             averageRating
             neighbourhoods
+            status
             availability {
                 date
                 slot9am
@@ -185,4 +186,20 @@ export const QUERY_WALKER_ORDERS = gql`
       }
     }
   }
+`;
+
+export const QUERY_WALKER_AVAILABILITY = gql`
+    query checkWalkerAvailability($date: String!, $time: String!) {
+        checkWalkerAvailability(date: $date, time: $time) {
+            _id
+            firstName
+            lastName
+            email
+            neighbourhoods
+            reviews {
+                reviewText
+            }
+            averageRating
+        }
+    }
 `;
