@@ -187,3 +187,19 @@ export const QUERY_WALKER_ORDERS = gql`
     }
   }
 `;
+
+export const QUERY_WALKER_AVAILABILITY = gql`
+    query checkWalkerAvailability($date: String!, $time: String!) {
+        checkWalkerAvailability(date: $date, time: $time) {
+            _id
+            firstName
+            lastName
+            email
+            neighbourhoods
+            reviews {
+                reviewText
+            }
+            averageRating
+        }
+    }
+`;

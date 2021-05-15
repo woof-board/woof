@@ -6,6 +6,7 @@ const typeDefs = gql`
         firstName: String
         lastName: String
         email: String
+        avatar: String
         admin: Boolean
         address: Address
         phone: String
@@ -19,6 +20,7 @@ const typeDefs = gql`
         firstName: String
         lastName: String
         email: String
+        avatar: String
         neighbourhoods: [String]
         reviews: [Review]
         earnings: Float
@@ -51,6 +53,7 @@ const typeDefs = gql`
         breed: String
         weight: Float
         treats: Boolean
+        avatar: String
     }
 
     type Availability {
@@ -97,6 +100,16 @@ const typeDefs = gql`
         address: AddressInput
         phone: String
         status: String
+        avatar: String
+    }
+
+    input OwnerProfileInput {
+        firstName: String
+        lastName: String
+        email: String
+        address: AddressInput
+        phone: String
+        avatar: String
     }
 
     input WalkerInput {
@@ -106,6 +119,15 @@ const typeDefs = gql`
         password: String!
         availability: [AvailabilityInput]
         status: String
+        avatar: String
+    }
+
+    input WalkerProfileInput {
+        firstName: String
+        lastName: String
+        email: String
+        neighbourhoods: [String]
+        avatar: String
     }
 
     input DogInput {
@@ -113,6 +135,7 @@ const typeDefs = gql`
         breed: String!
         weight: Float!
         treats: Boolean!
+        avatar: String
     }
 
     input OrderInput {
@@ -124,7 +147,6 @@ const typeDefs = gql`
     }
 
     input ReviewInput {
-        owner_id: ID!
         walker_id: ID!
         rating: Int!
         reviewText: String
@@ -148,6 +170,7 @@ const typeDefs = gql`
         walker(walker_id: ID!): Walker
         walkers: [Walker]
         walker_me: Walker
+        checkWalkerAvailability(date: String!, time: String!): [Walker]
         order(order_id: ID): Order
         orders: [Order]
         owner_orders(owner_id: ID): [Order]
@@ -156,19 +179,27 @@ const typeDefs = gql`
 
     type Mutation {
         addOwner(input: OwnerInput): AuthOwner
-        addWalker(input: WalkerInput): AuthWalker
         loginOwner(email: String!, password: String!): AuthOwner
-        loginWalker(email: String!, password: String!): AuthWalker
         addDog(input: DogInput): Owner
+        updateOwnerProfile(input: OwnerProfileInput): Owner
+        updateOwnerPassword(old_password: String!, new_password: String!): Owner
+
         addOrder(input: OrderInput): Order
         updateOrder(order_id: ID!, input: OrderInput): Order
         updateOrderStatus(order_id: ID!, status: String!): Order
         removeOrder(order_id: ID!): Order
+        
         addReview(input: ReviewInput): Walker
         removeReview(walker_id: ID!): Walker
         updateReview(input: ReviewInput): Walker
         clearReview(walker_id: ID!): Walker
-        checkWalkerAvailability(date: String!, time: String!): [Walker]
+        
+        addWalker(input: WalkerInput): AuthWalker
+        loginWalker(email: String!, password: String!): AuthWalker
+        updateWalkerProfile(input: WalkerProfileInput): Walker
+        updateWalkerPassword(old_password: String!, new_password: String!): Walker
+        updateWalkerAvailability(input: [AvailabilityInput]): Walker
+        updateWalkerStatus(walker_id: ID!, status: String!): Walker
     }
 
 `;
