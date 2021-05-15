@@ -7,9 +7,6 @@ import Auth from '../../utils/auth';
 function Header(props) {
 
     const {
-        headerLinks = [],
-        setHeaderCurrentLink,
-        currentHeaderLink,
         ownerLinks = [],
         setOwnerLink,
         currentOwnerLink,
