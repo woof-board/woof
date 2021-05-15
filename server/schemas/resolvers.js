@@ -283,17 +283,18 @@ const resolvers = {
            - removeOrder
         */
         addOrder: async (parent, { input }, context) => {
+            // only owner can add order
             if (context.owner) {
                 const order = await Order.create(input);
 
                 return order;
             }
-
+      
             throw new AuthenticationError('Not logged in');
         },
 
         updateOrder: async (parent, {order_id, input }, context) => {
-            if (context.owner) {
+            if (context.owner || context.walker) {
                 const order = await Order.findByIdAndUpdate(
                     order_id, 
                     input,
@@ -302,31 +303,31 @@ const resolvers = {
 
                 return order;
             }
-
+      
             throw new AuthenticationError('Not logged in');
         },
 
         updateOrderStatus: async (parent, {order_id, status }, context) => {
-            if (context.owner) {
+            if (context.owner || context.walker) {
                 const order = await Order.findByIdAndUpdate(
                     order_id, 
                     {status: status},
                     { new: true, runValidators: true }
                 );
-          
+            
                 return order;
             }
-          
+      
             throw new AuthenticationError('Not logged in');
         },
 
         removeOrder: async (parent, {order_id, input }, context) => {
-            if (context.owner) {
+            if (context.owner && context.owner.admin) {
                 const order = await Order.findByIdAndDelete(order_id);
 
                 return order;
             }
-
+        
             throw new AuthenticationError('Not logged in');
         },
 
