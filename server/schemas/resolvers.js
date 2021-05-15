@@ -159,51 +159,35 @@ const resolvers = {
            - removeOrder
         */
         addOrder: async (parent, { input }, context) => {
-            if (context.owner) {
-                const order = await Order.create(input);
+            const order = await Order.create(input);
 
-                return order;
-            }
-
-            throw new AuthenticationError('Not logged in');
+            return order;
         },
 
         updateOrder: async (parent, {order_id, input }, context) => {
-            if (context.owner) {
-                const order = await Order.findByIdAndUpdate(
-                    order_id, 
-                    input,
-                    { new: true, runValidators: true }
-                );
+            const order = await Order.findByIdAndUpdate(
+                order_id, 
+                input,
+                { new: true, runValidators: true }
+            );
 
-                return order;
-            }
-
-            throw new AuthenticationError('Not logged in');
+            return order;
         },
 
         updateOrderStatus: async (parent, {order_id, status }, context) => {
-            if (context.owner) {
-                const order = await Order.findByIdAndUpdate(
-                    order_id, 
-                    {status: status},
-                    { new: true, runValidators: true }
-                );
-          
-                return order;
-            }
-          
-            throw new AuthenticationError('Not logged in');
+            const order = await Order.findByIdAndUpdate(
+                order_id, 
+                {status: status},
+                { new: true, runValidators: true }
+            );
+        
+            return order;
         },
 
         removeOrder: async (parent, {order_id, input }, context) => {
-            if (context.owner) {
-                const order = await Order.findByIdAndDelete(order_id);
+            const order = await Order.findByIdAndDelete(order_id);
 
-                return order;
-            }
-
-            throw new AuthenticationError('Not logged in');
+            return order;
         },
 
         /* Review mutations
