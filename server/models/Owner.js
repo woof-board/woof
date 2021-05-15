@@ -39,17 +39,12 @@ const ownerSchema = new Schema(
         status: {
             type: String,
             required: true,
-<<<<<<< HEAD
-            enum: ["pending_information", "active", "suspended"],
-            default: "pending_information"
+            enum: ["PENDING_INFORMATION", "ACTIVE", "SUSPENDED"],
+            default: "PENDING_INFORMATION"
         },
         stripe_customer_id: {
             type: String,
             match: [/^cus_.+/, 'Must be a valid stripe customer id!']
-=======
-            enum: ["PENDING_INFORMATION", "ACTIVE", "SUSPENDED"],
-            default: "PENDING_INFORMATION"
->>>>>>> develop
         }
     },
     {
