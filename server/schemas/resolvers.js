@@ -102,11 +102,6 @@ const resolvers = {
                     );
                 }
 
-                // const setupIntent = await stripe.setupIntents.create({
-                //     customer: customer.id,
-                // });
-                // const clientSecret = setupIntent.client_secret;
-
                 const session = await stripe.checkout.sessions.create({
                     payment_method_types: ['card'],
                     mode: 'setup',
@@ -116,13 +111,11 @@ const resolvers = {
                 });
 
                 // save customer id into owner
-                if(session){
-                    const newOwner = await Owner.findByIdAndUpdate(
-                        context.owner._id,
-                        {stripe_setup_intent: session.setup_intent},
-                        { new: true, runValidators: true }
-                    );
-                }
+                await Owner.findByIdAndUpdate(
+                    context.owner._id,
+                    {stripe_setup_intent: session.setup_intent},
+                    { new: true, runValidators: true }
+                );
 
                 return { session_id: session.id };
             }
@@ -144,10 +137,9 @@ const resolvers = {
         charge_owner: async (parent, {amount}, context) => {
             if (context.owner) {
                 const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
-                const setupIntent = await stripe.setupIntents.retrieve(
-                    setup_intent
-                  );
+                const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
 
+                console.log(setupIntent);
                 // create a new charging instance
                 const charge = await stripe.paymentIntents.create({
                     amount: amount,
@@ -498,7 +490,7 @@ const resolvers = {
             if (context.owner) {
                 const newOwner = await Owner.findByIdAndUpdate(
                     context.owner._id,
-                    {stripe_setup_intent: ''},
+                    {stripe_setup_intent: null},
                     { new: true, runValidators: true }
                 );
 

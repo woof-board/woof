@@ -205,9 +205,20 @@ export const QUERY_WALKER_AVAILABILITY = gql`
 `;
 
 export const GET_CUSTOMER_SESSION_ID = gql`
-    query get_customer_session_id {
-      get_customer_session_id {
-          session_id
-        }
-    }
+  query get_customer_session_id {
+    get_customer_session_id {
+        session_id
+      }
+  }
+`;
+
+export const CHARGE_OWNER = gql`
+  query charge_owner($amount: Int!){
+    charge_owner(amount: $amount) {
+        id
+        object
+        amount
+        status
+    }	
+  }
 `;

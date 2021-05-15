@@ -202,14 +202,17 @@ const typeDefs = gql`
         owner(owner_id: ID!): Owner
         owners: [Owner]
         owner_me: Owner
+        
         walker(walker_id: ID!): Walker
         walkers: [Walker]
         walker_me: Walker
         checkWalkerAvailability(date: String!, time: String!): [Walker]
+
         order(order_id: ID): Order
         orders: [Order]
         owner_orders(owner_id: ID): [Order]
         walker_orders(walker_id: ID): [Order]
+
         get_customer_session_id: Checkout
         get_customer_info_from_stripe: Customer
         charge_owner(amount: Int!): Charge

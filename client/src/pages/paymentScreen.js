@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 // import ReactDOM from 'react-dom';
-import { useQuery } from '@apollo/react-hooks';
-import { GET_CUSTOMER_SESSION_ID } from '../utils/queries';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { GET_CUSTOMER_SESSION_ID, CHARGE_OWNER } from '../utils/queries';
 import { loadStripe } from '@stripe/stripe-js';
 import '../css/PaymentScreen.css';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
@@ -9,63 +9,47 @@ import '../css/PaymentScreen.css';
 const stripePromise = loadStripe('pk_test_51Ir7BPLlbUYQkEo2A2L6kb3YbdMv9jh8IJjshFAJOn3UXJEox2CDMpQoI8AS5HiTiccN6CzYnNbbCnaBJVgb8t08002TgJCE4p');
 
 function PaymentScreen() {
-  const {data} = useQuery(GET_CUSTOMER_SESSION_ID)
+  const [handleGetSessionId, {data:customer_data}] = useLazyQuery(GET_CUSTOMER_SESSION_ID,{
+    onCompleted: (data) => {
+      // some actions
+      handleGettingInformation(data);
+    }
+  });
+  const amount = 3000; // in cents
+  const [handleCharge] = useLazyQuery(CHARGE_OWNER, {
+    variables: { amount: amount }
+  });
 
   useEffect(() => {
-    if (data) {
+    if (customer_data) {
       stripePromise.then((res) => {
-        res.redirectToCheckout({ sessionId: data.get_customer_session_id.session });
+        res.redirectToCheckout({ sessionId: customer_data.get_customer_session_id.session });
       });
     }
-  }, [data]);
+  }, [customer_data]);
 
-  const handleClick = async (event) => {
+  const handleGettingInformation = async (data) => {
     // Call your backend to create the Checkout session.
     const sessionId = data.get_customer_session_id.session_id;
     // When the customer clicks on the button, redirect them to Checkout.
     const stripe = await stripePromise;
-    const { error } = await stripe.redirectToCheckout({
-      sessionId,
-    });
+    const { error } = await stripe.redirectToCheckout({sessionId});
     // If `redirectToCheckout` fails due to a browser or network
     // error, display the localized error message to your customer
     // using `error.message`.
-    console.log(error);
+    if(error){
+      console.log(error);
+    }
   };
   
-  // return (
-  //   <View>
-  //     <CardField
-  //       postalCodeEnabled={true}
-  //       placeholder={{
-  //         number: '4242 4242 4242 4242',
-  //       }}
-  //       cardStyle={{
-  //         backgroundColor: '#FFFFFF',
-  //         textColor: '#000000',
-  //       }}
-  //       style={{
-  //         width: '100%',
-  //         height: 50,
-  //         marginVertical: 30,
-  //       }}
-  //       onCardChange={(cardDetails) => {
-  //         setCard(cardDetails);
-  //       }}
-  //       onFocus={(focusedField) => {
-  //         console.log('focusField', focusedField);
-  //       }}
-  //     />
-  //     <button role="link" onClick={handleClick}>
-  //       Checkout
-  //     </button>
-  //   </View>
-  // );
   return (
     <>
-    <div>
-      <button className="payment-button page-body" role="link" onClick={handleClick}>
-        Checkout
+    <div className="page-body">
+      <button className="payment-button" role="link" onClick={handleGetSessionId}>
+        Enter Charging Information
+      </button>
+      <button className="payment-button" role="link" onClick={handleCharge}>
+        Charge User
       </button>
     </div>
     </>
