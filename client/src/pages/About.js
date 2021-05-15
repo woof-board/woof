@@ -44,8 +44,8 @@ function About() {
         },
         {
             name: 'Samiul',
-            github: 'https://github.com/woof-board',
-            linked: 'https://ca.linkedin.com/',
+            github: 'https://github.com/samiul1988',
+            linked: 'https://www.linkedin.com/in/samiul-choudhury/',
             image: '/images/samiul.jpg'
         },
         {

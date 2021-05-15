@@ -2,8 +2,9 @@ const { AuthenticationError } = require('apollo-server-express');
 
 const { Owner, Walker, Order } = require('../models');
 const { signTokenOwner, signTokenWalker } = require('../utils/auth');
-
+const { getTimeSlot } = require('../utils/helpers');
 const mongoose = require('mongoose');
+
 // const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
@@ -154,6 +155,7 @@ const resolvers = {
         /* Order mutations
            - addOrder
            - updateOrder
+           - updateOrderStatus
            - removeOrder
         */
         addOrder: async (parent, { input }, context) => {
@@ -177,6 +179,20 @@ const resolvers = {
                 return order;
             }
 
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateOrderStatus: async (parent, {order_id, status }, context) => {
+            if (context.owner) {
+                const order = await Order.findByIdAndUpdate(
+                    order_id, 
+                    {status: status},
+                    { new: true, runValidators: true }
+                );
+          
+                return order;
+            }
+          
             throw new AuthenticationError('Not logged in');
         },
 
@@ -261,6 +277,28 @@ const resolvers = {
                 );
 
                 return walker;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        checkWalkerAvailability: async (parent, { date, time }, context) => {
+            if(context.owner){
+                // const owner = await Owner.findById(context.owner._id)
+                //     .select('-__v -password');
+                const timeSlot = getTimeSlot(time);
+                
+                const filteredWalker = await Walker.find(
+                    {
+                        availability: {
+                            $elemMatch : { 
+                                date,
+                                [timeSlot]: true
+                            }
+                        }
+                    }
+                );
+                return filteredWalker;
             }
 
             throw new AuthenticationError('Not logged in');
