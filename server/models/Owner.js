@@ -41,7 +41,15 @@ const ownerSchema = new Schema(
             required: true,
             enum: ["PENDING_INFORMATION", "ACTIVE", "SUSPENDED"],
             default: "PENDING_INFORMATION"
-        }
+        },
+        stripe_customer_id: {
+            type: String,
+            match: [/^cus_.+/, 'Must be a valid stripe customer id!']
+        },
+        stripe_setup_intent: {
+            type: String,
+            match: [/^seti_.+/, 'Must be a valid stripe setup_intent id!']
+        },
     },
     {
       toJSON: {

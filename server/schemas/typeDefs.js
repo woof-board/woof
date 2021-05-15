@@ -13,6 +13,8 @@ const typeDefs = gql`
         dogs: [Dog]
         dogCount: Int
         status: String
+        stripe_customer_id: String
+        stripe_setup_intent: String
     }
 
     type Walker {
@@ -83,6 +85,52 @@ const typeDefs = gql`
     type AuthWalker {
         token: ID
         walker: Walker
+    }
+
+    type Checkout {
+        session_id: ID
+    }
+
+    type stripeAddress {
+        city: String
+        country: String
+        line1: String
+        line2: String
+        postal_code: String
+        state: String
+    }
+
+    type Customer {
+        id: String
+        object: String
+        address: stripeAddress
+        balance: Float
+        currency: String
+        description: String
+        email: String
+        name: String
+        phone: String
+    }
+
+    type Charge {
+        id: String
+        object: String
+        amount: Int
+        receipt_url: String
+        status: String
+    }
+
+    type Payment{
+        id: String
+        amount: Int
+        created: Int
+        currency: String
+        description: String
+        status: String
+    }
+
+    type Payments {
+        data: [Payment]
     }
 
     input AddressInput {
@@ -169,14 +217,21 @@ const typeDefs = gql`
         owner(owner_id: ID!): Owner
         owners: [Owner]
         owner_me: Owner
+        
         walker(walker_id: ID!): Walker
         walkers: [Walker]
         walker_me: Walker
         checkWalkerAvailability(date: String!, time: String!): [Walker]
+
         order(order_id: ID): Order
         orders: [Order]
         owner_orders(owner_id: ID): [Order]
         walker_orders(walker_id: ID): [Order]
+
+        get_customer_session_id: Checkout
+        get_customer_info_from_stripe: Customer
+        charge_owner(amount: Int!, description: String!): Charge
+        retrieve_payments: Payments
     }
 
     type Mutation {
@@ -202,6 +257,8 @@ const typeDefs = gql`
         updateWalkerPassword(old_password: String!, new_password: String!): Walker
         updateWalkerAvailability(input: [AvailabilityInput]): Walker
         updateWalkerStatus(walker_id: ID!, status: String!): Walker
+
+        clear_setup_intent: Owner
     }
 
 `;

@@ -9,6 +9,8 @@ import About from './pages/About';
 import Header from './components/Header';
 import NoMatch from './pages/NoMatch';
 import Auth from './utils/auth';
+import PaymentScreen from './pages/PaymentScreen';
+import Success from "./pages/Success";
 import WalkerSchedule from './pages/WalkerSchedule';
 
 import OwnerProfile from './pages/OwnerProfile.js';
@@ -17,6 +19,7 @@ import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
 import HomeMock from './pages/HomeMock';
+
 
 const client = new ApolloClient({
     request: operation => {
@@ -89,6 +92,8 @@ function App() {
                             <PublicRoute exact path='/' component={HomeMock} />
 
                             <Route exact path="/about" component={About} />
+                            <Route exact path="/paymentScreen" component={PaymentScreen} />
+                            <Route exact path="/Success" component={Success} />
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
                             <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />

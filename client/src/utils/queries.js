@@ -203,3 +203,37 @@ export const QUERY_WALKER_AVAILABILITY = gql`
         }
     }
 `;
+
+export const GET_CUSTOMER_SESSION_ID = gql`
+  query get_customer_session_id {
+    get_customer_session_id {
+        session_id
+      }
+  }
+`;
+
+export const CHARGE_OWNER = gql`
+  query charge_owner($amount: Int!, $description: String!){
+    charge_owner(amount: $amount, description: $description) {
+        id
+        object
+        amount
+        status
+    }	
+  }
+`;
+
+export const RETRIEVE_PAYMENTS = gql`
+  query retrieve_payments{
+    retrieve_payments{
+      data{
+        id
+        amount
+        created
+        currency
+        description
+        status
+      }
+    }
+  }
+`;

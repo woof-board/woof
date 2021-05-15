@@ -6,7 +6,7 @@ import WalkerLoginForm from '../components/WalkerLoginForm';
 import WalkerSignupForm from '../components/WalkerSignupForm';
 import OwnerLoginForm from '../components/OwnerLoginForm';
 import OwnerSignupForm from '../components/OwnerSignupForm';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function HomeMock() {
 
@@ -89,8 +89,7 @@ function HomeMock() {
                         )}
                         </>
                     )}
-                    <Link to="/about">Learn More</Link>
-
+                    {/* <Link to="/about">Learn More</Link> */}
             </div>
             </>
     )

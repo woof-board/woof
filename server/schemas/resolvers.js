@@ -1,22 +1,25 @@
+require('dotenv').config();
+
 const { AuthenticationError, UserInputError, ApolloError } = require('apollo-server-express');
 
 const { Owner, Walker, Order } = require('../models');
 const { signTokenOwner, signTokenWalker } = require('../utils/auth');
 const { getTimeSlot } = require('../utils/helpers');
 const mongoose = require('mongoose');
+const stripe = require('stripe')(process.env.STRIPE_KEY || process.env.STRIPE_TEST_SK);
 
-// const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
+
 
 const resolvers = {
     Query: {
-        owner: async (parent, {owner_id}, context) => {
+        owner: async (parent, { owner_id }, context) => {
             return await Owner.findById(owner_id)
-            .select('-__v -password');
+                .select('-__v -password');
         },
 
         owners: async (parent, args, context) => {
             return await Owner.find({})
-            .select('-__v -password');
+                .select('-__v -password');
         },
 
         // to get owner's own profile
@@ -31,14 +34,14 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        walker: async (parent, {walker_id}, context) => {
+        walker: async (parent, { walker_id }, context) => {
             return await Walker.findById(walker_id)
-            .select('-__v -password');
+                .select('-__v -password');
         },
 
         walkers: async (parent, args, context) => {
             return await Walker.find({})
-            .select('-__v -password');
+                .select('-__v -password');
         },
 
         // to get walker's own profile
@@ -53,32 +56,123 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        order: async (parent, {order_id}, context) => {
+        order: async (parent, { order_id }, context) => {
             return await Order.findById(order_id)
-            .select('-__v')
-            .populate('owner')
-            .populate('walker');
+                .select('-__v')
+                .populate('owner')
+                .populate('walker');
         },
 
         orders: async (parent, args, context) => {
             return await Order.find({})
-            .populate('owner')
-            .populate('walker');
+                .populate('owner')
+                .populate('walker');
         },
 
         // getOrders
-        owner_orders: async (parent, {owner_id}, context) => {
+        owner_orders: async (parent, { owner_id }, context) => {
             return await Order.find({ owner: mongoose.Types.ObjectId(owner_id) })
-            .select('-__v')
-            .populate('owner')
-            .populate('walker');
+                .select('-__v')
+                .populate('owner')
+                .populate('walker');
         },
 
-        walker_orders: async (parent, {walker_id}, context) => {
+        walker_orders: async (parent, { walker_id }, context) => {
             return await Order.find({ walker: mongoose.Types.ObjectId(walker_id) })
-            .select('-__v')
-            .populate('owner')
-            .populate('walker');
+                .select('-__v')
+                .populate('owner')
+                .populate('walker');
+        },
+
+        get_customer_session_id: async (parent, args, context) => {
+
+            if (context.owner) {
+                const url = new URL(context.headers.referer).origin;
+
+                const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
+                if(!customer_id){
+                    // if owner customer_id is empty, create a customer through stripe
+                    const {id: customer_id} = await stripe.customers.create();
+
+                    // save customer id into owner
+                    await Owner.findByIdAndUpdate(
+                        context.owner._id,
+                        {stripe_customer_id: customer_id},
+                        { new: true, runValidators: true }
+                    );
+                }
+
+                const session = await stripe.checkout.sessions.create({
+                    payment_method_types: ['card'],
+                    mode: 'setup',
+                    customer: customer_id,
+                    success_url: `${url}/success?session_id={CHECKOUT_SESSION_ID}`,
+                    cancel_url: `${url}/`
+                });
+
+                // save customer id into owner
+                await Owner.findByIdAndUpdate(
+                    context.owner._id,
+                    {stripe_setup_intent: session.setup_intent},
+                    { new: true, runValidators: true }
+                );
+
+                return { session_id: session.id };
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        get_customer_info_from_stripe: async (parent, args, context) => {
+            if (context.owner) {
+                const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
+                const customer = await stripe.customers.retrieve(customer_id);
+
+                return customer;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        charge_owner: async (parent, {amount, description}, context) => {
+            if (context.owner) {
+                const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
+                const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
+
+                // create a new charging instance
+                const charge = await stripe.paymentIntents.create({
+                    amount: amount,
+                    currency: 'cad',
+                    customer: customer_id,
+                    payment_method: setupIntent.payment_method,
+                    confirmation_method: 'automatic',
+                    description: description,
+                });
+
+                // confirm charging
+                await stripe.paymentIntents.confirm(charge.id);
+
+                // get finalized charging information
+                const newCharge = await stripe.paymentIntents.retrieve(charge.id);
+                return newCharge;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        retrieve_payments: async (parent, arg, context) => {
+            if (context.owner) {
+                const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
+
+                const paymentIntents = await stripe.paymentIntents.list({
+                    customer: customer_id,
+                    limit: 10,
+                  });
+
+                return paymentIntents;
+            }
+
+            throw new AuthenticationError('Not logged in');
         },
 
         checkWalkerAvailability: async (parent, { date, time }, context) => {
@@ -296,7 +390,7 @@ const resolvers = {
         updateOrder: async (parent, {order_id, input }, context) => {
             if (context.owner || context.walker) {
                 const order = await Order.findByIdAndUpdate(
-                    order_id, 
+                    order_id,
                     input,
                     { new: true, runValidators: true }
                 );
@@ -310,8 +404,8 @@ const resolvers = {
         updateOrderStatus: async (parent, {order_id, status }, context) => {
             if (context.owner || context.walker) {
                 const order = await Order.findByIdAndUpdate(
-                    order_id, 
-                    {status: status},
+                    order_id,
+                    { status: status },
                     { new: true, runValidators: true }
                 );
             
@@ -360,7 +454,7 @@ const resolvers = {
         },
 
         removeReview: async (parent, { walker_id }, context) => {
-            if(context.owner){
+            if (context.owner) {
                 return await Walker.findByIdAndUpdate(
                     walker_id,
                     { $pull: { reviews: { owner_id: context.owner._id } } },
@@ -372,9 +466,9 @@ const resolvers = {
         },
 
         updateReview: async (parent, { input }, context) => {
-            if(context.owner){
-                const {owner_id, walker_id, rating, reviewText} = input;   
-                const review = {owner_id: owner_id, rating: rating, reviewText: reviewText};
+            if (context.owner) {
+                const { owner_id, walker_id, rating, reviewText } = input;
+                const review = { owner_id: owner_id, rating: rating, reviewText: reviewText };
 
                 // remove current review
                 await Walker.findByIdAndUpdate(
@@ -395,16 +489,31 @@ const resolvers = {
         },
 
         clearReview: async (parent, { walker_id }, context) => {
-            if(context.owner){
-                const walker =  await Walker.findByIdAndUpdate(
+            if (context.owner) {
+                const walker = await Walker.findByIdAndUpdate(
                     walker_id,
-                    { $set: { reviews:[] } }
+                    { $set: { reviews: [] } }
                 );
 
                 return walker;
             }
 
             throw new AuthenticationError('Not logged in');
+        },
+
+        clear_setup_intent: async (parent, arg, context) => {
+            if (context.owner) {
+                const newOwner = await Owner.findByIdAndUpdate(
+                    context.owner._id,
+                    {stripe_setup_intent: null},
+                    { new: true, runValidators: true }
+                );
+
+                return newOwner;
+            }
+
+            throw new AuthenticationError('Not logged in');
+
         },
     }
 };
