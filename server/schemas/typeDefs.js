@@ -14,6 +14,7 @@ const typeDefs = gql`
         dogCount: Int
         status: String
         stripe_customer_id: String
+        stripe_setup_intent: String
     }
 
     type Walker {
@@ -107,6 +108,14 @@ const typeDefs = gql`
         email: String
         name: String
         phone: String
+    }
+
+    type Charge {
+        id: String
+        object: String
+        amount: Int
+        receipt_url: String
+        status: String
     }
 
     input AddressInput {
@@ -203,6 +212,7 @@ const typeDefs = gql`
         walker_orders(walker_id: ID): [Order]
         get_customer_session_id: Checkout
         get_customer_info_from_stripe: Customer
+        charge_owner(amount: Int!): Charge
     }
 
     type Mutation {
@@ -228,6 +238,8 @@ const typeDefs = gql`
         updateWalkerPassword(old_password: String!, new_password: String!): Walker
         updateWalkerAvailability(input: [AvailabilityInput]): Walker
         updateWalkerStatus(walker_id: ID!, status: String!): Walker
+
+        clear_setup_intent: Owner
     }
 
 `;

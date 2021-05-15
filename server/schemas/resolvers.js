@@ -115,7 +115,14 @@ const resolvers = {
                     cancel_url: `${url}/`
                 });
 
-                console.log(session);
+                // save customer id into owner
+                if(session){
+                    const newOwner = await Owner.findByIdAndUpdate(
+                        context.owner._id,
+                        {stripe_setup_intent: session.setup_intent},
+                        { new: true, runValidators: true }
+                    );
+                }
 
                 return { session_id: session.id };
             }
@@ -127,7 +134,36 @@ const resolvers = {
             if (context.owner) {
                 const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
                 const customer = await stripe.customers.retrieve(customer_id);
+
                 return customer;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        charge_owner: async (parent, {amount}, context) => {
+            if (context.owner) {
+                const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
+                const setupIntent = await stripe.setupIntents.retrieve(
+                    setup_intent
+                  );
+
+                // create a new charging instance
+                const charge = await stripe.paymentIntents.create({
+                    amount: amount,
+                    currency: 'cad',
+                    customer: customer_id,
+                    payment_method: setupIntent.payment_method,
+                    confirmation_method: 'automatic',
+                    description: 'My First Test Charge (created for API docs)',
+                });
+
+                // confirm charging
+                await stripe.paymentIntents.confirm(charge.id);
+
+                // get finalized charging information
+                const newCharge = await stripe.paymentIntents.retrieve(charge.id);
+                return newCharge;
             }
 
             throw new AuthenticationError('Not logged in');
@@ -456,6 +492,21 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
+        },
+
+        clear_setup_intent: async (parent, arg, context) => {
+            if (context.owner) {
+                const newOwner = await Owner.findByIdAndUpdate(
+                    context.owner._id,
+                    {stripe_setup_intent: ''},
+                    { new: true, runValidators: true }
+                );
+
+                return newOwner;
+            }
+
+            throw new AuthenticationError('Not logged in');
+
         },
     }
 };
