@@ -26,6 +26,7 @@ const ownerSchema = new Schema(
             required: true,
             minlength: 5
         },
+        avatar: String,
         admin: {
             type: Boolean,
             default: false
@@ -34,7 +35,13 @@ const ownerSchema = new Schema(
         phone: {
             type: String
         },
-        dogs: [dogSchema]
+        dogs: [dogSchema],
+        status: {
+            type: String,
+            required: true,
+            enum: ["PENDING_INFORMATION", "ACTIVE", "SUSPENDED"],
+            default: "PENDING_INFORMATION"
+        }
     },
     {
       toJSON: {

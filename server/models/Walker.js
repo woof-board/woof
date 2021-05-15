@@ -1,11 +1,9 @@
-
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const { formatDate }= require('../utils/helpers');
+const addressSchema = require('./Address');
+// const { formatDate }= require('../utils/helpers');
 
-
-const mongoose = require('mongoose');
-const reviewSchema = new Schema( // Do we need to add createdAt field for review? 
+const reviewSchema = new Schema( 
     {
         owner_id: {
             type: Schema.Types.ObjectId,
@@ -26,6 +24,10 @@ const reviewSchema = new Schema( // Do we need to add createdAt field for review
         },
         reviewText: {
             type: String
+        }
+    },{
+        toJSON: {
+          virtuals: true
         }
     }
 );
@@ -53,13 +55,15 @@ const walkerSchema = new Schema(
             required: true,
             minlength: 5
         },
+        avatar: String,
         neighbourhoods: {
             type: [String],
             default: undefined
         },
+        address: addressSchema,
         reviews: [reviewSchema],
         earnings: Number,
-        availability: [ // placeholder, needs further discussion
+        availability: [
             {
                 // date: {
                 //     type: Date,
@@ -72,9 +76,15 @@ const walkerSchema = new Schema(
                 slot3pm: Boolean,
                 slot5pm: Boolean,
                 slot7pm: Boolean,
-                slot9pm: Boolean // may be don't need this one...
+                slot9pm: Boolean
             }	
-        ]
+        ],
+        status: {
+            type: String,
+            required: true,
+            enum: ["PENDING_INFORMATION", "PENDING_APPROVAL", "ACTIVE", "SUSPENDED"],
+            default: "PENDING_INFORMATION"
+        }
     },
     {
         toJSON: {
@@ -82,7 +92,6 @@ const walkerSchema = new Schema(
         }
     }
 );
-
 
 // set up pre-save middleware to create password
 walkerSchema.pre('save', async function (next) {
@@ -98,7 +107,6 @@ walkerSchema.pre('save', async function (next) {
 walkerSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
-
 
 walkerSchema.virtual('averageRating').get(function () {
     const reducer = (accumulator, currentValue, currentIndex, sourceArr) => {
@@ -117,4 +125,3 @@ walkerSchema.virtual('averageRating').get(function () {
 const Walker = model('Walker', walkerSchema);
 
 module.exports = Walker;
-

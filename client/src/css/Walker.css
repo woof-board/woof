@@ -49,18 +49,6 @@
     width: 100%;
 }
 
-.form-container {
-    background-color: rgba(var(--rgb-secondary), 0.8);
-    box-shadow: 10px 10px 20px rgb(0,0,0,0.6);
-    margin: 1rem;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    width: 25rem;
-    display: flex;
-    flex-direction: column;
-    height: 5rem;
-}
-
 .active-title {
     font-weight: bold;
     font-size: 2rem;
@@ -98,49 +86,6 @@
     color: var(--secondary);
     border-radius: 15px;
     padding: .2rem;
-}
-
-.login-hover {
-
-}
-
-.login-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(var(--rgb-secondary), 0.8);
-    padding: 1rem;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.signup-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgba(var(--rgb-secondary), 0.8);
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-    padding: 1rem;
-    margin-bottom: 5rem;
-}
-
-.signup-login-input { 
-    width: 80%;
-    margin-bottom: 1rem;
-    padding: .75rem;
-    border-radius: 15px;
-    font-size: 1.25rem;
-    background-color: #b4d794;
-}
-
-.form-button {
-    padding: .5rem;
-    border-radius: 11px;
-    font-weight: bold;
-    background-color: var(--primary);
-    color: var(--secondary);
-    font-size: 1.15rem;
 }
 
 @media screen and (max-width: 900px) {

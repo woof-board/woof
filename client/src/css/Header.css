@@ -44,6 +44,11 @@ li {
     margin: .5;
 }
 
+.nav-row {
+    display: flex;
+    flex-direction: row;
+}
+
 .link:hover {
     padding: .5rem;
     border-radius: 35px;

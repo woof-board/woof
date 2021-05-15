@@ -1,9 +1,10 @@
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, UserInputError, ApolloError } = require('apollo-server-express');
 
 const { Owner, Walker, Order } = require('../models');
 const { signTokenOwner, signTokenWalker } = require('../utils/auth');
 const { getTimeSlot } = require('../utils/helpers');
 const mongoose = require('mongoose');
+
 // const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
@@ -79,10 +80,37 @@ const resolvers = {
             .populate('owner')
             .populate('walker');
         },
-        
+
+        checkWalkerAvailability: async (parent, { date, time }, context) => {
+            if(context.owner){
+                // const owner = await Owner.findById(context.owner._id)
+                //     .select('-__v -password');
+                const timeSlot = getTimeSlot(time);
+                
+                const filteredWalker = await Walker.find(
+                    {
+                        availability: {
+                            $elemMatch : { 
+                                date,
+                                [timeSlot]: true
+                            }
+                        }
+                    }
+                );
+                return filteredWalker;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
     },
     Mutation: {
-        // to add a new owner
+        /* Owner mutations
+           - addOwner
+           - loginOwner
+           - addDog
+           - updateOwnerProfile
+           - updateOwnerPassword
+        */
         addOwner: async (parent, { input }) => {
             const owner = await Owner.create(input);
             const token = signTokenOwner(owner);
@@ -90,15 +118,6 @@ const resolvers = {
             return { token, owner };
         },
 
-        // to add a new walker
-        addWalker: async (parent, { input }) => {
-            const walker = await Walker.create(input);
-            const token = signTokenWalker(walker);
-
-            return { token, walker };
-        },
-
-        // owner login
         loginOwner: async (parent, { email, password }) => {
             const owner = await Owner.findOne({ email });
 
@@ -115,6 +134,69 @@ const resolvers = {
             const token = signTokenOwner(owner);
 
             return { token, owner };
+        },
+
+        addDog: async (parent, { input }, context) => {
+            if (context.owner) {
+                const updatedOwner = await Owner.findByIdAndUpdate(
+                    context.owner._id, 
+                    { $push: { dogs: input } },
+                    { new: true, runValidators: true }
+                );
+
+                return updatedOwner;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateOwnerProfile: async (parent, { input }, context) => {
+            if (context.owner) {
+                return await Owner.findByIdAndUpdate(
+                    context.owner._id, 
+                    {...input}, 
+                    { new: true, runValidators: true }
+                );
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateOwnerPassword: async (parent, { old_password, new_password }, context) => {
+            if (context.owner) {
+                // find the owner by id
+                const owner = await Owner.findById(context.owner._id); 
+
+                // check if the current password is valid
+                const validPassword = owner.isCorrectPassword(old_password);
+                if (!validPassword) {
+                    throw new UserInputError("Current password is incorrect!");
+                }
+
+                return await Owner.findByIdAndUpdate(
+                    context.owner._id, 
+                    { password: new_password }, 
+                    { new: true, runValidators: true }
+                );
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
+        /* Walker mutations
+           - addWalker
+           - loginWalker
+           - updateWalkerProfile
+           - updateWalkerPassword
+           - updateWalkerAvailability
+           - updateWalkerStatus
+        */
+
+        addWalker: async (parent, { input }) => {
+            const walker = await Walker.create(input);
+            const token = signTokenWalker(walker);
+
+            return { token, walker };
         },
 
         // walker login
@@ -136,38 +218,83 @@ const resolvers = {
             return { token, walker };
         },
 
-        // add a dog
-        addDog: async (parent, { input }, context) => {
-            if (context.owner) {
-                const updatedOwner = await Owner.findByIdAndUpdate(
-                    context.owner._id, 
-                    { $push: { dogs: input } },
+        updateWalkerProfile: async (parent, { input }, context) => {
+            if (context.walker) {
+                return await Walker.findByIdAndUpdate(
+                    context.walker._id, 
+                    {...input}, 
                     { new: true, runValidators: true }
                 );
-
-                return updatedOwner;
             }
+      
+            throw new AuthenticationError('Not logged in');
+        },
 
+        updateWalkerPassword: async (parent, { old_password, new_password }, context) => {
+            if (context.walker) {
+                // find the walker by id
+                const walker = await Walker.findById(context.walker._id); 
+
+                // check if the current password is valid
+                const validPassword = walker.isCorrectPassword(old_password);
+                if (!validPassword) {
+                    throw new UserInputError("Current password is incorrect!");
+                }
+
+                return await Walker.findByIdAndUpdate(
+                    context.walker._id, 
+                    { password: new_password }, 
+                    { new: true, runValidators: true }
+                );
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateWalkerAvailability: async (parent, { input }, context) => {
+            if (context.walker) {
+                return await Walker.findByIdAndUpdate(
+                    context.walker._id, 
+                    { $set: { availability: [...input] } },
+                    { new: true, runValidators: true }
+                );
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateWalkerStatus: async (parent, { walker_id, status }, context) => {
+            // only executable by an admin
+            if (context.owner && context.owner.admin) {
+                return await Walker.findByIdAndUpdate(
+                    walker_id, 
+                    { status }, 
+                    { new: true, runValidators: true }
+                );
+            }
+      
             throw new AuthenticationError('Not logged in');
         },
 
         /* Order mutations
            - addOrder
            - updateOrder
+           - updateOrderStatus
            - removeOrder
         */
         addOrder: async (parent, { input }, context) => {
+            // only owner can add order
             if (context.owner) {
                 const order = await Order.create(input);
 
                 return order;
             }
-
+      
             throw new AuthenticationError('Not logged in');
         },
 
         updateOrder: async (parent, {order_id, input }, context) => {
-            if (context.owner) {
+            if (context.owner || context.walker) {
                 const order = await Order.findByIdAndUpdate(
                     order_id, 
                     input,
@@ -176,17 +303,31 @@ const resolvers = {
 
                 return order;
             }
+      
+            throw new AuthenticationError('Not logged in');
+        },
 
+        updateOrderStatus: async (parent, {order_id, status }, context) => {
+            if (context.owner || context.walker) {
+                const order = await Order.findByIdAndUpdate(
+                    order_id, 
+                    {status: status},
+                    { new: true, runValidators: true }
+                );
+            
+                return order;
+            }
+      
             throw new AuthenticationError('Not logged in');
         },
 
         removeOrder: async (parent, {order_id, input }, context) => {
-            if (context.owner) {
+            if (context.owner && context.owner.admin) {
                 const order = await Order.findByIdAndDelete(order_id);
 
                 return order;
             }
-
+        
             throw new AuthenticationError('Not logged in');
         },
 
@@ -198,13 +339,13 @@ const resolvers = {
         */
         addReview: async (parent, { input }, context) => {
             if(context.owner){
-                const {owner_id, walker_id, rating, reviewText} = input;   
-                const review = {owner_id: owner_id, rating: rating, reviewText: reviewText};
+                const { walker_id, rating, reviewText} = input;   
+                const review = {owner_id: context.owner._id, rating: rating, reviewText: reviewText};
 
                 // remove current review if exists to make sure only one review can be added by same owner
                 await Walker.findByIdAndUpdate(
                     walker_id,
-                    { $pull: { reviews: { owner_id: owner_id } } },
+                    { $pull: { reviews: { owner_id: context.owner._id } } },
                     { new: true, runValidators: true }
                 );
 
@@ -261,28 +402,6 @@ const resolvers = {
                 );
 
                 return walker;
-            }
-
-            throw new AuthenticationError('Not logged in');
-        },
-
-        checkWalkerAvailability: async (parent, { date, time }, context) => {
-            if(context.owner){
-                // const owner = await Owner.findById(context.owner._id)
-                //     .select('-__v -password');
-                const timeSlot = getTimeSlot(time);
-                
-                const filteredWalker = await Walker.find(
-                    {
-                        availability: {
-                            $elemMatch : { 
-                                date,
-                                [timeSlot]: true
-                            }
-                        }
-                    }
-                );
-                return filteredWalker;
             }
 
             throw new AuthenticationError('Not logged in');
