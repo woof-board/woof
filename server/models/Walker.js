@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const { addressSchema } = require('./Address');
+const addressSchema = require('./Address');
 // const { formatDate }= require('../utils/helpers');
 
 const reviewSchema = new Schema( 

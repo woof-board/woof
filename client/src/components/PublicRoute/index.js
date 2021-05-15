@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import Auth from '../../utils/auth';
 
-const PrublicRoute = ({ component: Component, ...rest }) => {
+const PublicRoute = ({ component: Component, ...rest }) => {
     return (
         <Route
             {...rest}
@@ -23,4 +23,4 @@ const PrublicRoute = ({ component: Component, ...rest }) => {
     );
 }
 
-export default PrublicRoute;
+export default PublicRoute;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import Auth from '../../utils/auth';
 import { LOGIN_WALKER } from '../../utils/mutations';
-import '../../css/Walker.css';
+import '../../css/LoginSignupForm.css';
 
 function WalkerLoginForm() {
     const [formData, setUserFormData] = useState({ email: '', password: '' });
@@ -32,8 +32,8 @@ function WalkerLoginForm() {
 
     return (
         <form 
-            id="walker-login-form" 
-            className="login-form" 
+            id="form-container" 
+            className="form-container" 
             onSubmit={handleFormSubmit}
         >
             <input 
@@ -61,7 +61,7 @@ function WalkerLoginForm() {
                 disabled={!(formData.email && formData.password)} 
                 type="submit" 
                 variant="success" 
-                className="form-button" 
+                className="home-form-button" 
                 id="walker-login-button"
             >
                 SUBMIT
