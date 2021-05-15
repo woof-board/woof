@@ -134,7 +134,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        charge_owner: async (parent, {amount}, context) => {
+        charge_owner: async (parent, {amount, description}, context) => {
             if (context.owner) {
                 const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
                 const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
@@ -146,7 +146,7 @@ const resolvers = {
                     customer: customer_id,
                     payment_method: setupIntent.payment_method,
                     confirmation_method: 'automatic',
-                    description: 'My First Test Charge (created for API docs)',
+                    description: description,
                 });
 
                 // confirm charging

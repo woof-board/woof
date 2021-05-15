@@ -230,7 +230,7 @@ const typeDefs = gql`
 
         get_customer_session_id: Checkout
         get_customer_info_from_stripe: Customer
-        charge_owner(amount: Int!): Charge
+        charge_owner(amount: Int!, description: String!): Charge
         retrieve_payments: Payments
     }
 

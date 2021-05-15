@@ -213,8 +213,8 @@ export const GET_CUSTOMER_SESSION_ID = gql`
 `;
 
 export const CHARGE_OWNER = gql`
-  query charge_owner($amount: Int!){
-    charge_owner(amount: $amount) {
+  query charge_owner($amount: Int!, $description: String!){
+    charge_owner(amount: $amount, description: $description) {
         id
         object
         amount
