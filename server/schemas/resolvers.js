@@ -84,7 +84,7 @@ const resolvers = {
                 .populate('walker');
         },
 
-        get_customer_charging_infomation: async (parent, args, context) => {
+        get_customer_session_id: async (parent, args, context) => {
 
             if (context.owner) {
                 const url = new URL(context.headers.referer).origin;
@@ -115,7 +115,9 @@ const resolvers = {
                     cancel_url: `${url}/`
                 });
 
-                return { session: session.id };
+                console.log(session);
+
+                return { session_id: session.id };
             }
 
             throw new AuthenticationError('Not logged in');

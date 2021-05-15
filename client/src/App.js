@@ -11,12 +11,15 @@ import NoMatch from './pages/NoMatch';
 import Walker from './pages/Walker';
 import Owner from './pages/Owner';
 import Auth from './utils/auth';
+import PaymentScreen from './pages/PaymentScreen';
+import Success from "./pages/Success";
 // import WalkerHeader from './components/Header/WalkerHeader.js';
 // import OwnerHeader from './components/Header/OwnerHeader.js';
 import OwnerProfile from './pages/OwnerProfile.js';
 import WalkerProfile from './pages/WalkerProfile.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+
 
 const client = new ApolloClient({
     request: operation => {
@@ -97,6 +100,8 @@ function App() {
                             <PublicRoute exact path="/owner" component={Owner} />         
                             <PublicRoute exact path="/walker" component={Walker} />
                             <Route exact path="/about" component={About} />
+                            <Route exact path="/paymentScreen" component={PaymentScreen} />
+                            <Route exact path="/Success" component={Success} />
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
                             <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />

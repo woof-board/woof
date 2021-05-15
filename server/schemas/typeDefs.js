@@ -85,7 +85,7 @@ const typeDefs = gql`
     }
 
     type Checkout {
-        session: ID
+        session_id: ID
     }
 
     type stripeAddress {
@@ -201,7 +201,7 @@ const typeDefs = gql`
         orders: [Order]
         owner_orders(owner_id: ID): [Order]
         walker_orders(walker_id: ID): [Order]
-        get_customer_charging_infomation: Checkout
+        get_customer_session_id: Checkout
         get_customer_info_from_stripe: Customer
     }
 
