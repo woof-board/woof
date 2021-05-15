@@ -173,11 +173,28 @@
     font-weight: 500;
 }
 @media screen and (max-width: 1125px) {
-    .times-header, .day-header {
-        height:60px;
-        vertical-align: bottom;
-    }
+    .schedule-days {
+        grid-template-columns: 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20%;
+    }  
  
+}
+
+@media screen and (max-width: 850px) { 
+    .schedule-container {
+        grid-template-columns: 15% 85%;
+    }
+    .schedule-days {
+        grid-template-columns: 25% 25% 25% 25% 25% 25% 25% 25% 25% 25% 25% 25% 25% 25%;
+    }   
+}
+
+@media screen and (max-width: 750px) { 
+    .schedule-container {
+        grid-template-columns: 15% 85%;
+    }
+    .schedule-days {
+        grid-template-columns: 33% 34% 33% 33% 34% 33% 33% 34% 33% 33% 34% 33% 33% 34%;
+    }   
 }
 
 @media screen and (max-width: 650px) {
