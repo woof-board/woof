@@ -2,6 +2,8 @@ import data from '@iconify-icons/ant-design/home-outlined';
 import React from 'react';
 import '../css/Walkers.css';
 
+
+
 const schedule = [
     {
         date: 'Thurs. May 13',
@@ -73,16 +75,76 @@ const schedule = [
         slot7pm: true,
         slot9pm: true,
     }, 
-    // {
-    //     date: 'Wed. May 20',
-    //     slot9am: true,
-    //     slot11am: true,
-    //     slot1pm: false,
-    //     slot3pm: false,
-    //     slot5pm: false,
-    //     slot7pm: true,
-    //     slot9pm: true,
-    // }  
+    {
+        date: 'Thurs. May 20',
+        slot9am: true,
+        slot11am: true,
+        slot1pm: false,
+        slot3pm: false,
+        slot5pm: false,
+        slot7pm: true,
+        slot9pm: true,
+    },
+    {
+        date: 'Fri. May 21',
+        slot9am: true,
+        slot11am: true,
+        slot1pm: false,
+        slot3pm: false,
+        slot5pm: false,
+        slot7pm: true,
+        slot9pm: true,
+    }, 
+    {
+        date: 'Sat. May 22',
+        slot9am: true,
+        slot11am: true,
+        slot1pm: true,
+        slot3pm: true,
+        slot5pm: true,
+        slot7pm: true,
+        slot9pm: true,
+    }, 
+    {
+        date: 'Sun. May 23',
+        slot9am: false,
+        slot11am: false,
+        slot1pm: false,
+        slot3pm: false,
+        slot5pm: false,
+        slot7pm: false,
+        slot9pm: false,
+    }, 
+    {
+        date: 'Mon. May 24',
+        slot9am: true,
+        slot11am: true,
+        slot1pm: false,
+        slot3pm: false,
+        slot5pm: false,
+        slot7pm: true,
+        slot9pm: true,
+    }, 
+    {
+        date: 'Tues. May 25',
+        slot9am: true,
+        slot11am: true,
+        slot1pm: false,
+        slot3pm: false,
+        slot5pm: false,
+        slot7pm: true,
+        slot9pm: true,
+    }, 
+    {
+        date: 'Wed. May 26',
+        slot9am: true,
+        slot11am: true,
+        slot1pm: false,
+        slot3pm: false,
+        slot5pm: false,
+        slot7pm: true,
+        slot9pm: true,
+    },  
  
 ]
 
@@ -107,8 +169,17 @@ const scheduledWalks = [
 
 function WalkerSchedule() {
 
-    function handleClick() {
-        console.log("clicked");
+
+    
+
+
+    function scrollSchedule(direction) {
+        const scheduleHolder = document.getElementById('scrolling-schedule');
+        let move = "+50px"
+        if(direction==="right") {
+            move ="-50px"
+        }
+        scheduleHolder.style.marginLeft = move;
     }
 
     const findBooking = (booking, today, time) => {
@@ -151,13 +222,11 @@ function WalkerSchedule() {
                         <div className="schedule-item time-label bottom-left"><h5>9pm</h5></div>
                     
                 </div>
-                <div className="schedule-item schedule-arrow-holder" onClick={handleClick}>
-                        <div className="arrow-left"></div>
-                </div>
 
 
 
-                <div className="schedule-days">
+                <div className="scroll-holder">
+                <div className="schedule-days" id="scrolling-schedule">
                 {schedule.map((schedule, index) => (
 
                     <div>
@@ -212,10 +281,8 @@ function WalkerSchedule() {
                     ))}
 
                 </div>
-
-                <div className="schedule-item schedule-arrow-holder right-corners" onClick={handleClick}>
-                    <div className="arrow-right"></div>
                 </div>
+
                 
 
                 

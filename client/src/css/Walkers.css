@@ -69,15 +69,24 @@
 
 .schedule-container {
     display: grid;
-    grid-template-columns: 8% 4% 84% 4%;
+    grid-template-columns: 8% 92%;
     grid-template-rows: 1;
     width: 100%;
 }
 .schedule-days {
     display: grid;
-    grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.2%;
+    grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.2% 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.2%;
     grid-template-rows: 1;
     width: 100%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    overflow: scroll;
+
+}
+
+.scroll-holder {
+    overflow-x: hidden;
+
 }
 
 
