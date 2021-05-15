@@ -1,5 +1,11 @@
 import gql from 'graphql-tag';
 
+/* ORDER mutations
+    - ADD_ORDER
+    - UPDATE_ORDER
+    - UPDATE_ORDER_STATUS
+    - REMOVE_ORDER
+*/
 export const ADD_ORDER = gql`
     mutation addOrder($input: OrderInput!) {
         addOrder(input: $input) {
@@ -83,6 +89,13 @@ export const REMOVE_ORDER = gql`
     }
 `;
 
+/* REVIEW mutations
+    - ADD_REVIEW
+    - REMOVE_REVIEW
+    - UPDATE_REVIEW
+    - CLEAR_REVIEW
+*/
+
 export const ADD_REVIEW = gql`
   mutation addReview( $input: ReviewInput ) {
     addReview( input: $input ) {
@@ -140,6 +153,30 @@ export const CLEAR_REVIEW = gql`
     }
 `;
 
+/* WALKER mutations
+    - ADD_WALKER
+    - LOGIN_WALKER
+    - UPDATE_WALKER_PROFILE
+    - UPDATE_WALKER_PASSWORD
+    - UPDATE_WALKER_AVAILABILITY
+    - UPDATE_WALKER_STATUS
+*/
+
+// export const ADD_WALKER = gql`
+//     mutation addWalker($input: WalkerInput) {
+//         addWalker(input: $input) {
+//             token
+//             walker {
+//                 _id
+//                 firstName
+//                 lastName
+//                 email
+//                 ratings
+//                 averageRating
+//             }
+//         }
+//     }
+// `;
 export const ADD_WALKER = gql`
     mutation addWalker($input: WalkerInput) {
         addWalker(input: $input) {
@@ -149,8 +186,6 @@ export const ADD_WALKER = gql`
                 firstName
                 lastName
                 email
-                ratings
-                averageRating
             }
         }
     }
@@ -167,6 +202,41 @@ export const LOGIN_WALKER = gql`
         }
     }
 `;
+
+export const UPDATE_WALKER_PROFILE = gql`
+    mutation updateWalkerProfile($input: WalkerProfileInput) {
+        updateWalkerProfile(input: $input) {
+            _id
+            firstName
+            lastName
+            email
+            avatar
+            reviews{
+                rating
+                reviewText
+            }
+            earnings
+            averageRating
+            neighbourhoods
+            availability {
+                date
+                slot9am
+                slot11am
+                slot1pm
+                slot3pm
+                slot5pm
+                slot7pm
+                slot9pm
+            }
+        }
+    }
+`;
+
+
+/* OWNER mutations
+    - ADD_OWNER
+    - LOGIN_OWNER
+*/
 
 export const ADD_OWNER = gql`
     mutation addOwner($input: OwnerInput) {
@@ -196,20 +266,4 @@ export const LOGIN_OWNER = gql`
             }
         }
 }
-`;
-
-export const CHECK_WALKER_AVAILABILITY = gql`
-    mutation checkWalkerAvailability($date: String!, $time: String!) {
-        checkWalkerAvailability(date: $date, time: $time) {
-            _id
-            firstName
-            lastName
-            email
-            neighbourhoods
-            reviews {
-                reviewText
-            }
-            averageRating
-        }
-    }
 `;

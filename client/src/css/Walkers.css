@@ -1,19 +1,30 @@
+:root {
+    --booked: #6740af;
+}
+
 #walkers {
     display: flex;
     flex-direction: row;
     padding: 8rem 5rem 5rem 5rem;
     flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.headline {
+    width: 100%;
 }
 
 .walkers-container {
     box-shadow: 10px 10px 20px rgb(0,0,0,0.25);
     background-color: white;
-    margin: 2rem;
     padding: 2rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    border-radius: 25px;
+    width: 15%;
 }
+
 
 .picture-container {
     display: flex;
@@ -29,10 +40,11 @@
 
 .walker-list-picture {
     height: auto;
-    width: auto;
+    width: 150px;
     border: 6px solid rgb(0,0,0,.3);
     border-radius: 50%;
     padding: .5rem;
+
 }
 
 .button-profile-container {
@@ -40,6 +52,8 @@
     justify-content: center;
     margin-top: 1rem;
 }
+
+
 
 .profile-button {
     padding: 1rem;
@@ -53,10 +67,141 @@
     color: white;
 }
 
+.schedule-container {
+    display: grid;
+    grid-template-columns: 8% 92%;
+    grid-template-rows: 1;
+    width: 100%;
+}
+.schedule-days {
+    display: grid;
+    grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.2% 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.2%;
+    grid-template-rows: 1;
+    width: 100%;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    overflow: scroll;
+
+}
+
+.scroll-holder {
+    overflow-x: hidden;
+
+}
+
+
+.schedule-item {
+    border: solid 1px var(--quinary);
+    text-align: center;
+}
+
+
+.arrow-right, .arrow-left {
+    width: 0; 
+    height: 0; 
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;  
+}
+.arrow-right {
+    border-left: 20px solid var(--quinary);
+    margin-left: 5px;
+}
+
+.arrow-left {
+    border-right:20px solid var(--quinary); 
+    margin-right: 5px;
+}
+
+
+.times-header, .day-header {
+    color: var(--quinary);
+    padding: 8px 0;
+}
+.times-header h5, .day-header h5 {
+    font-weight: 800;
+    line-height: 1.1em;
+}
+.times-header {
+    background-color: var(--tertiary);
+    text-align: left;
+    border-top-left-radius: 15px;
+    padding-left: 10px;
+}
+.time-label {
+    text-align: left;
+    background-color: var(--secondary);
+    padding: 0 10px;
+    min-height: 50px;
+}
+
+.day-header {
+    background-color: var(--primary);
+}
+.top-right {
+    border-top-right-radius: 15px;
+}
+.bottom-left {
+    border-bottom-left-radius: 15px;
+
+}
+.bottom-right {
+    border-bottom-right-radius: 15px;
+}
+.time-detail {
+    border-color: var(--secondary);
+    padding: 0;
+}
+.unavailable, .available, .booked {
+    width: 100%;
+    height: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: .85rem;
+    padding: 0 10px;
+    min-height: 48px;
+}
+.unavailable {
+    background-color: #bebebe;
+}
+.available {
+    background-color: var(--quatenary);
+}
+.booked {
+    background-color: var(--booked);
+    color: var(--quinary);
+    line-height: 1.1em;
+    font-weight: 500;
+}
+@media screen and (max-width: 1125px) {
+    .schedule-days {
+        grid-template-columns: 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20%;
+    }  
+ 
+}
+
+@media screen and (max-width: 850px) { 
+    .schedule-container {
+        grid-template-columns: 15% 85%;
+    }
+    .schedule-days {
+        grid-template-columns: 25% 25% 25% 25% 25% 25% 25% 25% 25% 25% 25% 25% 25% 25%;
+    }   
+}
+
+@media screen and (max-width: 750px) { 
+    .schedule-container {
+        grid-template-columns: 15% 85%;
+    }
+    .schedule-days {
+        grid-template-columns: 33% 34% 33% 33% 34% 33% 33% 34% 33% 33% 34% 33% 33% 34%;
+    }   
+}
+
 @media screen and (max-width: 650px) {
     #walkers {
         flex-direction: column;
         top: 5rem;
+        padding: 8rem 1rem;
     }
 
     .picture-container {
@@ -67,5 +212,12 @@
     .walker-list-picture {
         height: 50%;
         width: 50%;
+    }
+    .schedule-container {
+        grid-template-columns: 25% 75%;
+    }
+    .schedule-days {
+        grid-template-columns: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%;
+
     }
 }

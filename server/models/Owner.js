@@ -26,6 +26,7 @@ const ownerSchema = new Schema(
             required: true,
             minlength: 5
         },
+        avatar: String,
         admin: {
             type: Boolean,
             default: false
@@ -38,8 +39,8 @@ const ownerSchema = new Schema(
         status: {
             type: String,
             required: true,
-            enum: ["pending_information", "active", "suspended"],
-            default: "pending_information"
+            enum: ["PENDING_INFORMATION", "ACTIVE", "SUSPENDED"],
+            default: "PENDING_INFORMATION"
         }
     },
     {
