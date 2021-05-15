@@ -162,6 +162,21 @@ export const CLEAR_REVIEW = gql`
     - UPDATE_WALKER_STATUS
 */
 
+// export const ADD_WALKER = gql`
+//     mutation addWalker($input: WalkerInput) {
+//         addWalker(input: $input) {
+//             token
+//             walker {
+//                 _id
+//                 firstName
+//                 lastName
+//                 email
+//                 ratings
+//                 averageRating
+//             }
+//         }
+//     }
+// `;
 export const ADD_WALKER = gql`
     mutation addWalker($input: WalkerInput) {
         addWalker(input: $input) {
@@ -171,8 +186,6 @@ export const ADD_WALKER = gql`
                 firstName
                 lastName
                 email
-                ratings
-                averageRating
             }
         }
     }
