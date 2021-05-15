@@ -30,7 +30,7 @@ function Header(props) {
                 <a href="/"><img className="header-logo" src={Logo} alt="" width="84" /></a>
             </div>
             <div className="nav-links-container">
-                {result === 'guest' && (
+                {/* {result === 'guest' && (
                     <div className="nav-row">
                     {headerLinks.map((link) => (
                         <li key={link.name} className="list-link">
@@ -41,7 +41,7 @@ function Header(props) {
                         </li>
                     ))}
                     </div>
-                )}
+                )} */}
                 {result === 'owner' && (
                     <div className="nav-row">
                         {ownerLinks.map((link) => (

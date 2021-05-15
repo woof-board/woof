@@ -19,7 +19,8 @@ import WalkerSchedule from './pages/WalkerSchedule';
 import OwnerProfile from './pages/OwnerProfile.js';
 import WalkerProfile from './pages/WalkerProfile.js';
 import PrivateRoute from './components/PrivateRoute';
-import PublicRoute from './components/PublicRoute';
+import PublicRoute from './components/PublicRoute'; 
+import HomeMock from './pages/HomeMock';
 
 const client = new ApolloClient({
     request: operation => {
@@ -82,23 +83,26 @@ function App() {
             <Router>
                 <div className="page">
                         <div className="page">
-                        <Header
-                            headerLinks={headerLinks}
-                            currentHeaderLink={currentHeaderLink}
-                            setHeaderCurrentLink={setHeaderCurrentLink}
-                            walkerLinks={walkerLinks}
-                            setWalkerLink={setWalkerLink}
-                            currentWalkerLink={currentWalkerLink}
-                            ownerLinks={ownerLinks}
-                            currentOwnerLink={currentOwnerLink}
-                            setOwnerLink={setOwnerLink}
-                            result={result}
-                        />
-                        
+
+                        {Auth.getProfileType() === 'owner' && (
+                            <Header
+                                ownerLinks={ownerLinks}
+                                currentOwnerLink={currentOwnerLink}
+                                setOwnerLink={setOwnerLink}
+                                result={result}
+                            />
+                        )}
+                        {Auth.getProfileType() === 'walker' && (
+                            <Header
+                                walkerLinks={walkerLinks}
+                                setWalkerLink={setWalkerLink}
+                                currentWalkerLink={currentWalkerLink}
+                                result={result}
+                            />
+                        )}
+
                         <Switch>
-                            <PublicRoute exact path='/' component={Owner} />
-                            <PublicRoute exact path="/owner" component={Owner} />         
-                            <PublicRoute exact path="/walker" component={Walker} />
+                            <PublicRoute exact path='/' component={HomeMock} />
 
                             <Route exact path="/about" component={About} />
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
