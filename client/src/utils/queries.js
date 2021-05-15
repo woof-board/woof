@@ -63,6 +63,7 @@ export const QUERY_WALKER_ME = gql`
             earnings
             averageRating
             neighbourhoods
+            status
             availability {
                 date
                 slot9am

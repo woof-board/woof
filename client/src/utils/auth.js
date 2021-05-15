@@ -8,17 +8,6 @@ class AuthService {
     } else {
         return "guest";
     }
-
-    // if (this.loggedIn() === true) {
-    //   console.log('logged In')
-    //   const data = decode(this.getToken());
-    //   const admin = data.data['admin']
-    //   if (admin === false) {return 'owner'}
-    //   else {return 'walker'}
-    // } else {
-    //   console.log('not logged in')
-    //   return 'guest';
-    // }
   
   }
 
@@ -31,18 +20,6 @@ class AuthService {
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token);
   }
-
-//   OwnerloggedIn() {
-//     // Checks if there is a saved token and it's still valid
-//     const token = this.getToken();
-//     return !!token && !this.isTokenExpired(token);
-//   }  
-
-//   WalkerloggedIn() {
-//     // Checks if there is a saved token and it's still valid
-//     const token = this.getToken();
-//     return !!token && !this.isTokenExpired(token);
-//   }
 
   isTokenExpired(token) {
     try {
