@@ -5,6 +5,9 @@ import decode from 'jwt-decode';
 import WalkerContact from '../components/WalkerProfile/WalkerDetails';
 import WalkerReviews from '../components/WalkerProfile/WalkerReviews';
 import WalkerOrders from '../components/WalkerProfile/WalkerOrders';
+import WalkerEarnings from '../components/WalkerProfile/WalkerEarnings';
+import WalkerNeighbourhoods from '../components/WalkerProfile/WalkerNeighbourhoods';
+import WalkerAvgRating from '../components/WalkerProfile/WalkerAvgRating';
 
 function WalkerProfile() {
 
@@ -25,8 +28,11 @@ function WalkerProfile() {
       </div>
       <div className="walker-details-container">
           <WalkerContact />
+          <WalkerAvgRating />
           <WalkerReviews />
           <WalkerOrders />
+          <WalkerEarnings />
+          <WalkerNeighbourhoods />
       </div>
     </div>
   );

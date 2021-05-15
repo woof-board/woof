@@ -31,10 +31,23 @@
     margin: 0rem 1rem 1rem 1rem;
     min-width: 25rem;
     background-color: var(--secondary);
+    align-items: center;
+}
+
+.walker-contact-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+    padding: 1rem;
+    margin: 0rem 1rem 1rem 1rem;
+    min-width: 25rem;
+    background-color: var(--secondary);
 }
 
 .user-update-form {
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .profile-label {
@@ -47,6 +60,22 @@
     padding: 0.25rem;
 }
 
+.average-rating {
+    width: 90%;
+    height: 10rem;
+    background-color: rgb(var(--rgb-quinary),0.5);
+    padding: .5rem;
+    box-shadow: 5px 5px 5px rgb(0,0,0,0.2);
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8rem;
+    font-weight: bold;
+}
+
 .walks {
     display: flex;
     flex-direction: column;
@@ -56,6 +85,7 @@
     border-radius: 15px;
     margin-bottom: 1rem;
     margin-top: 1rem;
+    width: 90%;
 }
 
 .row-data {

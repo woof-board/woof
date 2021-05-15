@@ -31,7 +31,7 @@ function WalkerContact(props) {
     }
 
     return (
-        <div className="walker-profile-container">
+        <div className="walker-contact-container">
             <div>
                 My Profile
             </div>

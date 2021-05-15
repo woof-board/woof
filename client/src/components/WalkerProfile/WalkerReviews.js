@@ -8,15 +8,13 @@ import { useQuery } from '@apollo/react-hooks';
 function WalkerReviews(props) {
 
     const walkerToken = decode(Auth.getToken());
-    console.log(walkerToken.data);
 
     const walkerReview = useQuery(QUERY_WALKER, {
-        variables: { walker_id: walkerToken._id }
+        variables: { walker_id: walkerToken.data._id }
       })
     
     const walkerData = walkerReview?.walker || [{ _id: "", firstName: "", email: "", reviews: [{ owner_id: '', rating: '5', reviewText: 'You are Great'}], averageRating: '' }];
 
-    console.log(walkerData);
     const index = walkerData.length - 1;
     const totalReviews = walkerData[index].reviews.length;
 
@@ -26,14 +24,12 @@ function WalkerReviews(props) {
             My Reviews - {totalReviews ? `Viewing ${totalReviews} past ${totalReviews === 1 ? 'review' : 'reviews'}:`
               : 'You have no past Reviews'}
           </div>
-          <div>
             {walkerData[0].reviews.map((arr) => (
               <div key={arr.owner_id} className="walks">
               <div>Rating: {arr.rating}</div>
               <div>{arr.reviewText}</div> 
             </div>
             ))}
-          </div>
         </div>
     )
 }

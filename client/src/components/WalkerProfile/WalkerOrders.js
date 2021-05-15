@@ -8,15 +8,13 @@ import { useQuery } from '@apollo/react-hooks';
 function WalkerOrders(props) {
 
     const walkerToken = decode(Auth.getToken());
-    console.log(walkerToken.data);
 
     const orderData = useQuery(QUERY_WALKER_ORDERS, {
-        variables: { walker_id: walkerToken._id }
+        variables: { walker_id: walkerToken.data._id }
       })
     
     const walkerOrders = orderData?.walker_order || [{ _id: "", serviceData: '', serviceTime: 'Date(11/11/11)', owner: [{ _id: '', firstName: 'Nathan', lastName: ''}] }];
 
-    console.log(walkerOrders);
     const totalOrders = walkerOrders.length;
 
     return (
@@ -25,14 +23,12 @@ function WalkerOrders(props) {
             My Walks - {totalOrders ? `Viewing ${totalOrders} past ${totalOrders === 1 ? 'walk' : 'walks'}:`
             : 'You have no past Walks'}
           </div>
-          <div>
             {walkerOrders.map((arr) => (
               <div key={arr._id} className="walks">
                 <div>{arr.serviceTime}</div>
                 <div>{arr.owner[0].firstName}</div> 
               </div>
             ))}
-          </div>
         </div>
     )
 }
