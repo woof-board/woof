@@ -1,87 +1,87 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+
 import '../css/WalkerProfile.css';
 import Auth from '../utils/auth';
-import decode from 'jwt-decode';
-import WalkerContact from '../components/WalkerProfile/WalkerDetails';
+import WalkerDetails from '../components/WalkerProfile/WalkerDetails';
 import WalkerReviews from '../components/WalkerProfile/WalkerReviews';
 import WalkerOrders from '../components/WalkerProfile/WalkerOrders';
 import WalkerEarnings from '../components/WalkerProfile/WalkerEarnings';
 import WalkerNeighbourhoods from '../components/WalkerProfile/WalkerNeighbourhoods';
 import WalkerAvgRating from '../components/WalkerProfile/WalkerAvgRating';
-import { useQuery } from '@apollo/react-hooks';
 import { QUERY_WALKER_ME } from '../utils/queries';
+import { useStoreContext } from "../utils/GlobalState";
+import { UPDATE_CURRENT_USER } from "../utils/actions";
 
 function WalkerProfile() {
+    const [state, dispatch] = useStoreContext();
+    const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
+    // const { loading, data } = useQuery(QUERY_WALKER_ME);
+    const { currentUser } = state;
 
-  // decode token for walker data
-  const token = decode(Auth.getToken());
-  // get walker _id from array
-  const walkerToken = token.data;
+    useEffect(() => {
+        // if not already in global store
+        if (!currentUser && !data) {
+            getWalkerProfile(); // get profile from database
+        } 
+        // retrieved from server
+        else if (!currentUser && data) {
+            dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: data.walker_me
+            });
+            
+        }
+        // get cache from idb
+        // else if (!loading) {
+        //     idbPromise('products', 'get').then((indexedProducts) => {
+        //     dispatch({
+        //         type: UPDATE_PRODUCTS,
+        //         products: indexedProducts
+        //     });
+        //     });
+        // }
+    }, [currentUser, data, loading, dispatch]);
 
-  const walkerData = useQuery(QUERY_WALKER_ME, {
-    variables: { walker_id: walkerToken._id }
-  })
-
-  const walkerArr = walkerData?.walker || { _id: "", firstName: "", email: "", reviews: [{ owner_id: '', rating: '5', reviewText: 'You are Great'}], averageRating: '', earnings: '500', status: 'active' };
-
-  // status: ["pending_approval", "pending_information", "active", "suspended"]
-
-  const accountStatus = walkerArr.status;
-
-  function accountSuspended() {
-    if (accountStatus === 'suspended') {
-      return true
-    } else {
-      return false
-    }
-  }
-
-  console.log(accountStatus)
-
-  // REVIEWS == walker for walker = _id, firstName, lastName, email, reviews(owner_id, rating, reviewText), averageRating
-  // ORDERS == walker_orders for walker_orders = _id, serviceData, serviceTime, owner(_id, firstName, lastName), walker(_id, firstName, lastName)
 
   return (
     <div className="page-body">
-      {accountSuspended() ? (
+      {currentUser && currentUser.status === "SUSPENDED" && 
         <>
           <div className="account-status">
             ACCOUNT SUSPENDED
           </div>
         </>    
-      ) : (
+      } 
         <>
-        {accountStatus === 'active' && (
+        {currentUser && currentUser.status === "ACTIVE" && 
           <div className="walker-picture-container">
             IMG HERE
           </div>        
-        )}
+        }
         <div className="walker-details-container">
-            {accountStatus === 'pending_information' && (
+            {currentUser && currentUser.status === "PENDING_INFORMATION" && 
               <div className="account-status">
                 COMPLETE ALL FORMS FOR APPROVAL
               </div>
-            )}
-            {accountStatus === 'pending_approval' && (
+            }
+            {currentUser && currentUser.status === "PENDING_APPROVAL" && 
               <div className="account-status">
                 PENDING APPROVAL
               </div>
-            )}
-            <WalkerContact />
-            {accountStatus === 'active' && (
+            }
+            <WalkerDetails user={currentUser}/>
+            {currentUser && currentUser.status === "ACTIVE" && 
               <>
-                <WalkerAvgRating />
-                <WalkerReviews />
-                <WalkerOrders />
-                <WalkerEarnings />
-                <WalkerNeighbourhoods />
+                <WalkerAvgRating averageRating={currentUser.averageRating}/>
+                <WalkerReviews reviews={currentUser.reviews}/>
+                <WalkerOrders orders={currentUser.orders}/>
+                <WalkerEarnings earnings={currentUser.earnings}/>
+                <WalkerNeighbourhoods neighbourhoods={currentUser.neighbourhoods}/>
               </>
-            )}
+            }
           </div>
         </>
-      )}
-
-
     </div>
   );
 }

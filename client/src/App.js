@@ -22,6 +22,7 @@ import OwnerProfile from './pages/OwnerProfile.js';
 import WalkerProfile from './pages/WalkerProfile.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+import { StoreProvider } from "./utils/GlobalState";
 
 
 const client = new ApolloClient({
@@ -83,6 +84,7 @@ function App() {
     return (
         <ApolloProvider client={client}>
             <Router>
+                <StoreProvider>
                 <div className="page">
                         <div className="page">
                         <Header
@@ -117,8 +119,9 @@ function App() {
                         </div>
                 </div>
                 <Footer 
-            	footerLinks={footerLinks}
+            	    footerLinks={footerLinks}
                 />
+                </StoreProvider>
             </Router>
         </ApolloProvider>
     );

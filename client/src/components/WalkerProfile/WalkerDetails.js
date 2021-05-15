@@ -1,56 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../css/WalkerProfile.css';
-import decode from 'jwt-decode';
-import Auth from '../../utils/auth';
 
-function WalkerContact(props) {
+function WalkerDetails({ user }) {
 
-    const walkerToken = decode(Auth.getToken());
-    console.log(walkerToken.data);
+    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '' });
 
-    const walkerArr = [
-        {
-            display: 'First Name',
-            title: walkerToken.data.firstName,
-            type: 'text',
-            input: 'input'
-        },
-        {
-            display: 'Last Name',
-            title: walkerToken.data.lastName,
-            type: 'text',
-            input: 'input'
-        },
-        {
-            display: 'Email',
-            title: walkerToken.data.email,
-            type: 'email'
-        },
-        { 
-            display: 'Street Number',
-            title: '#',
-            type: 'text',
-            input: 'input'
-        },
-        {
-            display: 'Street Name',
-            title: 'Union',
-            type: 'text',
-            input: 'input'
-        },
-        {
-            display: 'City',
-            title: 'Toronto',
-            type: 'text',
-            input: 'input'
-        },
-    ]
+    useEffect(() => {
+        if (user) {
+            setFormData({
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email
+            });
+        }
+    
+    }, [user]);
 
-    const province = ['Alberta', 'British Columnbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan', 'Yukon']
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ 
+            ...formData, 
+            [name]: value
+        });
+    };
 
     const handleFormSubmit = async () => {
-        alert('Account Updated')
-    }
+        alert('Account Updated');
+    };
 
     return (
         <div className="walker-contact-container">
@@ -60,29 +36,58 @@ function WalkerContact(props) {
             <form 
                 className="user-update-form"
                 id="walker-update-form"
-                onSubmit={handleFormSubmit}>
-                {walkerArr.map((arr) => (
-                <div key={arr.display} className="row-data">
-                    <label className="profile-label">{arr.display}</label>
-                    <input className="profile-input" placeholder={arr.title} type={arr.type} name={arr.type} defaultValue={arr.title}/>
-                </div>
-                ))}
+                onSubmit={handleFormSubmit}
+            >
                 <div className="row-data">
-                    <label className="profile-label">Province</label>
-                    <select className="profile-input" id="walker-province" name="walker-province">
-                        {province.map((arr) => (
-                            <option key={arr} value={arr}>{arr}</option>
-                        ))}
-                    </select>
+                    <label className="profile-label">First Name</label>
+                    <input
+                        className="profile-input"
+                        type="text"
+                        name="firstName"
+                        onChange={handleInputChange}
+                        value={formData.firstName}
+                    />
                 </div>
+                <div className="row-data">
+                    <label className="profile-label">Last Name</label>
+                    <input
+                        className="profile-input"
+                        type="text"
+                        name="lastName"
+                        onChange={handleInputChange}
+                        value={formData.lastName}
+                    />
+                </div>
+                <div className="row-data">
+                    <label className="profile-label">Email</label>
+                    <input
+                        className="profile-input"
+                        type="text"
+                        name="email"
+                        onChange={handleInputChange}
+                        value={formData.email}
+                    />
+                </div>
+                {
+                // <div className="row-data">
+                //     <label className="profile-label">Province</label>
+                //     <select className="profile-input" id="walker-province" name="walker-province">
+                //         {province.map((arr) => (
+                //             <option key={arr} value={arr}>{arr}</option>
+                //         ))}
+                //     </select>
+                // </div>
+                }
                 <button
-                type="submit"
-                className="update-walker-button"
-                id="update-walker-button"
-                >UPDATE</button>
+                    type="submit"
+                    className="update-walker-button"
+                    id="update-walker-button"
+                >
+                    UPDATE
+                </button>
             </form>
         </div>
     )
 }
 
-export default WalkerContact;
+export default WalkerDetails;

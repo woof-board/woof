@@ -23,6 +23,7 @@ const typeDefs = gql`
         lastName: String
         email: String
         avatar: String
+        address: Address
         neighbourhoods: [String]
         reviews: [Review]
         earnings: Float
@@ -70,6 +71,7 @@ const typeDefs = gql`
     }
     
     type Review {
+        owner: Owner
         owner_id: ID!
         rating: Int!
         reviewText: String

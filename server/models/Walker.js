@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const { addressSchema } = require('./Address');
 // const { formatDate }= require('../utils/helpers');
 
 const reviewSchema = new Schema( 
@@ -23,6 +24,10 @@ const reviewSchema = new Schema(
         },
         reviewText: {
             type: String
+        }
+    },{
+        toJSON: {
+          virtuals: true
         }
     }
 );
@@ -55,6 +60,7 @@ const walkerSchema = new Schema(
             type: [String],
             default: undefined
         },
+        address: addressSchema,
         reviews: [reviewSchema],
         earnings: Number,
         availability: [
