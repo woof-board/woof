@@ -139,7 +139,6 @@ const resolvers = {
                 const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
                 const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
 
-                console.log(setupIntent);
                 // create a new charging instance
                 const charge = await stripe.paymentIntents.create({
                     amount: amount,
@@ -156,6 +155,21 @@ const resolvers = {
                 // get finalized charging information
                 const newCharge = await stripe.paymentIntents.retrieve(charge.id);
                 return newCharge;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        retrieve_payments: async (parent, arg, context) => {
+            if (context.owner) {
+                const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
+
+                const paymentIntents = await stripe.paymentIntents.list({
+                    customer: customer_id,
+                    limit: 10,
+                  });
+
+                return paymentIntents;
             }
 
             throw new AuthenticationError('Not logged in');

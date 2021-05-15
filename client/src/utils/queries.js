@@ -222,3 +222,18 @@ export const CHARGE_OWNER = gql`
     }	
   }
 `;
+
+export const RETRIEVE_PAYMENTS = gql`
+  query retrieve_payments{
+    retrieve_payments{
+      data{
+        id
+        amount
+        created
+        currency
+        description
+        status
+      }
+    }
+  }
+`;

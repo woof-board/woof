@@ -118,6 +118,19 @@ const typeDefs = gql`
         status: String
     }
 
+    type Payment{
+        id: String
+        amount: Int
+        created: Int
+        currency: String
+        description: String
+        status: String
+    }
+
+    type Payments {
+        data: [Payment]
+    }
+
     input AddressInput {
         street: String
         city: String
@@ -216,6 +229,7 @@ const typeDefs = gql`
         get_customer_session_id: Checkout
         get_customer_info_from_stripe: Customer
         charge_owner(amount: Int!): Charge
+        retrieve_payments: Payments
     }
 
     type Mutation {
