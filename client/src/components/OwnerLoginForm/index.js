@@ -32,7 +32,7 @@ function OwnerLoginForm() {
     return (
         <form 
             id="walker-login-form" 
-            className="login-form" 
+            className="form-container" 
             onSubmit={handleFormSubmit}
         >
             <input 
@@ -60,7 +60,7 @@ function OwnerLoginForm() {
                 disabled={!(formData.email && formData.password)} 
                 type="submit" 
                 variant="success" 
-                className="form-button" 
+                className="home-form-button" 
                 id="walker-login-button"
             >
                 SUBMIT
