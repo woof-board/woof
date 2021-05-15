@@ -6,11 +6,14 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './css/App.css';
 import Footer from './components/Footer';
 import About from './pages/About';
-import Header from './components/Header/index';
+import Header from './components/Header';
+import Walkers from './pages/Walkers'
 import NoMatch from './pages/NoMatch';
 import Walker from './pages/Walker';
 import Owner from './pages/Owner';
 import Auth from './utils/auth';
+import WalkerSchedule from './pages/WalkerSchedule';
+
 // import WalkerHeader from './components/Header/WalkerHeader.js';
 // import OwnerHeader from './components/Header/OwnerHeader.js';
 import OwnerProfile from './pages/OwnerProfile.js';
@@ -96,10 +99,13 @@ function App() {
                             <PublicRoute exact path='/' component={Owner} />
                             <PublicRoute exact path="/owner" component={Owner} />         
                             <PublicRoute exact path="/walker" component={Walker} />
+
                             <Route exact path="/about" component={About} />
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
                             <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
+                            <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
+
                             <Route component={NoMatch} />
                         </Switch>
                             
