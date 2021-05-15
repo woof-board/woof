@@ -4,11 +4,11 @@ import './css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
-import HomeMock from './pages/HomeMock';
+// import HomeMock from './pages/HomeMock';
 
 ReactDOM.render(
   <React.StrictMode>
-    <HomeMock />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
