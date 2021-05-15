@@ -1,15 +1,28 @@
 import React, { useState} from 'react';
 import '../css/HomeMock.css';
 import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
 import OwnerWalkerForm from '../components/OwnerWalkerForm';
 import FormHeader from '../components/LoginSIgnupForm';
 import WalkerLoginForm from '../components/WalkerLoginForm';
 import WalkerSignupForm from '../components/WalkerSignupForm';
 import OwnerLoginForm from '../components/OwnerLoginForm';
 import OwnerSignupForm from '../components/OwnerSignupForm';
+import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
-const client = new ApolloProvider({
-})
+
+const client = new ApolloClient({
+    request: operation => {
+        const token = localStorage.getItem('id_token');
+
+        operation.setContext({
+            headers: {
+                authorization: token ? `Bearer ${token}` : ''
+            }
+        });
+    },
+    uri: '/graphql'
+});
 
 function HomeMock() {
 
@@ -43,6 +56,7 @@ function HomeMock() {
 
     return (
         <ApolloProvider client={client}>
+            <Router>
             <>
             <div className="home-new"></div>
             <div className="center-page-vh">
@@ -93,9 +107,11 @@ function HomeMock() {
                         )}
                         </>
                     )}
+                    <Link to="/">Learn More</Link>
 
             </div>
             </>
+            </Router>
         </ApolloProvider>
     )
 }

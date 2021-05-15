@@ -4,6 +4,7 @@ import Auth from '../../utils/auth';
 import { LOGIN_OWNER } from '../../utils/mutations';
 import '../../css/Walker.css';
 
+
 function OwnerLoginForm() {
     const [formData, setUserFormData] = useState({ email: '', password: '' });
     const [loginOwner, { error }] = useMutation(LOGIN_OWNER);
@@ -18,6 +19,8 @@ function OwnerLoginForm() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        console.log(formData);
+        
         try {
           const { data } = await loginOwner({
             variables: { ...formData }
