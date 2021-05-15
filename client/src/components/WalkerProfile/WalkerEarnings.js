@@ -15,7 +15,6 @@ function WalkerEarnings(props) {
     
     const walkerData = walkerEarning?.walker || [{ _id: "", firstName: "", email: "", reviews: [{ owner_id: '', rating: '5', reviewText: 'You are Great'}], averageRating: '', earnings: '500' }];
 
-
     const index = walkerData.length - 1;
     const totalEarnings = walkerData[index].length;
 

@@ -11,20 +11,42 @@ function WalkerContact(props) {
     const walkerArr = [
         {
             display: 'First Name',
-            title: walkerToken.firstName,
-            type: 'text'
+            title: walkerToken.data.firstName,
+            type: 'text',
+            input: 'input'
         },
         {
             display: 'Last Name',
-            title: walkerToken.lastName,
-            type: 'text'
+            title: walkerToken.data.lastName,
+            type: 'text',
+            input: 'input'
         },
         {
             display: 'Email',
-            title: walkerToken.email,
+            title: walkerToken.data.email,
             type: 'email'
-        }
+        },
+        { 
+            display: 'Street Number',
+            title: '#',
+            type: 'text',
+            input: 'input'
+        },
+        {
+            display: 'Street Name',
+            title: 'Union',
+            type: 'text',
+            input: 'input'
+        },
+        {
+            display: 'City',
+            title: 'Toronto',
+            type: 'text',
+            input: 'input'
+        },
     ]
+
+    const province = ['Alberta', 'British Columnbia', 'Manitoba', 'New Brunswick', 'Newfoundland and Labrador', 'Northwest Territories', 'Nova Scotia', 'Nunavut', 'Ontario', 'Prince Edward Island', 'Quebec', 'Saskatchewan', 'Yukon']
 
     const handleFormSubmit = async () => {
         alert('Account Updated')
@@ -45,6 +67,14 @@ function WalkerContact(props) {
                     <input className="profile-input" placeholder={arr.title} type={arr.type} name={arr.type} defaultValue={arr.title}/>
                 </div>
                 ))}
+                <div className="row-data">
+                    <label className="profile-label">Province</label>
+                    <select className="profile-input" id="walker-province" name="walker-province">
+                        {province.map((arr) => (
+                            <option key={arr} value={arr}>{arr}</option>
+                        ))}
+                    </select>
+                </div>
                 <button
                 type="submit"
                 className="update-walker-button"
