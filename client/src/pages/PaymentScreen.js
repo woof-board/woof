@@ -17,7 +17,10 @@ function PaymentScreen() {
   });
   const amount = 3000; // in cents
   const [handleCharge] = useLazyQuery(CHARGE_OWNER, {
-    variables: { amount: amount }
+    variables: { 
+      amount: amount,
+      description: 'testing'
+     }
   });
 
   useEffect(() => {
