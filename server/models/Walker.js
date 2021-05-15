@@ -16,7 +16,6 @@ const reviewSchema = new Schema(
             validate: {
                 
                 validator: function(rating) {
-                    console.log(typeof(rating))
                     return rating >= 1 && rating <= 5;
                 },
                 message: props => `${props.value} is not a valid rating number!`
