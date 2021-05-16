@@ -70,8 +70,13 @@ function App() {
                 <StoreProvider>
                 <div className="page">
                         <div className="page">
+                        {result === 'admin' && (
+                            <Header 
+                                result={result}
+                            />
+                        )}
 
-                        {Auth.getProfileType() === 'owner' && (
+                        {result === 'owner' && (
                             <Header
                                 ownerLinks={ownerLinks}
                                 currentOwnerLink={currentOwnerLink}
@@ -79,7 +84,7 @@ function App() {
                                 result={result}
                             />
                         )}
-                        {Auth.getProfileType() === 'walker' && (
+                        {result === 'walker' && (
                             <Header
                                 walkerLinks={walkerLinks}
                                 setWalkerLink={setWalkerLink}
