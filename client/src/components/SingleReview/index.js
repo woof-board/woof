@@ -2,7 +2,6 @@ import React from 'react';
 import '../../css/WalkerProfile.css';
 
 function WalkerReviews({ reviews=[] }) {
-    const totalReviews = reviews.length;
 
     return (
         <>

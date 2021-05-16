@@ -43,6 +43,9 @@ function WalkerProfile() {
         // }
     }, [currentUser, data, loading, dispatch]);
 
+  
+    const currentUser = 'ACTIVE';
+
 
   return (
     <div className="page-body">
