@@ -51,11 +51,26 @@
   padding: 1rem;
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+}
+
 .aboutActive {
   padding: .5rem;
   background-color: var(--primary);
   color: white;
   border-radius: 25px;
+  text-align: center;
+}
+
+.learnActive {
+  padding: .5rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 20px;
+  text-align: center;
 }
 
 .learn-more-container {
@@ -89,6 +104,12 @@
 .flex-c {
   display: flex;
   flex-direction: column;
+}
+
+.flex-c-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .flex-tech {
