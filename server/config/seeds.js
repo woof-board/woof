@@ -22,7 +22,13 @@ db.once('open', async () => {
                 postalCode: 'AAA AAA'
             },
             phone: '111 111 1111',
-            dogs: [],
+            dogs: [{
+              name: 'Trigger',
+              breed: 'Pitbull',
+              weight: 80,
+              treats: true,
+              avatar: "/images/user-default.png"
+          }],
             status: "ACTIVE"
         },
         {
@@ -40,7 +46,13 @@ db.once('open', async () => {
                 postalCode: 'AAA AAA'
             },
             phone: '111 111 1111',
-            dogs: [],
+            dogs: [{
+              name: 'Milly',
+              breed: 'Chihuahua',
+              weight: 20,
+              treats: true,
+              avatar: "/images/user-default.png"
+          }],
             status: "ACTIVE"
         },
         {
@@ -58,7 +70,13 @@ db.once('open', async () => {
                 postalCode: 'AAA AAA'
             },
             phone: '111 111 1111',
-            dogs: [],
+            dogs: [{
+              name: 'Zeus',
+              breed: 'Great Dane',
+              weight: 80,
+              treats: true,
+              avatar: "/images/user-default.png"
+          }],
             status: "ACTIVE"
         },
         {
@@ -458,10 +476,84 @@ db.once('open', async () => {
 
     console.log('walker seeded');
 
+    await Order.deleteMany();
 
+    await Order.insertMany([
+      {
+        serviceDate:'2021-05-21',
+        serviceTime: '9am',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac06c',
+        walker: '60a073419ae33509302ac085',
+        dogs: '60a073419ae33509302ac06e'
+      },
+      {
+        serviceDate:'2021-05-20',
+        serviceTime: '9am',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac06f',
+        walker: '60a073419ae33509302ac08a',
+        dogs: '60a073419ae33509302ac071'
+      },
+      {
+        serviceDate:'2021-05-20',
+        serviceTime: '11am',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac072',
+        walker: '60a073419ae33509302ac08a',
+        dogs:'60a073419ae33509302ac074'
+      },
+      {
+        serviceDate:'2021-05-20',
+        serviceTime: '1pm',
+        status: 'PENDING_PROGRESS',
+        owner: '60a073419ae33509302ac075',
+        walker: '60a073419ae33509302ac08f',
+        dogs: [{
+          _id:'60a073419ae33509302ac077'},
+          {_id:'60a073419ae33509302ac078'}]
+      },
+      {
+        serviceDate:'2021-05-21',
+        serviceTime: '11am',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac079',
+        walker: '60a073419ae33509302ac097',
+        dogs: '60a073419ae33509302ac07b'
+      },
+      {
+        serviceDate:'2021-05-21',
+        serviceTime: '3pm',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac07c',
+        walker: '60a073419ae33509302ac09f',
+        dogs: '60a073419ae33509302ac07e'
+      },
+      {
+        serviceDate:'2021-05-20',
+        serviceTime: '5pm',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac07c',
+        walker: '60a073419ae33509302ac09f',
+        dogs: '60a073419ae33509302ac07e'
+      },
+      {
+        serviceDate:'2021-05-21',
+        serviceTime: '7pm',
+        status: 'PENDING_PROGRESS',
+        owner: '60a073419ae33509302ac075',
+        walker: '60a073419ae33509302ac08f',
+        dogs: [{
+          _id:'60a073419ae33509302ac077'},
+          {_id:'60a073419ae33509302ac078'}]
+      },
+      
+    ]);
 
-
+    console.log('order seeded');
     
     process.exit();
+
+
 
 });
