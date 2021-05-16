@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/WalkerProfile.css';
-import Auth from '../utils/auth';
 import OwnerDetails from '../components/OwnerProfile/OwnerDetails';
  
 import { useStoreContext } from "../utils/GlobalState";
@@ -24,7 +23,7 @@ function OwnerProfile() {
         else if (!currentUser && data) {
             dispatch({
                 type: UPDATE_CURRENT_USER,
-                currentUser: data.walker_me
+                currentUser: data.owner_me
             });
             
         }
@@ -60,11 +59,42 @@ function OwnerProfile() {
 //     }
 // `;
   
-    return (
-        <div className="page-body">
-            <OwnerDetails />
-        </div>
-    );
+return (
+    <div className="page-body">
+      {currentUser && currentUser.status === "SUSPENDED" && 
+        <>
+          <div className="account-status">
+            ACCOUNT SUSPENDED
+          </div>
+        </>    
+      } 
+        <>
+        {currentUser && currentUser.status === "ACTIVE" && 
+          <div className="walker-picture-container">
+            IMG HERE
+          </div>        
+        }
+        <div className="walker-details-container">
+            {currentUser && currentUser.status === "PENDING_INFORMATION" && 
+              <div className="account-status">
+                COMPLETE ALL FORMS FOR APPROVAL
+              </div>
+            }
+            {currentUser && currentUser.status === "PENDING_APPROVAL" && 
+              <div className="account-status">
+                PENDING APPROVAL
+              </div>
+            }
+            <OwnerDetails user={currentUser}/>
+            {currentUser && currentUser.status === "ACTIVE" && 
+              <>
+                COMPONENTS HERE
+              </>
+            }
+          </div>
+        </>
+    </div>
+  );
 }
 
 export default OwnerProfile;
