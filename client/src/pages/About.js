@@ -5,6 +5,8 @@ import AboutOwner from '../pages/AboutOwner';
 import AboutWalker from '../pages/AboutWalker';
 import AboutDevelopers from '../components/About/AboutDevelopers';
 import AboutTechnology from '../components/About/AboutTechnology';
+import AboutSafety from '../components/About/AboutSafety';
+import AboutPayment from '../components/About/AboutPayment';
 // import AboutApp from '../components/About/AboutApp';
 
 
@@ -20,8 +22,21 @@ function About() {
             name: 'walker'
         }
     ])
+
+    const [safety] = useState([
+        {
+            name: 'null'
+        },
+        {
+            name: 'safety'
+        },
+        {
+            name: 'payment'
+        }
+    ])
     
     const [currentLink, setCurrentLink] = useState(links[0]);
+    const [currentSafeLink, setCurrentSafeLink] = useState(safety[0])
 
     console.log(currentLink);
 
@@ -59,9 +74,32 @@ function About() {
             <div className="component-section">
             <h2>Technologies</h2>
                 <div className="content">
-                    <AboutTechnology />
+                    <AboutTechnology
+                        safety={safety}
+                        currentSafeLink={currentSafeLink}
+                        setCurrentSafeLink={setCurrentSafeLink}
+                    />
                 </div>
             </div>
+            
+            {currentSafeLink.name !== 'null' && (
+                <div className="component-section">
+                    <div className="content flex-c-center">
+                        {currentSafeLink.name === 'safety' && (
+                            <>
+                                <h2>Navigation Safety</h2>
+                                <AboutSafety />
+                            </>
+                        )}
+                        {currentSafeLink.name === 'payment' && (
+                            <>
+                                <h2>Payment Safety</h2>
+                                <AboutPayment />
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
 
             {/* <div className="component-section">
             <h2>Check out our App!</h2>
