@@ -14,7 +14,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "if-env": "^1.0.4"
+    "@admin-bro/express": "^3.1.0",
+    "@admin-bro/mongoose": "^1.1.0",
+    "admin-bro": "^4.0.1",
+    "admin-bro-expressjs": "^2.1.1",
+    "admin-bro-mongoose": "^0.5.2",
+    "if-env": "^1.0.4",
+    "ora": "^4.1.1"
   },
   "devDependencies": {
     "concurrently": "^5.3.0",

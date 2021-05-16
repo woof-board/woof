@@ -5,6 +5,18 @@ const path = require('path');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
 const db = require('./config/connection');
+const AdminBro = require('admin-bro')
+const AdminBroExpress = require('@admin-bro/express')
+ 
+const express = require('express')
+const app = express()
+ 
+const adminBro = new AdminBro ({
+    Databases: [],
+    rootPath: ‘/admin’,
+})
+ 
+const router = AdminBroExpress.buildRouter (adminBro)
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -16,6 +28,8 @@ const server = new ApolloServer({
 
 server.applyMiddleware({ app });
 
+const router = AdminBroExpress.buildRouter(adminBro)
+app.use(adminBro.options.rootPath, router);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
@@ -29,6 +43,10 @@ if (process.env.NODE_ENV === 'production') {
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
+
+
+
+
 
 db.once('open', () => {
   app.listen(PORT, () => {

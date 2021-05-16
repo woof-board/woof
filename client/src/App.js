@@ -13,7 +13,7 @@ import Walker from './pages/Walker';
 import Owner from './pages/Owner';
 import Auth from './utils/auth';
 import WalkerSchedule from './pages/WalkerSchedule';
-
+import Admin from './components/Admin';
 // import WalkerHeader from './components/Header/WalkerHeader.js';
 // import OwnerHeader from './components/Header/OwnerHeader.js';
 import OwnerProfile from './pages/OwnerProfile.js';
@@ -21,6 +21,7 @@ import WalkerProfile from './pages/WalkerProfile.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
+
 
 const client = new ApolloClient({
     request: operation => {
@@ -77,6 +78,7 @@ function App() {
     const [currentHeaderLink, setHeaderCurrentLink] = useState(headerLinks[0])
     const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
 	const [currentOwnerLink, setOwnerLink] = useState(ownerLinks[0])
+    
 
     return (
         <ApolloProvider client={client}>
@@ -120,6 +122,8 @@ function App() {
             </Router>
         </ApolloProvider>
     );
+
+    
 }
 
 export default App;
