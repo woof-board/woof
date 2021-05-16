@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/WalkerProfile.css';
 import Auth from '../utils/auth';
