@@ -6,13 +6,13 @@ function WalkerOrders({ orders=[] }) {
     const totalOrders = orders.length;
 
     return (
-        <div className="walker-profile-container">
-          <div>
-            My Walks - {totalOrders ? `Viewing ${totalOrders} past ${totalOrders === 1 ? 'walk' : 'walks'}:`
-            : 'You have no past Walks'}
+        <div className="walker-contact-container">
+          <div className="walker-header">
+            <h3>My Walks <span className="light">{totalOrders ? `Viewing ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
+            : 'You have no upcoming walks'}</span></h3>
           </div>
             {orders.map((order, ind) => (
-              <div key={ind} className="walks">
+              <div className="walks">
                 <div>{order.service_date}</div>
                 <div>{order.service_time}</div>
               </div>
