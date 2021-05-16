@@ -20,6 +20,7 @@ import { StoreProvider } from "./utils/GlobalState";
 import HomeMock from './pages/HomeMock';
 import { Admin, Resource, ListGuesser } from "react-admin";
 
+
 const client = new ApolloClient({
     request: operation => {
         const token = localStorage.getItem('id_token');
@@ -33,7 +34,7 @@ const client = new ApolloClient({
     uri: '/graphql'
 });
 
-
+const dataProvider = ();
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
             href: '/about'
         }
     ]
+
 
     return (
 
@@ -73,9 +75,8 @@ function App() {
                     />
 
                 </StoreProvider>
-
-                <Admin dataProvider={client}>
-                    <Resource name="users" list={ListGuesser} />
+                <Admin dataProvider={dataProvider}>
+                    <Resource name="users" list={UserList} />
                 </Admin>
 
             </Router>
@@ -83,6 +84,8 @@ function App() {
 
     
     );
+
+
 }
 
 export default App;

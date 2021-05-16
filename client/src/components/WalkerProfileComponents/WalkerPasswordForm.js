@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-<<<<<<< HEAD
 import '../../css/WalkerProfile.css';
-=======
-//import '../../css/WalkerProfile.css';
->>>>>>> 0588cfdd685bf938a28914e2ba3203539f50aef9
 import { UPDATE_WALKER_PASSWORD } from "../../utils/mutations";
 // import { useStoreContext } from "../../utils/GlobalState";
 // import { UPDATE_CURRENT_USER } from "../../utils/actions";

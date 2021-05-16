@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-<<<<<<< HEAD
-import '../../css/WalkerProfile.css';
-=======
 //import '../../css/WalkerProfile.css';
->>>>>>> 0588cfdd685bf938a28914e2ba3203539f50aef9
 import { UPDATE_WALKER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
@@ -108,38 +104,16 @@ function WalkerDetails({ user }) {
     ]
 
     return (
-<<<<<<< HEAD
-        <div className="walker-contact-container">
-            <div>
-                <h2>My Profile</h2>
-            </div>
-=======
+
         <>
         <div className="walker-contact-container">
->>>>>>> 0588cfdd685bf938a28914e2ba3203539f50aef9
+
             <form
                 className="user-update-form"
                 id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
                 <div className="row-data">
-<<<<<<< HEAD
-                    <label className="profile-label">First Name</label>
-                    <input
-                        className="profile-input"
-                        type="text"
-                        name="first_name"
-                        onChange={handleInputChange}
-                        value={formData.first_name}
-                    />
-                </div>
-                <div className="row-data">
-                    <label className="profile-label">Last Name</label>
-                    <input
-                        className="profile-input"
-                        type="text"
-                        name="last_name"
-=======
                     <input
                         className="profile-input profile-name"
                         type="text"
@@ -153,7 +127,6 @@ function WalkerDetails({ user }) {
                         type="text"
                         name="last_name"
                         placeholder="First Name"
->>>>>>> 0588cfdd685bf938a28914e2ba3203539f50aef9
                         onChange={handleInputChange}
                         value={formData.last_name}
                     />
@@ -228,10 +201,7 @@ function WalkerDetails({ user }) {
                 </button>
             </form>
         </div>
-<<<<<<< HEAD
-=======
         </>
->>>>>>> 0588cfdd685bf938a28914e2ba3203539f50aef9
     )
 }
 
