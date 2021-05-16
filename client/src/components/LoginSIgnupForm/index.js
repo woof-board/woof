@@ -1,18 +1,18 @@
 import React from 'react';
-import '../../css/Walker.css';
+import '../../css/LoginSignupForm.css';
 
 function FormHeader(props) {
 
     const {
-        links = [],
-        setCurrentLink,
-        currentLink
+        formLinks = [],
+        setFormCurrentLink,
+        currentFormLink
     } = props
 
     return (
-        <div className="walker-form-title">
-            {links.map((link) => (
-            <span key={link.name} className={`${link.id} ${currentLink.name === link.name && `linkActive`}`} onClick={() => { setCurrentLink(link);}} id={link.id}>{link.name}</span>
+        <div className="form-title">
+            {formLinks.map((link) => (
+            <span key={link.name} className={`form-link ${currentFormLink.name === link.name && `formActive`}`} onClick={() => { setFormCurrentLink(link);}} id={link.id}>{link.name}</span>
             ))}                 
         </div>
     )

@@ -37,7 +37,7 @@ function OwnerSignupForm() {
     return (
         <form
             id="owner-signup-form"
-            className="signup-form"
+            className="form-container"
             onSubmit={handleFormSubmit}
         >
             <input
@@ -80,7 +80,7 @@ function OwnerSignupForm() {
             <button
                 disabled={!(formData.email && formData.password && formData.firstName && formData.lastName)}
                 type="submit"
-                className="form-button"
+                className="home-form-button"
                 id="owner-signup-button"
             >
                 SUBMIT

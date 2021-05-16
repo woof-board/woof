@@ -23,8 +23,7 @@
 
 li {
     list-style: none;
-    padding-left: .1rem;
-    padding-right: .1rem;
+    text-decoration: none;
 }
 
 .nav-links-container {
@@ -40,8 +39,8 @@ li {
     text-decoration: none;
     color: var(--secondary);
     font-weight: bold;
-    padding: 1rem;
-    margin: .5;
+    padding: .5rem;
+    margin: 1rem;
 }
 
 .nav-row {
@@ -61,6 +60,7 @@ li {
     color: black;
     transition: 0.7s;
     border-radius: 35px;
+    text-decoration: none;
 }
 
 .listActive {

@@ -3,14 +3,15 @@ import '../../css/WalkerProfile.css';
 
 function WalkerDetails({ user }) {
 
-    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '' });
+    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '' });
 
     useEffect(() => {
         if (user) {
             setFormData({
                 firstName: user.firstName,
                 lastName: user.lastName,
-                email: user.email
+                email: user.email,
+                phone: user.phone
             });
         }
     
@@ -66,6 +67,16 @@ function WalkerDetails({ user }) {
                         name="email"
                         onChange={handleInputChange}
                         value={formData.email}
+                    />
+                </div>
+                <div className="row-data">
+                    <label className="profile-label">Phone</label>
+                    <input
+                        className="profile-input"
+                        type="text"
+                        name="phone"
+                        onChange={handleInputChange}
+                        value={formData.phone}
                     />
                 </div>
                 {

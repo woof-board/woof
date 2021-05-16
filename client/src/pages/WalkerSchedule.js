@@ -2,8 +2,6 @@ import data from '@iconify-icons/ant-design/home-outlined';
 import React from 'react';
 import '../css/Walkers.css';
 
-
-
 const schedule = [
     {
         date: 'Thurs. May 13',

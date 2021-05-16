@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -7,20 +7,17 @@ import './css/App.css';
 import Footer from './components/Footer';
 import About from './pages/About';
 import Header from './components/Header';
-import Walkers from './pages/Walkers'
 import NoMatch from './pages/NoMatch';
-import Walker from './pages/Walker';
-import Owner from './pages/Owner';
-import Auth from './utils/auth';
+import PaymentScreen from './pages/PaymentScreen';
+import Success from "./pages/Success";
 import WalkerSchedule from './pages/WalkerSchedule';
-import Admin from './components/Admin';
-// import WalkerHeader from './components/Header/WalkerHeader.js';
-// import OwnerHeader from './components/Header/OwnerHeader.js';
+
 import OwnerProfile from './pages/OwnerProfile.js';
 import WalkerProfile from './pages/WalkerProfile.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
+import HomeMock from './pages/HomeMock';
 
 
 const client = new ApolloClient({
@@ -37,48 +34,12 @@ const client = new ApolloClient({
 });
 
 function App() {
-        
-    const [headerLinks] = useState([
-        {
-            name: 'Owner',
-            href: '/owner',
-        },
-        {
-            name: 'Walker',
-            href: '/walker',
-        }
-    ])
-
-
-        const [walkerLinks] = useState([
-            {
-                name: 'Walker Profile',
-                href: '/walkerprofile'
-            },
-        ])
-
-
-    const [ownerLinks] = useState([
-        {
-            name: 'Owner Profile',
-            href: '/ownerprofile'
-        }
-    ])
-
     const footerLinks = [
         {
             name: 'About',
             href: '/about'
         }
     ]
-    
-    const result = Auth.getProfileType();
-    console.log(result);
-
-    const [currentHeaderLink, setHeaderCurrentLink] = useState(headerLinks[0])
-    const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
-	const [currentOwnerLink, setOwnerLink] = useState(ownerLinks[0])
-    
 
     return (
         <ApolloProvider client={client}>
@@ -86,33 +47,20 @@ function App() {
                 <StoreProvider>
                 <div className="page">
                         <div className="page">
-                        <Header
-                            headerLinks={headerLinks}
-                            currentHeaderLink={currentHeaderLink}
-                            setHeaderCurrentLink={setHeaderCurrentLink}
-                            walkerLinks={walkerLinks}
-                            setWalkerLink={setWalkerLink}
-                            currentWalkerLink={currentWalkerLink}
-                            ownerLinks={ownerLinks}
-                            currentOwnerLink={currentOwnerLink}
-                            setOwnerLink={setOwnerLink}
-                            result={result}
-                        />
-                        
-                        <Switch>
-                            <PublicRoute exact path='/' component={Owner} />
-                            <PublicRoute exact path="/owner" component={Owner} />         
-                            <PublicRoute exact path="/walker" component={Walker} />
+                            <Header />
+                            <Switch>
+                                <PublicRoute exact path='/' component={HomeMock} />
 
-                            <Route exact path="/about" component={About} />
-                            <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
-                            <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
-                            <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
-                            <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
+                                <Route exact path="/about" component={About} />
+                                <PrivateRoute exact path="/paymentScreen" component={PaymentScreen} />
+                                <PrivateRoute exact path="/Success" component={Success} />
+                                <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
+                                <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
+                                <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
+                                <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
 
-                            <Route component={NoMatch} />
-                        </Switch>
-                            
+                                <Route component={NoMatch} />
+                            </Switch>
                         </div>
                 </div>
                 <Footer 
@@ -122,8 +70,6 @@ function App() {
             </Router>
         </ApolloProvider>
     );
-
-    
 }
 
 export default App;

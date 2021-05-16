@@ -13,8 +13,8 @@ function WalkerOrders({ orders=[] }) {
           </div>
             {orders.map((order, ind) => (
               <div key={ind} className="walks">
-                <div>{order.serviceDate}</div>
-                <div>{order.serviceTime}</div>
+                <div>{order.service_date}</div>
+                <div>{order.service_time}</div>
               </div>
             ))}
         </div>

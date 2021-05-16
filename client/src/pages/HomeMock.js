@@ -1,44 +1,97 @@
-import React from 'react';
+import React, { useState} from 'react';
 import '../css/HomeMock.css';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { Link } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Walker from '../pages/Walker';
-import Owner from '../pages/Owner';
-
-const client = new ApolloProvider({
-})
+import OwnerWalkerForm from '../components/OwnerWalkerForm';
+import FormHeader from '../components/LoginSIgnupForm';
+import WalkerLoginForm from '../components/WalkerLoginForm';
+import WalkerSignupForm from '../components/WalkerSignupForm';
+import OwnerLoginForm from '../components/OwnerLoginForm';
+import OwnerSignupForm from '../components/OwnerSignupForm';
+// import { Link } from 'react-router-dom';
 
 function HomeMock() {
 
-    function walker() {
-        window.location.assign('/walker');
-    }
+    const [links] = useState([
+        {
+            name: 'OWNER',
+            action: 'owner'
+        },
+        {
+            name: 'WALKER',
+            action: 'walker'
+        },
+    ])
 
-    function owner() {
-        window.location.assign('/owner');
-    }
+    const [formLinks] = useState([
+        {
+            name: 'LOGIN',
+            id: 'active-title',
+            hover: 'login-hover'
+        },
+        {
+            name: 'SIGNUP',
+            id: 'active-title',
+            hover: 'login-hover'
+        }
+    ])
+
+    const [currentLink, setCurrentLink] = useState(links[0]);
+
+    const [currentFormLink, setFormCurrentLink] = useState(formLinks[0])
 
     return (
-        <ApolloProvider client={client}>
             <>
             <div className="home-new"></div>
             <div className="center-page-vh">
-                <div className="home-title">
-                    WOOF
-                </div>
+                <img src={process.env.PUBLIC_URL + `/images/woof-logo.svg`} alt="logo" className="home-logo"/>
                 <div className="home-font-small">
                     WHERE DOGS GET THEIR PERFECT WALK
                 </div>
-                <Router>
-                    <div className="home-links">
-                        <Link className="home-button" onClick={walker} to="/walker">WALKER</Link>
-                        <Link className="home-button" onClick={owner}to="/owner">OWNER</Link>
-                    </div>
-                </Router>
+                    <OwnerWalkerForm 
+                        links={links}
+                        currentLink={currentLink}
+                        setCurrentLink={setCurrentLink}
+                    />
+                    {currentLink.name === 'WALKER' &&  (
+                        <>
+                            <FormHeader 
+                                formLinks={formLinks}
+                                currentFormLink={currentFormLink}
+                                setFormCurrentLink={setFormCurrentLink}
+                            />
+                            {currentFormLink.name === 'LOGIN' && (
+                                <>
+                                    <WalkerLoginForm />
+                                </>
+                            )}
+                            {currentFormLink.name === 'SIGNUP' && (
+                                <>
+                                    <WalkerSignupForm />
+                                </>
+                            )}
+                        </>
+                    )}
+                    {currentLink.name === 'OWNER' && (
+                        <>
+                        <FormHeader 
+                            formLinks={formLinks}
+                            currentFormLink={currentFormLink}
+                            setFormCurrentLink={setFormCurrentLink}
+                        />
+                        {currentFormLink.name === 'LOGIN' && (
+                            <>
+                                <OwnerLoginForm />
+                            </>
+                        )}
+                        {currentFormLink.name === 'SIGNUP' && (
+                            <>
+                                <OwnerSignupForm />
+                            </>
+                        )}
+                        </>
+                    )}
+                    {/* <Link to="/about">Learn More</Link> */}
             </div>
             </>
-        </ApolloProvider>
     )
 }
 

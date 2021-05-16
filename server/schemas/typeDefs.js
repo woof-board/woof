@@ -3,37 +3,39 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
     type Owner {
         _id: ID
-        firstName: String
-        lastName: String
+        first_name: String
+        last_name: String
         email: String
         avatar: String
         admin: Boolean
         address: Address
         phone: String
         dogs: [Dog]
-        dogCount: Int
+        dog_count: Int
         status: String
+        stripe_customer_id: String
+        stripe_setup_intent: String
     }
 
     type Walker {
         _id: ID
-        firstName: String
-        lastName: String
+        first_name: String
+        last_name: String
         email: String
         avatar: String
         address: Address
         neighbourhoods: [String]
         reviews: [Review]
         earnings: Float
-        averageRating: Float
+        average_rating: Float
         availability: [Availability]
         status: String
     }
 
     type Order {
         _id: ID
-        serviceDate: String
-        serviceTime: String
+        service_date: String
+        service_time: String
         status: String
         owner: Owner
         walker: Walker
@@ -45,7 +47,7 @@ const typeDefs = gql`
         city: String
         neighbourhood: String
         province: String
-        postalCode: String  
+        postal_code: String  
     }
 
     type Dog {
@@ -72,7 +74,7 @@ const typeDefs = gql`
         owner: Owner
         owner_id: ID!
         rating: Int!
-        reviewText: String
+        review_text: String
     }
 
     type AuthOwner {
@@ -85,6 +87,52 @@ const typeDefs = gql`
         walker: Walker
     }
 
+    type Checkout {
+        session_id: ID
+    }
+
+    type stripeAddress {
+        city: String
+        country: String
+        line1: String
+        line2: String
+        postal_code: String
+        state: String
+    }
+
+    type Customer {
+        id: String
+        object: String
+        address: stripeAddress
+        balance: Float
+        currency: String
+        description: String
+        email: String
+        name: String
+        phone: String
+    }
+
+    type Charge {
+        id: String
+        object: String
+        amount: Int
+        receipt_url: String
+        status: String
+    }
+
+    type Payment{
+        id: String
+        amount: Int
+        created: Int
+        currency: String
+        description: String
+        status: String
+    }
+
+    type Payments {
+        data: [Payment]
+    }
+
     input AddressInput {
         street: String
         city: String
@@ -94,8 +142,8 @@ const typeDefs = gql`
     }
 
     input OwnerInput {
-        firstName: String!
-        lastName: String!
+        first_name: String!
+        last_name: String!
         email: String!
         password: String!
         admin: Boolean
@@ -106,8 +154,8 @@ const typeDefs = gql`
     }
 
     input OwnerProfileInput {
-        firstName: String
-        lastName: String
+        first_name: String
+        last_name: String
         email: String
         address: AddressInput
         phone: String
@@ -115,8 +163,8 @@ const typeDefs = gql`
     }
 
     input WalkerInput {
-        firstName: String!
-        lastName: String!
+        first_name: String!
+        last_name: String!
         email: String!
         password: String!
         availability: [AvailabilityInput]
@@ -125,10 +173,11 @@ const typeDefs = gql`
     }
 
     input WalkerProfileInput {
-        firstName: String
-        lastName: String
+        first_name: String
+        last_name: String
         email: String
         neighbourhoods: [String]
+        address: AddressInput
         avatar: String
     }
 
@@ -141,8 +190,8 @@ const typeDefs = gql`
     }
 
     input OrderInput {
-        serviceDate: String!
-        serviceTime: String!
+        service_date: String!
+        service_time: String!
         owner: ID!
         walker: ID
         dogs: [ID]!
@@ -151,7 +200,7 @@ const typeDefs = gql`
     input ReviewInput {
         walker_id: ID!
         rating: Int!
-        reviewText: String
+        review_text: String
     }
 
     input AvailabilityInput {
@@ -168,15 +217,22 @@ const typeDefs = gql`
     type Query {
         owner(owner_id: ID!): Owner
         owners: [Owner]
-        owner_me: Owner
+        ownerMe: Owner
+        
         walker(walker_id: ID!): Walker
         walkers: [Walker]
-        walker_me: Walker
+        walkerMe: Walker
         checkWalkerAvailability(date: String!, time: String!): [Walker]
+
         order(order_id: ID): Order
         orders: [Order]
-        owner_orders(owner_id: ID): [Order]
-        walker_orders(walker_id: ID): [Order]
+        ownerOrders(owner_id: ID): [Order]
+        walkerOrders(walker_id: ID): [Order]
+
+        getCustomerSessionId: Checkout
+        getCustomerInfoFromStripe: Customer
+        chargeOwner(amount: Int!, description: String!): Charge
+        retrievePayments: Payments
     }
 
     type Mutation {
@@ -202,6 +258,8 @@ const typeDefs = gql`
         updateWalkerPassword(old_password: String!, new_password: String!): Walker
         updateWalkerAvailability(input: [AvailabilityInput]): Walker
         updateWalkerStatus(walker_id: ID!, status: String!): Walker
+
+        clear_setup_intent: Owner
     }
 
 `;
