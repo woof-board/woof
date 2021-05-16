@@ -70,6 +70,26 @@ export const UPDATE_ORDER_STATUS = gql`
     }
 `;
 
+export const UPDATE_ORDER_COORDS = gql`
+    mutation updateOrderCoords($order_id: ID!, $coords: Array!) {
+        updateOrderCoords(order_id: $order_id, coords: $coords) {
+            _id
+            serviceDate
+            serviceTime
+            owner{
+                _id
+            }
+            walker{
+                _id
+            }
+            dogs{
+                _id
+            }
+            coords
+        }
+    }
+`;
+
 export const REMOVE_ORDER = gql`
     mutation removeOrder($order_id: ID!) {
         removeOrder(order_id: $order_id) {
