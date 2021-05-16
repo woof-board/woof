@@ -1,6 +1,10 @@
 import React from 'react';
 import StarRatingComponent from 'react-star-rating-component'; 
+<<<<<<< HEAD
 import '../../css/WalkerProfile.css';
+=======
+//import '../../css/WalkerProfile.css';
+>>>>>>> 0588cfdd685bf938a28914e2ba3203539f50aef9
 
 function SingleReview( { review }) {
     const { owner_id, review_text, rating } = review;

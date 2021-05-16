@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 
+<<<<<<< HEAD
 import '../css/WalkerProfile.css';
+=======
+// import '../css/WalkerProfile.css';
+>>>>>>> 0588cfdd685bf938a28914e2ba3203539f50aef9
 import OwnerDetails from '../components/OwnerProfile/OwnerDetails';
  
 import { useStoreContext } from "../utils/GlobalState";

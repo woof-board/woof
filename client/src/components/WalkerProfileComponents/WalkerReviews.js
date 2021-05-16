@@ -1,5 +1,9 @@
 import React from 'react';
+<<<<<<< HEAD:client/src/components/WalkerProfileComponents/WalkerReviews.js
 import '../../css/WalkerProfile.css';
+=======
+//import '../../css/WalkerProfile.css';
+>>>>>>> 0588cfdd685bf938a28914e2ba3203539f50aef9:client/src/components/WalkerProfile/WalkerReviews.js
 import SingleReview from '../SingleReview';
 
 function WalkerReviews({ reviews=[] }) {

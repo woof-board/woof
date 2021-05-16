@@ -9,7 +9,7 @@ function Footer(props) {
     } = props;
 
     return (
-        <div className="footer-container">
+        <div className="footer">
             <div className="footer-left">
                     &copy;2021 by Woof
             </div>

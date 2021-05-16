@@ -1,21 +1,18 @@
-.page-body {
-    position: absolute;
-    top: 7rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+.page-wrap {
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: center;
-    padding-bottom: 10rem;
+    padding: 0rem 2rem 10rem;
 }
 
 .walker-picture-container {
-    background-color: var(--secondary);
-    height: 10rem;
-    width: 10rem;
-    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
     margin: 0 1rem 1rem 1rem;
+}
+.walker-picture-container img {
+    border: 8px solid var(--secondary);
+    border-radius: 50%;
 }
 
 .walker-details-container {
@@ -37,11 +34,15 @@
 .walker-contact-container {
     display: flex;
     flex-direction: column;
-    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
     padding: 1rem;
+<<<<<<< HEAD
     margin: 0rem 1rem 1rem 1rem;
     width: 25rem;
+=======
+    width: 70vw;
+>>>>>>> 0588cfdd685bf938a28914e2ba3203539f50aef9
     background-color: var(--secondary);
+    border-radius: 15px;
 }
 
 .user-update-form {
@@ -56,8 +57,15 @@
 
 .profile-input {
     border: none;
-    margin: 1rem 0rem 1rem 0rem;
+    margin: 1rem 0rem;
     padding: 0.25rem;
+
+}
+
+.profile-name {
+    width:auto;
+    background:none;
+    border: none;
 }
 
 .average-rating {
@@ -99,7 +107,7 @@
 
 .row-data {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 @media screen and (max-width: 650px) {

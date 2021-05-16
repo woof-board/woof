@@ -37,8 +37,6 @@ const client = new ApolloClient({
 
 function App() {
 
-
-
     const footerLinks = [
         {
             name: 'About',
@@ -52,27 +50,28 @@ function App() {
         <ApolloProvider client={client}>
             <Router>
                 <StoreProvider>
-                <div className="page">
-                        <div className="page">
-                            <Header />
-                            <Switch>
-                                <PublicRoute exact path='/' component={HomeMock} />
 
-                                <Route exact path="/about" component={About} />
-                                <PrivateRoute exact path="/paymentScreen" component={PaymentScreen} />
-                                <PrivateRoute exact path="/Success" component={Success} />
-                                <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
-                                <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
-                                <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
-                                <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
 
-                                <Route component={NoMatch} />
-                            </Switch>
-                        </div>
-                </div>
-                <Footer 
-            	    footerLinks={footerLinks}
-                />
+                    <div className="page">
+                        <Header />
+                        <Switch>
+                            <PublicRoute exact path='/' component={HomeMock} />
+
+                            <Route exact path="/about" component={About} />
+                            <PrivateRoute exact path="/paymentScreen" component={PaymentScreen} />
+                            <PrivateRoute exact path="/Success" component={Success} />
+                            <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
+                            <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
+                            <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
+                            <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
+
+                            <Route component={NoMatch} />
+                        </Switch>
+                    </div>
+                    <Footer 
+                        footerLinks={footerLinks}
+                    />
+
                 </StoreProvider>
 
                 <Admin dataProvider={client}>
