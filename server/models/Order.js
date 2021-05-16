@@ -27,7 +27,11 @@ const orderSchema = new Schema(
         dogs: [{
             type: Schema.Types.ObjectId,
             ref: 'dogSchema'
-        }]
+        }],
+        coords: {
+            type: Array,
+            required: false,
+        }
     },
     {
         toJSON: {
