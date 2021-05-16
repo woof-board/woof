@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../css/WalkerProfile.css';
-import SingleReview from './../SingleReview';
+import SingleReview from '../SingleReview';
 
 function WalkerReviews({ reviews=[] }) {
     const totalReviews = reviews.length;
@@ -11,8 +11,9 @@ function WalkerReviews({ reviews=[] }) {
             My Reviews - {totalReviews ? `Viewing ${totalReviews} past ${totalReviews === 1 ? 'review' : 'reviews'}:`
               : 'You have no past Reviews'}
           </div>
-            <SingleReview />
-            ))}
+          {
+              reviews.map((review, ind) => <SingleReview key={ind} review={review}/>)
+          }
         </div>
     )
 }

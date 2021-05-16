@@ -10,8 +10,8 @@ export const ADD_ORDER = gql`
     mutation addOrder($input: OrderInput!) {
         addOrder(input: $input) {
             _id
-            serviceDate
-            serviceTime
+            service_date
+            service_time
             owner{
                 _id
             }
@@ -26,8 +26,8 @@ export const UPDATE_ORDER = gql`
     mutation updateOrder($order_id: ID!, $input: OrderInput!) {
         updateOrder(order_id: $order_id, input: $input) {
             _id
-            serviceDate
-            serviceTime
+            service_date
+            service_time
             owner{
                 _id
             }
@@ -54,8 +54,8 @@ export const UPDATE_ORDER_STATUS = gql`
     mutation updateOrderStatus($order_id: ID!, $status: String!) {
         updateOrderStatus(order_id: $order_id, status: $status) {
             _id
-            serviceDate
-            serviceTime
+            service_date
+            service_time
             status
             owner{
                 _id
@@ -74,8 +74,8 @@ export const REMOVE_ORDER = gql`
     mutation removeOrder($order_id: ID!) {
         removeOrder(order_id: $order_id) {
             _id
-            serviceDate
-            serviceTime
+            service_date
+            service_time
             owner{
                 _id
             }
@@ -100,12 +100,12 @@ export const ADD_REVIEW = gql`
   mutation addReview( $input: ReviewInput ) {
     addReview( input: $input ) {
       _id
-      firstName
-      lastName
+      first_name
+      last_name
       reviews{
-        owner
+        owner_id
         rating
-        reviewText
+        review_text
       }
     }
   }
@@ -115,12 +115,12 @@ export const REMOVE_REVIEW = gql`
     mutation removeReview($walker_id: ID! ) {
         removeReview(walker_id: $walker_id ) {
             _id
-            firstName
-            lastName
+            first_name
+            last_name
             reviews{
                 owner_id
                 rating
-                reviewText
+                review_text
             }
         }
     }
@@ -130,12 +130,12 @@ export const UPDATE_REVIEW = gql`
     mutation updateReview($input: ReviewInput ) {
         updateReview(input: $input ) {
             _id
-            firstName
-            lastName
+            first_name
+            last_name
             reviews{
                 owner_id
                 rating
-                reviewText
+                review_text
             }
         }
     }
@@ -145,10 +145,14 @@ export const CLEAR_REVIEW = gql`
     mutation clearReview($walker_id: ID! ) {
         clearReview(walker_id: $walker_id) {
             _id
-            firstName
-            lastName
-            reviews
-            averageRating
+            first_name
+            last_name
+            reviews{
+                owner_id
+                rating
+                review_text
+            }
+            average_rating
         }
     }
 `;
@@ -162,29 +166,14 @@ export const CLEAR_REVIEW = gql`
     - UPDATE_WALKER_STATUS
 */
 
-// export const ADD_WALKER = gql`
-//     mutation addWalker($input: WalkerInput) {
-//         addWalker(input: $input) {
-//             token
-//             walker {
-//                 _id
-//                 firstName
-//                 lastName
-//                 email
-//                 ratings
-//                 averageRating
-//             }
-//         }
-//     }
-// `;
 export const ADD_WALKER = gql`
     mutation addWalker($input: WalkerInput) {
         addWalker(input: $input) {
             token
             walker {
                 _id
-                firstName
-                lastName
+                first_name
+                last_name
                 email
             }
         }
@@ -207,16 +196,17 @@ export const UPDATE_WALKER_PROFILE = gql`
     mutation updateWalkerProfile($input: WalkerProfileInput) {
         updateWalkerProfile(input: $input) {
             _id
-            firstName
-            lastName
+            first_name
+            last_name
             email
             avatar
             reviews{
+                owner_id
                 rating
-                reviewText
+                review_text
             }
             earnings
-            averageRating
+            average_rating
             neighbourhoods
             availability {
                 date
@@ -244,8 +234,8 @@ export const ADD_OWNER = gql`
             token
             owner {
                 _id
-                firstName
-                lastName
+                first_name
+                last_name
                 email
                 admin
                 dogs {

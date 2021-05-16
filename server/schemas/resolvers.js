@@ -23,7 +23,7 @@ const resolvers = {
         },
 
         // to get owner's own profile
-        owner_me: async (parent, args, context) => {
+        ownerMe: async (parent, args, context) => {
             if (context.owner) {
                 const owner = await Owner.findById(context.owner._id)
                     .select('-__v -password');
@@ -45,7 +45,7 @@ const resolvers = {
         },
 
         // to get walker's own profile
-        walker_me: async (parent, args, context) => {
+        walkerMe: async (parent, args, context) => {
             if (context.walker) {
                 const walker = await Walker.findById(context.walker._id)
                     .select('-__v -password');
@@ -70,21 +70,21 @@ const resolvers = {
         },
 
         // getOrders
-        owner_orders: async (parent, { owner_id }, context) => {
+        ownerOrders: async (parent, { owner_id }, context) => {
             return await Order.find({ owner: mongoose.Types.ObjectId(owner_id) })
                 .select('-__v')
                 .populate('owner')
                 .populate('walker');
         },
 
-        walker_orders: async (parent, { walker_id }, context) => {
+        walkerOrders: async (parent, { walker_id }, context) => {
             return await Order.find({ walker: mongoose.Types.ObjectId(walker_id) })
                 .select('-__v')
                 .populate('owner')
                 .populate('walker');
         },
 
-        get_customer_session_id: async (parent, args, context) => {
+        getCustomerSessionId: async (parent, args, context) => {
 
             if (context.owner) {
                 const url = new URL(context.headers.referer).origin;
@@ -123,7 +123,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        get_customer_info_from_stripe: async (parent, args, context) => {
+        getCustomerInfoFromStripe: async (parent, args, context) => {
             if (context.owner) {
                 const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
                 const customer = await stripe.customers.retrieve(customer_id);
@@ -134,7 +134,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        charge_owner: async (parent, {amount, description}, context) => {
+        chargeOwner: async (parent, {amount, description}, context) => {
             if (context.owner) {
                 const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
                 const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
@@ -160,7 +160,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        retrieve_payments: async (parent, arg, context) => {
+        retrievePayments: async (parent, arg, context) => {
             if (context.owner) {
                 const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
 
@@ -433,8 +433,8 @@ const resolvers = {
         */
         addReview: async (parent, { input }, context) => {
             if(context.owner){
-                const { walker_id, rating, reviewText} = input;   
-                const review = {owner_id: context.owner._id, rating: rating, reviewText: reviewText};
+                const { walker_id, rating, review_text} = input;   
+                const review = {owner_id: context.owner._id, rating: rating, review_text: review_text};
 
                 // remove current review if exists to make sure only one review can be added by same owner
                 await Walker.findByIdAndUpdate(
@@ -467,13 +467,13 @@ const resolvers = {
 
         updateReview: async (parent, { input }, context) => {
             if (context.owner) {
-                const { owner_id, walker_id, rating, reviewText } = input;
-                const review = { owner_id: owner_id, rating: rating, reviewText: reviewText };
+                const { walker_id, rating, review_text } = input;
+                const review = { owner_id: context.owner._id, rating: rating, review_text: review_text };
 
                 // remove current review
                 await Walker.findByIdAndUpdate(
                     walker_id,
-                    { $pull: { reviews: { owner_id: owner_id } } },
+                    { $pull: { reviews: { owner_id: context.owner._id } } },
                     { new: true, runValidators: true }
                 );
 

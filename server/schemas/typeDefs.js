@@ -3,15 +3,15 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
     type Owner {
         _id: ID
-        firstName: String
-        lastName: String
+        first_name: String
+        last_name: String
         email: String
         avatar: String
         admin: Boolean
         address: Address
         phone: String
         dogs: [Dog]
-        dogCount: Int
+        dog_count: Int
         status: String
         stripe_customer_id: String
         stripe_setup_intent: String
@@ -19,23 +19,23 @@ const typeDefs = gql`
 
     type Walker {
         _id: ID
-        firstName: String
-        lastName: String
+        first_name: String
+        last_name: String
         email: String
         avatar: String
         address: Address
         neighbourhoods: [String]
         reviews: [Review]
         earnings: Float
-        averageRating: Float
+        average_rating: Float
         availability: [Availability]
         status: String
     }
 
     type Order {
         _id: ID
-        serviceDate: String
-        serviceTime: String
+        service_date: String
+        service_time: String
         status: String
         owner: Owner
         walker: Walker
@@ -47,7 +47,7 @@ const typeDefs = gql`
         city: String
         neighbourhood: String
         province: String
-        postalCode: String  
+        postal_code: String  
     }
 
     type Dog {
@@ -74,7 +74,7 @@ const typeDefs = gql`
         owner: Owner
         owner_id: ID!
         rating: Int!
-        reviewText: String
+        review_text: String
     }
 
     type AuthOwner {
@@ -142,8 +142,8 @@ const typeDefs = gql`
     }
 
     input OwnerInput {
-        firstName: String!
-        lastName: String!
+        first_name: String!
+        last_name: String!
         email: String!
         password: String!
         admin: Boolean
@@ -154,8 +154,8 @@ const typeDefs = gql`
     }
 
     input OwnerProfileInput {
-        firstName: String
-        lastName: String
+        first_name: String
+        last_name: String
         email: String
         address: AddressInput
         phone: String
@@ -163,8 +163,8 @@ const typeDefs = gql`
     }
 
     input WalkerInput {
-        firstName: String!
-        lastName: String!
+        first_name: String!
+        last_name: String!
         email: String!
         password: String!
         availability: [AvailabilityInput]
@@ -173,8 +173,8 @@ const typeDefs = gql`
     }
 
     input WalkerProfileInput {
-        firstName: String
-        lastName: String
+        first_name: String
+        last_name: String
         email: String
         neighbourhoods: [String]
         avatar: String
@@ -189,8 +189,8 @@ const typeDefs = gql`
     }
 
     input OrderInput {
-        serviceDate: String!
-        serviceTime: String!
+        service_date: String!
+        service_time: String!
         owner: ID!
         walker: ID
         dogs: [ID]!
@@ -199,7 +199,7 @@ const typeDefs = gql`
     input ReviewInput {
         walker_id: ID!
         rating: Int!
-        reviewText: String
+        review_text: String
     }
 
     input AvailabilityInput {
@@ -216,22 +216,22 @@ const typeDefs = gql`
     type Query {
         owner(owner_id: ID!): Owner
         owners: [Owner]
-        owner_me: Owner
+        ownerMe: Owner
         
         walker(walker_id: ID!): Walker
         walkers: [Walker]
-        walker_me: Walker
+        walkerMe: Walker
         checkWalkerAvailability(date: String!, time: String!): [Walker]
 
         order(order_id: ID): Order
         orders: [Order]
-        owner_orders(owner_id: ID): [Order]
-        walker_orders(walker_id: ID): [Order]
+        ownerOrders(owner_id: ID): [Order]
+        walkerOrders(walker_id: ID): [Order]
 
-        get_customer_session_id: Checkout
-        get_customer_info_from_stripe: Customer
-        charge_owner(amount: Int!, description: String!): Charge
-        retrieve_payments: Payments
+        getCustomerSessionId: Checkout
+        getCustomerInfoFromStripe: Customer
+        chargeOwner(amount: Int!, description: String!): Charge
+        retrievePayments: Payments
     }
 
     type Mutation {

@@ -1,14 +1,14 @@
 import React from 'react';
 import '../../css/WalkerProfile.css';
 
-function WalkerAvgRating({averageRating}) {
+function WalkerAvgRating({average_rating}) {
     return (
         <div className="walker-profile-container">
           <div>
             My Rating
           </div>
           <div className="average-rating">
-            {parseInt(averageRating).toFixed(1)}
+            {parseFloat(average_rating).toFixed(1)}
           </div>
         </div>
     )

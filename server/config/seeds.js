@@ -8,8 +8,8 @@ db.once('open', async () => {
 
     await Owner.create(
         {
-            firstName: 'Eric',
-            lastName: 'Normann',
+            first_name: 'Eric',
+            last_name: 'Normann',
             email: 'eric.n@me.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -19,7 +19,7 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'west toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
             dogs: [],
@@ -29,8 +29,8 @@ db.once('open', async () => {
 
     await Owner.create(
         {
-            firstName: 'Samiul',
-            lastName: 'Choudhury',
+            first_name: 'Samiul',
+            last_name: 'Choudhury',
             email: 'sc@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -40,7 +40,7 @@ db.once('open', async () => {
                 city: 'calgary',
                 neighbourhood: '',
                 province: 'alberta',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
             dogs: [],
@@ -50,8 +50,8 @@ db.once('open', async () => {
 
     await Owner.create(
         {
-            firstName: 'Nathan',
-            lastName: 'Chow',
+            first_name: 'Nathan',
+            last_name: 'Chow',
             email: 'nc@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -61,7 +61,7 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'south toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
             dogs: [],
@@ -71,8 +71,8 @@ db.once('open', async () => {
 
     await Owner.create(
         {
-            firstName: 'Shamim',
-            lastName: 'Imtiaz',
+            first_name: 'Shamim',
+            last_name: 'Imtiaz',
             email: 'si@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -82,7 +82,7 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'east toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
             dogs: [
@@ -107,8 +107,8 @@ db.once('open', async () => {
 
     await Owner.create(
         {
-            firstName: 'Mike',
-            lastName: 'Smith',
+            first_name: 'Mike',
+            last_name: 'Smith',
             email: 'ms@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -118,7 +118,7 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'east toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
             dogs: [
@@ -136,8 +136,8 @@ db.once('open', async () => {
 
     await Owner.create(
         {
-            firstName: 'Jim',
-            lastName: 'Anderson',
+            first_name: 'Jim',
+            last_name: 'Anderson',
             email: 'ja@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -147,7 +147,7 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'east toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
             dogs: [
@@ -172,8 +172,8 @@ db.once('open', async () => {
 
     await Walker.create(
         {
-            firstName: 'Pamela',
-            lastName: 'Washington',
+            first_name: 'Pamela',
+            last_name: 'Washington',
             email: 'pw@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -183,7 +183,7 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'east toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             reviews: [],
             earnings: 0.0,
@@ -225,8 +225,8 @@ db.once('open', async () => {
 
     await Walker.create(
         {
-            firstName: 'Elijah',
-            lastName: 'Holt',
+            first_name: 'Elijah',
+            last_name: 'Holt',
             email: 'eh@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -236,7 +236,7 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'east toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             reviews: [],
             earnings: 0.0,
@@ -278,8 +278,8 @@ db.once('open', async () => {
 
     await Walker.create(
         {
-            firstName: 'Karen',
-            lastName: 'Nuvoski',
+            first_name: 'Karen',
+            last_name: 'Nuvoski',
             email: 'kn@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -289,23 +289,23 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'east toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             reviews: [
                 {
                     owner_id: ownerIds[0],
                     rating: 4,
-                    reviewText: "keep up good work"
+                    review_text: "keep up good work"
                 },
                 {
                     owner_id: ownerIds[4],
                     rating: 1,
-                    reviewText: "bad!!!"
+                    review_text: "bad!!!"
                 },
                 {
                     owner_id: ownerIds[1],
                     rating: 3,
-                    reviewText: "not so bad"
+                    review_text: "not so bad"
                 }
             ],
             earnings: 1000.0,
@@ -347,8 +347,8 @@ db.once('open', async () => {
 
     await Walker.create(
         {
-            firstName: 'Ryan',
-            lastName: 'Turnbull',
+            first_name: 'Ryan',
+            last_name: 'Turnbull',
             email: 'rt@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -358,23 +358,23 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'east toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             reviews: [
                 {
                     owner_id: ownerIds[4],
                     rating: 1,
-                    reviewText: "pretty bad service!"
+                    review_text: "pretty bad service!"
                 },
                 {
                     owner_id: ownerIds[1],
                     rating: 2,
-                    reviewText: "not recommended"
+                    review_text: "not recommended"
                 },
                 {
                     owner_id: ownerIds[2],
                     rating: 3,
-                    reviewText: "not so bad"
+                    review_text: "not so bad"
                 }
             ],
             earnings: 800.0,
@@ -416,8 +416,8 @@ db.once('open', async () => {
 
     await Walker.create(
         {
-            firstName: 'Mark',
-            lastName: 'Spencer',
+            first_name: 'Mark',
+            last_name: 'Spencer',
             email: 'ms@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
@@ -427,23 +427,23 @@ db.once('open', async () => {
                 city: 'toronto',
                 neighbourhood: 'east toronto',
                 province: 'ontario',
-                postalCode: 'AAA AAA'
+                postal_code: 'AAA AAA'
             },
             reviews: [
                 {
                     owner_id: ownerIds[5],
                     rating: 4,
-                    reviewText: "keep up good work"
+                    review_text: "keep up good work"
                 },
                 {
                     owner_id: ownerIds[4],
                     rating: 2,
-                    reviewText: "not recommended"
+                    review_text: "not recommended"
                 },
                 {
                     owner_id: ownerIds[1],
                     rating: 3,
-                    reviewText: "not so bad"
+                    review_text: "not so bad"
                 }
             ],
             earnings: 1000.0,
@@ -491,32 +491,32 @@ db.once('open', async () => {
     await Order.insertMany([
       
       {
-        serviceDate:'2021-05-21',
-        serviceTime: '9am',
+        service_date:'2021-05-21',
+        service_time: '9am',
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac06c',
         walker: '60a073419ae33509302ac085',
         dogs: ['60a073419ae33509302ac06e']
       },
       {
-        serviceDate:'2021-05-20',
-        serviceTime: '9am',
+        service_date:'2021-05-20',
+        service_time: '9am',
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac06f',
         walker: '60a073419ae33509302ac08a',
         dogs: ['60a073419ae33509302ac071']
       },
       {
-        serviceDate:'2021-05-20',
-        serviceTime: '11am',
+        service_date:'2021-05-20',
+        service_time: '11am',
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac072',
         walker: '60a073419ae33509302ac08a',
         dogs: ['60a073419ae33509302ac074']
       },
       {
-        serviceDate:'2021-05-20',
-        serviceTime: '1pm',
+        service_date:'2021-05-20',
+        service_time: '1pm',
         status: 'PENDING_PROGRESS',
         owner: '60a073419ae33509302ac075',
         walker: '60a073419ae33509302ac08f',
@@ -526,32 +526,32 @@ db.once('open', async () => {
         ]
       },
       {
-        serviceDate:'2021-05-21',
-        serviceTime: '11am',
+        service_date:'2021-05-21',
+        service_time: '11am',
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac079',
         walker: '60a073419ae33509302ac097',
         dogs: ['60a073419ae33509302ac07b']
       },
       {
-        serviceDate:'2021-05-21',
-        serviceTime: '3pm',
+        service_date:'2021-05-21',
+        service_time: '3pm',
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac07c',
         walker: '60a073419ae33509302ac09f',
         dogs: ['60a073419ae33509302ac07e']
       },
       {
-        serviceDate:'2021-05-20',
-        serviceTime: '5pm',
+        service_date:'2021-05-20',
+        service_time: '5pm',
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac07c',
         walker: '60a073419ae33509302ac09f',
         dogs: ['60a073419ae33509302ac07e']
       },
       {
-        serviceDate:'2021-05-21',
-        serviceTime: '7pm',
+        service_date:'2021-05-21',
+        service_time: '7pm',
         status: 'PENDING_PROGRESS',
         owner: '60a073419ae33509302ac075',
         walker: '60a073419ae33509302ac08f',

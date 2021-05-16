@@ -28,7 +28,7 @@ function WalkerProfile() {
         else if (!currentUser && data) {
             dispatch({
                 type: UPDATE_CURRENT_USER,
-                currentUser: data.walker_me
+                currentUser: data.walkerMe
             });
             
         }
@@ -42,10 +42,6 @@ function WalkerProfile() {
         //     });
         // }
     }, [currentUser, data, loading, dispatch]);
-
-  
-    // const currentUser = 'ACTIVE';
-
 
   return (
     <div className="page-body">
@@ -76,8 +72,8 @@ function WalkerProfile() {
             <WalkerDetails user={currentUser}/>
             {currentUser && currentUser.status === "ACTIVE" && 
               <>
-                <WalkerAvgRating averageRating={currentUser.averageRating}/>
-                <WalkerReviews reviews={currentUser.reviews}/>
+                <WalkerAvgRating average_rating={currentUser.average_rating}/>
+                <WalkerReviews reviews={currentUser.reviews} />
                 <WalkerOrders orders={currentUser.orders}/>
                 <WalkerEarnings earnings={currentUser.earnings}/>
                 <WalkerNeighbourhoods neighbourhoods={currentUser.neighbourhoods}/>

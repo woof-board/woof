@@ -3,13 +3,25 @@ import '../../css/WalkerProfile.css';
 
 function WalkerDetails({ user }) {
 
-    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '' });
+    const [formData, setFormData] = useState({ 
+        first_name: '', 
+        last_name: '', 
+        email: '',
+        // avatar: '',
+        // neighbourhoods: [],
+        // street: '',
+        // city: '',
+        // neighbourhood: '',
+        // province: '',
+        // postal:''
+
+    });
 
     useEffect(() => {
         if (user) {
             setFormData({
-                firstName: user.firstName,
-                lastName: user.lastName,
+                first_name: user.first_name,
+                last_name: user.last_name,
                 email: user.email
             });
         }
@@ -43,9 +55,9 @@ function WalkerDetails({ user }) {
                     <input
                         className="profile-input"
                         type="text"
-                        name="firstName"
+                        name="first_name"
                         onChange={handleInputChange}
-                        value={formData.firstName}
+                        value={formData.first_name}
                     />
                 </div>
                 <div className="row-data">
@@ -53,9 +65,9 @@ function WalkerDetails({ user }) {
                     <input
                         className="profile-input"
                         type="text"
-                        name="lastName"
+                        name="last_name"
                         onChange={handleInputChange}
-                        value={formData.lastName}
+                        value={formData.last_name}
                     />
                 </div>
                 <div className="row-data">
