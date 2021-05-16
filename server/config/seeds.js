@@ -496,7 +496,7 @@ db.once('open', async () => {
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac06c',
         walker: '60a073419ae33509302ac085',
-        dogs: '60a073419ae33509302ac06e'
+        dogs: ['60a073419ae33509302ac06e']
       },
       {
         serviceDate:'2021-05-20',
@@ -504,7 +504,7 @@ db.once('open', async () => {
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac06f',
         walker: '60a073419ae33509302ac08a',
-        dogs: '60a073419ae33509302ac071'
+        dogs: ['60a073419ae33509302ac071']
       },
       {
         serviceDate:'2021-05-20',
@@ -512,7 +512,7 @@ db.once('open', async () => {
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac072',
         walker: '60a073419ae33509302ac08a',
-        dogs:'60a073419ae33509302ac074'
+        dogs: ['60a073419ae33509302ac074']
       },
       {
         serviceDate:'2021-05-20',
@@ -520,9 +520,10 @@ db.once('open', async () => {
         status: 'PENDING_PROGRESS',
         owner: '60a073419ae33509302ac075',
         walker: '60a073419ae33509302ac08f',
-        dogs: [{
-          _id:'60a073419ae33509302ac077'},
-          {_id:'60a073419ae33509302ac078'}]
+        dogs: [
+          '60a073419ae33509302ac077',
+          '60a073419ae33509302ac078'
+        ]
       },
       {
         serviceDate:'2021-05-21',
@@ -530,7 +531,7 @@ db.once('open', async () => {
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac079',
         walker: '60a073419ae33509302ac097',
-        dogs: '60a073419ae33509302ac07b'
+        dogs: ['60a073419ae33509302ac07b']
       },
       {
         serviceDate:'2021-05-21',
@@ -538,7 +539,7 @@ db.once('open', async () => {
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac07c',
         walker: '60a073419ae33509302ac09f',
-        dogs: '60a073419ae33509302ac07e'
+        dogs: ['60a073419ae33509302ac07e']
       },
       {
         serviceDate:'2021-05-20',
@@ -546,7 +547,7 @@ db.once('open', async () => {
         status: 'PENDING_WALKER',
         owner: '60a073419ae33509302ac07c',
         walker: '60a073419ae33509302ac09f',
-        dogs: '60a073419ae33509302ac07e'
+        dogs: ['60a073419ae33509302ac07e']
       },
       {
         serviceDate:'2021-05-21',
@@ -554,16 +555,15 @@ db.once('open', async () => {
         status: 'PENDING_PROGRESS',
         owner: '60a073419ae33509302ac075',
         walker: '60a073419ae33509302ac08f',
-        dogs: [{
-          _id:'60a073419ae33509302ac077'},
-          {_id:'60a073419ae33509302ac078'}]
+        dogs: [
+          '60a073419ae33509302ac077',
+          '60a073419ae33509302ac078'
+        ]
       },
       
     ]);
 
     console.log('order seeded');
-
-
 
     
     process.exit();
