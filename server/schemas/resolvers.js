@@ -262,16 +262,19 @@ const resolvers = {
                 const owner = await Owner.findById(context.owner._id); 
 
                 // check if the current password is valid
-                const validPassword = owner.isCorrectPassword(old_password);
+                const validPassword = await owner.isCorrectPassword(old_password);
                 if (!validPassword) {
                     throw new UserInputError("Current password is incorrect!");
                 }
+                
+                owner.password = new_password;
+                return await owner.save();
 
-                return await Owner.findByIdAndUpdate(
-                    context.owner._id, 
-                    { password: new_password }, 
-                    { new: true, runValidators: true }
-                );
+                // return await Owner.findByIdAndUpdate(
+                //     context.owner._id, 
+                //     { password: new_password }, 
+                //     { new: true, runValidators: true }
+                // );
             }
       
             throw new AuthenticationError('Not logged in');
@@ -330,16 +333,20 @@ const resolvers = {
                 const walker = await Walker.findById(context.walker._id); 
 
                 // check if the current password is valid
-                const validPassword = walker.isCorrectPassword(old_password);
+                const validPassword = await walker.isCorrectPassword(old_password);
+                
                 if (!validPassword) {
                     throw new UserInputError("Current password is incorrect!");
                 }
 
-                return await Walker.findByIdAndUpdate(
-                    context.walker._id, 
-                    { password: new_password }, 
-                    { new: true, runValidators: true }
-                );
+                walker.password = new_password;
+                return await walker.save();
+
+                // return await Walker.findByIdAndUpdate(
+                //     context.walker._id, 
+                //     { password: new_password }, 
+                //     { new: true, runValidators: true }
+                // );
             }
       
             throw new AuthenticationError('Not logged in');

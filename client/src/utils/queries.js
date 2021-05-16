@@ -57,6 +57,13 @@ export const QUERY_WALKER_ME = gql`
             last_name
             email
             avatar
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
             reviews{
                 owner_id
                 rating

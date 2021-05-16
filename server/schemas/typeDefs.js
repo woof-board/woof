@@ -177,6 +177,7 @@ const typeDefs = gql`
         last_name: String
         email: String
         neighbourhoods: [String]
+        address: AddressInput
         avatar: String
     }
 

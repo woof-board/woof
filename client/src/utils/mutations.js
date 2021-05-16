@@ -200,6 +200,13 @@ export const UPDATE_WALKER_PROFILE = gql`
             last_name
             email
             avatar
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
             reviews{
                 owner_id
                 rating
@@ -208,6 +215,7 @@ export const UPDATE_WALKER_PROFILE = gql`
             earnings
             average_rating
             neighbourhoods
+            status
             availability {
                 date
                 slot9am
@@ -218,6 +226,14 @@ export const UPDATE_WALKER_PROFILE = gql`
                 slot7pm
                 slot9pm
             }
+        }
+    }
+`;
+
+export const UPDATE_WALKER_PASSWORD = gql`
+    mutation updateWalkerPassword($old_password: String!, $new_password: String!) {
+        updateWalkerPassword(old_password: $old_password, new_password: $new_password) {
+            _id
         }
     }
 `;

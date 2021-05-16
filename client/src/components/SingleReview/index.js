@@ -1,4 +1,5 @@
 import React from 'react';
+import StarRatingComponent from 'react-star-rating-component'; 
 import '../../css/WalkerProfile.css';
 
 function SingleReview( { review }) {
@@ -8,7 +9,13 @@ function SingleReview( { review }) {
         <>
             <div className="walks">
                 <div>Reviewer: {owner_id}</div>
-                <div>Rating: {rating}</div>
+                <div>
+                    <StarRatingComponent 
+                        name="rating" 
+                        starCount={5}
+                        value={rating}
+                    />
+                </div>
                 <div>{review_text}</div>
             </div>
         </>
