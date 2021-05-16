@@ -5,7 +5,7 @@ import AboutOwner from '../pages/AboutOwner';
 import AboutWalker from '../pages/AboutWalker';
 import AboutDevelopers from '../components/About/AboutDevelopers';
 import AboutTechnology from '../components/About/AboutTechnology';
-import AboutApp from '../components/About/AboutApp';
+// import AboutApp from '../components/About/AboutApp';
 
 
 function About() {
@@ -63,12 +63,12 @@ function About() {
                 </div>
             </div>
 
-            <div className="component-section">
+            {/* <div className="component-section">
             <h2>Check out our App!</h2>
                 <div className="content flex-r">
                     <AboutApp />
                 </div>
-            </div>
+            </div> */}
             
             <div className="component-section">
             <h2>Team</h2>
