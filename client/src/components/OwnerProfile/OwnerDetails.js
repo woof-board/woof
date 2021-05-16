@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../css/WalkerProfile.css';
+// import '../../css/WalkerProfile.css';
 
 function WalkerDetails({ user }) {
 
@@ -30,10 +30,9 @@ function WalkerDetails({ user }) {
     };
 
     return (
+        <>
+        <h1>My Profile</h1>
         <div className="walker-contact-container">
-            <div>
-                My Profile
-            </div>
             <form 
                 className="user-update-form"
                 id="walker-update-form"
@@ -98,6 +97,7 @@ function WalkerDetails({ user }) {
                 </button>
             </form>
         </div>
+        </>
     )
 }
 

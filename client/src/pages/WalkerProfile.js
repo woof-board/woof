@@ -44,7 +44,10 @@ function WalkerProfile() {
     }, [currentUser, data, loading, dispatch]);
 
   return (
-    <div className="page-body">
+    <>
+      <h1>My Profile</h1>
+      <div className='page-wrap'>
+      
       {currentUser && currentUser.status === "SUSPENDED" && 
         <>
           <div className="account-status">
@@ -82,6 +85,7 @@ function WalkerProfile() {
           </div>
         </>
     </div>
+    </>
   );
 }
 

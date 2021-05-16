@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import '../../css/WalkerProfile.css';
+//import '../../css/WalkerProfile.css';
 import { UPDATE_WALKER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
@@ -104,31 +104,27 @@ function WalkerDetails({ user }) {
     ]
 
     return (
+        <>
         <div className="walker-contact-container">
-            <div>
-                <h2>My Profile</h2>
-            </div>
             <form
                 className="user-update-form"
                 id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
                 <div className="row-data">
-                    <label className="profile-label">First Name</label>
                     <input
-                        className="profile-input"
+                        className="profile-input profile-name"
                         type="text"
                         name="first_name"
+                        placeholder="First Name"
                         onChange={handleInputChange}
                         value={formData.first_name}
                     />
-                </div>
-                <div className="row-data">
-                    <label className="profile-label">Last Name</label>
                     <input
-                        className="profile-input"
+                        className="profile-input profile-name"
                         type="text"
                         name="last_name"
+                        placeholder="First Name"
                         onChange={handleInputChange}
                         value={formData.last_name}
                     />
@@ -203,6 +199,7 @@ function WalkerDetails({ user }) {
                 </button>
             </form>
         </div>
+        </>
     )
 }
 

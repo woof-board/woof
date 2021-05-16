@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../css/WalkerProfile.css';
+//import '../../css/WalkerProfile.css';
 import SingleReview from '../SingleReview';
 
 function WalkerReviews({ reviews=[] }) {

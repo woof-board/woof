@@ -24,6 +24,10 @@
 
 /* if adding opacity to VAR, rgb(var(--color), <opacity>); */
 
+html, body, main {
+  height: 100%;
+}
+
 body {
   background-color: var(--quinary);
  
@@ -37,8 +41,21 @@ body {
 
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.page {
+  padding-top: 80px;
+  flex: 1 0 auto;
+  
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Rokkitt', 'serif';
+  /* font-family: 'Rokkitt', 'serif'; */
+  font-family: 'Ubuntu', 'sans-serif';
 
   /* possible font weights for Rokkit
   300: light
