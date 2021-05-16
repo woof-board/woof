@@ -170,16 +170,6 @@ function WalkerSchedule() {
 
     
 
-
-    function scrollSchedule(direction) {
-        const scheduleHolder = document.getElementById('scrolling-schedule');
-        let move = "+50px"
-        if(direction==="right") {
-            move ="-50px"
-        }
-        scheduleHolder.style.marginLeft = move;
-    }
-
     const findBooking = (booking, today, time) => {
         
         for (let i = 0; i < booking.length; i++) {
@@ -205,7 +195,7 @@ function WalkerSchedule() {
     return (
         <div id="walkers">
             <div className="headline">            
-                <h1>Your Walking Schedule</h1>
+                <h1>My Walking Schedule</h1>
             </div>
             <div className="schedule-container">
 
