@@ -14,6 +14,7 @@ import WalkerSchedule from './pages/WalkerSchedule';
 
 import OwnerProfile from './pages/OwnerProfile.js';
 import WalkerProfile from './pages/WalkerProfile.js';
+import WalkerTrackWalks from './pages/WalkerTrackWalks.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
@@ -57,6 +58,7 @@ function App() {
                             <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
                             <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
+                            <PrivateRoute exact path="/walkertrackwalks" usertype="walker" component={WalkerTrackWalks} />
 
                             <Route component={NoMatch} />
                         </Switch>
