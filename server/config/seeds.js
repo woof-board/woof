@@ -6,7 +6,7 @@ db.once('open', async () => {
 
     await Owner.deleteMany();
 
-    await Owner.insertMany([
+    await Owner.create(
         {
             firstName: 'Eric',
             lastName: 'Normann',
@@ -24,7 +24,10 @@ db.once('open', async () => {
             phone: '111 111 1111',
             dogs: [],
             status: "ACTIVE"
-        },
+        }
+    );
+
+    await Owner.create(
         {
             firstName: 'Samiul',
             lastName: 'Choudhury',
@@ -42,7 +45,10 @@ db.once('open', async () => {
             phone: '111 111 1111',
             dogs: [],
             status: "ACTIVE"
-        },
+        }
+    );
+
+    await Owner.create(
         {
             firstName: 'Nathan',
             lastName: 'Chow',
@@ -60,7 +66,10 @@ db.once('open', async () => {
             phone: '111 111 1111',
             dogs: [],
             status: "ACTIVE"
-        },
+        }
+    );
+
+    await Owner.create(
         {
             firstName: 'Shamim',
             lastName: 'Imtiaz',
@@ -93,7 +102,10 @@ db.once('open', async () => {
                 }
             ],
             status: "ACTIVE"
-        },
+        }
+    );
+
+    await Owner.create(
         {
             firstName: 'Mike',
             lastName: 'Smith',
@@ -119,7 +131,10 @@ db.once('open', async () => {
                 }
             ],
             status: "PENDING_INFORMATION"
-        },
+        }
+    );
+
+    await Owner.create(
         {
             firstName: 'Jim',
             lastName: 'Anderson',
@@ -146,7 +161,7 @@ db.once('open', async () => {
             ],
             status: "SUSPENDED"
         }
-    ]);
+    );
 
     console.log('owners seeded');
 
@@ -155,7 +170,7 @@ db.once('open', async () => {
 
     await Walker.deleteMany();
 
-    await Walker.insertMany([
+    await Walker.create(
         {
             firstName: 'Pamela',
             lastName: 'Washington',
@@ -205,7 +220,10 @@ db.once('open', async () => {
                 }
             ],
             status: "PENDING_INFORMATION"
-        },
+        }
+    );
+
+    await Walker.create(
         {
             firstName: 'Elijah',
             lastName: 'Holt',
@@ -255,7 +273,10 @@ db.once('open', async () => {
                 }
             ],
             status: "PENDING_APPROVAL"
-        },
+        }
+    );
+
+    await Walker.create(
         {
             firstName: 'Karen',
             lastName: 'Nuvoski',
@@ -321,7 +342,10 @@ db.once('open', async () => {
                 }
             ],
             status: "ACTIVE"
-        },
+        }
+    );
+
+    await Walker.create(
         {
             firstName: 'Ryan',
             lastName: 'Turnbull',
@@ -387,7 +411,10 @@ db.once('open', async () => {
                 }
             ],
             status: "ACTIVE"
-        },
+        }
+    );
+
+    await Walker.create(
         {
             firstName: 'Mark',
             lastName: 'Spencer',
@@ -454,7 +481,7 @@ db.once('open', async () => {
             ],
             status: "SUSPENDED"
         }
-    ]);
+    );
 
     console.log('walker seeded');
 
