@@ -5,12 +5,12 @@ const dogSchema = require('./Dog');
 
 const ownerSchema = new Schema(
     {
-        firstName: {
+        first_name: {
             type: String,
             required: true,
             trim: true
         },
-        lastName: {
+        last_name: {
             type: String,
             required: true,
             trim: true
@@ -73,7 +73,7 @@ ownerSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-ownerSchema.virtual('dogCount').get(function() {
+ownerSchema.virtual('dog_count').get(function() {
     return this.dogs.length;
 });
 

@@ -21,7 +21,7 @@ const reviewSchema = new Schema(
                 message: props => `${props.value} is not a valid rating number!`
             },
         },
-        reviewText: {
+        review_text: {
             type: String
         }
     },{
@@ -33,12 +33,12 @@ const reviewSchema = new Schema(
 
 const walkerSchema = new Schema(
     {
-        firstName: {
+        first_name: {
             type: String,
             required: true,
             trim: true
         },
-        lastName: {
+        last_name: {
             type: String,
             required: true,
             trim: true
@@ -107,7 +107,7 @@ walkerSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-walkerSchema.virtual('averageRating').get(function () {
+walkerSchema.virtual('average_rating').get(function () {
     const reducer = (accumulator, currentValue, currentIndex, sourceArr) => {
         if(currentIndex === sourceArr.length - 1) {
           return parseFloat(((accumulator + currentValue) / sourceArr.length).toFixed(2));
