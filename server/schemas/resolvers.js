@@ -501,7 +501,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        clear_setup_intent: async (parent, arg, context) => {
+        clearSetupIntent: async (parent, arg, context) => {
             if (context.owner) {
                 const newOwner = await Owner.findByIdAndUpdate(
                     context.owner._id,

@@ -258,7 +258,7 @@ const typeDefs = gql`
         updateWalkerAvailability(input: [AvailabilityInput]): Walker
         updateWalkerStatus(walker_id: ID!, status: String!): Walker
 
-        clear_setup_intent: Owner
+        clearSetupIntent: Owner
     }
 
 `;
