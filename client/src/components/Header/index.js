@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
+import { NavLink } from 'react-router-dom';
 
 function Header() {
 
@@ -29,6 +30,11 @@ function Header() {
             name: 'Dashboard',
             href: '/admindashboard',
             for: 'admin'
+        },
+        {
+            name: 'Schedule',
+            href: '/walkerschedule',
+            for: 'walker'
         }
     ]);
 
@@ -62,7 +68,7 @@ function Header() {
                         className="header-logo" 
                         src={Logo} 
                         alt="logo" 
-                        width="84" 
+                        width="100" 
                     />
                 </Link>
             </div>
@@ -72,28 +78,26 @@ function Header() {
                         <div className="nav-row">
                             {links.map((link) => (
                                 link.for === result &&
-                                <li key={link.name} className="list-link">
-                                    <Link to={link.href}>
-                                        <span 
-                                            className={`link ${currentLink.name === link.name && `listActive`}`} 
-                                            onClick={() => {setCurrentLink(link);}}
-                                        >
+                                <li key={link.name} className="link">
+                                    <NavLink to={link.href} activeClassName="navActive">
                                             {link.name}
-                                        </span>
-                                    </Link>
+                                    </NavLink>
                                 </li>                     
-                            ))}                       
+                            ))}    
+                            <li className="link">
+                                <Link to="/">
+                                    <span 
+                                        href="/" 
+                                        onClick={logout} 
+                                        className="link" 
+                                        key="walker-logout"
+                                    >
+                                        Logout
+                                    </span>
+                                </Link>
+                            </li>                    
                         </div>
-                        <li className="list-link">
-                            <a 
-                                href="/" 
-                                onClick={logout} 
-                                className="link" 
-                                key="walker-logout"
-                            >
-                                Logout
-                            </a>
-                        </li> 
+                        
                     </>)
                 }
             </div>
