@@ -5,7 +5,7 @@
 #walkers {
     display: flex;
     flex-direction: row;
-    padding: 2rem 5rem 0;
+    padding: 2rem 5rem 1rem;
     flex-wrap: wrap;
     flex-direction: row;
 }
@@ -145,7 +145,7 @@ h1 {
 }
 
 .schedule-button-container button{
-    margin: 12px 0 0 8px
+    margin: 12px 0 12px 8px
 }
 
 
@@ -171,7 +171,7 @@ h1 {
     padding: 8px 0;
 }
 .times-header h5, .day-header h5 {
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1em;
 }
 .times-header {
