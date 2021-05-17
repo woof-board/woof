@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Home.css';
 import '../css/About.css';
-import AboutOwner from '../pages/AboutOwner';
-import AboutWalker from '../pages/AboutWalker';
+import AboutOwner from '../components/About/AboutOwner';
+import AboutWalker from '../components/About/AboutWalker';
 import AboutDevelopers from '../components/About/AboutDevelopers';
 import AboutTechnology from '../components/About/AboutTechnology';
 import AboutSafety from '../components/About/AboutSafety';
@@ -11,8 +11,6 @@ import AboutPayment from '../components/About/AboutPayment';
 
 
 function About() {
-
-
 
     const [links] = useState([
         {
@@ -53,7 +51,7 @@ function About() {
             </div>
 
             <div className="learn-more-container">
-                <h1>Learn More</h1>
+                <h1>Servicing the Greater Toronto Area</h1>
                 <div clasName="learn-more-links">
                     <span className={`aboutLink ${currentLink.name === 'owner' && `aboutActive`}`} onClick={() => { setCurrentLink(links[0]); }} >Owner</span>
                     <span className={`aboutLink ${currentLink.name === 'walker' && `aboutActive`}`} onClick={() => { setCurrentLink(links[1]); }} >Walker</span>
@@ -109,7 +107,7 @@ function About() {
             </div> */}
             
             <div className="component-section">
-            <h2>Team</h2>
+            <h2>Development Team</h2>
                 <div className="content flex-r">
                     <AboutDevelopers />
                 </div>
