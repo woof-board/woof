@@ -1,6 +1,19 @@
 const { Schema, model } = require('mongoose');
 const dogSchema = require('./Dog');
 
+const coordsSchema = new Schema( 
+    {
+        lon: {
+            type: Number,
+            required: true
+        },
+        lat: {
+            type: Number,
+            required: true,
+        }
+    }
+);
+
 const orderSchema = new Schema(
     {
         service_date: {
@@ -27,7 +40,8 @@ const orderSchema = new Schema(
         dogs: [{
             type: Schema.Types.ObjectId,
             ref: 'dogSchema'
-        }]
+        }],
+        coords: [coordsSchema]
     },
     {
         toJSON: {

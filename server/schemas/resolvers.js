@@ -422,6 +422,19 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+        updateOrderCoords: async (parent, {order_id, lon, lat }, context) => {
+            if (context.walker) {
+                const order = await Order.findByIdAndUpdate(
+                    order_id, 
+                    {$push: {coords: {lon, lat} } }
+                );
+          
+                return order;
+            }    
+           
+            throw new AuthenticationError('Not logged in');
+        },
+
         removeOrder: async (parent, {order_id, input }, context) => {
             if (context.owner && context.owner.admin) {
                 const order = await Order.findByIdAndDelete(order_id);
