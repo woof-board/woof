@@ -166,3 +166,7 @@ export const neighbourhoods = [
   "Scarborough",
   "York"
 ]
+
+export function objectToArray(coordsObject) {
+  return Object.values(coordsObject);
+}

@@ -11,10 +11,13 @@ function Map() {
     const mapContainer = useRef(null);
     const map = useRef(null);
     const coordinates = useRef(null);
+    // get coords object
+    // convert to array
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
         console.log("Current Hi");
+        
         coordinates.current = [
             [-122.483696, 37.833818],
             [-122.483482, 37.833174],
