@@ -39,7 +39,8 @@ const typeDefs = gql`
         status: String
         owner: Owner
         walker: Walker
-        dogs: [Dog]  
+        dogs: [Dog] 
+        coords: [Coords] 
     }
 
     type Address {
@@ -75,6 +76,11 @@ const typeDefs = gql`
         owner_id: ID!
         rating: Int!
         review_text: String
+    }
+
+    type Coords {
+        lon: Float
+        lat: Float
     }
 
     type AuthOwner {
