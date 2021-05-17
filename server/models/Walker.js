@@ -116,7 +116,7 @@ walkerSchema.virtual('average_rating').get(function () {
         }
     }
 
-    return this.reviews.map(review => review.rating).reduce(reducer, 0);
+    return this.reviews?.map(review => review.rating).reduce(reducer, 0);
 });
 
 

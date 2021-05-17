@@ -123,7 +123,11 @@ export const ADD_REVIEW = gql`
       first_name
       last_name
       reviews{
-        owner_id
+        owner_id{
+            _id
+            first_name
+            last_name
+          }
         rating
         review_text
       }
@@ -138,7 +142,11 @@ export const REMOVE_REVIEW = gql`
             first_name
             last_name
             reviews{
-                owner_id
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
                 rating
                 review_text
             }
@@ -153,7 +161,11 @@ export const UPDATE_REVIEW = gql`
             first_name
             last_name
             reviews{
-                owner_id
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
                 rating
                 review_text
             }
@@ -168,7 +180,11 @@ export const CLEAR_REVIEW = gql`
             first_name
             last_name
             reviews{
-                owner_id
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
                 rating
                 review_text
             }
@@ -228,7 +244,11 @@ export const UPDATE_WALKER_PROFILE = gql`
                 postal_code
             }
             reviews{
-                owner_id
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
                 rating
                 review_text
             }
@@ -274,7 +294,11 @@ export const UPDATE_WALKER_AVAILABILITY = gql`
                 postal_code
             }
             reviews{
-                owner_id
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
                 rating
                 review_text
             }
