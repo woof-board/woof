@@ -43,29 +43,28 @@ function WalkerPasswordForm() {
 
     return (
         <div className="walker-contact-container">
-            <div>
-                <h4>Update Password</h4>
-            </div>
+            <div className="walker-header"><h3>Update Password</h3></div>
+
             <form
                 className="user-update-form"
                 id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
                 <div className="row-data">
-                    <label className="profile-label">Old Password</label>
                     <input
                         className="profile-input"
                         type="password"
                         name="old_password"
+                        placeholder="Current Password"
+
                         onChange={handleInputChange}
                         value={formData.old_password}
                     />
-                </div>
-                <div className="row-data">
-                    <label className="profile-label">New Password</label>
+
                     <input
                         className="profile-input"
                         type="password"
+                        placeholder="New Password"
                         name="new_password"
                         onChange={handleInputChange}
                         value={formData.new_password}

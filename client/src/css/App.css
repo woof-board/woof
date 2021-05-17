@@ -54,8 +54,7 @@ main {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  /* font-family: 'Rokkitt', 'serif'; */
-  font-family: 'Ubuntu', 'sans-serif';
+  font-family: 'Rokkitt', 'serif'; 
 
   /* possible font weights for Rokkit
   300: light
@@ -65,7 +64,7 @@ h1, h2, h3, h4, h5, h6 {
   700: bold
   800: extra bold
   900: black */
-  font-weight:600;
+  font-weight:700;
 
 }
 

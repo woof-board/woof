@@ -74,7 +74,7 @@ ownerSchema.methods.isCorrectPassword = async function (password) {
 };
 
 ownerSchema.virtual('dog_count').get(function() {
-    return this.dogs.length;
+    return this.dogs?.length;
 });
 
 const Owner = model('Owner', ownerSchema);

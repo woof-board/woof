@@ -39,7 +39,8 @@ const typeDefs = gql`
         status: String
         owner: Owner
         walker: Walker
-        dogs: [Dog]  
+        dogs: [Dog] 
+        coords: [Coords] 
     }
 
     type Address {
@@ -72,9 +73,14 @@ const typeDefs = gql`
     
     type Review {
         owner: Owner
-        owner_id: ID!
+        owner_id: Owner
         rating: Int!
         review_text: String
+    }
+
+    type Coords {
+        lon: Float
+        lat: Float
     }
 
     type AuthOwner {
@@ -260,7 +266,7 @@ const typeDefs = gql`
         updateWalkerAvailability(input: [AvailabilityInput]): Walker
         updateWalkerStatus(walker_id: ID!, status: String!): Walker
 
-        clear_setup_intent: Owner
+        clearSetupIntent: Owner
     }
 
 `;

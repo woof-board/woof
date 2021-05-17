@@ -4,6 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_WALKER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
+import { cities, neighbourhoods } from '../../utils/helpers';
 
 function WalkerDetails({ user }) {
     const [updateWalkerProfile, { error }] = useMutation(UPDATE_WALKER_PROFILE);
@@ -106,8 +107,9 @@ function WalkerDetails({ user }) {
     return (
         <>
         <div className="walker-contact-container">
+            <div className="walker-header"><h2>Personal Information</h2></div>
             <form
-                className="user-update-form"
+                className="walker-update-form"
                 id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
@@ -130,7 +132,6 @@ function WalkerDetails({ user }) {
                     />
                 </div>
                 <div className="row-data">
-                    <label className="profile-label">Email</label>
                     <input
                         className="profile-input"
                         type="text"
@@ -139,9 +140,8 @@ function WalkerDetails({ user }) {
                         value={formData.email}
                     />
                 </div>
-                <div><h4>Address Info</h4></div>
+                <div><h4>Address</h4></div>
                 <div className="row-data">
-                    <label className="profile-label">Street</label>
                     <input
                         className="profile-input"
                         type="text"
@@ -151,27 +151,37 @@ function WalkerDetails({ user }) {
                     />
                 </div>
                 <div className="row-data">
-                    <label className="profile-label">Street</label>
-                    <input
-                        className="profile-input"
-                        type="text"
-                        name="address_city"
-                        onChange={handleInputChange}
-                        value={formData.address_city}
-                    />
+                    <select className="profile-input profile-name" id="walker-cities" name="walker-province">
+                        <option value="choose" disabled>Choose your City</option>
+                        {
+                        cities.map(({name, group}) => 
+                            (group 
+                                ? <optgroup label={name}></optgroup>
+                                // ? city.name!=="close" 
+                                //     ? <optgroup label={city}>
+                                //     : </optgroup>
+                                : name.toLowerCase() === formData.address_city.toLowerCase()
+                                    ? <option selected="selected" value={name}>{name}</option>
+                                    : <option value={name}>  {name}</option>
+                            )
+                        )
+                        }
+                    </select>
+                {formData.address_city === "toronto" &&
+                    <select className="profile-input profile-name" id="walker-province" name="walker-province">
+                        <option value="choose" disabled>Choose your neighbourhood</option>
+                        {
+                            neighbourhoods.map( neighbourhood =>
+                                neighbourhood.toLowerCase() === formData.address_neighbourhood.toLowerCase()
+                                    ? <option selected="selected" value={neighbourhood}>{neighbourhood}</option>
+                                    : <option value={neighbourhood}>{neighbourhood}</option>
+                            )
+                        }
+                    </select>
+                    
+                }
                 </div>
                 <div className="row-data">
-                    <label className="profile-label">Street</label>
-                    <input
-                        className="profile-input"
-                        type="text"
-                        name="address_neighbourhood"
-                        onChange={handleInputChange}
-                        value={formData.address_neighbourhood}
-                    />
-                </div>
-                <div className="row-data">
-                    <label className="profile-label">Street</label>
                     <input
                         className="profile-input"
                         type="text"
@@ -180,20 +190,11 @@ function WalkerDetails({ user }) {
                         value={formData.address_postal_code}
                     />
                 </div>
-
-                <div className="row-data">
-                    <label className="profile-label">Province</label>
-                    <select className="profile-input" id="walker-province" name="walker-province">
-                        {provinces.map((province, ind) => (
-                            <option key={ind} value={province.value}>{province.displayName}</option>
-                        ))}
-                    </select>
-                </div>
                 
                 <button
                     type="submit"
                     className="update-walker-button"
-                    id="update-walker-button"
+                    id="update-walker-profile-button"
                 >
                     UPDATE
                 </button>

@@ -65,7 +65,11 @@ export const QUERY_WALKER_ME = gql`
                 postal_code
             }
             reviews{
-                owner_id
+                owner_id{
+                  _id
+                  first_name
+                  last_name
+                }
                 rating
                 review_text
             }
@@ -96,7 +100,11 @@ export const QUERY_WALKER = gql`
       last_name
       email
       reviews{
-        owner_id
+        owner_id{
+          _id
+          first_name
+          last_name
+        }
         rating
         review_text
       }
@@ -113,7 +121,11 @@ export const QUERY_WALKERS = gql`
       last_name
       email
       reviews{
-        owner_id
+        owner_id{
+          _id
+          first_name
+          last_name
+        }
         rating
         review_text
       }
@@ -138,6 +150,10 @@ export const QUERY_ORDER = gql`
         first_name
         last_name
       }
+      coords{
+        lon
+        lat
+      }
     }
   }
 `;
@@ -152,6 +168,10 @@ export const QUERY_ORDERS = gql`
       }
       walker{
         _id
+      }
+      coords{
+        lon
+        lat
       }
     }
   }
@@ -172,6 +192,10 @@ export const QUERY_OWNER_ORDERS = gql`
         _id
         first_name
         last_name
+      }
+      coords{
+        lon
+        lat
       }
     }
   }
