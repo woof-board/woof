@@ -7,6 +7,41 @@ export function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
+const appendZero = input => {
+	const inputStr = input.toString();
+  	return inputStr.length < 2 ? `0${inputStr}` : inputStr;
+};
+
+export const formatDate = dateObj => {
+  	return `${dateObj.getFullYear()}-${appendZero(dateObj.getMonth() + 1)}-${appendZero(dateObj.getDate())}`;
+}
+
+export const addDays = (oldDate, nDays) => {
+    return new Date(oldDate.setDate(oldDate.getDate() + nDays));
+};
+
+
+export const createInitialState = () => {
+    const arrLen = 14; // two weeks
+    const tempArr = Array.from(Array(arrLen).keys());
+  
+    return tempArr.map((item, index)=>{
+        const date = new Date();
+        return {
+            date: formatDate(addDays(date, index)),
+            slot9am: false,
+            slot11am: false,
+            slot1pm: false,
+            slot3pm: false,
+            slot5pm: false,
+            slot7pm: false,
+            slot9pm: false,
+          }
+    }
+        
+    );
+};
+
 export const RatingIconSVG = {
   box: "0 0 133 135",
   coords: `M49.32,124a24.69,24.69,0,0,1-1.45-16c.78-3.43,1.93-6.79,3-10.14a127.59,127.59,0,0,0,4.67-17c.36-2,.59-4,.8-6,.69-6.79,3.58-12.38,9.41-16,6.84-4.3,14-4.75,21.18-.75,3.75,2.09,7.37,4.42,11.08,6.59,2,1.19,4.1,2.35,6.23,3.38a59.49,59.49,0,0,0,5.89,2.46,51.28,51.28,0,0,1,16.19,9c6.83,5.78,8,13.18,5.54,20.89a20.91,20.91,0,0,1-4.64,7.89c-1.91,2.06-4.39,2.86-7,3.45-5.67,1.29-11.36,2.51-17,3.82-2,.46-4,1.06-5.93,1.69a22.8,22.8,0,0,0-7.43,4.56c-3.52,2.91-7,5.9-10.52,8.79a37.85,37.85,0,0,1-4.13,2.85,13.6,13.6,0,0,1-8.32,2c-6.92-.52-12.51-3.44-16.44-9.27C50,125.44,49.71,124.72,49.32,124Z

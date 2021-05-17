@@ -1,167 +1,168 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
+import { createInitialState } from "../utils/helpers";
 
 import '../css/Walkers.css';
 
-const schedule = [
-    {
-        _id:"1",
-        date: 'Thurs. May 13',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    },
-    {
-        _id:"2",
-        date: 'Fri. May 14',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        _id:"3",
-        date: 'Sat. May 15',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: true,
-        slot3pm: true,
-        slot5pm: true,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        _id:"4",
-        date: 'Sun. May 16',
-        slot9am: false,
-        slot11am: false,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: false,
-        slot9pm: false,
-    }, 
-    {
-        _id:"5",
-        date: 'Mon. May 17',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        _id:"6",
-        date: 'Tues. May 18',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        _id:"7",
-        date: 'Wed. May 19',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        _id:"8",
-        date: 'Thurs. May 20',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    },
-    {
-        _id:"9",
-        date: 'Fri. May 21',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        _id:"10",
-        date: 'Sat. May 22',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: true,
-        slot3pm: true,
-        slot5pm: true,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        _id:"11",
-        date: 'Sun. May 23',
-        slot9am: false,
-        slot11am: false,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: false,
-        slot9pm: false,
-    }, 
-    {
-        _id:"12",
-        date: 'Mon. May 24',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        _id:"13",
-        date: 'Tues. May 25',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        _id:"14",
-        date: 'Wed. May 26',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    },  
+// const schedule = [
+//     {
+//         _id:"1",
+//         date: 'Thurs. May 13',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     },
+//     {
+//         _id:"2",
+//         date: 'Fri. May 14',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     }, 
+//     {
+//         _id:"3",
+//         date: 'Sat. May 15',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: true,
+//         slot3pm: true,
+//         slot5pm: true,
+//         slot7pm: true,
+//         slot9pm: true,
+//     }, 
+//     {
+//         _id:"4",
+//         date: 'Sun. May 16',
+//         slot9am: false,
+//         slot11am: false,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: false,
+//         slot9pm: false,
+//     }, 
+//     {
+//         _id:"5",
+//         date: 'Mon. May 17',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     }, 
+//     {
+//         _id:"6",
+//         date: 'Tues. May 18',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     }, 
+//     {
+//         _id:"7",
+//         date: 'Wed. May 19',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     }, 
+//     {
+//         _id:"8",
+//         date: 'Thurs. May 20',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     },
+//     {
+//         _id:"9",
+//         date: 'Fri. May 21',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     }, 
+//     {
+//         _id:"10",
+//         date: 'Sat. May 22',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: true,
+//         slot3pm: true,
+//         slot5pm: true,
+//         slot7pm: true,
+//         slot9pm: true,
+//     }, 
+//     {
+//         _id:"11",
+//         date: 'Sun. May 23',
+//         slot9am: false,
+//         slot11am: false,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: false,
+//         slot9pm: false,
+//     }, 
+//     {
+//         _id:"12",
+//         date: 'Mon. May 24',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     }, 
+//     {
+//         _id:"13",
+//         date: 'Tues. May 25',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     }, 
+//     {
+//         _id:"14",
+//         date: 'Wed. May 26',
+//         slot9am: true,
+//         slot11am: true,
+//         slot1pm: false,
+//         slot3pm: false,
+//         slot5pm: false,
+//         slot7pm: true,
+//         slot9pm: true,
+//     },  
  
-]
+// ]
 
 const walker = "d45g11r43a333";
  
@@ -184,9 +185,15 @@ const scheduledWalks = [
 
 function WalkerSchedule() {
     const [state, dispatch] = useStoreContext();
-    const { currentUser: {availability} } = state;
+    const { currentUser } = state;
     
-    console.log("availability", availability);
+    const [ schedule, setSchedule ] = useState(createInitialState());
+
+    useEffect(()=>{
+        console.log(createInitialState());
+    });
+
+    // console.log("availability", availability);
     const [buttonVisible, setButtonVisible] = useState(false);
 
     const changeAvailability = event => {
@@ -209,6 +216,7 @@ function WalkerSchedule() {
             setButtonVisible(true);
         }
     }
+    
 
     const findBooking = (booking, today, time) => {
         
@@ -241,25 +249,22 @@ function WalkerSchedule() {
                 <div className="schedule-container">
 
                     <div>
-                            <div className="schedule-item times-header"><h5>Time</h5></div>
-                            <div className="schedule-item time-label"><h5>9am</h5></div>
-                            <div className="schedule-item time-label"><h5>11am</h5></div>
-                            <div className="schedule-item time-label"><h5>1pm</h5></div>
-                            <div className="schedule-item time-label"><h5>3pm</h5></div>
-                            <div className="schedule-item time-label"><h5>5pm</h5></div>
-                            <div className="schedule-item time-label"><h5>7pm</h5></div>
-                            <div className="schedule-item time-label bottom-left"><h5>9pm</h5></div>
-                        
+                        <div className="schedule-item times-header"><h5>Time</h5></div>
+                        <div className="schedule-item time-label"><h5>9am</h5></div>
+                        <div className="schedule-item time-label"><h5>11am</h5></div>
+                        <div className="schedule-item time-label"><h5>1pm</h5></div>
+                        <div className="schedule-item time-label"><h5>3pm</h5></div>
+                        <div className="schedule-item time-label"><h5>5pm</h5></div>
+                        <div className="schedule-item time-label"><h5>7pm</h5></div>
+                        <div className="schedule-item time-label bottom-left"><h5>9pm</h5></div>
                     </div>
-
-
 
                     <div className="scroll-holder">
                     
                     <div className="schedule-days" id="scrolling-schedule">
                     {schedule.map((schedule, index) => (
 
-                        <div>
+                        <div key={index}>
                             <div className="schedule-item day-header"><h5>{schedule.date}</h5></div>
                             <div className="schedule-item time-detail">
                                 {schedule.slot9am 
