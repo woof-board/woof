@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 
-import '../css/WalkerProfile.css';
+//import '../css/WalkerProfile.css';
 import { QUERY_WALKER_ME } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";

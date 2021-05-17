@@ -1,72 +1,24 @@
-.page-wrap {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: center;
-    padding: 0rem 2rem 10rem;
-}
+
 .walker-header {
-    width: 100%;
     background-color: var(--tertiary);
-    color: var(--quinary);
-    padding: 0 15px;
-}
-.walker-picture-container {
-    margin: 0 1rem 1rem 1rem;
 }
 .walker-picture-container img {
     border: 8px solid var(--tertiary);
-    border-radius: 50%;
-}
-
-.walker-details-container {
-    display: flex;
-    flex-direction: column;
 }
 
 .walker-profile-container {
-    display: flex;
-    flex-direction: column;
-    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
-    padding: 1rem;
-    margin: 0rem 1rem 1rem 1rem;
-    min-width: 25rem;
     background-color: var(--secondary);
-    align-items: center;
-    overflow: hidden;
 }
 
 .walker-contact-container {
-    display: flex;
-    flex-direction: column;
-    width: 70vw;
     background-color: var(--secondary);
-    border-radius: 15px;
-    margin-bottom: 20px;
-    overflow:hidden;
-}
-.walker-contact-container form {
-    padding: 15px 7px 15px 15px;
+
 }
 
-.user-update-form {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-}
 
-.profile-label {
-    font-weight: bold;
-}
 
 .profile-input {
-    border: none;
-    margin: 0 8px 8px 0;
-    padding: 12px 8px;
     background:rgb(var(--rgb-quinary),0.5);
-    border: none;
-    width: 50%
 }
 .profile-input:focus {
     background-color: rgb(var(--rgb-tertiary),0.1);
@@ -75,73 +27,23 @@
 
 
 .average-rating {
-    width: 90%;
     background-color: rgb(var(--rgb-quinary),0.5);
-    padding: .5rem;
-    border-radius: 15px;
-    margin: 15px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-.account-status {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 1rem;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
 
 .walks {
-    display: flex;
-    flex-direction: column;
     background-color: rgb(var(--rgb-quinary),0.5);
-    padding: .5rem;
-    border-radius: 15px;
-    margin: 1rem auto;
-    width: 90%;
-}
-
-.row-data {
-    display: flex;
-    flex-direction: row;
 }
 
 h3 .light {
-    font-weight: 300;
     color: var(--secondary);
-    font-size: .75em;
 }
 
 button {
-    color: var(--quinary);
-    margin: 12px 7px 0 auto;
-    width: auto;
-    font-weight: 500;
-    padding: 10px;
     background-color: var(--tertiary);
     border: 3px solid var(--tertiary);
-    border-radius: 15px;
-
 }
 button:hover {
-    cursor: pointer;
-    background-color: var(--quinary);
     color: var(--tertiary);
 }
 
-@media screen and (max-width: 650px) {
-    .page-body {
-        flex-direction: column;
-        align-items: center;
-    }
-    .walker-picture-container {
-        min-width: 20rem;
-        min-height: 20rem;
-    }
-    .walker-contact-container {
-        width: 20rem;
-    }
-}

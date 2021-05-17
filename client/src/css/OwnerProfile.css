@@ -1,0 +1,53 @@
+
+h1 {
+    color: var(--tertiary);
+}
+
+.walker-header {
+    background-color: var(--primary);
+}
+.walker-picture-container img {
+    border: 8px solid var(--primary);
+}
+
+.walker-profile-container {
+    background-color: var(--quatenary);
+}
+
+.walker-contact-container {
+    background-color: var(--quatenary);
+
+}
+
+
+
+.profile-input {
+    background:rgb(var(--rgb-quinary),0.5y);
+}
+.profile-input:focus {
+    background-color: rgb(var(--rgb-primar),0.1y);
+}
+
+
+
+.average-rating {
+    background-color: rgb(var(--rgb-quinary),0.5y);
+}
+
+
+.walks {
+    background-color: rgb(var(--rgb-quinary),0.5y);
+}
+
+h3 .light {
+    color: var(--quatenary);
+}
+
+button {
+    background-color: var(--primary);
+    border: 3px solid var(--primary);
+}
+button:hover {
+    color: var(--primary);
+}
+

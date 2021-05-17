@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 
-// import '../css/WalkerProfile.css';
 import OwnerDetails from '../components/OwnerProfile/OwnerDetails';
- 
+import '../css/Profile.css';
+import '../css/OwnerProfile.css'
 import { useStoreContext } from "../utils/GlobalState";
 import { QUERY_OWNER_ME } from '../utils/queries';
 import { UPDATE_CURRENT_USER } from "../utils/actions";

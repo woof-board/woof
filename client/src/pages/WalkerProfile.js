@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
-
+import '../css/Profile.css'
 import '../css/WalkerProfile.css';
 import Auth from '../utils/auth';
 import WalkerDetails from '../components/WalkerProfileComponents/WalkerDetails';
