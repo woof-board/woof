@@ -10,7 +10,7 @@ import WalkerTrackOrder from "../components/WalkerTrackWalks/WalkerTrackOrder"
 
 function WalkerTrackWalks() {
     const [state, dispatch] = useStoreContext();
-    const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
+    const [getWalkerProfile, { loading, data }] = useLazyQuery(QUERY_WALKER_ME);
     const { currentUser } = state;
     const orders = currentUser.orders;
     const totalOrders = currentUser.orders.length;
