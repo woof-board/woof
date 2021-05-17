@@ -1,9 +1,9 @@
-import data from '@iconify-icons/ant-design/home-outlined';
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/Walkers.css';
 
 const schedule = [
     {
+        _id:"1",
         date: 'Thurs. May 13',
         slot9am: true,
         slot11am: true,
@@ -14,6 +14,7 @@ const schedule = [
         slot9pm: true,
     },
     {
+        _id:"2",
         date: 'Fri. May 14',
         slot9am: true,
         slot11am: true,
@@ -24,6 +25,7 @@ const schedule = [
         slot9pm: true,
     }, 
     {
+        _id:"3",
         date: 'Sat. May 15',
         slot9am: true,
         slot11am: true,
@@ -34,6 +36,7 @@ const schedule = [
         slot9pm: true,
     }, 
     {
+        _id:"4",
         date: 'Sun. May 16',
         slot9am: false,
         slot11am: false,
@@ -44,6 +47,7 @@ const schedule = [
         slot9pm: false,
     }, 
     {
+        _id:"5",
         date: 'Mon. May 17',
         slot9am: true,
         slot11am: true,
@@ -54,6 +58,7 @@ const schedule = [
         slot9pm: true,
     }, 
     {
+        _id:"6",
         date: 'Tues. May 18',
         slot9am: true,
         slot11am: true,
@@ -64,6 +69,7 @@ const schedule = [
         slot9pm: true,
     }, 
     {
+        _id:"7",
         date: 'Wed. May 19',
         slot9am: true,
         slot11am: true,
@@ -74,6 +80,7 @@ const schedule = [
         slot9pm: true,
     }, 
     {
+        _id:"8",
         date: 'Thurs. May 20',
         slot9am: true,
         slot11am: true,
@@ -84,6 +91,7 @@ const schedule = [
         slot9pm: true,
     },
     {
+        _id:"9",
         date: 'Fri. May 21',
         slot9am: true,
         slot11am: true,
@@ -94,6 +102,7 @@ const schedule = [
         slot9pm: true,
     }, 
     {
+        _id:"10",
         date: 'Sat. May 22',
         slot9am: true,
         slot11am: true,
@@ -104,6 +113,7 @@ const schedule = [
         slot9pm: true,
     }, 
     {
+        _id:"11",
         date: 'Sun. May 23',
         slot9am: false,
         slot11am: false,
@@ -114,6 +124,7 @@ const schedule = [
         slot9pm: false,
     }, 
     {
+        _id:"12",
         date: 'Mon. May 24',
         slot9am: true,
         slot11am: true,
@@ -124,6 +135,7 @@ const schedule = [
         slot9pm: true,
     }, 
     {
+        _id:"13",
         date: 'Tues. May 25',
         slot9am: true,
         slot11am: true,
@@ -134,6 +146,7 @@ const schedule = [
         slot9pm: true,
     }, 
     {
+        _id:"14",
         date: 'Wed. May 26',
         slot9am: true,
         slot11am: true,
@@ -167,17 +180,27 @@ const scheduledWalks = [
 
 function WalkerSchedule() {
 
+    const [buttonVisible, setButtonVisible] = useState(false);
 
-    
-
-
-    function scrollSchedule(direction) {
-        const scheduleHolder = document.getElementById('scrolling-schedule');
-        let move = "+50px"
-        if(direction==="right") {
-            move ="-50px"
+    const changeAvailability = event => {
+        event.preventDefault()
+        if(event.target.className === "unavailable"){
+            event.target.className = "available";
+            event.target.innerHTML = "Available";
+        } else {
+            event.target.className = "unavailable";
+            event.target.innerHTML = "Unavailable"
         }
-        scheduleHolder.style.marginLeft = move;
+        if(!buttonVisible) {
+            setButtonVisible(true);
+        }
+    }
+    const viewWalkDetails = event => {
+        event.preventDefault()
+        console.log(event.target.id);
+        if(!buttonVisible) {
+            setButtonVisible(true);
+        }
     }
 
     const findBooking = (booking, today, time) => {
@@ -188,7 +211,7 @@ function WalkerSchedule() {
             const todaysDate = today.date;
             if (bookDate === todaysDate && bookTime === time) {
                 return (
-                    <button className="booked">
+                    <button className="booked" onClick={viewWalkDetails} id={today._id + "-" +time}>
                         Walk booked with<br />
                         {booking[i].owner}
                     </button>
@@ -197,7 +220,7 @@ function WalkerSchedule() {
         }
         
         return ( 
-            <button className="unavailable" id={schedule.date + "U9am"} key={schedule.date + "U9am"}>Unvailable</button>
+            <button className="unavailable"  onClick={changeAvailability} id={today._id + "-" +time} >Unavailable</button>
         )
 
     }
@@ -205,8 +228,9 @@ function WalkerSchedule() {
     return (
         <div id="walkers">
             <div className="headline">            
-                <h1>Your Walking Schedule</h1>
+                <h1>My Walking Schedule</h1>
             </div>
+            <form>
             <div className="schedule-container">
 
                 <div>
@@ -224,6 +248,7 @@ function WalkerSchedule() {
 
 
                 <div className="scroll-holder">
+                
                 <div className="schedule-days" id="scrolling-schedule">
                 {schedule.map((schedule, index) => (
 
@@ -231,7 +256,7 @@ function WalkerSchedule() {
                         <div className="schedule-item day-header"><h5>{schedule.date}</h5></div>
                         <div className="schedule-item time-detail">
                             {schedule.slot9am 
-                                ? <button className="available" id={schedule.date + "9am"} key={schedule.date + "9am"}>Available</button>
+                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-9am"}>Available</button>
                                 : findBooking(scheduledWalks, schedule, "9am")
                                
                             }
@@ -239,39 +264,39 @@ function WalkerSchedule() {
                         </div>
                         <div className="schedule-item time-detail">
                             {schedule.slot11am 
-                                ? <button className="available" id={schedule.date + "11am"} key={schedule.date + "11am"}>Available</button> 
+                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-11am"}>Available</button> 
                                 : findBooking(scheduledWalks, schedule, "11am")
                             }
                             
                         </div>
                         <div className="schedule-item time-detail">
                             {schedule.slot1pm 
-                                ? <button className="available" id={schedule.date + "1pm"} key={schedule.date + "1pm"}>Available</button>   
+                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-1pm"}>Available</button>   
                                 : findBooking(scheduledWalks, schedule, "1pm")
                             }
                             
                         </div>
                         <div className="schedule-item time-detail">
                             {schedule.slot3pm 
-                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
+                            ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
                             :  findBooking(scheduledWalks, schedule, "3pm")
                             }     
                         </div>
                         <div className="schedule-item time-detail">
                             {schedule.slot3pm 
-                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
+                            ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
                             :  findBooking(scheduledWalks, schedule, "5pm")
                             }     
                         </div>
                         <div className="schedule-item time-detail">
                             {schedule.slot3pm 
-                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
+                            ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
                             :  findBooking(scheduledWalks, schedule, "7pm")
                             }     
                         </div>
                         <div className="schedule-item time-detail">
                             {schedule.slot3pm 
-                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
+                            ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
                             :  findBooking(scheduledWalks, schedule, "9pm")
                             }     
                         </div>
@@ -285,6 +310,14 @@ function WalkerSchedule() {
 
                 
             </div>
+            {buttonVisible &&
+                <div className="schedule-button-container">
+                    <button>Cancel Changes</button>
+                    <button>Update Changes</button>
+                </div>
+            }   
+            </form>
+
         </div>
 
     )

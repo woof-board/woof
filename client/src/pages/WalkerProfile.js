@@ -44,7 +44,7 @@ function WalkerProfile() {
     }, [currentUser, data, loading, dispatch]);
 
   return (
-    <>
+    <div id="walkers">
       <h1>My Profile</h1>
       <div className='page-wrap'>
       
@@ -85,7 +85,7 @@ function WalkerProfile() {
           </div>
         </>
     </div>
-    </>
+    </div>
   );
 }
 
