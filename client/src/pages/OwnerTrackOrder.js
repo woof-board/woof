@@ -5,6 +5,7 @@ import '../css/WalkerProfile.css';
 import { QUERY_OWNER_ME } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
+import Map from "../components/OwnerTrackOrder/Map";
 
 
 
@@ -13,7 +14,8 @@ function OwnerTrackOrder() {
     const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
     const { currentUser } = state;
     const orders = currentUser.orders;
-    const totalOrders = currentUser.orders.length;
+    const totalOrders = currentUser.orders.length;//with status "IN_PROGRESS"
+    const status = orders.status;
 
     useEffect(() => {
       // if not already in global store
@@ -37,8 +39,8 @@ function OwnerTrackOrder() {
           {currentUser && currentUser.status === "ACTIVE" &&   
             <div className="walker-profile-container">
               <div>
-                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
-                : 'You have no upcoming Walks'}
+                {/* {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
+                  : 'You have no upcoming Walks'} */}
               </div>
               {orders.map((order) => (
                 // render walk orders
@@ -48,11 +50,11 @@ function OwnerTrackOrder() {
                         <div>Walk Date: {order.service_date}</div>
                         <div>Start time: {order.service_time}</div>
                         {/* Add map component */}
-                        {/* <Map
+                        <Map
                             order_id = {order.order_id}
                             service_date = {order.service_date}
                             service_time = {order.service_time}
-                        /> */}
+                        />
                     </div>
                     } 
                 </div>
