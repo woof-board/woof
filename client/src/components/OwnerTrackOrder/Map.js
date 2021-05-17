@@ -3,7 +3,7 @@ import './Map.css';
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 // set up .env
-// mapboxgl.accessToken = token
+mapboxgl.accessToken = 'pk.eyJ1Ijoid29vZi1ib2FyZCIsImEiOiJja29udGdoYW8wNDF1MndtbDMyeWY3c3pzIn0.IlKfCHeu66AocJmQMG0jxw'
 
 
 function Map() {
