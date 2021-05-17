@@ -55,6 +55,17 @@
   display: flex;
   justify-content: center;
   font-weight: bold;
+  flex-direction: column;
+}
+
+.learnLink {
+  font-weight: bold;
+}
+
+.hover-line {
+  width: 0rem;
+  border-bottom: 3px solid black;
+  transition: .6s;
 }
 
 .aboutActive {
@@ -65,12 +76,16 @@
   text-align: center;
 }
 
+.learnLink:hover ~ .hover-line {
+  font-weight: bold;
+  width: 5.5rem;
+  border-bottom: 3px solid black;
+  transition: .6s;
+}
+
 .learnActive {
-  padding: .5rem;
-  background-color: var(--primary);
-  color: white;
-  border-radius: 20px;
-  text-align: center;
+  border-bottom: 3px solid black;
+  transition: .6s;
 }
 
 .learn-more-container {
@@ -126,11 +141,17 @@
   width: 20rem;
 }
 
+b {
+  font-weight: bold;
+}
+
 .tech-picture {
   height: 20rem;
   width: 20rem;
   background-color: white;
   border-radius: 25px;
+  box-shadow: 5px 5px 10px rgb(0,0,0,0.6);
+  margin-bottom: 1rem;
 }
 
 .app-card {
