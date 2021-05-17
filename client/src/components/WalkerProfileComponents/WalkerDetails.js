@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_WALKER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
-import { cities, neighbourhoods } from '../../utils/helpers'
+import { cities, neighbourhoods } from '../../utils/helpers';
 
 function WalkerDetails({ user }) {
     const [updateWalkerProfile, { error }] = useMutation(UPDATE_WALKER_PROFILE);
@@ -109,7 +109,7 @@ function WalkerDetails({ user }) {
         <div className="walker-contact-container">
             <div className="walker-header"><h2>Personal Information</h2></div>
             <form
-                className="user-update-form"
+                className="walker-update-form"
                 id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
@@ -151,7 +151,7 @@ function WalkerDetails({ user }) {
                     />
                 </div>
                 <div className="row-data">
-                    <select className="profile-input profile-name" id="walker-province" name="walker-province">
+                    <select className="profile-input profile-name" id="walker-cities" name="walker-province">
                         <option value="choose" disabled>Choose your City</option>
                         {
                         cities.map(({name, group}) => 
@@ -194,7 +194,7 @@ function WalkerDetails({ user }) {
                 <button
                     type="submit"
                     className="update-walker-button"
-                    id="update-walker-button"
+                    id="update-walker-profile-button"
                 >
                     UPDATE
                 </button>
