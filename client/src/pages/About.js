@@ -7,6 +7,7 @@ import AboutDevelopers from '../components/About/AboutDevelopers';
 import AboutTechnology from '../components/About/AboutTechnology';
 import AboutSafety from '../components/About/AboutSafety';
 import AboutPayment from '../components/About/AboutPayment';
+import AboutUs from '../components/About/AboutUs';
 // import AboutApp from '../components/About/AboutApp';
 
 
@@ -32,9 +33,19 @@ function About() {
             name: 'payment'
         }
     ])
+
+    const [dev] = useState([
+        {
+            name: 'null'
+        },
+        {
+            name: 'dev'
+        }
+    ])
     
     const [currentLink, setCurrentLink] = useState(links[0]);
     const [currentSafeLink, setCurrentSafeLink] = useState(safety[0])
+    const [currentDevLink, setCurrentDevLink] = useState(dev[0])
 
     console.log(currentLink);
 
@@ -43,11 +54,8 @@ function About() {
         <div className="flex-c">
             <div className="about-imgholder">
                     <div className="about-banner">
-                        <span className="about-title">About Woof</span>
-                        <span className="about-caption">For you and your dogs</span>
+                        <span className="about-caption">About us</span>
                     </div>
-                    <div>
-                </div>
             </div>
 
             <div className="learn-more-container">
@@ -68,6 +76,24 @@ function About() {
                     </div>
                 </div>
             </div>
+
+            <div className="about-us-container">
+                    <AboutUs 
+                        dev={dev}
+                        currentDevLink={currentDevLink}
+                        setCurrentDevLink={setCurrentDevLink}
+                    />
+            </div>
+            
+            {currentDevLink.name === 'dev' && (
+                <div className="component-section">
+                    <h2>Development Team</h2>
+                    <div className="content flex-r">
+                        <AboutDevelopers />
+                    </div>
+                </div>
+            )}
+
 
             <div className="component-section">
             <h2>Technologies</h2>
@@ -106,12 +132,6 @@ function About() {
                 </div>
             </div> */}
             
-            <div className="component-section">
-            <h2>Development Team</h2>
-                <div className="content flex-r">
-                    <AboutDevelopers />
-                </div>
-            </div>
         </div>
         </>
     )
