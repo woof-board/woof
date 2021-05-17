@@ -6,8 +6,8 @@ import '../../css/Walker.css';
 
 function WalkerSignupForm() {
     const [formData, setUserFormData] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: ''
     });
@@ -44,17 +44,17 @@ function WalkerSignupForm() {
                 className="signup-login-input"
                 type="text"
                 placeholder="Enter First Name"
-                name="firstName"
+                name="first_name"
                 onChange={handleInputChange}
-                value={formData.firstName}
+                value={formData.first_name}
             />
             <input
                 className="signup-login-input"
                 type="text"
                 placeholder="Enter Last Name"
-                name="lastName"
+                name="last_name"
                 onChange={handleInputChange}
-                value={formData.lastName}
+                value={formData.last_name}
             />
             <input
                 className="signup-login-input"
@@ -78,7 +78,7 @@ function WalkerSignupForm() {
                 </div> : null
             }
             <button
-                disabled={!(formData.email && formData.password && formData.firstName && formData.lastName)}
+                disabled={!(formData.email && formData.password && formData.first_name && formData.last_name)}
                 type="submit"
                 className="home-form-button"
                 id="owner-signup-button"

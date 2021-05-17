@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 const stripe = require('stripe')(process.env.STRIPE_KEY || process.env.STRIPE_TEST_SK);
 
 
-
 const resolvers = {
     Query: {
         owner: async (parent, { owner_id }, context) => {
@@ -36,19 +35,31 @@ const resolvers = {
 
         walker: async (parent, { walker_id }, context) => {
             return await Walker.findById(walker_id)
-                .select('-__v -password');
+                .select('-__v -password')
+                .populate({
+                    path: 'reviews.owner_id',
+                    model: 'Owner'
+                });
         },
 
         walkers: async (parent, args, context) => {
-            return await Walker.find({})
-                .select('-__v -password');
+            return await Walker.find()
+                .select('-__v -password')
+                .populate({
+                    path: 'reviews.owner_id',
+                    model: 'Owner'
+                });
         },
 
         // to get walker's own profile
         walkerMe: async (parent, args, context) => {
             if (context.walker) {
                 const walker = await Walker.findById(context.walker._id)
-                    .select('-__v -password');
+                    .select('-__v -password')
+                    .populate({
+                        path: 'reviews.owner_id',
+                        model: 'Owner'
+                    });
 
                 return walker;
             }
@@ -457,12 +468,12 @@ const resolvers = {
         addReview: async (parent, { input }, context) => {
             if(context.owner){
                 const { walker_id, rating, review_text} = input;   
-                const review = {owner_id: context.owner._id, rating: rating, review_text: review_text};
+                const review = {owner_id: mongoose.Types.ObjectId(context.owner._id), rating: rating, review_text: review_text};
 
                 // remove current review if exists to make sure only one review can be added by same owner
                 await Walker.findByIdAndUpdate(
                     walker_id,
-                    { $pull: { reviews: { owner_id: context.owner._id } } },
+                    { $pull: { reviews: { owner_id: mongoose.Types.ObjectId(context.owner._id) } } },
                     { new: true, runValidators: true }
                 );
 
@@ -524,7 +535,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        clear_setup_intent: async (parent, arg, context) => {
+        clearSetupIntent: async (parent, arg, context) => {
             if (context.owner) {
                 const newOwner = await Owner.findByIdAndUpdate(
                     context.owner._id,
