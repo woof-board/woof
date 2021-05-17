@@ -15,6 +15,7 @@ function WalkerTrackOrder(order) {
 
    // Tracker Start and Stop Functions
    const trackCoordinates = [];
+   
    var myVar;
    function startTrack(event) {
        event.preventDefault();
@@ -36,7 +37,8 @@ function WalkerTrackOrder(order) {
                const lastcoords = trackCoordinates.lastItem;
                try {
                    const { data } = updateOrderCoords({ 
-                       variables: { order_id, lastcoords} 
+                       variables: { order_id, 
+                        lon: position.coords.longitude, lat:position.coords.latitude} 
                    });
                
                    Auth.login(data.loginOwner.token);
