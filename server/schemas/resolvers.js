@@ -422,11 +422,11 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        updateOrderCoords: async (parent, {order_id, coords }, context) => {
+        updateOrderCoords: async (parent, {order_id, lon, lat }, context) => {
             if (context.walker) {
                 const order = await Order.findByIdAndUpdate(
                     order_id, 
-                    {$push: {coords: coords} }
+                    {$push: {coords: {lon, lat} } }
                 );
           
                 return order;

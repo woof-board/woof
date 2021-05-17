@@ -245,7 +245,7 @@ const typeDefs = gql`
         addOrder(input: OrderInput): Order
         updateOrder(order_id: ID!, input: OrderInput): Order
         updateOrderStatus(order_id: ID!, status: String!): Order
-        updateOrderCoords(order_id: ID!, coords: Array!): Order
+        updateOrderCoords(order_id: ID!, lat: Float!, lon: Float!): Order
         removeOrder(order_id: ID!): Order
         
         addReview(input: ReviewInput): Walker
