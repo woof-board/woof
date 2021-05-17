@@ -69,7 +69,7 @@
     width: 50%
 }
 .profile-input:focus {
-    background-color: rgb(var(--rgb-tertiary),0.4);
+    background-color: rgb(var(--rgb-tertiary),0.1);
 }
 
 
