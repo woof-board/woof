@@ -92,6 +92,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .component-section {
@@ -260,12 +262,16 @@ b {
 @media screen and (max-width: 950px) {
   .content {
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
   .flex-tech {
     flex-direction: column;
     align-items: center;
+  }
+
+  .component-section {
+    padding: 2rem 0rem;
   }
 }
 /*Leadership style ends*/
