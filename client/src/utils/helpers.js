@@ -205,3 +205,14 @@ export const neighbourhoods = [
 export function objectToArray(coordsObject) {
   return Object.values(coordsObject);
 }
+
+export function middleValueOfArray(arr) {
+  if (arr!=0){
+    middleIndex = Math.floor(arr.length / 2);
+    return arr[middleIndex];
+  }
+  else {
+    return "Tracking not Started";
+  }
+}
+

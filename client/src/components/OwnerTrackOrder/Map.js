@@ -19,7 +19,8 @@ function Map(order) {
     const coordinateArr = coords.map((coord, ind) => {
         objectToArray(coord);
     });
-        
+    // get center position of the walker path
+    const mapCenter = middleValueOfArray(coordinateArr);
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
@@ -29,7 +30,7 @@ function Map(order) {
         map.current = new mapboxgl.Map({
           container: mapContainer.current,
           style: 'mapbox://styles/mapbox/streets-v11',
-          center: [-122.4861, 37.828802],
+          center: mapCenter,
           zoom: 15
         });
     });
