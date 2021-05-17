@@ -207,12 +207,12 @@ export function objectToArray(coordsObject) {
 }
 
 export function middleValueOfArray(arr) {
-  if (arr!=0){
-    middleIndex = Math.floor(arr.length / 2);
+  if (arr!==0){
+    const middleIndex = Math.floor(arr.length / 2);
     return arr[middleIndex];
   }
   else {
-    return "Tracking not Started";
+    return []; // Tracking not started
   }
 }
 
