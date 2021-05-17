@@ -354,11 +354,14 @@ const resolvers = {
 
         updateWalkerAvailability: async (parent, { input }, context) => {
             if (context.walker) {
-                return await Walker.findByIdAndUpdate(
-                    context.walker._id, 
-                    { $set: { availability: [...input] } },
-                    { new: true, runValidators: true }
-                );
+                const walker = await Walker.findById(context.walker._id);
+                walker.availability = [...input];
+                return await walker.save();
+                // return await Walker.findByIdAndUpdate(
+                //     context.walker._id, 
+                //     { $set: { availability: [...input] } },
+                //     { new: true, runValidators: true }
+                // );
             }
       
             throw new AuthenticationError('Not logged in');

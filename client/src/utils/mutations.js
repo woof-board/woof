@@ -258,6 +258,43 @@ export const UPDATE_WALKER_PASSWORD = gql`
     }
 `;
 
+export const UPDATE_WALKER_AVAILABILITY = gql`
+    mutation updateWalkerAvailability($input: [AvailabilityInput]) {
+        updateWalkerAvailability(input: $input) {
+            _id
+            first_name
+            last_name
+            email
+            avatar
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
+            reviews{
+                owner_id
+                rating
+                review_text
+            }
+            earnings
+            average_rating
+            neighbourhoods
+            status
+            availability {
+                date
+                slot9am
+                slot11am
+                slot1pm
+                slot3pm
+                slot5pm
+                slot7pm
+                slot9pm
+            }
+        }
+    }
+`;
 
 /* OWNER mutations
     - ADD_OWNER
