@@ -544,7 +544,7 @@ db.once('open', async () => {
       {
         service_date:'2021-05-20',
         service_time: '5pm',
-        status: 'PENDING_WALKER',
+        status: 'IN_PROGRESS',
         owner: '60a073419ae33509302ac07c',
         walker: '60a073419ae33509302ac09f',
         dogs: ['60a073419ae33509302ac07e']
