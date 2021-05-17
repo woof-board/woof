@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useStoreContext } from "../utils/GlobalState";
+import { UPDATE_CURRENT_USER } from "../utils/actions";
+
 import '../css/Walkers.css';
 
 const schedule = [
@@ -179,7 +183,10 @@ const scheduledWalks = [
 ]
 
 function WalkerSchedule() {
-
+    const [state, dispatch] = useStoreContext();
+    const { currentUser: {availability} } = state;
+    
+    console.log("availability", availability);
     const [buttonVisible, setButtonVisible] = useState(false);
 
     const changeAvailability = event => {
@@ -231,91 +238,91 @@ function WalkerSchedule() {
                 <h1>My Walking Schedule</h1>
             </div>
             <form>
-            <div className="schedule-container">
-
-                <div>
-                        <div className="schedule-item times-header"><h5>Time</h5></div>
-                        <div className="schedule-item time-label"><h5>9am</h5></div>
-                        <div className="schedule-item time-label"><h5>11am</h5></div>
-                        <div className="schedule-item time-label"><h5>1pm</h5></div>
-                        <div className="schedule-item time-label"><h5>3pm</h5></div>
-                        <div className="schedule-item time-label"><h5>5pm</h5></div>
-                        <div className="schedule-item time-label"><h5>7pm</h5></div>
-                        <div className="schedule-item time-label bottom-left"><h5>9pm</h5></div>
-                    
-                </div>
-
-
-
-                <div className="scroll-holder">
-                
-                <div className="schedule-days" id="scrolling-schedule">
-                {schedule.map((schedule, index) => (
+                <div className="schedule-container">
 
                     <div>
-                        <div className="schedule-item day-header"><h5>{schedule.date}</h5></div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot9am 
-                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-9am"}>Available</button>
-                                : findBooking(scheduledWalks, schedule, "9am")
-                               
-                            }
-                            
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot11am 
-                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-11am"}>Available</button> 
-                                : findBooking(scheduledWalks, schedule, "11am")
-                            }
-                            
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot1pm 
-                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-1pm"}>Available</button>   
-                                : findBooking(scheduledWalks, schedule, "1pm")
-                            }
-                            
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot3pm 
-                            ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
-                            :  findBooking(scheduledWalks, schedule, "3pm")
-                            }     
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot3pm 
-                            ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
-                            :  findBooking(scheduledWalks, schedule, "5pm")
-                            }     
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot3pm 
-                            ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
-                            :  findBooking(scheduledWalks, schedule, "7pm")
-                            }     
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot3pm 
-                            ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
-                            :  findBooking(scheduledWalks, schedule, "9pm")
-                            }     
-                        </div>
+                            <div className="schedule-item times-header"><h5>Time</h5></div>
+                            <div className="schedule-item time-label"><h5>9am</h5></div>
+                            <div className="schedule-item time-label"><h5>11am</h5></div>
+                            <div className="schedule-item time-label"><h5>1pm</h5></div>
+                            <div className="schedule-item time-label"><h5>3pm</h5></div>
+                            <div className="schedule-item time-label"><h5>5pm</h5></div>
+                            <div className="schedule-item time-label"><h5>7pm</h5></div>
+                            <div className="schedule-item time-label bottom-left"><h5>9pm</h5></div>
+                        
                     </div>
-                    ))}
 
-                </div>
-                </div>
 
-                
 
-                
-            </div>
-            {buttonVisible &&
-                <div className="schedule-button-container">
-                    <button>Cancel Changes</button>
-                    <button>Update Changes</button>
+                    <div className="scroll-holder">
+                    
+                    <div className="schedule-days" id="scrolling-schedule">
+                    {schedule.map((schedule, index) => (
+
+                        <div>
+                            <div className="schedule-item day-header"><h5>{schedule.date}</h5></div>
+                            <div className="schedule-item time-detail">
+                                {schedule.slot9am 
+                                    ? <button className="available" onClick={changeAvailability} id={schedule._id + "-9am"}>Available</button>
+                                    : findBooking(scheduledWalks, schedule, "9am")
+                                
+                                }
+                                
+                            </div>
+                            <div className="schedule-item time-detail">
+                                {schedule.slot11am 
+                                    ? <button className="available" onClick={changeAvailability} id={schedule._id + "-11am"}>Available</button> 
+                                    : findBooking(scheduledWalks, schedule, "11am")
+                                }
+                                
+                            </div>
+                            <div className="schedule-item time-detail">
+                                {schedule.slot1pm 
+                                    ? <button className="available" onClick={changeAvailability} id={schedule._id + "-1pm"}>Available</button>   
+                                    : findBooking(scheduledWalks, schedule, "1pm")
+                                }
+                                
+                            </div>
+                            <div className="schedule-item time-detail">
+                                {schedule.slot3pm 
+                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
+                                :  findBooking(scheduledWalks, schedule, "3pm")
+                                }     
+                            </div>
+                            <div className="schedule-item time-detail">
+                                {schedule.slot3pm 
+                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
+                                :  findBooking(scheduledWalks, schedule, "5pm")
+                                }     
+                            </div>
+                            <div className="schedule-item time-detail">
+                                {schedule.slot3pm 
+                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
+                                :  findBooking(scheduledWalks, schedule, "7pm")
+                                }     
+                            </div>
+                            <div className="schedule-item time-detail">
+                                {schedule.slot3pm 
+                                ? <button className="available" onClick={changeAvailability} id={schedule._id + "-3pm"}>Available</button>
+                                :  findBooking(scheduledWalks, schedule, "9pm")
+                                }     
+                            </div>
+                        </div>
+                        ))}
+
+                    </div>
+                    </div>
+
+                    
+
+                    
                 </div>
-            }   
+                {buttonVisible &&
+                    <div className="schedule-button-container">
+                        <button>Cancel Changes</button>
+                        <button>Update Changes</button>
+                    </div>
+                }   
             </form>
 
         </div>
