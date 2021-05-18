@@ -4,6 +4,7 @@ import { UPDATE_WALKER_AVAILABILITY } from "../utils/mutations";
 import { createInitialState } from "../utils/helpers";
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
+import ModalDisplay from '../components/ModalDisplay';
 import '../css/Walkers.css';
  
 const scheduledWalks = [
@@ -31,6 +32,8 @@ function WalkerSchedule() {
 
     const [ schedule, setSchedule ] = useState(createInitialState());
     const [buttonVisible, setButtonVisible] = useState(false);
+    const [modalJSX, setModalJSX] = useState(<div />);
+    const [modalOpen, setModalOpen] = useState(false);
 
     const timeSlotArr = ["slot9am", "slot11am", "slot1pm", "slot3pm", "slot5pm", "slot7pm", "slot9pm"];
 
@@ -78,7 +81,14 @@ function WalkerSchedule() {
     };
 
     const viewWalkDetails = () => {
-        alert("Slot is Booked"); // TO-DO: show inside a modal
+        const messageJSX = (
+            <div className="available" width="400px" height="400px">
+                This slot is booked <br />
+                More info and formatting coming soon... 
+            </div>
+        );  
+        setModalJSX(messageJSX);
+        setModalOpen(true); 
     };
 
     const handleFormSubmit = async (event) => {
@@ -151,6 +161,11 @@ function WalkerSchedule() {
         );
     };
 
+    const closeModal = () => {
+        setModalJSX(<div />);
+        setModalOpen(false);
+    };
+
     return (
         <div id="walkers">
             <div className="headline">            
@@ -197,6 +212,7 @@ function WalkerSchedule() {
                     </div>
                 }   
             </form>
+            <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
         </div>
 
     )
