@@ -25,19 +25,34 @@ function WalkerDetails({ user }) {
 
     useEffect(() => {
         if (user) {
-            const { first_name, last_name, email, avatar, neighbourhoods, address } = user;
-            setFormData({
-                first_name,
-                last_name,
-                email,
-                avatar,
-                neighbourhoods,
-                address_street: address.street,
-                address_city: address.city,
-                address_neighbourhood: address.neighbourhood,
-                address_province: address.province,
-                address_postal_code: address.postal_code,
-            });
+            const { first_name, last_name, email, avatar, neighbourhoods, address, status } = user;
+            if(status === "PENDING_INFORMATION") {
+                setFormData({
+                    first_name,
+                    last_name,
+                    email,
+                    avatar: "",
+                    neighbourhoods:"",
+                    address_street: "",
+                    address_city: "",
+                    address_neighbourhood: "",
+                    address_province: "",
+                    address_postal_code: "",
+                })
+            } else {
+                setFormData({
+                    first_name,
+                    last_name,
+                    email,
+                    avatar,
+                    neighbourhoods,
+                    address_street: address.street,
+                    address_city: address.city,
+                    address_neighbourhood: address.neighbourhood,
+                    address_province: address.province,
+                    address_postal_code: address.postal_code,
+                });
+            }            
         }
     
     }, [user]);
