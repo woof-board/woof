@@ -18,7 +18,6 @@ import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
 import HomeMock from './pages/HomeMock';
-import { Admin, Resource, ListGuesser } from "react-admin";
 
 
 const client = new ApolloClient({
@@ -34,7 +33,6 @@ const client = new ApolloClient({
     uri: '/graphql'
 });
 
-const dataProvider = ();
 
 function App() {
 
@@ -75,9 +73,7 @@ function App() {
                     />
 
                 </StoreProvider>
-                <Admin dataProvider={dataProvider}>
-                    <Resource name="users" list={UserList} />
-                </Admin>
+
 
             </Router>
         </ApolloProvider>
