@@ -48,28 +48,45 @@ function WalkerProfile() {
       <h1>My Profile</h1>
       <div className='page-wrap'>
       
-      {currentUser && currentUser.status === "SUSPENDED" && 
-        <>
-          <div className="account-status">
-            ACCOUNT SUSPENDED
+        {currentUser && currentUser.status === "SUSPENDED" && 
+          <>
+          <div className="walker-contact-container">
+            <div className="walker-header">
+              <h2>Current account status</h2>
+            </div>
+            <div className="account-status">
+                ACCOUNT SUSPENDED
+            </div>
           </div>
-        </>    
-      } 
+
+          </>    
+        } 
         <>
         {currentUser && currentUser.status === "ACTIVE" && 
           <div className="walker-picture-container">
-            <img src="https://via.placeholder.com/150" alt="profile-image"/>
+            <img src="https://via.placeholder.com/150" alt="profile-img"/>
           </div>        
         }
         <div className="walker-details-container">
             {currentUser && currentUser.status === "PENDING_INFORMATION" && 
-              <div className="account-status">
-                COMPLETE ALL FORMS FOR APPROVAL
+              <div className="walker-contact-container">
+                <div className="walker-header">
+                  <h2>Current account status</h2>
+                </div>
+                <div className="account-status">
+                  COMPLETE ALL FORMS FOR APPROVAL
+                </div>
               </div>
+          
             }
             {currentUser && currentUser.status === "PENDING_APPROVAL" && 
-              <div className="account-status">
-                PENDING APPROVAL
+              <div className="walker-contact-container">
+                <div className="walker-header">
+                  <h2>Current account status</h2>
+                </div>
+                <div className="account-status">
+                  PENDING APPROVAL
+                </div>
               </div>
             }
             <WalkerDetails user={currentUser}/>

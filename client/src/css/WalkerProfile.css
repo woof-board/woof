@@ -72,8 +72,6 @@
     background-color: rgb(var(--rgb-tertiary),0.1);
 }
 
-
-
 .average-rating {
     width: 90%;
     background-color: rgb(var(--rgb-quinary),0.5);
@@ -133,13 +131,9 @@ button:hover {
 }
 
 @media screen and (max-width: 650px) {
-    .page-body {
+    .page-wrap {
         flex-direction: column;
         align-items: center;
-    }
-    .walker-picture-container {
-        min-width: 20rem;
-        min-height: 20rem;
     }
     .walker-contact-container {
         width: 20rem;
