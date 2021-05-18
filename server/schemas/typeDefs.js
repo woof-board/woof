@@ -166,6 +166,7 @@ const typeDefs = gql`
         address: AddressInput
         phone: String
         avatar: String
+        status: String
     }
 
     input WalkerInput {

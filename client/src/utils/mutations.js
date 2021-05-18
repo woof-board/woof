@@ -356,7 +356,7 @@ export const LOGIN_OWNER = gql`
 `;
 
 export const UPDATE_OWNER_PROFILE = gql`
-    mutation updateOwnerProfile($input: WalkerProfileInput) {
+    mutation updateOwnerProfile($input: OwnerProfileInput) {
         updateOwnerProfile(input: $input) {
             _id
             first_name
