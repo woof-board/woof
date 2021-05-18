@@ -1,13 +1,11 @@
-.footer-container {
-    position: fixed;
-    bottom: 0;
-    left: 0;
+.footer {
+    flex-shrink: 0;
     background-color: var(--primary);
     width: 100%;
     padding: 1rem;
-    z-index: 999;
     color: white;
-
+    position: relative;
+    z-index: 5;
 }
 
 .footer-left {

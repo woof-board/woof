@@ -2,10 +2,10 @@ import gql from 'graphql-tag';
 
 export const QUERY_OWNER_ME = gql`
     query {
-        owner_me {
+        ownerMe {
             _id
-            firstName
-            lastName
+            first_name
+            last_name
             email
             admin
             status
@@ -16,7 +16,7 @@ export const QUERY_OWNER_ME = gql`
             dogs {
                 name
             }
-            dogCount
+            dog_count
         }
     }
 `;
@@ -25,8 +25,8 @@ export const QUERY_OWNER = gql`
   query owner($owner_id: ID!) {
     owner (owner_id: $owner_id){
       _id
-      firstName
-      lastName
+      first_name
+      last_name
       email
       dogs{
         name
@@ -39,8 +39,8 @@ export const QUERY_OWNERS = gql`
   query owners {
     owners{
       _id
-      firstName
-      lastName
+      first_name
+      last_name
       email
       dogs{
         name
@@ -51,17 +51,30 @@ export const QUERY_OWNERS = gql`
 
 export const QUERY_WALKER_ME = gql`
     query {
-        walker_me {
+        walkerMe {
             _id
-            firstName
-            lastName
+            first_name
+            last_name
             email
+            avatar
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
             reviews{
+                owner_id{
+                  _id
+                  first_name
+                  last_name
+                }
                 rating
-                reviewText
+                review_text
             }
             earnings
-            averageRating
+            average_rating
             neighbourhoods
             status
             availability {
@@ -83,15 +96,19 @@ export const QUERY_WALKER = gql`
   query walker($walker_id: ID!) {
     walker (walker_id: $walker_id){
       _id
-      firstName
-      lastName
+      first_name
+      last_name
       email
       reviews{
-        owner_id
+        owner_id{
+          _id
+          first_name
+          last_name
+        }
         rating
-        reviewText
+        review_text
       }
-      averageRating
+      average_rating
     }
   }
 `;
@@ -100,15 +117,19 @@ export const QUERY_WALKERS = gql`
   query walkers{
     walkers {
       _id
-      firstName
-      lastName
+      first_name
+      last_name
       email
       reviews{
-        owner_id
+        owner_id{
+          _id
+          first_name
+          last_name
+        }
         rating
-        reviewText
+        review_text
       }
-      averageRating
+      average_rating
     }
   }
 `;
@@ -117,17 +138,21 @@ export const QUERY_ORDER = gql`
   query order($order_id: ID!) {
     order (order_id: $order_id){
       _id
-      serviceDate
-      serviceTime
+      service_date
+      service_time
       owner{
         _id
-        firstName
-        lastName
+        first_name
+        last_name
       }
       walker{
         _id
-        firstName
-        lastName
+        first_name
+        last_name
+      }
+      coords{
+        lon
+        lat
       }
     }
   }
@@ -136,53 +161,61 @@ export const QUERY_ORDER = gql`
 export const QUERY_ORDERS = gql`
   query orders{
     orders {
-      serviceDate
-      serviceTime
+      service_date
+      service_time
       owner{
         _id
       }
       walker{
         _id
+      }
+      coords{
+        lon
+        lat
       }
     }
   }
 `;
 
 export const QUERY_OWNER_ORDERS = gql`
-  query owner_orders($owner_id: ID!) {
-    owner_orders (owner_id: $owner_id){
+  query ownerOrders($owner_id: ID!) {
+    ownerOrders (owner_id: $owner_id){
       _id
-      serviceDate
-      serviceTime
+      service_date
+      service_time
       owner{
         _id
-        firstName
-        lastName
+        first_name
+        last_name
       }
       walker{
         _id
-        firstName
-        lastName
+        first_name
+        last_name
+      }
+      coords{
+        lon
+        lat
       }
     }
   }
 `;
 
 export const QUERY_WALKER_ORDERS = gql`
-  query walker_orders($walker_id: ID!) {
-    walker_orders (walker_id: $walker_id){
+  query walkerOrders($walker_id: ID!) {
+    walkerOrders (walker_id: $walker_id){
       _id
-      serviceDate
-      serviceTime
+      service_date
+      service_time
       owner{
         _id
-        firstName
-        lastName
+        first_name
+        last_name
       }
       walker{
         _id
-        firstName
-        lastName
+        first_name
+        last_name
       }
     }
   }
@@ -192,14 +225,48 @@ export const QUERY_WALKER_AVAILABILITY = gql`
     query checkWalkerAvailability($date: String!, $time: String!) {
         checkWalkerAvailability(date: $date, time: $time) {
             _id
-            firstName
-            lastName
+            first_name
+            last_name
             email
             neighbourhoods
             reviews {
-                reviewText
+                review_text
             }
-            averageRating
+            average_rating
         }
     }
+`;
+
+export const GET_CUSTOMER_SESSION_ID = gql`
+  query getCustomerSessionId {
+    getCustomerSessionId {
+        session_id
+      }
+  }
+`;
+
+export const CHARGE_OWNER = gql`
+  query chargeOwner($amount: Int!, $description: String!){
+    chargeOwner(amount: $amount, description: $description) {
+        id
+        object
+        amount
+        status
+    }	
+  }
+`;
+
+export const RETRIEVE_PAYMENTS = gql`
+  query retrievePayments{
+    retrievePayments{
+      data{
+        id
+        amount
+        created
+        currency
+        description
+        status
+      }
+    }
+  }
 `;

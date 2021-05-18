@@ -5,9 +5,13 @@
 #walkers {
     display: flex;
     flex-direction: row;
-    padding: 8rem 5rem 5rem 5rem;
+    padding: 2rem 5rem 1rem;
     flex-wrap: wrap;
     flex-direction: row;
+}
+
+h1 {
+    color: var(--primary);
 }
 
 .headline {
@@ -67,11 +71,51 @@
     color: white;
 }
 
+
+
+
+/* Walker Schedule */
+
 .schedule-container {
     display: grid;
     grid-template-columns: 8% 92%;
     grid-template-rows: 1;
     width: 100%;
+}
+.schedule-container button {
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    font-weight: 300;
+    color: black;
+}
+.schedule-container button:hover {
+    font-weight: 500;
+}
+.unavailable, .available, .booked {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    font-size: .85rem;
+    padding: 0 10px;
+    min-height: 48px;
+}
+.unavailable {
+    background-color: #bebebe;
+}
+.available {
+    background-color: var(--secondary);
+}
+.schedule-container .booked {
+    background-color: var(--primary);
+    color: var(--quinary);
+    line-height: 1.1em;
+    font-weight: 500;
+}
+.schedule-container .booked:hover {
+    background-color: var(--quinary);
+    color: var(--primary);
+    font-weight: 700;
 }
 .schedule-days {
     display: grid;
@@ -81,7 +125,6 @@
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     overflow: scroll;
-
 }
 
 .scroll-holder {
@@ -94,15 +137,25 @@
     border: solid 1px var(--quinary);
     text-align: center;
 }
+.schedule-button-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.schedule-button-container button{
+    margin: 12px 0 12px 8px
+}
 
 
-.arrow-right, .arrow-left {
+/* .arrow-right, .arrow-left {
     width: 0; 
     height: 0; 
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;  
-}
-.arrow-right {
+} */
+/* .arrow-right {
     border-left: 20px solid var(--quinary);
     margin-left: 5px;
 }
@@ -110,7 +163,7 @@
 .arrow-left {
     border-right:20px solid var(--quinary); 
     margin-right: 5px;
-}
+} */
 
 
 .times-header, .day-header {
@@ -118,24 +171,29 @@
     padding: 8px 0;
 }
 .times-header h5, .day-header h5 {
-    font-weight: 800;
+    font-weight: 700;
     line-height: 1.1em;
 }
 .times-header {
-    background-color: var(--tertiary);
+    background-color: var(--primary);
     text-align: left;
     border-top-left-radius: 15px;
     padding-left: 10px;
 }
 .time-label {
     text-align: left;
-    background-color: var(--secondary);
+    background-color: var(--quatenary);
     padding: 0 10px;
     min-height: 50px;
 }
 
+.time-label h5 {
+    font-weight: 500;
+    color: var(--primary);
+}
+
 .day-header {
-    background-color: var(--primary);
+    background-color: var(--tertiary);
 }
 .top-right {
     border-top-right-radius: 15px;
@@ -148,30 +206,10 @@
     border-bottom-right-radius: 15px;
 }
 .time-detail {
-    border-color: var(--secondary);
+    border-color: var(--quinary);
     padding: 0;
 }
-.unavailable, .available, .booked {
-    width: 100%;
-    height: 100%;
-    border: none;
-    cursor: pointer;
-    font-size: .85rem;
-    padding: 0 10px;
-    min-height: 48px;
-}
-.unavailable {
-    background-color: #bebebe;
-}
-.available {
-    background-color: var(--quatenary);
-}
-.booked {
-    background-color: var(--booked);
-    color: var(--quinary);
-    line-height: 1.1em;
-    font-weight: 500;
-}
+
 @media screen and (max-width: 1125px) {
     .schedule-days {
         grid-template-columns: 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20% 20%;

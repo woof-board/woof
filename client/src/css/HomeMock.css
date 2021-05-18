@@ -30,15 +30,17 @@
     flex-direction: row;
 }
 
-.home-title {
-    font-size: 10rem;
-    font-weight: bold;
+.home-logo {
+    height: 20rem;
+    width: 20rem;
+    margin-top: 5rem;
 }
 
 .home-font-small {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 2rem;
+    padding: 0 2rem 0 2rem;
 }
 
 .home-button {
@@ -50,6 +52,25 @@
     margin: 1rem;
 }
 
+.buttonActive {
+    background-color: rgb(255, 255, 255, .6);
+}
+
 .home-button:hover {
     background-color: rgb(255, 255, 255, .4);
+}
+
+@media screen and (max-width: 650px) {
+    .home-button {
+        font-size: 2rem;
+    }
+
+    .home-logo {
+        width: 15rem;
+        height: 15rem;
+    }
+
+    .home-font-small {
+        font-size: 1rem;
+    }
 }

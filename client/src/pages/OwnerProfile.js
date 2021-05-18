@@ -1,93 +1,102 @@
-import React from 'react';
-import '../css/OwnerProfile.css';
+import React, { useEffect } from 'react';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+
+// import '../css/WalkerProfile.css';
+import OwnerDetails from '../components/OwnerProfile/OwnerDetails';
+ 
+import { useStoreContext } from "../utils/GlobalState";
+import { QUERY_OWNER_ME } from '../utils/queries';
+import { UPDATE_CURRENT_USER } from "../utils/actions";
 
 function OwnerProfile() {
-    return (
-        <>
-        <div className="w3-content w3-margin-top" style={{maxWidth: "1400px"}}>
-             <div className="w3-row-padding">
+    const [state, dispatch] = useStoreContext();
+    const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
+    // const { loading, data } = useQuery(QUERY_WALKER_ME);
+    const { currentUser } = state;
 
-                <div className="w3-third">
+    useEffect(() => {
+        // if not already in global store
+        if (!currentUser && !data) {
+            getOwnerProfile(); // get profile from database
+        } 
+        // retrieved from server
+        else if (!currentUser && data) {
+            dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: data.owner_me
+            });
+            
+        }
+        // get cache from idb
+        // else if (!loading) {
+        //     idbPromise('products', 'get').then((indexedProducts) => {
+        //     dispatch({
+        //         type: UPDATE_PRODUCTS,
+        //         products: indexedProducts
+        //     });
+        //     });
+        // }
+    }, [currentUser, data, loading, dispatch]);
 
-                    <div className="w3-white w3-text-grey w3-card-4">
-                        <div className="w3-display-container">
-                        {/* <img src="./benspicture.JPG" style="width:100%" alt="Avatar"> */}
-                            <div className="w3-display-bottomleft w3-container w3-text-black">
-                                <h2>Benn Asabir</h2>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div className="w3-twothird">
-                    <div className="w3-container w3-card w3-white w3-margin-bottom">
-
-                        <h2 className="w3-padding-16"><i className="w3-margin-right w3-xxlarge"></i>My Profile</h2>
-
-                        <div className="w3-container">
-                            <h5 className="w3-opacity"><b>Full Name</b></h5>
-                            <p>Cure Insta</p>
-                            <hr></hr>
-                        </div>
-
-                        <div className="w3-container">
-                            <h5 className="w3-opacity"><b>Email</b></h5>
-                            <p>Benny555@gmail.com</p>
-                            <hr></hr>
-                        </div>
-
-                        <div className="w3-container">
-                            <h5 className="w3-opacity"><b>Number</b></h5>
-                            <p>555 5555 5555</p>
-                            <hr></hr>
-                        </div>
-
-                        <div className="w3-container">
-                            <h5 className="w3-opacity"><b>Address</b></h5>
-                            <p>555 Queensway Drive, Etobicoke, ON, L5M6Y7</p>
-                            <hr></hr>
-                        </div>
+//     export const QUERY_OWNER_ME = gql`
+//     query {
+//         owner_me {
+//             _id
+//             firstName
+//             lastName
+//             email
+//             admin
+//             status
+//             address {
+//                 city
+//             }
+//             phone
+//             dogs {
+//                 name
+//             }
+//             dogCount
+//         }
+//     }
+// `;
   
-                    </div>
-                </div>
-
-
-                <div className="w3-container w3-card w3-white">
-
-                    <h2 className="w3-padding-16">My Dog/s</h2>
-
-                    <div className="w3-container">
-                        {/* <img src="./home-samson.jpg" alt="" height="200"> */}
-                    </div>
-
-                    <div className="w3-container">
-                        <h5 className="w3-opacity"><b>Dog Name</b></h5>
-                        <p>Samson</p>
-                        <hr></hr>
-                    </div>
-
-                    <div className="w3-container">
-                        <h5 className="w3-opacity"><b>Dog Age</b></h5>
-                        <p>4</p>
-                        <hr></hr>
-                    </div>
-
-                    <div className="w3-container">
-                        <h5 className="w3-opacity"><b>Dog Weight</b></h5>
-                        <p>...</p>
-                        <hr></hr>
-                    </div>
-
-                </div>
-
-                
-             </div>
-        </div>
+return (
+    <div className="page-body">
+      {currentUser && currentUser.status === "SUSPENDED" && 
+        <>
+          <div className="account-status">
+            ACCOUNT SUSPENDED
+          </div>
+        </>    
+      } 
+        <>
+        {currentUser && currentUser.status === "ACTIVE" && 
+          <div className="walker-picture-container">
+            IMG HERE
+          </div>        
+        }
+        <div className="walker-details-container">
+            {currentUser && currentUser.status === "PENDING_INFORMATION" && 
+              <div className="account-status">
+                COMPLETE ALL FORMS FOR APPROVAL
+              </div>
+            }
+            {currentUser && currentUser.status === "PENDING_APPROVAL" && 
+              <div className="account-status">
+                PENDING APPROVAL
+              </div>
+            }
+            <OwnerDetails user={currentUser}/>
+            {currentUser && currentUser.status === "ACTIVE" && 
+              <>
+                COMPONENTS HERE
+              </>
+            }
+          </div>
         </>
-    )
+    </div>
+  );
 }
 
 export default OwnerProfile;
+
+

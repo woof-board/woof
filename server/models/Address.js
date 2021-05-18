@@ -18,7 +18,7 @@ const addressSchema = new Schema(
             type: String,
             required: true  
         },
-        postalCode: {
+        postal_code: {
             type: String,
             required: true  
         }

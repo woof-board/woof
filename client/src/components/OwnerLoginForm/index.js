@@ -4,6 +4,7 @@ import Auth from '../../utils/auth';
 import { LOGIN_OWNER } from '../../utils/mutations';
 import '../../css/Walker.css';
 
+
 function OwnerLoginForm() {
     const [formData, setUserFormData] = useState({ email: '', password: '' });
     const [loginOwner, { error }] = useMutation(LOGIN_OWNER);
@@ -18,21 +19,23 @@ function OwnerLoginForm() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        console.log(formData.email, formData.password)
+
         try {
           const { data } = await loginOwner({
             variables: { ...formData }
           });
-      
+        
           Auth.login(data.loginOwner.token);
-        } catch (e) {
-          console.error(e);
+        } catch (error) {
+          console.error(error);
         }
     };
     
     return (
         <form 
             id="walker-login-form" 
-            className="login-form" 
+            className="form-container" 
             onSubmit={handleFormSubmit}
         >
             <input 
@@ -60,7 +63,7 @@ function OwnerLoginForm() {
                 disabled={!(formData.email && formData.password)} 
                 type="submit" 
                 variant="success" 
-                className="form-button" 
+                className="home-form-button" 
                 id="walker-login-button"
             >
                 SUBMIT

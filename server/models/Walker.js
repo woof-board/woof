@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const { addressSchema } = require('./Address');
+const addressSchema = require('./Address');
 // const { formatDate }= require('../utils/helpers');
 
 const reviewSchema = new Schema( 
@@ -16,13 +16,12 @@ const reviewSchema = new Schema(
             validate: {
                 
                 validator: function(rating) {
-                    console.log(typeof(rating))
                     return rating >= 1 && rating <= 5;
                 },
                 message: props => `${props.value} is not a valid rating number!`
             },
         },
-        reviewText: {
+        review_text: {
             type: String
         }
     },{
@@ -34,12 +33,12 @@ const reviewSchema = new Schema(
 
 const walkerSchema = new Schema(
     {
-        firstName: {
+        first_name: {
             type: String,
             required: true,
             trim: true
         },
-        lastName: {
+        last_name: {
             type: String,
             required: true,
             trim: true
@@ -108,7 +107,7 @@ walkerSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-walkerSchema.virtual('averageRating').get(function () {
+walkerSchema.virtual('average_rating').get(function () {
     const reducer = (accumulator, currentValue, currentIndex, sourceArr) => {
         if(currentIndex === sourceArr.length - 1) {
           return parseFloat(((accumulator + currentValue) / sourceArr.length).toFixed(2));
@@ -117,7 +116,7 @@ walkerSchema.virtual('averageRating').get(function () {
         }
     }
 
-    return this.reviews.map(review => review.rating).reduce(reducer, 0);
+    return this.reviews?.map(review => review.rating).reduce(reducer, 0);
 });
 
 

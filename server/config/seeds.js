@@ -1,181 +1,571 @@
 const db = require('./connection');
-const { Owner, Walker, Dog } = require('../models');
-​
-db.once('open', async () => {   
-​
-    await Dog.deleteMany();
-    const dogs = await Dog.insertMany([
+const { Owner, Walker, Order } = require('../models');
+
+db.once('open', async () => {
+    console.log('opened');
+
+    await Owner.deleteMany();
+
+    await Owner.create(
         {
-           name: 'Mylo',
-           breed: 'Husky',
-           weight: '70lb'
-        },
-        {
-            name: 'Monty',
-            breed: 'AusiSheppard',
-            weight: '90lb'
-        },
-        {
-            name: 'Rex',
-            breed: 'Doberman',
-            weight: '70lb'
-        },
-        {
-            name: 'Bruen',
-            breed: 'Poodle',
-            weight: '70lb'
+            first_name: 'Eric',
+            last_name: 'Normann',
+            email: 'eric.n@me.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            admin: true,
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'west toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            phone: '111 111 1111',
+            dogs: [],
+            status: "ACTIVE"
         }
+    );
+
+    await Owner.create(
+        {
+            first_name: 'Samiul',
+            last_name: 'Choudhury',
+            email: 'sc@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            admin: true,
+            address: {
+                street: '1st Street NW',
+                city: 'calgary',
+                neighbourhood: '',
+                province: 'alberta',
+                postal_code: 'AAA AAA'
+            },
+            phone: '111 111 1111',
+            dogs: [],
+            status: "ACTIVE"
+        }
+    );
+
+    await Owner.create(
+        {
+            first_name: 'Nathan',
+            last_name: 'Chow',
+            email: 'nc@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            admin: true,
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'south toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            phone: '111 111 1111',
+            dogs: [],
+            status: "ACTIVE"
+        }
+    );
+
+    await Owner.create(
+        {
+            first_name: 'Shamim',
+            last_name: 'Imtiaz',
+            email: 'si@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            admin: false,
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            phone: '111 111 1111',
+            dogs: [
+                {
+                    name: 'Mylo',
+                    breed: 'Husky',
+                    weight: 70,
+                    treats: true,
+                    avatar: "/images/user-default.png"
+                },
+                {
+                    name: 'Monty',
+                    breed: 'AusiSheppard',
+                    weight: 90,
+                    treats: true,
+                    avatar: "/images/user-default.png"
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+
+    await Owner.create(
+        {
+            first_name: 'Mike',
+            last_name: 'Smith',
+            email: 'ms@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            admin: false,
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            phone: '111 111 1111',
+            dogs: [
+                {
+                    name: 'Rex',
+                    breed: 'Doberman',
+                    weight: 70,
+                    treats: false,
+                    avatar: "/images/user-default.png"
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+
+    await Owner.create(
+        {
+            first_name: 'Jim',
+            last_name: 'Anderson',
+            email: 'ja@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            admin: false,
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            phone: '111 111 1111',
+            dogs: [
+                {
+                    name: 'Bruen',
+                    breed: 'Poodle',
+                    weight: 70,
+                    treats: true,
+                    avatar: "/images/user-default.png"
+                }
+            ],
+            status: "SUSPENDED"
+        }
+    );
+
+    console.log('owners seeded');
+
+    const owners = await Owner.find({});
+    const ownerIds = owners.map(owner => owner._id);
+
+    await Walker.deleteMany();
+
+    await Walker.create(
+        {
+            first_name: 'Pamela',
+            last_name: 'Washington',
+            email: 'pw@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            neighbourhoods: ['east toronto', 'south toronto'],
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [],
+            earnings: 0.0,
+            availability: [
+                {
+                    date: '2021-05-20',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-21',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+
+    await Walker.create(
+        {
+            first_name: 'Elijah',
+            last_name: 'Holt',
+            email: 'eh@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            neighbourhoods: ['north toronto', 'west toronto'],
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [],
+            earnings: 0.0,
+            availability: [
+                {
+                    date: '2021-05-20',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-21',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                }
+            ],
+            status: "PENDING_APPROVAL"
+        }
+    );
+
+    await Walker.create(
+        {
+            first_name: 'Karen',
+            last_name: 'Nuvoski',
+            email: 'kn@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            neighbourhoods: ['north toronto', 'west toronto'],
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[0],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 1,
+                    review_text: "bad!!!"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-20',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-21',
+                    slot9am: false,
+                    slot11am: false,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+
+    await Walker.create(
+        {
+            first_name: 'Ryan',
+            last_name: 'Turnbull',
+            email: 'rt@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            neighbourhoods: ['north toronto', 'west toronto'],
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[4],
+                    rating: 1,
+                    review_text: "pretty bad service!"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[2],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 800.0,
+            availability: [
+                {
+                    date: '2021-05-20',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-21',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+
+    await Walker.create(
+        {
+            first_name: 'Mark',
+            last_name: 'Spencer',
+            email: 'ms@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            neighbourhoods: ['north toronto', 'west toronto'],
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-20',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-21',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                }
+            ],
+            status: "SUSPENDED"
+        }
+    );
+
+    console.log('walker seeded');
+
+
+    await Order.deleteMany();
+
+    await Order.insertMany([
+      
+      {
+        service_date:'2021-05-21',
+        service_time: '9am',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac06c',
+        walker: '60a073419ae33509302ac085',
+        dogs: ['60a073419ae33509302ac06e']
+      },
+      {
+        service_date:'2021-05-20',
+        service_time: '9am',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac06f',
+        walker: '60a073419ae33509302ac08a',
+        dogs: ['60a073419ae33509302ac071']
+      },
+      {
+        service_date:'2021-05-20',
+        service_time: '11am',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac072',
+        walker: '60a073419ae33509302ac08a',
+        dogs: ['60a073419ae33509302ac074']
+      },
+      {
+        service_date:'2021-05-20',
+        service_time: '1pm',
+        status: 'PENDING_PROGRESS',
+        owner: '60a073419ae33509302ac075',
+        walker: '60a073419ae33509302ac08f',
+        dogs: [
+          '60a073419ae33509302ac077',
+          '60a073419ae33509302ac078'
+        ]
+      },
+      {
+        service_date:'2021-05-21',
+        service_time: '11am',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac079',
+        walker: '60a073419ae33509302ac097',
+        dogs: ['60a073419ae33509302ac07b']
+      },
+      {
+        service_date:'2021-05-21',
+        service_time: '3pm',
+        status: 'PENDING_WALKER',
+        owner: '60a073419ae33509302ac07c',
+        walker: '60a073419ae33509302ac09f',
+        dogs: ['60a073419ae33509302ac07e']
+      },
+      {
+        service_date:'2021-05-20',
+        service_time: '5pm',
+        status: 'IN_PROGRESS',
+        owner: '60a073419ae33509302ac07c',
+        walker: '60a073419ae33509302ac09f',
+        dogs: ['60a073419ae33509302ac07e']
+      },
+      {
+        service_date:'2021-05-21',
+        service_time: '7pm',
+        status: 'PENDING_PROGRESS',
+        owner: '60a073419ae33509302ac075',
+        walker: '60a073419ae33509302ac08f',
+        dogs: [
+          '60a073419ae33509302ac077',
+          '60a073419ae33509302ac078'
+        ]
+      },
+      
     ]);
-​
-​
-  await Walker.deleteMany();
-​
-  await Walker.create({
-    firstName: 'Pamela',
-    lastName: 'Washington',
-    email: 'pamela@testmail.com',
-    password: 'password12345',
-    neighbourhoods: 'East Toronto',
-    avatar: "/images/user-default.png"
-  });
-​
-  await Walker.create({
-    firstName: 'Elijah',
-    lastName: 'Holt',
-    email: 'eholt@testmail.com',
-    password: 'password12345',
-    neighbourhoods: 'West Toronto',
-    avatar: "/images/user-default.png"
-  });
-​
-  await Walker.create({
-    firstName: 'Karen',
-    lastName: 'Nuvoski',
-    email: 'karen@testmail.com',
-    password: 'password12345',
-    neighbourhoods: 'North Toronto',
-    avatar: "/images/user-default.png"
-  });
-​
-  await Walker.create({
-    firstName: 'Ryan',
-    lastName: 'Turnbull',
-    email: 'Ryan@testmail.com',
-    password: 'password12345',
-    neighbourhoods: 'South Toronto',
-    avatar: "/images/user-default.png"
-  });
-​
-  await Walker.create({
-    firstName: 'Mark',
-    lastName: 'Spencer',
-    email: 'Ryan@testmail.com',
-    password: 'password12345',
-    neighbourhoods: 'Etobicoke',
-    avatar: "/images/user-default.png"
-  });
-​
-  await Walker.create({
-    firstName: 'Alexander',
-    lastName: 'Slater',
-    email: 'Ryan@testmail.com',
-    password: 'password12345',
-    neighbourhoods: 'Hamilton',
-    avatar: "/images/user-default.png"
-  });
-​
-  await Walker.create({
-    firstName: 'Joe',
-    lastName: 'Smith',
-    email: 'Ryan@testmail.com',
-    password: 'password12345',
-    neighbourhoods: 'Ajax',
-    avatar: "/images/user-default.png"
-  });
-​
-console.log('walker seeded');
-​
-​
-await Owner.deleteMany();
-​
-  await Owner.create({
-    first_name: 'Eric',
-    last_name: 'Normann',
-    email: 'eric.n@me.com',
-    password: 'password12345',
-    admin:true
-  });
-​
-  await Owner.create({
-    first_name: 'Samiul',
-    last_name: 'Choudhury',
-    email: 'samiulhaydereee@gmail.com',
-    password: 'password12345',
-    admin:true
-  });
-​
-  await Owner.create({
-    first_name: 'Nathan',
-    last_name: 'Chow',
-    email: 'emailme@nathanchow.ca',
-    password: 'password12345',
-    admin:true,
-  });
-​
-  await Owner.create({
-    first_name: 'Shamim',
-    last_name: 'Imtiaz',
-    email: 'km_si@ymail.com',
-    password: 'password12345',
-    admin:true,
-  });
-  await Owner.create({
-    first_name: 'Benjamin',
-    last_name: 'Asabir',
-    email: 'benasabir@gmail.com',
-    password: 'password12345',
-    admin:true,
-  });
-​
-  await Owner.create({
-    firstName: 'Rose',
-    lastName: 'Francis',
-    email: 'rose@testmail.com',
-    password: 'password12345',
-    admin:true,
-    orders: [
-        {
-          dog: [dog[0]._id, dog[1]._id]
-        }
-      ]
-  });
-  await Owner.create({
-    firstName: 'Alex',
-    lastName: 'Chung',
-    email: 'alex@testmail.com',
-    password: 'password12345',
-    admin:true,
-    orders: [
-        {
-          dog: [dog[0]._id, dog[1]._id, dog[2]._id]
-        }
-      ]
-  });
-  await Owner.create({
-    firstName: 'Brian',
-    lastName: 'Wang',
-    email: 'alex@testmail.com',
-    password: 'password12345',
-    admin:true,
-    orders: [
-        {
-          dog: [dog[0]._id, dog[1]._id]
-        }
-      ]
-  });
-​
-  console.log('users seeded');
-​
-  process.exit();
-​
+
+    console.log('order seeded');
+
+    
+    process.exit();
+
 });

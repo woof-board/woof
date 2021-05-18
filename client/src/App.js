@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -7,20 +7,20 @@ import './css/App.css';
 import Footer from './components/Footer';
 import About from './pages/About';
 import Header from './components/Header';
-import Walkers from './pages/Walkers'
 import NoMatch from './pages/NoMatch';
-import Walker from './pages/Walker';
-import Owner from './pages/Owner';
-import Auth from './utils/auth';
+import PaymentScreen from './pages/PaymentScreen';
+import Success from "./pages/Success";
 import WalkerSchedule from './pages/WalkerSchedule';
 
-// import WalkerHeader from './components/Header/WalkerHeader.js';
-// import OwnerHeader from './components/Header/OwnerHeader.js';
 import OwnerProfile from './pages/OwnerProfile.js';
+import OwnerTrackOrder from './pages/OwnerTrackOrder';
 import WalkerProfile from './pages/WalkerProfile.js';
+import WalkerTrackWalks from './pages/WalkerTrackWalks.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
+import HomeMock from './pages/HomeMock';
+import Map from './components/OwnerTrackOrder/Map'
 
 const client = new ApolloClient({
     request: operation => {
@@ -36,86 +36,39 @@ const client = new ApolloClient({
 });
 
 function App() {
-        
-    const [headerLinks] = useState([
-        {
-            name: 'Owner',
-            href: '/owner',
-        },
-        {
-            name: 'Walker',
-            href: '/walker',
-        }
-    ])
-
-
-        const [walkerLinks] = useState([
-            {
-                name: 'Walker Profile',
-                href: '/walkerprofile'
-            },
-        ])
-
-
-    const [ownerLinks] = useState([
-        {
-            name: 'Owner Profile',
-            href: '/ownerprofile'
-        }
-    ])
-
     const footerLinks = [
         {
             name: 'About',
             href: '/about'
         }
     ]
-    
-    const result = Auth.getProfileType();
-    console.log(result);
-
-    const [currentHeaderLink, setHeaderCurrentLink] = useState(headerLinks[0])
-    const [currentWalkerLink, setWalkerLink] = useState(walkerLinks[0]);
-	const [currentOwnerLink, setOwnerLink] = useState(ownerLinks[0])
 
     return (
         <ApolloProvider client={client}>
             <Router>
                 <StoreProvider>
-                <div className="page">
-                        <div className="page">
-                        <Header
-                            headerLinks={headerLinks}
-                            currentHeaderLink={currentHeaderLink}
-                            setHeaderCurrentLink={setHeaderCurrentLink}
-                            walkerLinks={walkerLinks}
-                            setWalkerLink={setWalkerLink}
-                            currentWalkerLink={currentWalkerLink}
-                            ownerLinks={ownerLinks}
-                            currentOwnerLink={currentOwnerLink}
-                            setOwnerLink={setOwnerLink}
-                            result={result}
-                        />
-                        
+                    <div className="page">
+                        <Header />
                         <Switch>
-                            <PublicRoute exact path='/' component={Owner} />
-                            <PublicRoute exact path="/owner" component={Owner} />         
-                            <PublicRoute exact path="/walker" component={Walker} />
+                            <PublicRoute exact path='/' component={HomeMock} />
 
                             <Route exact path="/about" component={About} />
+                            <PrivateRoute exact path="/paymentScreen" component={PaymentScreen} />
+                            <PrivateRoute exact path="/Success" component={Success} />
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
+                            <Route exact path="/ownertrackorder" usertype="owner" component={OwnerTrackOrder}/> 
+                            <Route exact path="/map" usertype="owner" component={Map}/> 
                             <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
                             <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
+                            <PrivateRoute exact path="/walkertrackwalks" usertype="walker" component={WalkerTrackWalks} />
 
                             <Route component={NoMatch} />
                         </Switch>
-                            
-                        </div>
-                </div>
-                <Footer 
-            	    footerLinks={footerLinks}
-                />
+                    </div>
+                    <Footer 
+                        footerLinks={footerLinks}
+                    />
                 </StoreProvider>
             </Router>
         </ApolloProvider>

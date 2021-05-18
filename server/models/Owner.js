@@ -5,12 +5,12 @@ const dogSchema = require('./Dog');
 
 const ownerSchema = new Schema(
     {
-        firstName: {
+        first_name: {
             type: String,
             required: true,
             trim: true
         },
-        lastName: {
+        last_name: {
             type: String,
             required: true,
             trim: true
@@ -41,7 +41,15 @@ const ownerSchema = new Schema(
             required: true,
             enum: ["PENDING_INFORMATION", "ACTIVE", "SUSPENDED"],
             default: "PENDING_INFORMATION"
-        }
+        },
+        stripe_customer_id: {
+            type: String,
+            match: [/^cus_.+/, 'Must be a valid stripe customer id!']
+        },
+        stripe_setup_intent: {
+            type: String,
+            match: [/^seti_.+/, 'Must be a valid stripe setup_intent id!']
+        },
     },
     {
       toJSON: {
@@ -65,8 +73,8 @@ ownerSchema.methods.isCorrectPassword = async function (password) {
     return await bcrypt.compare(password, this.password);
 };
 
-ownerSchema.virtual('dogCount').get(function() {
-    return this.dogs.length;
+ownerSchema.virtual('dog_count').get(function() {
+    return this.dogs?.length;
 });
 
 const Owner = model('Owner', ownerSchema);

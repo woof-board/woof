@@ -1,24 +1,33 @@
 .about-imgholder {
   position: relative;
   text-align: center;
+  height: 30rem;
+  top: -1rem;
 }
-.about-image {
-    width: 100%;
-    max-height:30rem;
-    text-align: center;
-}
-.about-title {
+
+.about-banner {
+  background-image: url('../assets/images/about-dog-banner-cropped.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-title {
+  position: relative;
   color: var(--secondary);
   font-size: 6rem;
   font-weight: 400;
   text-shadow: 5px 5px 10px rgb(0,0,0,0.6);
-  margin: auto;
   padding: 0;
+  z-index: 2;
 }
+
 .about-caption {
   font-size: 2rem;
   color: var(--quinary);
@@ -26,6 +35,7 @@
   text-shadow: 3px 3px 5px rgb(0,0,0,0.8);
   padding-top: 0;
   margin-top: 0;
+  z-index: 2;
 }
 .about-us {
   line-height: 1.6;
@@ -34,11 +44,143 @@
   text-align: justify;
 }
 
-/*Leadership style starts*/
-.leadership {
-  text-align: center;
-  margin: 5rem 20rem 5rem 20rem;
+.aboutLink {
+  margin: 1rem 1rem 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  padding: 1rem;
 }
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  flex-direction: column;
+}
+
+.learnLink {
+  font-weight: bold;
+}
+
+.hover-line {
+  width: 0rem;
+  border-bottom: 3px solid black;
+  transition: .6s;
+}
+
+.aboutActive {
+  padding: .5rem;
+  background-color: var(--primary);
+  color: white;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.learnLink:hover ~ .hover-line {
+  font-weight: bold;
+  width: 5.5rem;
+  border-bottom: 3px solid black;
+  transition: .6s;
+}
+
+.learnActive {
+  border-bottom: 3px solid black;
+  transition: .6s;
+}
+
+.learn-more-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.component-section {
+  background-color: var(--quinary);
+  width: 100%;
+  height: auto;
+  padding: 2rem;
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.content {
+  width: 55rem;
+}
+
+.flex-r {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.flex-c {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-c-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-tech {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+}
+
+b {
+  font-weight: bold;
+}
+
+.tech-picture {
+  height: 20rem;
+  width: 20rem;
+  background-color: white;
+  border-radius: 25px;
+  box-shadow: 5px 5px 10px rgb(0,0,0,0.6);
+  margin-bottom: 1rem;
+}
+
+.app-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+  padding: 1rem;
+  border-radius: 25px;
+  margin-top: 1rem;
+}
+
+.app-card:hover {
+  box-shadow: 5px 5px 10px rgb(0,0,0,0.8);
+}
+
+.app-description {
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.app-logo {
+  height: 10rem;
+  width: 10rem;
+  padding: .5rem;
+  border: .5rem solid black;
+  border-radius: 30px;
+}
+
 .profile-picture {
   width: 10rem;
   height: 10rem;
@@ -54,7 +196,10 @@
   /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
   padding: 2rem;
   text-align: center;
-  background-color: var(--quinary);
+  background-color: var(--quatenary);
+  border-radius: 25px;
+  margin: 1rem;
+  box-shadow: 5px 5px 10px rgb(0,0,0,0.5);
 }
 .profile-socialmedia {
   margin: 0 1rem 0 1rem;
@@ -68,7 +213,7 @@
 }
 
 /* Responsiveness */
-@media screen and (max-width: 1315px) {
+/* @media screen and (max-width: 1315px) {
   
   .about-title {
     font-size: 5rem;
@@ -110,20 +255,17 @@
     font-size: 4rem;
     color: var(--tertiary);
   }
-}
+} */
 
-@media screen and (max-width: 650px) {
-  .about-image {
+@media screen and (max-width: 950px) {
+  .content {
     width: 100%;
-    min-height: 0rem;
-    padding: 5rem 1rem 5rem 1rem;
+    padding: 0 2rem;
   }
-  .about-title {
-    margin: 3rem 0;
-    font-size: 3rem;
-  }
-  .about-caption {
-    font-size: 1.75rem;
+
+  .flex-tech {
+    flex-direction: column;
+    align-items: center;
   }
 }
 /*Leadership style ends*/
