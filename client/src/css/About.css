@@ -2,7 +2,7 @@
   position: relative;
   text-align: center;
   top: -1rem;
-  height: 30rem;
+  height: 50rem;
 }
 
 .page-margin-bottom {
@@ -431,6 +431,20 @@ b {
   }
 } */
 
+@media screen and (max-width: 1250px) {
+  .about-us-container {
+    height: 40rem;
+  }
+
+  .about-banner {
+    height: 40rem;
+  }
+
+  .about-imgholder {
+    height: 40rem;
+  }
+}
+
 @media screen and (max-width: 950px) {
   .content {
     width: 100%;
@@ -450,16 +464,21 @@ b {
     font-size: 3rem;
   }
 
-  .about-us-container {
-    height: 20rem;
+  .about-us-container, .about-banner, .about-imgholder {
+    height: 30rem;
   }
 
-  .about-banner {
-    height: 20rem;
+}
+
+@media screen and (max-width: 650px) {
+  .about-banner, .about-us-banner, .about-contact-banner {
+    background-size: contain;
+    justify-content: center;
   }
 
-  .about-imgholder {
-    height: 20rem;
+  .about-us-container, .about-banner, .about-imgholder {
+    height: 24rem;
   }
+
 }
 /*Leadership style ends*/
