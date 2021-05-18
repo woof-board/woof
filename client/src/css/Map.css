@@ -1,6 +1,4 @@
 .page-container {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
     height: 100%;
     width: 100%;
     display: flex;
@@ -11,10 +9,10 @@
 .map-container {
     padding: 2rem;
     background-color: var(--tertiary);
-    padding-bottom: 6rem;
+    padding-bottom: 5rem;
     border-radius: 35px;
     width: 95%;
-    height: 95%;
+    height: 85%;
     margin: 2rem;
 }
 
