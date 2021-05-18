@@ -201,3 +201,18 @@ export const neighbourhoods = [
   "Scarborough",
   "York"
 ]
+
+export function objectToArray(coordsObject) {
+  return Object.values(coordsObject);
+}
+
+export function middleValueOfArray(arr) {
+  if (arr!==0){
+    const middleIndex = Math.floor(arr.length / 2);
+    return arr[middleIndex];
+  }
+  else {
+    return []; // Tracking not started
+  }
+}
+

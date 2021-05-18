@@ -24,8 +24,6 @@
     background-color: rgb(var(--rgb-tertiary),0.1);
 }
 
-
-
 .average-rating {
     background-color: rgb(var(--rgb-quinary),0.5);
 }
@@ -47,3 +45,12 @@ button:hover {
     color: var(--tertiary);
 }
 
+@media screen and (max-width: 650px) {
+    .page-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+    .walker-contact-container {
+        width: 20rem;
+    }
+}

@@ -55,6 +55,7 @@ function WalkerTrackOrder(order) {
    function stopTrack(event) {
        clearInterval(myVar);
        console.log("walk stopped");
+       // change order status to fulfilled
    } 
 
     return (
