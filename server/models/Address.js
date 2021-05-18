@@ -4,11 +4,11 @@ const addressSchema = new Schema(
     {
         street: {
             type: String,
-            required: true
+            required: false
         },
         city: {
             type: String,
-            required: true  
+            required: false  
         },
         neighbourhood: {   // is there any list of neighbourhoods with standard wording? 
             type: String,
@@ -16,11 +16,11 @@ const addressSchema = new Schema(
         },
         province: {
             type: String,
-            required: true  
+            required: false  
         },
         postal_code: {
             type: String,
-            required: true  
+            required: false  
         }
     }
 );

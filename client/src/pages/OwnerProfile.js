@@ -74,13 +74,19 @@ return (
                 </div>
               </div>
             }
+            {currentUser && currentUser.status === "ACTIVE" && 
+              <div className="walker-contact-container">
+              <div className="walker-header">
+                <h2>Welcome {currentUser.first_name}!</h2>
+              </div>
+              <div className="account-status">
+                Welcome!
+              </div>
+            </div>
+            }
             <OwnerDetails user={currentUser}/>
             <OwnerPasswordForm />
-            {currentUser && currentUser.status === "ACTIVE" && 
-              <>
-                COMPONENTS HERE
-              </>
-            }
+            
           </div>
         </>
       </div>
