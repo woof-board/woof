@@ -40,12 +40,13 @@ function WalkerTrackWalks() {
                 {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
                 : 'You have no upcoming Walks'}
               </div>
-              {orders.map((order) => (
+              {orders.filter(order => order.status === "PENDING_PROGRESS").map((order) => (
                 // render component
                 <WalkerTrackOrder
                 order_id = {order.order_id}
                 service_date = {order.service_date}
                 service_time = {order.service_time}
+                status = {order.status}
                 />
               ))}
             </div>
