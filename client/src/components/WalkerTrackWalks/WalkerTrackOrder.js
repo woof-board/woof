@@ -1,17 +1,22 @@
 import React from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_ORDER_COORDS } from "../../utils/mutations";
+import { UPDATE_ORDER_COORDS, UPDATE_ORDER_STATUS } from "../../utils/mutations";
 import Auth from '../../utils/auth';
 
 
 function WalkerTrackOrder(order) {
 
     const [updateOrderCoords] = useMutation(UPDATE_ORDER_COORDS);
+    
     const {
         order_id,
         service_date,
-        service_time
+        service_time,
+        status
     } = order;
+
+    const [updateOrderStatus] = useMutation(UPDATE_ORDER_STATUS);
+    // const [updateOrderStatusToFulfilled] = useMutation(UPDATE_ORDER_STATUS, {order_id: order_id , status: "FULFILLED"});
 
    // Tracker Start and Stop Functions
    const trackCoordinates = [];
@@ -19,6 +24,12 @@ function WalkerTrackOrder(order) {
    var myVar;
    function startTrack(event) {
        event.preventDefault();
+       // change order status to In Progress
+       updateOrderStatus(
+        {
+          "order_id": order_id,
+          "status": "IN_PROGRESS"
+        });
        // set timer for one minute
        myVar = setInterval(myTimer, 60000);
        function myTimer() {
@@ -56,6 +67,11 @@ function WalkerTrackOrder(order) {
        clearInterval(myVar);
        console.log("walk stopped");
        // change order status to fulfilled
+       updateOrderStatus(
+        {
+          "order_id": order_id,
+          "status": "FULFILLED"
+        });
    } 
 
     return (
