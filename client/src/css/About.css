@@ -5,8 +5,12 @@
   top: -1rem;
 }
 
+.page-margin-bottom {
+  margin-bottom: 10rem;
+}
+
 .about-banner {
-  background-image: url('../assets/images/about-dog-banner-cropped.png');
+  background-image: url('../assets/images/dog-walker.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -20,14 +24,28 @@
 }
 
 .about-us-container {
-  height: 30rem;
+  height: 40rem;
   position: relative;
   width: 100%;
   left: 0;
 }
 
 .about-us-banner {
-  background-image: url('../assets/images/dog-with-glasses.jpeg');
+  background-image: url('../assets/images/dog-leash.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.about-contact-banner {
+  background-image: url('../assets/images/about-contact-dog-cropped.png');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -52,14 +70,17 @@
 
 .about-caption {
   font-size: 2rem;
-  color: var(--quinary);
-  font-weight: 500;
+  color: white;
+  font-weight: bold;
   padding-top: 0;
   margin-top: 0;
-  z-index: 2;
-  padding: 3rem; 
+  padding-left: 1rem;
+  z-index: 2; 
+  margin: 1rem;
   font-size: 4rem;
+  /* background-image: linear-gradient(to right,rgb(0,0,0,0.5), rgb(0,0,0,0)); */
 }
+
 .about-us {
   line-height: 1.6;
   font-size: 120%;
@@ -73,12 +94,15 @@
   font-weight: bold;
   padding: .25rem 0.4rem;
   color: white;
-  position: relative;
-  z-index: 3;
   border: 3px solid white;
   border-radius: 35px;
   position: relative;
   z-index: 10;
+}
+
+.devActive {
+  background-color: white;
+  color: black;
 }
 
 .about-learn-more:hover {
@@ -91,6 +115,44 @@
 }
 
 .about-button-anim {
+  border-radius: 35px;
+  margin: 1rem 3rem;
+  position: relative;
+  top: -3rem;
+  width: 0rem;
+  background-color: white;
+  height: 2rem;
+  transition: .7s;
+  opacity: 0;
+}
+
+.about-contact {
+  margin: 1rem 3rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: .25rem 0.4rem;
+  color: white;
+  border: 3px solid white;
+  border-radius: 35px;
+  position: relative;
+  z-index: 10;
+}
+
+.contactActive {
+  background-color: white;
+  color: black;
+}
+
+.about-contact:hover {
+  color: black;
+}
+
+.about-contact:hover ~ .about-contact-button-anim {
+  width: 7rem;
+  opacity: 1;
+}
+
+.about-contact-button-anim {
   border-radius: 35px;
   margin: 1rem 3rem;
   position: relative;
@@ -174,6 +236,30 @@
 
 .content {
   width: 55rem;
+}
+
+.contact-us-container {
+  width: 30rem;
+  height: 30rem;
+
+}
+
+.contactus-input {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.contact-us-title {
+  background-color: var(--tertiary);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  padding: .5rem;
+  text-align: center;
+}
+
+.contactus-question {
+  height: 5rem;
+  padding-left: 1rem;
 }
 
 .flex-r {

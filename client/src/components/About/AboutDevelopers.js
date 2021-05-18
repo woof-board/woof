@@ -55,15 +55,15 @@ function AboutDevelopers() {
 
     return (
         <>
-                {developers.map((dev) => (
-                    <div key={dev.name} className="about-card">
-                        <img alt={dev.name} src={process.env.PUBLIC_URL + `${dev.image}`} className="profile-picture"></img>
-                        <h3>{dev.name}</h3>
-                        <p>I am who I am</p>
-                        <a href={dev.github}><i className="fab fa-github profile-socialmedia"></i></a>
-                        <a href={dev.linked}><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
-                    </div>
-                ))}
+            {developers.map((dev) => (
+                <div key={dev.name} className="about-card">
+                    <img alt={dev.name} src={process.env.PUBLIC_URL + `${dev.image}`} className="profile-picture"></img>
+                    <h3>{dev.name}</h3>
+                    <p>I am who I am</p>
+                    <a href={dev.github}><i className="fab fa-github profile-socialmedia"></i></a>
+                    <a href={dev.linked}><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
+                </div>
+            ))}
         </>
     )
 }
