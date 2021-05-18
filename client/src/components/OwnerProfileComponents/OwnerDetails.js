@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 //import '../../css/OwnerProfile.css';
-// import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
+import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import { cities, neighbourhoods } from '../../utils/helpers';
 
 function OwnerDetails(props) {
-
     const {
         results,
     } = props

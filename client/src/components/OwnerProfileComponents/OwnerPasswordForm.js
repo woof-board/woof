@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_WALKER_PASSWORD } from "../../utils/mutations";
+import { UPDATE_OWNER_PASSWORD } from "../../utils/mutations";
 import ModalDisplay from '../../components/ModalDisplay';
 
-function WalkerPasswordForm() {
-    const [updateWalkerPassword, { error }] = useMutation(UPDATE_WALKER_PASSWORD);
+function OwnerPasswordForm() {
+    const [updateOwnerPassword, { error }] = useMutation(UPDATE_OWNER_PASSWORD);
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState();
-    
+
     const [formData, setFormData] = useState({ 
         old_password: '', 
         new_password: ''
@@ -25,9 +25,9 @@ function WalkerPasswordForm() {
         e.preventDefault();
 
         // need to implement form validation here
-
+        console.log(formData);
          try {
-            await updateWalkerPassword({
+            await updateOwnerPassword({
                 variables: {
                     old_password: formData.old_password,
                     new_password: formData.new_password
@@ -99,4 +99,4 @@ function WalkerPasswordForm() {
     )
 }
 
-export default WalkerPasswordForm;
+export default OwnerPasswordForm;
