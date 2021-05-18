@@ -77,6 +77,8 @@
   z-index: 3;
   border: 3px solid white;
   border-radius: 35px;
+  position: relative;
+  z-index: 10;
 }
 
 .about-learn-more:hover {
@@ -104,7 +106,14 @@
   margin: 1rem 1rem 2rem;
   font-size: 2rem;
   font-weight: bold;
-  padding: 1rem;
+  padding: .5rem;
+  border-radius: 25px;
+}
+
+.aboutLink:hover {
+  background-color: rgb(var(--rgb-primary), 0.4);
+  border-radius: 25px;
+  transition: .5s;
 }
 
 .flex-center {

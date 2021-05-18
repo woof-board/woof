@@ -51,7 +51,7 @@ function About() {
 
     return (
         <>
-        <div className="flex-c">
+        <div className="flex-c" onClick={() => { setCurrentDevLink(dev[0])}}>
             <div className="about-imgholder">
                     <div className="about-banner">
                         <span className="about-caption">About us</span>
