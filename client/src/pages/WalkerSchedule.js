@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/react-hooks';
 import { UPDATE_WALKER_AVAILABILITY } from "../utils/mutations";
 import { createInitialState } from "../utils/helpers";
 import { useStoreContext } from "../utils/GlobalState";
@@ -215,28 +215,30 @@ function WalkerSchedule() {
 
     const changeAvailability = event => {
         event.preventDefault();
-        let tempArr = Array.from(schedule, x => x); 
-        const index = parseInt(event.target.getAttribute("data-index"));
-        const timeSlot = event.target.getAttribute("data-time");
+        console.log(event.target);
+        // let tempArr = Array.from(schedule, x => x); 
+        // const index = parseInt(event.target.getAttribute("data-index"));
+        // const timeSlot = event.target.getAttribute("data-time");
         
-        if(event.target.className === "unavailable"){
-            tempArr[index][timeSlot] = true; 
-        } else {
-            tempArr[index][timeSlot] = false; 
-        }
+        // if(event.target.className === "unavailable"){
+        //     tempArr[index][timeSlot] = true; 
+        // } else {
+        //     tempArr[index][timeSlot] = false; 
+        // }
         
-        setSchedule([...tempArr]);
-        if(!buttonVisible) {
-            setButtonVisible(true);
-        }
+        // setSchedule([...tempArr]);
+        // if(!buttonVisible) {
+        //     setButtonVisible(true);
+        // }
     };
 
     const viewWalkDetails = event => {
         event.preventDefault();
         console.log(event.target.id);
-        // if(!buttonVisible) {
-        //     setButtonVisible(true);
-        // }
+        
+        if(!buttonVisible) {
+            setButtonVisible(true);
+        }
     };
 
     // const findBooking = (booking, today, time, index) => {
@@ -304,28 +306,28 @@ function WalkerSchedule() {
     };
 
     const displayLabel = (availabilityStatus, date, timeSlot) => {
-        // console.log(availabilityStatus, date, timeSlot);
-        // check with serviceHistory
+        // check with booked services
         let isBooked = false;
         let ownerName = "";
         const slot = timeSlot.replace("slot", "");
 
         scheduledWalks.map((walk, index) => {
-            if(walk.service_date === date && walk.service_time === slot) {
-                isBooked = true;
-                ownerName = walk.owner;
+            if(!isBooked){
+                if(walk.service_date === date && walk.service_time === slot) {
+                    isBooked = true;
+                    ownerName = walk.owner;
+                }
             }
         });
 
         if (isBooked) {
             return (
-                <button 
+                <div 
                     className="booked" 
-                    onClick={viewWalkDetails} 
                 >
                     Walk booked with <br />
                     {ownerName}
-                </button>
+                </div>
             );
         }
 

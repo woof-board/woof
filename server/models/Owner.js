@@ -64,7 +64,7 @@ ownerSchema.pre('save', async function (next) {
         const saltRounds = 10;
         this.password = await bcrypt.hash(this.password, saltRounds);
     }
-
+s
     next();
 });
 
@@ -74,7 +74,7 @@ ownerSchema.methods.isCorrectPassword = async function (password) {
 };
 
 ownerSchema.virtual('dog_count').get(function() {
-    return this.dogs?.length;
+    return this.dogs.length;
 });
 
 const Owner = model('Owner', ownerSchema);
