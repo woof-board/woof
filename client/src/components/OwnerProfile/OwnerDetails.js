@@ -1,97 +1,74 @@
 import React, { useState, useEffect } from 'react';
-// import '../../css/WalkerProfile.css';
+import { useMutation } from '@apollo/react-hooks';
+//import '../../css/OwnerProfile.css';
+// import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
+import { useStoreContext } from "../../utils/GlobalState";
+import { UPDATE_CURRENT_USER } from "../../utils/actions";
+import { cities, neighbourhoods } from '../../utils/helpers';
 
-function WalkerDetails({ user }) {
+function OwnerDetails(props) {
 
-    const [formData, setFormData] = useState({ firstName: '', lastName: '', email: '', phone: '' });
+    const {
+        results,
+    } = props
 
-    useEffect(() => {
-        if (user) {
-            setFormData({
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                phone: user.phone
-            });
-        }
-    
-    }, [user]);
+    function handleFormSubmit() {
+        console.log('do nothing')
+    }
 
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({ 
-            ...formData, 
-            [name]: value
-        });
-    };
-
-    const handleFormSubmit = async () => {
-        alert('Account Updated');
-    };
+    function handleInputChange() {
+        console.log('go sleep');
+    }
 
     return (
         <>
-        <h1>My Profile</h1>
         <div className="walker-contact-container">
-            <form 
-                className="user-update-form"
+            <div className="walker-header"><h2>Personal Information</h2></div>
+            <form
+                className="walker-update-form"
                 id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
                 <div className="row-data">
-                    <label className="profile-label">First Name</label>
                     <input
-                        className="profile-input"
+                        className="profile-input profile-name"
                         type="text"
-                        name="firstName"
+                        name="first_name"
+                        placeholder="First Name"
                         onChange={handleInputChange}
-                        value={formData.firstName}
+                    />
+                    <input
+                        className="profile-input profile-name"
+                        type="text"
+                        name="last_name"
+                        placeholder="First Name"
+                        onChange={handleInputChange}
                     />
                 </div>
                 <div className="row-data">
-                    <label className="profile-label">Last Name</label>
-                    <input
-                        className="profile-input"
-                        type="text"
-                        name="lastName"
-                        onChange={handleInputChange}
-                        value={formData.lastName}
-                    />
-                </div>
-                <div className="row-data">
-                    <label className="profile-label">Email</label>
                     <input
                         className="profile-input"
                         type="text"
                         name="email"
+                        placeholder="Email"
                         onChange={handleInputChange}
-                        value={formData.email}
                     />
                 </div>
+                <div><h4>City</h4></div>
                 <div className="row-data">
-                    <label className="profile-label">Phone</label>
                     <input
                         className="profile-input"
                         type="text"
-                        name="phone"
+                        name="address_street"
+                        placeholder="City"
                         onChange={handleInputChange}
-                        value={formData.phone}
                     />
                 </div>
-                {
-                // <div className="row-data">
-                //     <label className="profile-label">Province</label>
-                //     <select className="profile-input" id="walker-province" name="walker-province">
-                //         {province.map((arr) => (
-                //             <option key={arr} value={arr}>{arr}</option>
-                //         ))}
-                //     </select>
-                // </div>
-                }
+             
                 <button
                     type="submit"
                     className="update-walker-button"
-                    id="update-walker-button"
+                    id="update-walker-profile-button"
                 >
                     UPDATE
                 </button>
@@ -101,4 +78,4 @@ function WalkerDetails({ user }) {
     )
 }
 
-export default WalkerDetails;
+export default OwnerDetails;

@@ -1,0 +1,9 @@
+#owners {
+    margin: 0 2rem;
+}
+
+@media screen and (max-width: 650px) {
+    #owners {
+        margin-top: 4rem;
+    }
+}
