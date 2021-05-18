@@ -7,6 +7,7 @@ import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswor
 import { useStoreContext } from "../utils/GlobalState";
 import { QUERY_OWNER_ME } from '../utils/queries';
 import { UPDATE_CURRENT_USER } from "../utils/actions";
+import { Link } from 'react-router-dom';
 
 function OwnerProfile() {
     const [state, dispatch] = useStoreContext();
@@ -80,7 +81,10 @@ return (
                 <h2>Welcome {currentUser.first_name}!</h2>
               </div>
               <div className="account-status">
-                Welcome!
+                {/* Link to Book Walk, pass owner details */}
+                <Link to={"/bookwalk"}>
+                        <button>Book A Walk</button>
+                    </Link>
               </div>
             </div>
             }
