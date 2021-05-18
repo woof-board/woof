@@ -1,10 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
-import './Map.css';
+import '../../css/Map.css';
 
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 // set up .env
-// mapboxgl.accessToken = token
-
+const token = require('dotenv').config();
+mapboxgl.accessToken = token
 
 function Map() {
     
@@ -48,9 +48,6 @@ function Map() {
     
     useEffect(() => {
         if (!map.current) return; 
-        // event.preventDefault();
-        console.log("Hi");
-        // document.getElementById('map').innerHTML = "MAP";
         
         map.current.on('load', function () {
             map.current.addSource('route', {
@@ -83,8 +80,8 @@ function Map() {
   
     return (
         <>
-            <div id="map-container">
-                <div ref={mapContainer} id="map-container"></div>
+            <div className="map-container">
+                <div ref={mapContainer}></div>
             </div> 
 
         </>

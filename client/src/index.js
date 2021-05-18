@@ -4,10 +4,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
+import Map from '../src/components/OwnerTrackOrder/Map';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Map />
   </React.StrictMode>,
   document.getElementById('root')
 );
