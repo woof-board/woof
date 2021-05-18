@@ -1,18 +1,22 @@
 .about-imgholder {
   position: relative;
   text-align: center;
-  height: 30rem;
   top: -1rem;
+  height: 50rem;
+}
+
+.page-margin-bottom {
+  margin-bottom: 10rem;
 }
 
 .about-banner {
-  background-image: url('../assets/images/about-dog-banner-cropped.png');
+  background-image: url('../assets/images/dog-walker.jpeg');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
   height: 100%;
   z-index: 1;
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -20,14 +24,28 @@
 }
 
 .about-us-container {
-  height: 30rem;
+  height: 40rem;
   position: relative;
   width: 100%;
   left: 0;
 }
 
 .about-us-banner {
-  background-image: url('../assets/images/dog-with-glasses.jpeg');
+  background-image: url('../assets/images/dog-leash.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.about-contact-banner {
+  background-image: url('../assets/images/about-contact-dog-cropped.png');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -51,15 +69,17 @@
 }
 
 .about-caption {
-  font-size: 2rem;
-  color: var(--quinary);
-  font-weight: 500;
+  color: white;
+  font-weight: bold;
   padding-top: 0;
   margin-top: 0;
-  z-index: 2;
-  padding: 3rem; 
+  padding-left: 2rem;
+  z-index: 2; 
+  margin: 1rem 0rem;
   font-size: 4rem;
+  background-image: linear-gradient(to right,rgb(0,0,0,0.6), rgb(0,0,0,0));
 }
+
 .about-us {
   line-height: 1.6;
   font-size: 120%;
@@ -73,24 +93,86 @@
   font-weight: bold;
   padding: .25rem 0.4rem;
   color: white;
-  position: relative;
-  z-index: 3;
   border: 3px solid white;
   border-radius: 35px;
   position: relative;
   z-index: 10;
 }
 
+.devActive {
+  background-color: white;
+  color: black;
+}
+
 .about-learn-more:hover {
   color: black;
 }
 
-.about-learn-more:hover ~ .about-button-anim {
+.about-learn-more:hover ~ .about-button-anim-white {
   width: 13.4rem;
+  opacity: 1;
+  background-color: white;
+  color: black;
+  transition: .8s;
+}
+
+.about-learn-more:hover ~ .about-button-anim-black {
+  width: 13.4;
+  opacity: 1;
+  background-color: white;
+  transition: 1s;
+}
+
+.about-button-anim-white {
+  border-radius: 35px;
+  margin: 1rem 3rem;
+  position: relative;
+  top: -3rem;
+  width: 0rem;
+  opacity: 0;
+  height: 2rem;
+  background-color: white;
+  z-index: 5;
+}
+
+.about-button-anim-black {
+  border-radius: 35px;
+  margin: 1rem 3rem;
+  position: relative;
+  top: -6rem;
+  width: 13.4rem;
+  height: 2rem;
+  background-color: black;
+  z-index: 3;
+}
+
+.about-contact {
+  margin: 1rem 3rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: .25rem 0.4rem;
+  color: white;
+  border: 3px solid white;
+  border-radius: 35px;
+  position: relative;
+  z-index: 10;
+}
+
+.contactActive {
+  background-color: white;
+  color: black;
+}
+
+.about-contact:hover {
+  color: black;
+}
+
+.about-contact:hover ~ .about-contact-button-anim {
+  width: 7rem;
   opacity: 1;
 }
 
-.about-button-anim {
+.about-contact-button-anim {
   border-radius: 35px;
   margin: 1rem 3rem;
   position: relative;
@@ -174,6 +256,30 @@
 
 .content {
   width: 55rem;
+}
+
+.contact-us-container {
+  width: 30rem;
+  height: 30rem;
+
+}
+
+.contactus-input {
+  margin-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+.contact-us-title {
+  background-color: var(--tertiary);
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  padding: .5rem;
+  text-align: center;
+}
+
+.contactus-question {
+  height: 5rem;
+  padding-left: 1rem;
 }
 
 .flex-r {
@@ -325,6 +431,20 @@ b {
   }
 } */
 
+@media screen and (max-width: 1250px) {
+  .about-us-container {
+    height: 40rem;
+  }
+
+  .about-banner {
+    height: 40rem;
+  }
+
+  .about-imgholder {
+    height: 40rem;
+  }
+}
+
 @media screen and (max-width: 950px) {
   .content {
     width: 100%;
@@ -339,13 +459,26 @@ b {
   .component-section {
     padding: 2rem 0rem;
   }
-
-  .about-us-container {
-    height: 20rem;
+  
+  .about-caption {
+    font-size: 3rem;
   }
 
-  .about-banner {
-    height: 20rem;
+  .about-us-container, .about-banner, .about-imgholder {
+    height: 30rem;
   }
+
+}
+
+@media screen and (max-width: 650px) {
+  .about-banner, .about-us-banner, .about-contact-banner {
+    background-size: contain;
+    justify-content: center;
+  }
+
+  .about-us-container, .about-banner, .about-imgholder {
+    height: 24rem;
+  }
+
 }
 /*Leadership style ends*/
