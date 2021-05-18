@@ -8,13 +8,15 @@
 }
 .walker-header {
     width: 100%;
-    padding: 0 15px;
+    background-color: var(--tertiary);
     color: var(--quinary);
+    padding: 0 15px;
 }
 .walker-picture-container {
     margin: 0 1rem 1rem 1rem;
 }
 .walker-picture-container img {
+    border: 8px solid var(--tertiary);
     border-radius: 50%;
 }
 
@@ -23,11 +25,23 @@
     flex-direction: column;
 }
 
+.walker-profile-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
+    padding: 1rem;
+    margin: 0rem 1rem 1rem 1rem;
+    min-width: 25rem;
+    background-color: var(--secondary);
+    align-items: center;
+    overflow: hidden;
+}
 
 .walker-contact-container {
     display: flex;
     flex-direction: column;
     width: 70vw;
+    background-color: var(--secondary);
     border-radius: 15px;
     margin-bottom: 20px;
     overflow:hidden;
@@ -50,15 +64,19 @@
     border: none;
     margin: 0 8px 8px 0;
     padding: 12px 8px;
+    background:rgb(var(--rgb-quinary),0.5);
     border: none;
     width: 50%
 }
-
+.profile-input:focus {
+    background-color: rgb(var(--rgb-tertiary),0.1);
+}
 
 
 
 .average-rating {
     width: 90%;
+    background-color: rgb(var(--rgb-quinary),0.5);
     padding: .5rem;
     border-radius: 15px;
     margin: 15px auto;
@@ -79,6 +97,7 @@
 .walks {
     display: flex;
     flex-direction: column;
+    background-color: rgb(var(--rgb-quinary),0.5);
     padding: .5rem;
     border-radius: 15px;
     margin: 1rem auto;
@@ -92,6 +111,7 @@
 
 h3 .light {
     font-weight: 300;
+    color: var(--secondary);
     font-size: .75em;
 }
 
@@ -101,12 +121,15 @@ button {
     width: auto;
     font-weight: 500;
     padding: 10px;
+    background-color: var(--tertiary);
+    border: 3px solid var(--tertiary);
     border-radius: 15px;
 
 }
 button:hover {
     cursor: pointer;
     background-color: var(--quinary);
+    color: var(--tertiary);
 }
 
 @media screen and (max-width: 650px) {

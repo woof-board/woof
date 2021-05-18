@@ -21,6 +21,18 @@ export const QUERY_OWNER_ME = gql`
     }
 `;
 
+export const QUERY_OWNER_BOOKING = gql`
+  query {
+    ownerMe {
+      _id
+      dogs {
+        _id
+        name
+      }
+    }    
+  }
+`
+
 export const QUERY_OWNER = gql`
   query owner($owner_id: ID!) {
     owner (owner_id: $owner_id){
