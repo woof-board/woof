@@ -9,14 +9,20 @@ import OwnerWalkDetails from "../components/OwnerWalkerForm/OwnerWalkDetails"
 
 function OwnerBookWalk() {
     const { loading, data } = useQuery(QUERY_OWNER_BOOKING);
-    
+
+    if (loading){
+        return <p>Loading ... </p>
+    }
+
+    const ownerData = data.ownerMe;
+
 
     return (
         <div id="walkers">
             <div className="headline">            
                 <h1>Book a Walk</h1>
             </div>
-            <OwnerWalkDetails data={data}/>
+            <OwnerWalkDetails data={ownerData}/>
         </div>
     )
 

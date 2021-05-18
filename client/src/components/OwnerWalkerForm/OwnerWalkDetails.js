@@ -1,64 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_WALKER_PROFILE } from "../../utils/mutations";
+import { useMutation, useQuery } from '@apollo/react-hooks';
+import { QUERY_WALKER_ORDERS } from "../../utils/queries";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import { cities, neighbourhoods } from '../../utils/helpers';
 
+const bookDates = []
+const today = new Date();
+let newDate = new Date(today);
+let newFormattedDate = "";
+for (let i=1; i <=14; i++) {
+    newDate.setDate(newDate.getDate() + 1);
+    newFormattedDate = ('0'+(newDate.getMonth()+1)).slice(-2) + "-" + ('0'+(newDate.getDate())).slice(-2) + "-" + newDate.getFullYear();
+    bookDates.push(newFormattedDate);
+}
+
 function OwnerWalkDetails({data}) {
-    console.log(data);
+    const dogs = data.dogs;
+    const ownerId = data._id;
 
-    const handleFormSubmit = async (e) => {
-        e.preventDefault();
 
-        // need to implement form validation here
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        console.log(event);
+
         
 
 
-         try {
-            // const { data: { updateWalkerProfile: newProfile } } = await updateWalkerProfile({
-            //     variables: {
-            //         input: {
-            //             ...rest,
-            //             address: {
-            //                 street: address_street,
-            //                 city: address_city,
-            //                 neighbourhood: address_neighbourhood,
-            //                 province: address_province,
-            //                 postal_code: address_postal_code,
-            //             }
-            //         }
-            //     }
-            // });
-            
-            // dispatch({
-            //     type: UPDATE_CURRENT_USER,
-            //     currentUser: newProfile
-            // });
-
-            alert('Account Updated');
-         } catch (e) {
-             console.log(e);
-         }
+        
     };
 
+    
 
-    const bookDates = [
-        "05-17-2021",
-        "05-18-2021",
-        "05-19-2021",
-        "05-20-2021",
-        "05-21-2021",
-        "05-22-2021",
-        "05-23-2021",
-        "05-24-2021",
-        "05-25-2021",
-        "05-26-2021",
-        "05-27-2021",
-        "05-28-2021",
-        "05-29-2021",
-        "05-30-2021"
-    ]
     const bookTimes = [
         "9am",
         "11am",
@@ -68,12 +42,7 @@ function OwnerWalkDetails({data}) {
         "7pm",
         "9pm"
     ]
-    const dogs = [
-        "Pixel",
-        "Pudding",
-        "Samson"
 
-    ]
 
     return (
         <>
@@ -89,7 +58,7 @@ function OwnerWalkDetails({data}) {
                         <option value="choose" selected disabled>Pick a Date</option>
                         {
                         bookDates.map(bookDate => 
-                            <option value={bookDate}>{bookDate}</option>
+                            <option key={bookDate} value={bookDate}>{bookDate}</option>
                             )
                         }
                     </select>
@@ -99,22 +68,26 @@ function OwnerWalkDetails({data}) {
                         <option value="choose" selected disabled>Pick a Time</option>
                         {
                             bookTimes.map(bookTime => 
-                                <option value={bookTime}>{bookTime}</option>
+                                <option key={bookTime} value={bookTime}>{bookTime}</option>
                             )
                         }
                     </select>
 
                 </div>
+                {dogs.length > 1 &&
+                <>
                 <h3>Which dogs need a walk?</h3>
                 <div className="row-data">
                     {
-                    data.ownerMe.dogs.map(dog =>
+                    dogs.map(dog =>
                         <>
-                            <input type="checkbox" id={dog._id} name={dog.name} value={dog.name} checked />
-                            <label for={dog._id}>{dog.name}</label>
+                            <input type="checkbox" key={dog._id} id={dog._id} name={dog.name} value={dog.name} defaultChecked />
+                            <label key={dog._id+"1"} htmlFor={dog._id}>{dog.name}</label>
                         </>
                     )}
                 </div>
+                </>
+                }
 
                 <button
                     type="submit"

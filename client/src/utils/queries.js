@@ -219,6 +219,7 @@ export const QUERY_WALKER_ORDERS = gql`
       _id
       service_date
       service_time
+      avatar
       owner{
         _id
         first_name
