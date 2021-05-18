@@ -354,3 +354,41 @@ export const LOGIN_OWNER = gql`
         }
 }
 `;
+
+export const UPDATE_OWNER_PROFILE = gql`
+    mutation updateOwnerProfile($input: WalkerProfileInput) {
+        updateOwnerProfile(input: $input) {
+            _id
+            first_name
+            last_name
+            email
+            avatar
+            admin
+            status
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
+            phone
+            dogs {
+                name
+                breed
+                weight
+                treats
+                avatar
+            }
+            dog_count
+        }
+    }
+`;
+
+export const UPDATE_OWNER_PASSWORD = gql`
+    mutation updateOwnerPassword($old_password: String!, $new_password: String!) {
+        updateOwnerPassword(old_password: $old_password, new_password: $new_password) {
+            _id
+        }
+    }
+`;

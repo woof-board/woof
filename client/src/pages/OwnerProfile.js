@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/OwnerProfile.css';
-import OwnerDetails from '../components/OwnerProfile/OwnerDetails';
- 
+import OwnerDetails from '../components/OwnerProfileComponents/OwnerDetails';
+import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswordForm'; 
 import { useStoreContext } from "../utils/GlobalState";
 import { QUERY_OWNER_ME } from '../utils/queries';
 import { UPDATE_CURRENT_USER } from "../utils/actions";
@@ -14,7 +14,7 @@ function OwnerProfile() {
     // const { loading, data } = useQuery(QUERY_WALKER_ME);
     const { currentUser } = state;
 
-    const results = data;
+    // const results = data;
 
     useEffect(() => {
         // if not already in global store
@@ -25,7 +25,7 @@ function OwnerProfile() {
         else if (!currentUser && data) {
             dispatch({
                 type: UPDATE_CURRENT_USER,
-                currentUser: data.owner_me
+                currentUser: data.ownerMe
             });
             
         }
@@ -74,20 +74,8 @@ return (
                 </div>
               </div>
             }
-            {currentUser && currentUser.status === "PENDING_APPROVAL" && 
-              <div className="walker-contact-container">
-                <div className="walker-header">
-                  <h2>Current account status</h2>
-                </div>
-                <div className="account-status">
-                  PENDING APPROVAL
-                </div>
-              </div>
-            }
-            <OwnerDetails 
-              user={currentUser}
-              results={results}
-            />
+            <OwnerDetails user={currentUser}/>
+            <OwnerPasswordForm />
             {currentUser && currentUser.status === "ACTIVE" && 
               <>
                 COMPONENTS HERE

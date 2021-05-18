@@ -7,14 +7,23 @@ export const QUERY_OWNER_ME = gql`
             first_name
             last_name
             email
+            avatar
             admin
             status
             address {
+                street
                 city
+                neighbourhood
+                province
+                postal_code
             }
             phone
             dogs {
                 name
+                breed
+                weight
+                treats
+                avatar
             }
             dog_count
         }
