@@ -167,7 +167,11 @@ function WalkerDetails({ user }) {
                 </div>
                 <div className="row-data">
                     <select className="profile-input profile-name" id="walker-cities" name="walker-province">
-                        <option value="choose" disabled>Choose your City</option>
+                        {formData.address_city ==="" 
+                            ? <option value="choose" selected disabled>Choose your City</option>
+                            : <option value="choose" disabled>Choose your City</option>
+                        }
+                        
                         {
                         cities.map(({name, group}) => 
                             (group 
