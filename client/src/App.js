@@ -12,8 +12,10 @@ import PaymentScreen from './pages/PaymentScreen';
 import Success from "./pages/Success";
 import WalkerSchedule from './pages/WalkerSchedule';
 
+
 import OwnerProfile from './pages/OwnerProfile.js';
 import OwnerTrackOrder from './pages/OwnerTrackOrder';
+import OwnerBookWalk from './pages/OwnerBookWalk';
 import WalkerProfile from './pages/WalkerProfile.js';
 import WalkerTrackWalks from './pages/WalkerTrackWalks.js';
 import PrivateRoute from './components/PrivateRoute';
@@ -58,6 +60,7 @@ function App() {
                             <PrivateRoute exact path="/Success" component={Success} />
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
                             <Route exact path="/ownertrackorder" usertype="owner" component={OwnerTrackOrder}/> 
+                            <PrivateRoute exact path="/bookwalk" usertype="owner" component={OwnerBookWalk}/> 
                             <Route exact path="/map" usertype="owner" component={Map}/>
                             <Route exact path="/testmap" usertype="owner" component={TestMap}/> 
                             <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
