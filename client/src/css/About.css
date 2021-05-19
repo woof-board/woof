@@ -433,7 +433,19 @@ b {
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
+  border: .5rem solid white;
+  position: relative;
+  top: -5rem;
 } 
+
+.profile-picture-container {
+  height: 5rem;
+}
+
+.dev-contact {
+  height: 10rem;
+}
+
 .about-row {
   display: flex;
   flex-direction: row;
@@ -441,14 +453,22 @@ b {
   justify-content: space-around;
 }
 .about-card {
-  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
-  padding: 2rem;
   text-align: center;
-  background-color: var(--quatenary);
+  background-color: white;
   border-radius: 25px;
   margin: 1rem;
   box-shadow: 5px 5px 10px rgb(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+.about-card-dog {
+  width: 20rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
 .profile-socialmedia {
   margin: 0 1rem 0 1rem;
   font-size: 1.5rem;
