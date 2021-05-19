@@ -54,6 +54,16 @@ main {
   
 }
 
+.regText {
+  font-family: 'Ubuntu', 'sans-serif';
+  font-weight: 300;
+  font-size: .85em;
+}
+
+.normal-text {
+  font-size: 15px;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Rokkitt', 'serif'; 
 
@@ -68,4 +78,13 @@ h1, h2, h3, h4, h5, h6 {
   font-weight:700;
 
 }
+.medium-text {
+  font-weight: 500;
+}
 
+.checkbox {
+ margin-top: 12px;
+}
+.checkbox input {
+  margin: 0 6px;
+}

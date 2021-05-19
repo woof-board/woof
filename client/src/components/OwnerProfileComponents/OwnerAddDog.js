@@ -60,7 +60,7 @@ function OwnerAddDog() {
     return (
         <>
             <div className="walker-contact-container">
-                <div className="walker-header"><h2>ADD DOG</h2></div>
+                <div className="walker-header"><h2>Add a Dog</h2></div>
                 <form
                     className="walker-update-form"
                     id="add-dog-form"
@@ -73,7 +73,6 @@ function OwnerAddDog() {
                             name="name"
                             placeholder="Name"
                             onChange={handleInputChange}
-                            value={formData.name}
                         />
                         <input
                             className="profile-input profile-name"
@@ -81,38 +80,35 @@ function OwnerAddDog() {
                             name="breed"
                             placeholder="Breed"
                             onChange={handleInputChange}
-                            value={formData.breed}
                         />
                     </div>
                     <div className="row-data">
                         <input
                             className="profile-input profile-name"
-                            type="number"
+                            type="text"
                             name="weight"
-                            placeholder="Weight"
+                            placeholder="Weight in pounds"
                             onChange={handleInputChange}
-                            value={formData.weight}
-                        />
+                        />      
+                        <label className="checkbox" for="treats"><span className="normal-text">Check box if dog is allowed treats</span>      
+                            <input
+                                type="checkBox"
+                                name="treats"
+                                placeholder="Treats"
+                                onChange={handleInputChange}
+                            />
+                            <span class="checkmark"></span>
+                        </label>
                     </div>
-                    <div className="row-data">
-                        <input
-                            className="profile-input profile-name"
-                            type="checkBox"
-                            name="treats"
-                            placeholder="Treats"
-                            onChange={handleInputChange}
-                            value={formData.treats}
-                        />
-                        <label for="treats"> Treats</label>
+                    <div className="button-container">
+                        <button
+                            type="submit"
+                            className="update-walker-button"
+                            id="owner-add-dog-button"
+                        >
+                            ADD
+                        </button>
                     </div>
-
-                    <button
-                        type="submit"
-                        className="update-walker-button"
-                        id="owner-add-dog-button"
-                    >
-                        ADD
-                </button>
                 </form>
             </div>
         </>
