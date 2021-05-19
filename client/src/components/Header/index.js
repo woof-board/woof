@@ -129,7 +129,7 @@ function Header() {
         page.style.setProperty(bg, 'var(--quinary)');
 
         for (var u = 0; u < fontH2.length; u++) {
-            fontH2[u].style.color = 'black';
+            fontH2[u].style.color = 'white';
         }
 
         for (var e = 0; e < footerEl.length; e++) {
