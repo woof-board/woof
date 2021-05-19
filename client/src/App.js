@@ -21,6 +21,7 @@ import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
 import HomeMock from './pages/HomeMock';
 import Map from './components/OwnerTrackOrder/Map'
+import AdminPage from './pages/Admin.js';
 
 const client = new ApolloClient({
     request: operation => {
@@ -62,6 +63,7 @@ function App() {
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
                             <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
                             <PrivateRoute exact path="/walkertrackwalks" usertype="walker" component={WalkerTrackWalks} />
+                            <Route exact path="/admin" component={AdminPage}/>
 
                             <Route component={NoMatch} />
                         </Switch>
