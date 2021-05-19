@@ -77,7 +77,7 @@
   z-index: 2; 
   margin: 1rem 0rem;
   font-size: 4rem;
-  background-image: linear-gradient(to right,rgb(0,0,0,0.6), rgb(0,0,0,0));
+  /* background-image: linear-gradient(to right,rgb(0,0,0,0.6), rgb(0,0,0,0)); */
 }
 
 .about-us {
