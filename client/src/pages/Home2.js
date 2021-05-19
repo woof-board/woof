@@ -1,12 +1,14 @@
 import React, { useState} from 'react';
-import '../css/HomeMock.css';
+import { Link } from 'react-router-dom';
+
+import '../css/Home2.css';
 import OwnerWalkerForm from '../components/OwnerWalkerForm';
-import FormHeader from '../components/LoginSIgnupForm';
+import FormHeader from '../components/LoginSignupForm';
 import WalkerLoginForm from '../components/WalkerLoginForm';
 import WalkerSignupForm from '../components/WalkerSignupForm';
 import OwnerLoginForm from '../components/OwnerLoginForm';
 import OwnerSignupForm from '../components/OwnerSignupForm';
-import Logo from '../assets/images/woof-logo.svg'
+import Logo from '../assets/images/woof-logo-circle.svg'
 function HomeMock() {
 
     const [links] = useState([
@@ -24,12 +26,14 @@ function HomeMock() {
         {
             name: 'LOGIN',
             id: 'active-title',
-            hover: 'login-hover'
+            hover: 'login-hover',
+            userType: 'OWNER'
         },
         {
             name: 'SIGNUP',
             id: 'active-title',
-            hover: 'login-hover'
+            hover: 'login-hover',
+            userType: 'OWNER'
         }
     ])
 
@@ -39,12 +43,15 @@ function HomeMock() {
 
     return (
             <>
-            <div className="home-new"></div>
+            <div className="home-new">
             <div className="center-page-vh">
                 <img src={Logo} alt="logo" className="home-logo"/>
-                <div className="home-font-small">
+
+                <h1 className="home-font-small">
                     WHERE DOGS GET THEIR PERFECT WALK
-                </div>
+                </h1>
+
+                <h3 className="smaller-font">{currentLink.name} {currentFormLink.name}</h3>
                     <OwnerWalkerForm 
                         links={links}
                         currentLink={currentLink}
@@ -52,11 +59,14 @@ function HomeMock() {
                     />
                     {currentLink.name === 'WALKER' &&  (
                         <>
-                            <FormHeader 
+                            <FormHeader
+                                currentLink={currentLink}
+                                setCurrentLink={setCurrentLink}
                                 formLinks={formLinks}
                                 currentFormLink={currentFormLink}
                                 setFormCurrentLink={setFormCurrentLink}
                             />
+                            
                             {currentFormLink.name === 'LOGIN' && (
                                 <>
                                     <WalkerLoginForm />
@@ -71,11 +81,14 @@ function HomeMock() {
                     )}
                     {currentLink.name === 'OWNER' && (
                         <>
-                        <FormHeader 
+                        <FormHeader
+                            currentLink={currentLink}
+                            setCurrentLink={setCurrentLink}
                             formLinks={formLinks}
                             currentFormLink={currentFormLink}
                             setFormCurrentLink={setFormCurrentLink}
                         />
+             
                         {currentFormLink.name === 'LOGIN' && (
                             <>
                                 <OwnerLoginForm />
@@ -88,7 +101,8 @@ function HomeMock() {
                         )}
                         </>
                     )}
-                    {/* <Link to="/about">Learn More</Link> */}
+                    <Link to="/about" className="more-link">Learn More</Link>
+            </div>
             </div>
             </>
     )
