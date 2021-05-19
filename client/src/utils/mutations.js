@@ -23,7 +23,7 @@ export const ADD_ORDER = gql`
 `;
 
 export const UPDATE_ORDER = gql`
-    mutation updateOrder($order_id: ID!, $input: OrderInput!) {
+    mutation updateOrder($order_id: ID!, $input: UpdateOrderInput!) {
         updateOrder(order_id: $order_id, input: $input) {
             _id
             service_date

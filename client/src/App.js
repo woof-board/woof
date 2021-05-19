@@ -24,6 +24,7 @@ import { StoreProvider } from "./utils/GlobalState";
 import HomeMock from './pages/HomeMock';
 import Map from './components/OwnerTrackOrder/Map'
 import TestMap from './components/OwnerTrackOrder/TestMap'
+import OwnerWalkDetails from './components/OwnerWalkerForm/OwnerWalkDetails';
 
 const client = new ApolloClient({
     request: operation => {
@@ -54,13 +55,15 @@ function App() {
                         <Header />
                         <Switch>
                             <PublicRoute exact path='/' component={HomeMock} />
-
                             <Route exact path="/about" component={About} />
+
                             <PrivateRoute exact path="/paymentScreen" component={PaymentScreen} />
                             <PrivateRoute exact path="/Success" component={Success} />
+                            
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
                             <Route exact path="/ownertrackorder" usertype="owner" component={OwnerTrackOrder}/> 
-                            <PrivateRoute exact path="/bookwalk" usertype="owner" component={OwnerBookWalk}/> 
+                            
+                            <PrivateRoute exact path="/bookwalk" usertype="owner" component={OwnerWalkDetails}/> 
                             <Route exact path="/map" usertype="owner" component={Map}/>
                             <Route exact path="/testmap" usertype="owner" component={TestMap}/> 
                             <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
