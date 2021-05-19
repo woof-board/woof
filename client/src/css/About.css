@@ -537,9 +537,18 @@ b {
   }
 } */
 
+@media screen and (max-width: 4000px) {
+  .about-page-width {
+    box-shadow: 10px 10px 40px rgb(0,0,0,0.7);
+  }
+}
+
 @media screen and (max-width: 1900px) {
   .about-page-width {
     min-width: 100%;
+  }
+  .about-page-width {
+    box-shadow: none;
   }
 }
 
