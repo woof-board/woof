@@ -219,7 +219,7 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
 
@@ -272,7 +272,7 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "PENDING_APPROVAL"
+            status: "ACTIVE"
         }
     );
 
@@ -479,7 +479,7 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "SUSPENDED"
+            status: "PENDING_INFORMATION"
         }
     );
 
@@ -555,6 +555,17 @@ db.once('open', async () => {
         status: 'PENDING_PROGRESS',
         owner: '60a073419ae33509302ac075',
         walker: '60a073419ae33509302ac08f',
+        dogs: [
+          '60a073419ae33509302ac077',
+          '60a073419ae33509302ac078'
+        ]
+      },
+      {
+        service_date:'2021-05-21',
+        service_time: '7pm',
+        status: 'PENDING_PROGRESS',
+        owner: '60a073419ae33509302ac075',
+        walker: '60a4607dafbe01234063522c',
         dogs: [
           '60a073419ae33509302ac077',
           '60a073419ae33509302ac078'

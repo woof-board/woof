@@ -21,7 +21,7 @@ function OwnerBookWalk() {
     return (
         <div id="walkers">
             <div className="headline">            
-                <button><Link to="/bookwalk">Book a Walk</Link></button>
+            <Link to={"/bookwalk"}><button> Book a Walk</button></Link>
             </div>
         </div>
     )
