@@ -3,10 +3,21 @@
   text-align: center;
   top: -1rem;
   height: 50rem;
+  background-color: rgb(53, 53, 53);
 }
 
 .page-margin-bottom {
   margin-bottom: 0rem;
+}
+
+.header-icon {
+  font-size: 2rem;
+  color: white;
+  margin-right: 1rem;
+}
+
+.header-icon:hover {
+  color: yellow;
 }
 
 .flex-page {

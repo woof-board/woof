@@ -132,6 +132,13 @@ button:hover {
     color: var(--tertiary);
 }
 
+@media screen and (max-width: 750px) {
+    .page-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 @media screen and (max-width: 650px) {
     .page-body {
         flex-direction: column;
