@@ -15,7 +15,7 @@ db.once('open', async () => {
             avatar: "/images/eric.jpg",
             admin: false,
             address: {
-                street: '2325 Yolands Dr',
+                street: '2325 Yolanda Dr',
                 city: 'oakville',
                 neighbourhood: 'oakville',
                 province: 'ontario',
@@ -106,14 +106,14 @@ db.once('open', async () => {
                     breed: 'Husky',
                     weight: 70,
                     treats: true,
-                    avatar: "/images/user-default.png"
+                    avatar: "/images/mylo.jpg"
                 },
                 {
                     name: 'Monty',
                     breed: 'AusiSheppard',
                     weight: 90,
                     treats: true,
-                    avatar: "/images/user-default.png"
+                    avatar: "/images/monty.jpg"
                 }
             ],
             status: "ACTIVE"
@@ -142,7 +142,7 @@ db.once('open', async () => {
                     breed: 'Doberman',
                     weight: 70,
                     treats: false,
-                    avatar: "/images/user-default.png"
+                    avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-9/87142813_3275290815826955_9075443982971961344_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=n7nY1OkFTDgAX9aUiMu&_nc_oc=AQlwkKBkBHKDIbwHP0jv7Vt_1n0jdL65W0-fxR0fkeKYDhhmJXMg7fqjU7bYIyzIY3E&_nc_ht=scontent-yyz1-1.xx&oh=fd13fa42abfb06c1f6469558ce3ba71c&oe=60CA1595"
                 }
             ],
             status: "ACTIVE"
@@ -297,7 +297,7 @@ db.once('open', async () => {
             last_name: 'Nuvoski',
             email: 'kn@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "https://i2.wp.com/www.hadviser.com/wp-content/uploads/2019/04/5-choppy-cut-for-a-square-face-CF4Tf1tMDJu.jpg?resize=1078%2C1078&ssl=1",
             neighbourhoods: ['north toronto', 'west toronto'],
             address: {
                 street: '1st Street NW',
@@ -308,13 +308,23 @@ db.once('open', async () => {
             },
             reviews: [
                 {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "My dogs love her!"
+                },
+                {
+                    owner_id: ownerIds[3],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                },
+                {
                     owner_id: ownerIds[0],
                     rating: 4,
                     review_text: "keep up good work"
                 },
                 {
                     owner_id: ownerIds[4],
-                    rating: 1,
+                    rating: 2,
                     review_text: "bad!!!"
                 },
                 {
@@ -323,7 +333,7 @@ db.once('open', async () => {
                     review_text: "not so bad"
                 }
             ],
-            earnings: 1000.0,
+            earnings: 672.0,
             availability: [
                 {
                     date: '2021-05-20',
