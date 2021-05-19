@@ -9,6 +9,18 @@
   margin-bottom: 10rem;
 }
 
+.flex-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+.about-page-width {
+  min-width: 1900px;
+}
+
 .about-banner {
   background-image: url('../assets/images/dog-walker.jpeg');
   background-size: cover;
@@ -31,7 +43,7 @@
 }
 
 .about-us-banner {
-  background-image: url('../assets/images/dog-leash.jpeg');
+  background-image: url('../assets/images/dog-sea-crop.png');
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -77,7 +89,7 @@
   z-index: 2; 
   margin: 1rem 0rem;
   font-size: 4rem;
-  background-image: linear-gradient(to right,rgb(0,0,0,0.6), rgb(0,0,0,0));
+  /* background-image: linear-gradient(to right,rgb(0,0,0,0.6), rgb(0,0,0,0)); */
 }
 
 .about-us {
@@ -116,6 +128,34 @@
   transition: .8s;
 }
 
+.email-item {
+  margin-top: .5rem;
+}
+
+.icon-list {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.hover-item {
+  font-weight: bold;
+}
+
+.hover-item:hover {
+  color: rgb(91, 91, 91);
+  transition: .8s;
+}
+
+.privacy-items {
+  margin-top: 2rem;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 .about-learn-more:hover ~ .about-button-anim-black {
   width: 13.4;
   opacity: 1;
@@ -142,7 +182,7 @@
   top: -6rem;
   width: 13.4rem;
   height: 2rem;
-  background-color: black;
+  background-color: none;
   z-index: 3;
 }
 
@@ -258,15 +298,59 @@
   width: 55rem;
 }
 
-.contact-us-container {
-  width: 30rem;
-  height: 30rem;
+.contact-container {
+  width: 50rem;
+  border-radius: 40px;
+}
 
+.flex-r-nospace {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 10px 10px 20px rgb(0,0,0,0.5);
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-us-container-left {
+  width: 25rem;
+  height: 30rem;
+  padding: 2rem;
+  background-color: white;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.triangle-left {
+	width: 0;
+	height: 0;
+	border-top: 35px solid transparent;
+	border-right: 30px solid rgb(103, 182, 103);
+	border-bottom: 35px solid transparent;
+  position: relative;
+  left: -4rem;
+  top: -17rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-us-container-right {
+  width: 25rem;
+  height: 30rem;
+  background-color: rgb(103, 182, 103);
+  padding: 2rem;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .contactus-input {
   margin-bottom: 1rem;
   padding-left: 1rem;
+  height: 2rem;
+  border: 5px solid white;
+  border-radius: 10px;
 }
 
 .contact-us-title {
@@ -278,8 +362,10 @@
 }
 
 .contactus-question {
-  height: 5rem;
+  height: 8rem;
   padding-left: 1rem;
+  border: 5px solid white;
+  border-radius: 10px;
 }
 
 .flex-r {
@@ -359,7 +445,19 @@ b {
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
+  border: .5rem solid white;
+  position: relative;
+  top: -5rem;
 } 
+
+.profile-picture-container {
+  height: 5rem;
+}
+
+.dev-contact {
+  height: 10rem;
+}
+
 .about-row {
   display: flex;
   flex-direction: row;
@@ -367,14 +465,22 @@ b {
   justify-content: space-around;
 }
 .about-card {
-  /*box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);*/
-  padding: 2rem;
   text-align: center;
-  background-color: var(--quatenary);
+  background-color: white;
   border-radius: 25px;
   margin: 1rem;
   box-shadow: 5px 5px 10px rgb(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
+
+.about-card-dog {
+  width: 20rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
 .profile-socialmedia {
   margin: 0 1rem 0 1rem;
   font-size: 1.5rem;
@@ -431,6 +537,12 @@ b {
   }
 } */
 
+@media screen and (max-width: 1900px) {
+  .about-page-width {
+    min-width: 100%;
+  }
+}
+
 @media screen and (max-width: 1250px) {
   .about-us-container {
     height: 40rem;
@@ -468,6 +580,26 @@ b {
     height: 30rem;
   }
 
+}
+
+@media screen and (max-width: 800px) {
+  .flex-r-nospace {
+    flex-direction: column;
+  }
+
+  .contact-us-container-left {
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 0px;
+  }
+
+  .contact-us-container-right {
+    border-top-right-radius: 0px;
+    border-bottom-left-radius: 20px;
+  }
+
+  .contact-container {
+    width: auto;
+  }
 }
 
 @media screen and (max-width: 650px) {

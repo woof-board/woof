@@ -21,7 +21,7 @@ import WalkerTrackWalks from './pages/WalkerTrackWalks.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
-import HomeMock from './pages/HomeMock';
+import Home from './pages/Home2';
 import Map from './components/OwnerTrackOrder/Map'
 import TestMap from './components/OwnerTrackOrder/TestMap'
 import OwnerWalkDetails from './components/OwnerWalkerForm/OwnerWalkDetails';
@@ -52,9 +52,11 @@ function App() {
             <Router>
                 <StoreProvider>
                     <div className="page">
+                        
                         <Header />
                         <Switch>
-                            <PublicRoute exact path='/' component={HomeMock} />
+
+                            <PublicRoute exact path='/' component={Home} />
                             <Route exact path="/about" component={About} />
 
                             <PrivateRoute exact path="/paymentScreen" component={PaymentScreen} />

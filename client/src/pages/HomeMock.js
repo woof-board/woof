@@ -1,13 +1,12 @@
 import React, { useState} from 'react';
 import '../css/HomeMock.css';
 import OwnerWalkerForm from '../components/OwnerWalkerForm';
-import FormHeader from '../components/LoginSIgnupForm';
+import FormHeader from '../components/LoginSignupForm';
 import WalkerLoginForm from '../components/WalkerLoginForm';
 import WalkerSignupForm from '../components/WalkerSignupForm';
 import OwnerLoginForm from '../components/OwnerLoginForm';
 import OwnerSignupForm from '../components/OwnerSignupForm';
-// import { Link } from 'react-router-dom';
-
+import Logo from '../assets/images/woof-logo.svg'
 function HomeMock() {
 
     const [links] = useState([
@@ -42,7 +41,7 @@ function HomeMock() {
             <>
             <div className="home-new"></div>
             <div className="center-page-vh">
-                <img src={process.env.PUBLIC_URL + `/images/woof-logo.svg`} alt="logo" className="home-logo"/>
+                <img src={Logo} alt="logo" className="home-logo"/>
                 <div className="home-font-small">
                     WHERE DOGS GET THEIR PERFECT WALK
                 </div>
