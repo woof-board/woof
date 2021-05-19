@@ -6,7 +6,7 @@
 }
 
 .page-margin-bottom {
-  margin-bottom: 10rem;
+  margin-bottom: 0rem;
 }
 
 .flex-page {
@@ -283,6 +283,10 @@
   padding-right: 2rem;
 }
 
+.dev-content {
+  width: 1900px;
+}
+
 .component-section {
   background-color: var(--quinary);
   width: 100%;
@@ -549,6 +553,9 @@ b {
   }
   .about-page-width {
     box-shadow: none;
+  }
+  .dev-content {
+    width: 100%;
   }
 }
 
