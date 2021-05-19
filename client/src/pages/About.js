@@ -102,7 +102,7 @@ function About() {
                 {currentDevLink.name === 'dev' && (
                     <div className="component-section">
                         <h2>Development Team</h2>
-                        <div className="content flex-r">
+                        <div className="dev-content flex-r">
                             <AboutDevelopers />
                         </div>
                     </div>
