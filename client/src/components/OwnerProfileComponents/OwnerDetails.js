@@ -1,17 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 //import '../../css/OwnerProfile.css';
+import { GET_CUSTOMER_SESSION_ID, CHARGE_OWNER } from '../../utils/queries';
 import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import { cities, neighbourhoods } from '../../utils/helpers';
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe('pk_test_51Ir7BPLlbUYQkEo2A2L6kb3YbdMv9jh8IJjshFAJOn3UXJEox2CDMpQoI8AS5HiTiccN6CzYnNbbCnaBJVgb8t08002TgJCE4p');
 
 function OwnerDetails({ user }) {
 
     const [updateOwnerProfile, { error }] = useMutation(UPDATE_OWNER_PROFILE);
     const [state, dispatch] = useStoreContext();
 
-
+    const [handleGetSessionId, {data:customer_data}] = useLazyQuery(GET_CUSTOMER_SESSION_ID,{
+        onCompleted: (data) => {
+          // some actions
+          handleGettingInformation(data);
+        }
+      });
+    
+      const handleGettingInformation = async (data) => {
+        // Call your backend to create the Checkout session.
+        const sessionId = data.getCustomerSessionId.session_id;
+        // When the customer clicks on the button, redirect them to Checkout.
+        const stripe = await stripePromise;
+        const { error } = await stripe.redirectToCheckout({sessionId});
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `error.message`.
+        if(error){
+          console.log(error.message);
+        }
+      };
+      
+      useEffect(() => {
+        const sessionId = customer_data?.getCustomerSessionId?.session;
+        if (sessionId) {
+          stripePromise.then((res) => {
+            res.redirectToCheckout({ sessionId: sessionId });
+          });
+        }
+      }, [customer_data]);
 
     const [formData, setFormData] = useState({ 
         first_name: '', 
@@ -20,6 +51,13 @@ function OwnerDetails({ user }) {
         address_city: ''
     });
     
+    const amount = 3500; // in cents
+    const [handleCharge] = useLazyQuery(CHARGE_OWNER, {
+      variables: { 
+        amount: amount,
+        description: 'testing brian2'
+       }
+    });
 
     useEffect(() => {
         if (user) {
@@ -189,7 +227,25 @@ function OwnerDetails({ user }) {
                     className="update-walker-button"
                     id="update-owner-profile-button"
                 >
-                    UPDATE
+                    UPDATE PROFILE
+                </button>
+                <button
+                    type="button"
+                    role="link" 
+                    className="update-walker-button"
+                    id="update-owner-Credit-Info-button"
+                    onClick={handleGetSessionId}
+                >
+                    UPDATE CHARGING INFORMATION
+                </button>
+                <button
+                    type="button"
+                    role="link" 
+                    className="update-walker-button"
+                    id="update-owner-charging-button"
+                    onClick={handleCharge}
+                >
+                    CHARGE
                 </button>
             </form>
         </div>

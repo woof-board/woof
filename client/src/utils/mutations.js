@@ -381,6 +381,8 @@ export const UPDATE_OWNER_PROFILE = gql`
                 avatar
             }
             dog_count
+            stripe_customer_id
+            stripe_setup_intent
         }
     }
 `;
