@@ -1,48 +1,106 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { QUERY_WALKER_ORDERS } from "../../utils/queries";
+import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks';
+import { QUERY_WALKER_AVAILABILITY } from "../../utils/queries";
+import { ADD_ORDER, UPDATE_ORDER } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
-import { UPDATE_CURRENT_USER } from "../../utils/actions";
-import { cities, neighbourhoods } from '../../utils/helpers';
+// import { UPDATE_CURRENT_USER } from "../../utils/actions";
+// import { cities, neighbourhoods } from '../../utils/helpers';
 
-const bookDates = []
+
+let bookDates = []
 const today = new Date();
 let newDate = new Date(today);
 let newFormattedDate = "";
+
 for (let i=1; i <=14; i++) {
     newDate.setDate(newDate.getDate() + 1);
-    newFormattedDate = ('0'+(newDate.getMonth()+1)).slice(-2) + "-" + ('0'+(newDate.getDate())).slice(-2) + "-" + newDate.getFullYear();
+    newFormattedDate = newDate.getFullYear() + "-"+ ('0'+(newDate.getMonth()+1)).slice(-2) + "-" + ('0'+(newDate.getDate())).slice(-2);
     bookDates.push(newFormattedDate);
 }
 
-function OwnerWalkDetails({data}) {
-    const dogs = data.dogs;
-    const ownerId = data._id;
+const bookTimes = [
+    "9am",
+    "11am",
+    "1pm",
+    "3pm",
+    "5pm",
+    "7pm",
+    "9pm"
+];
 
+function OwnerWalkDetails() {
+    const [state, dispatch] = useStoreContext();
+    const { currentUser } = state;
+
+    const [checkWalkerAvailability, { called, loading, data: WalkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY);
+    const [addOrder, {error: addOrderError}] = useMutation(ADD_ORDER);
+    const [updateOrder, {error: updateOrderError}] = useMutation(UPDATE_ORDER);
+    const [showWalkerList, setShowWalkerList] = useState(false);
+    const [formData, setFormData] = useState({date:bookDates[0], time: bookTimes[0] });
+    const [orderId, setOrderId] = useState("");
+
+    useEffect(() => {
+        if(WalkerData) {
+            setShowWalkerList(true);
+        }
+    }, [WalkerData]);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ 
+            ...formData, 
+            [name]: value
+        });
+    };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        const {date, time} = formData;
+        console.log("formData", formData);
+        try {
+            const { data } = await addOrder({
+                variables: {
+                    input: {
+                        service_date: formData.date,
+                        service_time: formData.time,
+                        owner: currentUser._id
+                    }
+                }
+            });
+            setOrderId(data.addOrder._id);
 
-        console.log(event);
+            checkWalkerAvailability({
+                variables: {
+                    date,
+                    time
+                }
+            });
 
-        
-
-
-        
+        } catch(e) {
+            console.log(e);
+        }
     };
 
-    
+    const handleUpdateOrder = async (e) => {
+        e.preventDefault();
+        const walkerId = e.target.getAttribute("data-id");
+        try {
+            await updateOrder({
+                variables:{
+                    order_id: orderId,
+                    input: {
+                        walker: walkerId,
+                        status: "PENDING_PROGRESS"
+                    }
+                }
+            });
 
-    const bookTimes = [
-        "9am",
-        "11am",
-        "1pm",
-        "3pm",
-        "5pm",
-        "7pm",
-        "9pm"
-    ]
+            alert("Order Updated with Walker Info!");
+        }catch (e){
+            console.log(e);
+        }
 
+    };
 
     return (
         <>
@@ -54,7 +112,13 @@ function OwnerWalkDetails({data}) {
                 onSubmit={handleFormSubmit}
             >
                 <div className="row-data">
-                    <select className="profile-input profile-name" id="book-date" name="book-date">
+                    <select 
+                        className="profile-input profile-name" 
+                        id="book-date" 
+                        name="date"
+                        value={formData.date} 
+                        onChange={handleInputChange}
+                    >
                         <option value="choose" selected disabled>Pick a Date</option>
                         {
                         bookDates.map(bookDate => 
@@ -64,7 +128,13 @@ function OwnerWalkDetails({data}) {
                     </select>
 
 
-                    <select className="profile-input profile-name" id="book-time" name="book-time">
+                    <select 
+                        className="profile-input profile-name" 
+                        id="book-time" 
+                        name="time"
+                        value={formData.time} 
+                        onChange={handleInputChange}
+                    >
                         <option value="choose" selected disabled>Pick a Time</option>
                         {
                             bookTimes.map(bookTime => 
@@ -73,8 +143,18 @@ function OwnerWalkDetails({data}) {
                         }
                     </select>
 
+                    <div className="row-data">
+                    <input
+                        className="profile-input"
+                        type="number"
+                        name="dog_number"
+                        placeholder="#dogs"
+                        onChange={handleInputChange}
+                        value={formData.email}
+                    />
                 </div>
-                {dogs.length > 1 &&
+                </div>
+                {/* {dogs.length > 1 &&
                 <>
                 <h3>Which dogs need a walk?</h3>
                 <div className="row-data">
@@ -86,7 +166,7 @@ function OwnerWalkDetails({data}) {
                         </>
                     )}
                 </div>
-                </>
+                </> */
                 }
 
                 <button
@@ -94,9 +174,25 @@ function OwnerWalkDetails({data}) {
                     className="update-walker-button"
                     id="update-walker-profile-button"
                 >
-                    BOOK YOUR WALK
+                    Place Order
                 </button>
             </form>
+             {
+                 showWalkerList && 
+                    <div 
+                        // onSubmit={handleChangeOrderStatus}
+                    >
+                        Available Walker
+                        {WalkerData?.checkWalkerAvailability.map((data) => 
+                        <div>
+                            <h5>Walker: {data.first_name} {data.last_name}</h5>
+                            <h6>Rating: {data.average_rating}</h6>
+                            <button data-id={data._id} onClick={handleUpdateOrder}>Select and confirm booking</button>
+                        </div>)}
+                    </div>
+             }   
+                
+
         </div>
         </>
     )

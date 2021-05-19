@@ -8,12 +8,10 @@ import { cities, neighbourhoods } from '../../utils/helpers';
 
 function OwnerDetails({ user }) {
 
-    // const {
-    //     user
-    // } = props
-
     const [updateOwnerProfile, { error }] = useMutation(UPDATE_OWNER_PROFILE);
     const [state, dispatch] = useStoreContext();
+
+
 
     const [formData, setFormData] = useState({ 
         first_name: '', 
@@ -22,22 +20,24 @@ function OwnerDetails({ user }) {
         address_city: ''
     });
     
+
     useEffect(() => {
         if (user) {
-            const { first_name, last_name, email, address, address_city, status } = user;
+            const { first_name, last_name, email, address, status } = user;
+
             if(status === "PENDING_INFORMATION") {
                 setFormData({
                     first_name,
                     last_name,
                     email,
-                    address_city: address_city
+                    address_city: address?.city
                 })
             } else {
                 setFormData({
                     first_name,
                     last_name,
                     email,
-                    address_city: address_city
+                    address_city: address?.city
                 });
             }            
         }
@@ -54,16 +54,15 @@ function OwnerDetails({ user }) {
 
 
     const handleFormSubmit = async (e) => {
-        console.log('do nothing');
         e.preventDefault();
 
         // need to implement form validation here
-        
+
         const { 
             first_name, 
             last_name,
             email,
-            city,
+            address_city,
             status,
             ...rest
          } = formData;
@@ -78,7 +77,7 @@ function OwnerDetails({ user }) {
                         status: "ACTIVE",
                         // ...rest,
                         address: {
-                            city: city,
+                            city: address_city,
                             ...rest
                         },
                         ...rest
@@ -150,7 +149,7 @@ function OwnerDetails({ user }) {
                 </div>
                 <div><h4>City</h4></div>
                 <div className="row-data">
-                    <select className="profile-input profile-name" id="walker-cities" name="walker-province">
+                    <select className="profile-input profile-name" id="walker-cities" name="address_city" onChange={handleInputChange}>
                         {formData.address_city ==="" 
                             ? <option value="choose" selected disabled>Choose your City</option>
                             : <option value="choose" disabled>Choose your City</option>
@@ -159,13 +158,13 @@ function OwnerDetails({ user }) {
                         {
                         cities.map(({name, group}) => 
                             (group 
-                                ? <optgroup label={name}></optgroup>
+                                ? <optgroup label={name} ></optgroup>
                                 // ? city.name!=="close" 
                                 //     ? <optgroup label={city}>
                                 //     : </optgroup>
                                 : name === formData.address_city
-                                    ? <option selected="selected" value={name}>{name}</option>
-                                    : <option value={name}>  {name}</option>
+                                    ? <option selected value={name} >{name}</option>
+                                    : <option value={name} >  {name}</option>
                             )
                         )
                         }
@@ -175,7 +174,7 @@ function OwnerDetails({ user }) {
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
                             neighbourhoods.map( neighbourhood =>
-                                neighbourhood.toLowerCase() === formData.address_neighbourhood.toLowerCase()
+                                neighbourhood === formData.address_neighbourhood
                                     ? <option selected="selected" value={neighbourhood}>{neighbourhood}</option>
                                     : <option value={neighbourhood}>{neighbourhood}</option>
                             )

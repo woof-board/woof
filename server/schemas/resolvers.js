@@ -412,7 +412,7 @@ const resolvers = {
             if (context.owner || context.walker) {
                 const order = await Order.findByIdAndUpdate(
                     order_id,
-                    input,
+                    {...input},
                     { new: true, runValidators: true }
                 );
 
