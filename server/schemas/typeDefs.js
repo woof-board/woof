@@ -167,6 +167,8 @@ const typeDefs = gql`
         phone: String
         avatar: String
         status: String
+        stripe_customer_id: String
+        stripe_setup_intent: String
     }
 
     input WalkerInput {
@@ -186,6 +188,7 @@ const typeDefs = gql`
         neighbourhoods: [String]
         address: AddressInput
         avatar: String
+        status: String
     }
 
     input DogInput {
@@ -201,7 +204,16 @@ const typeDefs = gql`
         service_time: String!
         owner: ID!
         walker: ID
-        dogs: [ID]!
+        dogs: [ID]
+        status: String
+    }
+
+    input UpdateOrderInput {
+        service_date: String
+        service_time: String
+        walker: ID
+        dogs: [ID]
+        status: String
     }
 
     input ReviewInput {
@@ -250,7 +262,7 @@ const typeDefs = gql`
         updateOwnerPassword(old_password: String!, new_password: String!): Owner
 
         addOrder(input: OrderInput): Order
-        updateOrder(order_id: ID!, input: OrderInput): Order
+        updateOrder(order_id: ID!, input: UpdateOrderInput): Order
         updateOrderStatus(order_id: ID!, status: String!): Order
         updateOrderCoords(order_id: ID!, lat: Float!, lon: Float!): Order
         removeOrder(order_id: ID!): Order

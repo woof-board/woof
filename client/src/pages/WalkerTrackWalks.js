@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 
 //import '../css/WalkerProfile.css';
-import { QUERY_WALKER_ME } from '../utils/queries';
+import { QUERY_WALKER_ME, QUERY_WALKER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
 import WalkerTrackOrder from "../components/WalkerTrackWalks/WalkerTrackOrder"
@@ -11,9 +11,11 @@ import WalkerTrackOrder from "../components/WalkerTrackWalks/WalkerTrackOrder"
 function WalkerTrackWalks() {
     const [state, dispatch] = useStoreContext();
     const [getWalkerProfile, { loading, data }] = useLazyQuery(QUERY_WALKER_ME);
+    // const [getWalkerOrder, { called,loading, data }] = useLazyQuery(QUERY_WALKER_ORDERS);
     const { currentUser } = state;
     const orders = currentUser.orders;
     const totalOrders = currentUser.orders.length;
+    // const totalOrders = 1;
 
     useEffect(() => {
       // if not already in global store
@@ -28,6 +30,13 @@ function WalkerTrackWalks() {
         });
       }
     }, [currentUser, data, loading, dispatch]);
+
+
+    // useEffect(() => {
+    //   // if not already in global store
+    //   getWalkerOrder({ variables: { walker_id: currentUser._id}});
+      
+    // }, [orders]);
 
   return (
     <>

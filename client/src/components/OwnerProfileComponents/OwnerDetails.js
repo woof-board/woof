@@ -1,19 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 //import '../../css/OwnerProfile.css';
+import { GET_CUSTOMER_SESSION_ID, CHARGE_OWNER } from '../../utils/queries';
 import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import { cities, neighbourhoods } from '../../utils/helpers';
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe('pk_test_51Ir7BPLlbUYQkEo2A2L6kb3YbdMv9jh8IJjshFAJOn3UXJEox2CDMpQoI8AS5HiTiccN6CzYnNbbCnaBJVgb8t08002TgJCE4p');
 
 function OwnerDetails({ user }) {
 
-    // const {
-    //     user
-    // } = props
-
     const [updateOwnerProfile, { error }] = useMutation(UPDATE_OWNER_PROFILE);
     const [state, dispatch] = useStoreContext();
+
+    const [handleGetSessionId, {data:customer_data}] = useLazyQuery(GET_CUSTOMER_SESSION_ID,{
+        onCompleted: (data) => {
+          // some actions
+          handleGettingInformation(data);
+        }
+      });
+    
+      const handleGettingInformation = async (data) => {
+        // Call your backend to create the Checkout session.
+        const sessionId = data.getCustomerSessionId.session_id;
+        // When the customer clicks on the button, redirect them to Checkout.
+        const stripe = await stripePromise;
+        const { error } = await stripe.redirectToCheckout({sessionId});
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer
+        // using `error.message`.
+        if(error){
+          console.log(error.message);
+        }
+      };
+      
+      useEffect(() => {
+        const sessionId = customer_data?.getCustomerSessionId?.session;
+        if (sessionId) {
+          stripePromise.then((res) => {
+            res.redirectToCheckout({ sessionId: sessionId });
+          });
+        }
+      }, [customer_data]);
 
     const [formData, setFormData] = useState({ 
         first_name: '', 
@@ -22,22 +51,31 @@ function OwnerDetails({ user }) {
         address_city: ''
     });
     
+    // const amount = 3500; // in cents
+    // const [handleCharge, { called, loading: charging, data }] = useLazyQuery(CHARGE_OWNER, {
+    //   variables: { 
+    //     amount: amount,
+    //     description: 'testing brian2'
+    //    }
+    // });
+
     useEffect(() => {
         if (user) {
-            const { first_name, last_name, email, address, address_city, status } = user;
+            const { first_name, last_name, email, address, status } = user;
+
             if(status === "PENDING_INFORMATION") {
                 setFormData({
                     first_name,
                     last_name,
                     email,
-                    address_city: address_city
+                    address_city: address?.city
                 })
             } else {
                 setFormData({
                     first_name,
                     last_name,
                     email,
-                    address_city: address_city
+                    address_city: address?.city
                 });
             }            
         }
@@ -54,16 +92,15 @@ function OwnerDetails({ user }) {
 
 
     const handleFormSubmit = async (e) => {
-        console.log('do nothing');
         e.preventDefault();
 
         // need to implement form validation here
-        
+
         const { 
             first_name, 
             last_name,
             email,
-            city,
+            address_city,
             status,
             ...rest
          } = formData;
@@ -78,7 +115,7 @@ function OwnerDetails({ user }) {
                         status: "ACTIVE",
                         // ...rest,
                         address: {
-                            city: city,
+                            city: address_city,
                             ...rest
                         },
                         ...rest
@@ -150,7 +187,7 @@ function OwnerDetails({ user }) {
                 </div>
                 <div><h4>City</h4></div>
                 <div className="row-data">
-                    <select className="profile-input profile-name" id="walker-cities" name="walker-province">
+                    <select className="profile-input profile-name" id="walker-cities" name="address_city" onChange={handleInputChange}>
                         {formData.address_city ==="" 
                             ? <option value="choose" selected disabled>Choose your City</option>
                             : <option value="choose" disabled>Choose your City</option>
@@ -159,13 +196,13 @@ function OwnerDetails({ user }) {
                         {
                         cities.map(({name, group}) => 
                             (group 
-                                ? <optgroup label={name}></optgroup>
+                                ? <optgroup label={name} ></optgroup>
                                 // ? city.name!=="close" 
                                 //     ? <optgroup label={city}>
                                 //     : </optgroup>
                                 : name === formData.address_city
-                                    ? <option selected="selected" value={name}>{name}</option>
-                                    : <option value={name}>  {name}</option>
+                                    ? <option selected value={name} >{name}</option>
+                                    : <option value={name} >  {name}</option>
                             )
                         )
                         }
@@ -175,7 +212,7 @@ function OwnerDetails({ user }) {
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
                             neighbourhoods.map( neighbourhood =>
-                                neighbourhood.toLowerCase() === formData.address_neighbourhood.toLowerCase()
+                                neighbourhood === formData.address_neighbourhood
                                     ? <option selected="selected" value={neighbourhood}>{neighbourhood}</option>
                                     : <option value={neighbourhood}>{neighbourhood}</option>
                             )
@@ -190,8 +227,37 @@ function OwnerDetails({ user }) {
                     className="update-walker-button"
                     id="update-owner-profile-button"
                 >
-                    UPDATE
+                    UPDATE PROFILE
                 </button>
+                <button
+                    type="button"
+                    role="link" 
+                    className="update-walker-button"
+                    id="update-owner-Credit-Info-button"
+                    onClick={handleGetSessionId}
+                >
+                    UPDATE CHARGING INFORMATION
+                </button>
+                {/* {!charging ?
+                <button
+                    type="button"
+                    role="link" 
+                    className="update-walker-button"
+                    id="update-owner-charging-button"
+                    onClick={handleCharge}
+                >
+                     CHARGE
+                </button>
+                :
+                <button
+                    type="button"
+                    role="link" 
+                    className="update-walker-button"
+                    id="update-owner-charging-button"
+                >
+                     CHARGING
+                </button>} */}
+                
             </form>
         </div>
         </>

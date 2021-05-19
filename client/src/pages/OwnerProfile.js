@@ -2,11 +2,14 @@ import React, { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/OwnerProfile.css';
+import OwnerAddDog from '../components/OwnerProfileComponents/OwnerAddDog';
 import OwnerDetails from '../components/OwnerProfileComponents/OwnerDetails';
 import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswordForm'; 
 import { useStoreContext } from "../utils/GlobalState";
 import { QUERY_OWNER_ME } from '../utils/queries';
 import { UPDATE_CURRENT_USER } from "../utils/actions";
+import OwnerBookWalk from './OwnerBookWalk';
+import { Link } from 'react-router-dom';
 
 function OwnerProfile() {
     const [state, dispatch] = useStoreContext();
@@ -80,10 +83,14 @@ return (
                 <h2>Welcome {currentUser.first_name}!</h2>
               </div>
               <div className="account-status">
-                Welcome!
+                <OwnerBookWalk />
+                <Link to={"/ownertrackorder"}><button>Upcoming Walks</button></Link>
+                {/* Need to make a new page for past walk */}
+                <Link to={"/ownertrackorder"}><button>Past Walks</button></Link>
               </div>
             </div>
             }
+            <OwnerAddDog />
             <OwnerDetails user={currentUser}/>
             <OwnerPasswordForm />
             

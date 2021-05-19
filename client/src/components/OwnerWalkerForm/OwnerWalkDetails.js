@@ -1,48 +1,165 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation, useQuery } from '@apollo/react-hooks';
-import { QUERY_WALKER_ORDERS } from "../../utils/queries";
+import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks';
+import DatePicker from 'react-datepicker';
+import Select from 'react-select';
+
+import ModalDisplay from '../ModalDisplay';
+import { QUERY_WALKER_AVAILABILITY } from "../../utils/queries";
+import { ADD_ORDER, UPDATE_ORDER } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
-import { UPDATE_CURRENT_USER } from "../../utils/actions";
-import { cities, neighbourhoods } from '../../utils/helpers';
+import { formatDate, addDays } from '../../utils/helpers';
+import "react-datepicker/dist/react-datepicker.css";
+import { Redirect } from 'react-router';
 
-const bookDates = []
-const today = new Date();
-let newDate = new Date(today);
-let newFormattedDate = "";
-for (let i=1; i <=14; i++) {
-    newDate.setDate(newDate.getDate() + 1);
-    newFormattedDate = ('0'+(newDate.getMonth()+1)).slice(-2) + "-" + ('0'+(newDate.getDate())).slice(-2) + "-" + newDate.getFullYear();
-    bookDates.push(newFormattedDate);
-}
+// import { UPDATE_CURRENT_USER } from "../../utils/actions";
+// import { cities, neighbourhoods } from '../../utils/helpers';
 
-function OwnerWalkDetails({data}) {
-    const dogs = data.dogs;
-    const ownerId = data._id;
 
+// for react-select
+const customStyles = {
+    option: (provided, state) => ({
+      ...provided,
+      borderBottom: '1px dotted pink',
+      color: state.isSelected ? 'red' : 'blue',
+      padding: 20,
+    }),
+    // control: () => ({
+    //   // none of react-select's styles are passed to <Control />
+    //   width: 200,
+    // }),
+    // singleValue: (provided, state) => {
+    //   const opacity = state.isDisabled ? 0.5 : 1;
+    //   const transition = 'opacity 300ms';
+  
+    //   return { ...provided, opacity, transition };
+    // }
+  }
+
+const bookTimes = [ "9am", "11am", "1pm", "3pm", "5pm", "7pm", "9pm" ];
+
+function OwnerWalkDetails() {
+    const [state, dispatch] = useStoreContext();
+    const { currentUser } = state;
+
+    const [checkWalkerAvailability, { called, loading, data: WalkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY);
+    const [addOrder, {error: addOrderError}] = useMutation(ADD_ORDER);
+    const [updateOrder, {error: updateOrderError}] = useMutation(UPDATE_ORDER);
+    
+    const [showWalkerList, setShowWalkerList] = useState(false);
+    const [modalJSX, setModalJSX] = useState(<div />);
+    const [modalOpen, setModalOpen] = useState();
+    const [formData, setFormData] = useState({
+        date: formatDate(new Date()), 
+        time: bookTimes[0],
+        dogIdList: [] 
+    });
+    const [orderId, setOrderId] = useState("");
+    const [startDate, setStartDate] = useState(new Date());
+    const [redirect, setRedirect ] = useState(false);
+
+    useEffect(() => {
+        if(WalkerData) {
+            setShowWalkerList(true);
+        }
+    }, [WalkerData]);
+
+    const handleInputChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({ 
+            ...formData, 
+            [name]: value
+        });
+    };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        const {date, time, dogIdList } = formData;
+        console.log("formData", formData);
+        if (dogIdList.length < 1) {
+            setModalJSX(
+                <div>
+                    <h6>Please select at least one dog!</h6>
+                    <button type="button" onClick={() => setModalOpen(false)}>Close</button>
+                </div>
+            );
+            setModalOpen(true);
+            return;
+        }
 
-        console.log(event);
+        try {
+            const { data } = await addOrder({
+                variables: {
+                    input: {
+                        service_date: formData.date,
+                        service_time: formData.time,
+                        owner: currentUser._id,
+                        dogs: formData.dogIdList
+                    }
+                }
+            });
+            setOrderId(data.addOrder._id);
 
-        
+            checkWalkerAvailability({
+                variables: {
+                    date,
+                    time
+                }
+            });
 
-
-        
+        } catch(e) {
+            console.log(e);
+        }
     };
 
+    const handleUpdateOrder = async (e) => {
+        e.preventDefault();
+        const walkerId = e.target.getAttribute("data-id");
+        try {
+            await updateOrder({
+                variables:{
+                    order_id: orderId,
+                    input: {
+                        walker: walkerId,
+                        status: "PENDING_PROGRESS"
+                    }
+                }
+            });
+
+            setModalJSX(
+                <div>
+                    <h6>Your order is booked with the selected walker!</h6>
+                    <button type="button" onClick={() => {
+                        setModalOpen(false);
+                        setRedirect(true);
+                        }}>Close</button>
+                </div>
+            );
+            setModalOpen(true);
+            // remove alert and redirect to owner profile page
+        }catch (e){
+            console.log(e);
+        }
+
+    };
+
+     const getDogNames = () => {
+        return currentUser.dogs.map( dog =>
+            ({ value: dog._id, label: dog.name })
+        );
+    };
     
+    const handleChangeDogSelect = (selectedOption) => {
+        const selectedDogIds = selectedOption.map(option => option.value);
+        setFormData({
+            ...formData,
+            dogIdList: [...selectedDogIds]
+        });
+    };
 
-    const bookTimes = [
-        "9am",
-        "11am",
-        "1pm",
-        "3pm",
-        "5pm",
-        "7pm",
-        "9pm"
-    ]
-
+    const closeModal = () => {
+        setModalJSX(<div />);
+        setModalOpen(true);
+    };
 
     return (
         <>
@@ -53,50 +170,86 @@ function OwnerWalkDetails({data}) {
                 id="book-walk-form"
                 onSubmit={handleFormSubmit}
             >
+                <h4>Pick date and time</h4>
                 <div className="row-data">
-                    <select className="profile-input profile-name" id="book-date" name="book-date">
-                        <option value="choose" selected disabled>Pick a Date</option>
-                        {
-                        bookDates.map(bookDate => 
-                            <option key={bookDate} value={bookDate}>{bookDate}</option>
-                            )
-                        }
-                    </select>
+                    <DatePicker 
+                        className="profile-input profile-name" 
+                        id="book-date" 
+                        name="date"
+                        dateFormat="yyyy-MM-dd"
+                        minDate={new Date()}
+                        maxDate={addDays(new Date(), 13)}
+                        selected={startDate} 
+                        onChange={date => {
+                            setStartDate(date);
+                            const formattedDate = formatDate(date);
+                            setFormData({ 
+                                ...formData, 
+                                date: formattedDate
+                            });
+                        }}
+                    />
 
-
-                    <select className="profile-input profile-name" id="book-time" name="book-time">
-                        <option value="choose" selected disabled>Pick a Time</option>
+                    <select 
+                        className="profile-input profile-name" 
+                        id="book-time" 
+                        name="time"
+                        value={formData.time} 
+                        onChange={handleInputChange}
+                    >
+                        {/* <option value="choose" selected disabled>Pick a Time</option> */}
                         {
                             bookTimes.map(bookTime => 
                                 <option key={bookTime} value={bookTime}>{bookTime}</option>
                             )
                         }
                     </select>
-
-                </div>
-                {dogs.length > 1 &&
-                <>
-                <h3>Which dogs need a walk?</h3>
-                <div className="row-data">
-                    {
-                    dogs.map(dog =>
-                        <>
-                            <input type="checkbox" key={dog._id} id={dog._id} name={dog.name} value={dog.name} defaultChecked />
-                            <label key={dog._id+"1"} htmlFor={dog._id}>{dog.name}</label>
-                        </>
-                    )}
-                </div>
-                </>
-                }
+                    </div>
+                    <h4>Select your dogs</h4>
+                    <div className="row-data">
+                        
+                    <Select 
+                        customStyles={customStyles}
+                        className="profile-input profile-name" 
+                        options={getDogNames()} 
+                        isMulti={true}
+                        onChange={handleChangeDogSelect}
+                    />
+                    </div>
 
                 <button
                     type="submit"
                     className="update-walker-button"
                     id="update-walker-profile-button"
                 >
-                    BOOK YOUR WALK
+                    Place Order
                 </button>
             </form>
+             {
+                 showWalkerList && 
+                    <div 
+                        // onSubmit={handleChangeOrderStatus}
+                    >
+                        {(WalkerData?.checkWalkerAvailability === undefined || WalkerData.checkWalkerAvailability.length == 0) 
+                        ? <div> Sorry, no walker available at your selected time </div>
+                        : (
+                            <>
+                                <h4> Available Walker</h4>
+                                { WalkerData?.checkWalkerAvailability.map((data) => 
+                                <div>
+                                    <h5>Walker: {data.first_name} {data.last_name}</h5>
+                                    <h6>Rating: {data.average_rating}</h6>
+                                    <button data-id={data._id} onClick={handleUpdateOrder}>Select and confirm booking</button>
+                                </div>
+                                )}
+                            </>
+                            )
+                        }
+                    </div>
+             }   
+                
+                <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
+                { redirect && <Redirect to="/ownerprofile" />}
         </div>
         </>
     )
