@@ -6,7 +6,7 @@ function ContactDetails() {
             <div className="contact-us-container-left">
                 <div>
                     <h2>Let's get in touch</h2>
-                    <h3>We're open for any suggestion or just to have a chat.</h3>
+                    <span>We're open for any suggestion or just to have a chat.</span>
                 </div>
                 <div>
                     <div className="privacy-items">
