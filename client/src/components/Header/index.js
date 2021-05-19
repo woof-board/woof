@@ -35,6 +35,11 @@ function Header() {
             name: 'Schedule',
             href: '/walkerschedule',
             for: 'walker'
+        },
+        {
+            name: 'Home',
+            href: '/',
+            for: 'guest'
         }
     ]);
 
@@ -73,7 +78,7 @@ function Header() {
                 </Link>
             </div>
             <div className="nav-links-container">
-                {result !== 'guest' && (
+                {/* {result !== 'guest' && ( */}
                     <>
                         <div className="nav-row">
                             {links.map((link) => (
@@ -83,7 +88,8 @@ function Header() {
                                             {link.name}
                                     </NavLink>
                                 </li>                     
-                            ))}    
+                            ))}   
+                            {result !== 'guest' && (
                             <li className="link">
                                 <Link to="/">
                                     <span 
@@ -95,11 +101,11 @@ function Header() {
                                         Logout
                                     </span>
                                 </Link>
-                            </li>                    
+                            </li>)}                    
                         </div>
                         
-                    </>)
-                }
+                    </>
+                {/* } */}
             </div>
         </nav>
     )
