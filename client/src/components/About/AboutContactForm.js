@@ -21,14 +21,14 @@ function AboutContactForm() {
 
     return (
         <>
-            <div className="contact-us-container">
-                <h2 className="contact-us-title">Contact Us</h2>
+            <div className="contact-us-container-right">
                 <form onSubmit={formHandler} className="flex-c">
                     <input type="text" onChange={handleInputChange} name="name" className="contactus-input" placeholder="Name"></input>
                     <input type="text" onChange={handleInputChange} name="email" className="contactus-input"  placeholder="Email"></input>
                     <input type="text" onChange={handleInputChange} name="question" className="contactus-question" placeholder="Questions"></input>
                     <button type="submit">SUBMIT</button>
                 </form>
+                <div className="triangle-left"></div>
             </div>
         </>
     )

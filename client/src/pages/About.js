@@ -10,6 +10,7 @@ import AboutPayment from '../components/About/AboutPayment';
 import AboutUs from '../components/About/AboutUs';
 import AboutContact from '../components/About/AboutContact';
 import AboutContactForm from '../components/About/AboutContactForm';
+import ContactDetails from '../components/About/ContactDetails';
 // import AboutApp from '../components/About/AboutApp';
 
 
@@ -147,7 +148,8 @@ function About() {
 
             {currentContactLink.name === 'contact' && (
                 <div className="component-section">
-                    <div className="content flex-r">
+                    <div className="contact-container flex-r-nospace">
+                        <ContactDetails />
                         <AboutContactForm />
                     </div>
                 </div>
