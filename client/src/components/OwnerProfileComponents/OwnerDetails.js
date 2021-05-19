@@ -48,7 +48,7 @@ function OwnerDetails({ user }) {
         first_name: '', 
         last_name: '', 
         email: '',
-        address_city: ''
+        city: ''
     });
     
     // const amount = 3500; // in cents
@@ -61,23 +61,18 @@ function OwnerDetails({ user }) {
 
     useEffect(() => {
         if (user) {
-            const { first_name, last_name, email, address, status } = user;
+            const { first_name, last_name, email, address } = user;
+            setFormData({
+                first_name,
+                last_name,
+                email,
+                street: address?.street,
+                city: address?.city,
+                neighbourhood: address?.neighbourhood,
+                postal_code: address?.postal_code
 
-            if(status === "PENDING_INFORMATION") {
-                setFormData({
-                    first_name,
-                    last_name,
-                    email,
-                    address_city: address?.city
-                })
-            } else {
-                setFormData({
-                    first_name,
-                    last_name,
-                    email,
-                    address_city: address?.city
-                });
-            }            
+            })
+  
         }
     
     }, [user]);
@@ -100,7 +95,10 @@ function OwnerDetails({ user }) {
             first_name, 
             last_name,
             email,
-            address_city,
+            street,
+            city,
+            neighbourhood,
+            postal_code,
             status,
             ...rest
          } = formData;
@@ -115,7 +113,10 @@ function OwnerDetails({ user }) {
                         status: "ACTIVE",
                         // ...rest,
                         address: {
-                            city: address_city,
+                            street,
+                            city,
+                            neighbourhood,
+                            postal_code,
                             ...rest
                         },
                         ...rest
@@ -135,21 +136,11 @@ function OwnerDetails({ user }) {
 
     }
 
-    const provinces = [
-        { displayName: 'Ontario', value: "ontario"},
-        { displayName: 'Quebec', value: "quebec"},
-        { displayName: 'New Foundland', value: "new-foundland"},
-        { displayName: 'Nova Scotia', value: "nova-scotia"},
-        { displayName: 'New Brunswick', value: "new-brunswick"},
-        { displayName: 'Manitoba', value: "manitoba"},
-        { displayName: 'Saskatchewan', value: "saskatchewan"},
-        { displayName: 'Alberta', value: "alberta"},
-        { displayName: 'British Columbia', value: "british-columbia"},
-        { displayName: 'Prince Edward Island', value: "prince-edward-island"},
-    ]
 
     return (
+        
         <>
+        {console.log(formData)}
         <div className="walker-contact-container">
             <div className="walker-header"><h2>Personal Information</h2></div>
             <form
@@ -185,10 +176,20 @@ function OwnerDetails({ user }) {
                         value={formData.email}
                     />
                 </div>
-                <div><h4>City</h4></div>
+                <div><h4>Address</h4></div>
                 <div className="row-data">
-                    <select className="profile-input profile-name" id="walker-cities" name="address_city" onChange={handleInputChange}>
-                        {formData.address_city ==="" 
+                    <input
+                        className="profile-input street-input"
+                        type="text"
+                        name="street"
+                        placeholder="Street"
+                        onChange={handleInputChange}
+                        value={formData.street}
+                    />
+                </div>
+                <div className="row-data">
+                    <select className="profile-input profile-name" id="walker-cities" name="city" onChange={handleInputChange}>
+                        {formData.city ==="" 
                             ? <option value="choose" selected disabled>Choose your City</option>
                             : <option value="choose" disabled>Choose your City</option>
                         }
@@ -200,14 +201,14 @@ function OwnerDetails({ user }) {
                                 // ? city.name!=="close" 
                                 //     ? <optgroup label={city}>
                                 //     : </optgroup>
-                                : name === formData.address_city
+                                : name.toLowerCase() === formData.city.toLowerCase()
                                     ? <option selected value={name} >{name}</option>
                                     : <option value={name} >  {name}</option>
                             )
                         )
                         }
                     </select>
-                {formData.address_city === "toronto" &&
+                {formData.city === "toronto" &&
                     <select className="profile-input profile-name" id="walker-province" name="walker-province">
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
@@ -218,26 +219,39 @@ function OwnerDetails({ user }) {
                             )
                         }
                     </select>
+                
                     
                 }
                 </div>
-             
-                <button
-                    type="submit"
-                    className="update-walker-button"
-                    id="update-owner-profile-button"
-                >
-                    UPDATE PROFILE
-                </button>
-                <button
-                    type="button"
-                    role="link" 
-                    className="update-walker-button"
-                    id="update-owner-Credit-Info-button"
-                    onClick={handleGetSessionId}
-                >
-                    UPDATE CHARGING INFORMATION
-                </button>
+                <div className="row-data">
+                
+                    <input
+                        className="profile-input"
+                        type="text"
+                        name="postal_code"
+                        placeholder="Postal Code"
+                        onChange={handleInputChange}
+                        value={formData.postal_code}
+                    />
+                </div>
+                <div className="button-container">
+                    <button
+                        type="submit"
+                        className="update-walker-button"
+                        id="update-owner-profile-button"
+                    >
+                        UPDATE PROFILE
+                    </button>
+                    <button
+                        type="button"
+                        role="link" 
+                        className="update-walker-button right-button"
+                        id="update-owner-Credit-Info-button"
+                        onClick={handleGetSessionId}
+                    >
+                        UPDATE PAYMENT INFORMATION
+                    </button>
+                </div>
                 {/* {!charging ?
                 <button
                     type="button"

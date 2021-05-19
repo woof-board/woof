@@ -1,23 +1,30 @@
-import React, { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import React, { useState, useEffect } from 'react';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 
-import '../css/OwnerProfile.css';
+import '../css/Profile.css';
 import OwnerDetails from '../components/OwnerProfileComponents/OwnerDetails';
 import OwnerPetDetails from '../components/OwnerProfileComponents/OwnerPetDetails';
 import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswordForm'; 
 import { useStoreContext } from "../utils/GlobalState";
-import { QUERY_OWNER_ME } from '../utils/queries';
+import { QUERY_OWNER_ME, QUERY_OWNER_ORDERS } from '../utils/queries';
 import { UPDATE_CURRENT_USER } from "../utils/actions";
 import OwnerBookWalk from './OwnerBookWalk';
 import { Link } from 'react-router-dom';
 
 function OwnerProfile() {
-    const [state, dispatch] = useStoreContext();
-    const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
-    // const { loading, data } = useQuery(QUERY_WALKER_ME);
+    const [state, dispatch] = useStoreContext(); 
     const { currentUser } = state;
+    
+    /// pull upcoming walks ///
+    
+    // const { data: ownerOrderData, loading: orderLoading } = useQuery(QUERY_OWNER_ORDERS, {
+    //   variables: {
+    //       owner_id: currentUser._id
+    //   }
+      
+    // });
 
-    // const results = data;
+    const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
 
     useEffect(() => {
         // if not already in global store
@@ -32,18 +39,22 @@ function OwnerProfile() {
             });
             
         }
-        // get cache from idb
-        // else if (!loading) {
-        //     idbPromise('products', 'get').then((indexedProducts) => {
-        //     dispatch({
-        //         type: UPDATE_PRODUCTS,
-        //         products: indexedProducts
-        //     });
-        //     });
-        // }
     }, [currentUser, data, loading, dispatch]);
 
     console.log(currentUser);
+
+    /// SHOW UPCOMING WALKS ///
+
+    // useEffect(() => {
+    //   if(ownerOrderData) {
+    //     console.log(ownerOrderData.ownerOrders);
+    //   }
+    // }, [ownerOrderData]);
+
+    // if (orderLoading) {
+    //     return (<div>Loading data...</div>);
+    // }
+
 
   
 return (
@@ -82,13 +93,36 @@ return (
             {currentUser && currentUser.status === "ACTIVE" && 
               <div className="walker-contact-container">
               <div className="walker-header">
-                <h2>Welcome {currentUser.first_name}!</h2>
+                {/* <h2>Welcome {currentUser.first_name}!</h2> */}
+                <h2>Walks</h2>
               </div>
-              <div className="account-status">
-                <OwnerBookWalk />
-                <Link to={"/ownertrackorder"}><button>Upcoming Walks</button></Link>
+
+              {/* SHOW UPCOMING WALKS */}
+
+              {/* <h4 className="indent-text">Upcoming Walks</h4>
+              {currentUser && currentUser.status === "ACTIVE" }
+              {
+                ownerOrderData?.ownerOrders.map((order) => (
+                  order.status !== "PENDING_PROGRESS" 
+                  ? null 
+                  : (
+                    <div className="walks">
+                        <div>
+                            <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
+                            <div><span className="medium-text">Start time:</span> {order.service_time}</div>
+                            <div><span className="medium-text">Walker:</span> {`${order.walker.first_name} ${order.walker.last_name}`} </div>
+                            
+                            </div>
+                        </div>
+                    )
+                ))} */}
+
+
+              <div className="button-container">
+                <Link to="bookwalk"><button>Book a walk</button></Link>
+                <Link to="/ownertrackorder"><button>Upcoming Walks</button></Link>
                 {/* Need to make a new page for past walk */}
-                <Link to={"/ownertrackorder"}><button>Past Walks</button></Link>
+                <Link to="/ownertrackorder"><button>Past Walks</button></Link>
               </div>
             </div>
             }

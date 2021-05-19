@@ -13,38 +13,21 @@ function OwnerDetails({ user }) {
 
 
     const [formData, setFormData] = useState({ 
-        first_name: '', 
-        last_name: '', 
-        email: '',
-        address_city: ''
+        dogs: []
     });
     
 
     useEffect(() => {
         if (user) {
-            const {  dogs } = user;
+            const { dogs } = user;
+            setFormData({
+                dogs
 
-            if(status === "PENDING_INFORMATION") {
-                setFormData({
-                    dog_name: dogs.name,
-                    breed: dogs.breed,
-                    avatar: dogs.avatar,
-                    weight: dogs.weight,
-                    treats: dogs.treats
-                })
-            } else {
-                setFormData({
-                    dog_name: dogs.name,
-                    breed: dogs.breed,
-                    avatar: dogs.avatar,
-                    weight: dogs.weight,
-                    treats: dogs.treats
-                });
-            }            
+            })
+  
         }
     
     }, [user]);
-
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData({ 
@@ -52,19 +35,14 @@ function OwnerDetails({ user }) {
             [name]: value
         });
     };
-
-
+    const {dogs} = formData;
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
         // need to implement form validation here
 
         const { 
-            first_name, 
-            last_name,
-            email,
-            address_city,
-            status,
+            dogs,
             ...rest
          } = formData;
 
@@ -72,13 +50,11 @@ function OwnerDetails({ user }) {
             const { data: { updateOwnerProfile: newProfile } } = await updateOwnerProfile({
                 variables: {
                     input: {
-                        first_name: first_name,
-                        last_name: last_name,
-                        email: email,
-                        status: "ACTIVE",
-                        // ...rest,
-                        address: {
-                            city: address_city,
+                        dogs: {
+                            breed: dogs.breed,
+                            weight: dogs.weight,
+                            treats: dogs.treats,
+                            avatar: dogs.avatar,
                             ...rest
                         },
                         ...rest
@@ -98,83 +74,68 @@ function OwnerDetails({ user }) {
 
     }
 
-    console.log(formData);
-
-
     return (
         <>
         <div className="walker-contact-container">
+
             <div className="walker-header"><h2>Pet Information</h2></div>
             <form
                 className="walker-update-form"
                 id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
-                <div className="row-data">
-                    <input
-                        className="profile-input profile-name"
-                        type="text"
-                        name="first_name"
-                        placeholder="First Name"
-                        onChange={handleInputChange}
-                        value={formData.first_name}
-                    />
-                    <input
-                        className="profile-input profile-name"
-                        type="text"
-                        name="last_name"
-                        placeholder="Last Name"
-                        onChange={handleInputChange}
-                        value={formData.last_name}
-                    />
-                </div>
-                <div className="row-data">
-                    <input
-                        className="profile-input"
-                        type="text"
-                        name="email"
-                        placeholder="Email"
-                        onChange={handleInputChange}
-                        value={formData.email}
-                    />
-                </div>
-                <div><h4>City</h4></div>
-                <div className="row-data">
-                    <select className="profile-input profile-name" id="walker-cities" name="address_city" onChange={handleInputChange}>
-                        {formData.address_city ==="" 
-                            ? <option value="choose" selected disabled>Choose your City</option>
-                            : <option value="choose" disabled>Choose your City</option>
-                        }
-                        
-                        {
-                        cities.map(({name, group}) => 
-                            (group 
-                                ? <optgroup label={name} ></optgroup>
-                                // ? city.name!=="close" 
-                                //     ? <optgroup label={city}>
-                                //     : </optgroup>
-                                : name === formData.address_city
-                                    ? <option selected value={name} >{name}</option>
-                                    : <option value={name} >  {name}</option>
-                            )
-                        )
-                        }
-                    </select>
-                {formData.address_city === "toronto" &&
-                    <select className="profile-input profile-name" id="walker-province" name="walker-province">
-                        <option value="choose" disabled>Choose your neighbourhood</option>
-                        {
-                            neighbourhoods.map( neighbourhood =>
-                                neighbourhood === formData.address_neighbourhood
-                                    ? <option selected="selected" value={neighbourhood}>{neighbourhood}</option>
-                                    : <option value={neighbourhood}>{neighbourhood}</option>
-                            )
-                        }
-                    </select>
+
+
+                    {
+                    dogs.map((dog) => 
+                    <>
+                    <img src={dog.avatar} width="150"></img>
+                    <div className="row-data">
+
+                        <input
+                            className="profile-input profile-name"
+                            type="text"
+                            name="dog_name"
+                            placeholder="Name"
+                            onChange={handleInputChange}
+                            value={dog.name}
+                        />
                     
-                }
-                </div>
-             
+                    <input
+                        className="profile-input profile-name"
+                        type="text"
+                        name="breed"
+                        placeholder="Breed"
+                        onChange={handleInputChange}
+                        value={dog.breed}
+                    />
+                    </div>
+                    <div className="row-data">
+                     <input
+                        className="profile-input profile-name"
+                        type="text"
+                        name="weight"
+                        placeholder="Weight"
+                        onChange={handleInputChange}
+                        value={dog.weight}
+                    />lbs.
+                    <label>Dog Treats allowed</label>
+                    <select className="profile-input profile-name" id="walker-cities" name="address_city" onChange={handleInputChange}>
+                                {console.log(dog.treats)}
+                                {dog.treats
+                                    ? <><option selected value="true">Yes</option><option value="false">No</option></>
+                                    : <><option value="true">Yes</option><option selected value="false">No</option></>
+                                }
+                    </select>
+
+                    </div>
+                    </>
+                    )}
+                    
+            
+                
+                
+                <div className="button-container">
                 <button
                     type="submit"
                     className="update-walker-button"
@@ -182,6 +143,7 @@ function OwnerDetails({ user }) {
                 >
                     UPDATE
                 </button>
+                </div>
             </form>
         </div>
         </>

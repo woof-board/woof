@@ -33,7 +33,7 @@ db.once('open', async () => {
                 {
                     name: 'Pudding',
                     breed: 'Shi-zu mix',
-                    weight: 90,
+                    weight: 15,
                     treats: true,
                     avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-9/39257859_10158104653536151_4978567789913571328_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=730e14&_nc_ohc=CKtX-w_SiOUAX-6SYVi&_nc_ht=scontent-yyz1-1.xx&oh=0885e71ab8514745b2f93ea3b0c2e5d0&oe=60C96238"
                 }
@@ -145,7 +145,7 @@ db.once('open', async () => {
                     avatar: "/images/user-default.png"
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
 

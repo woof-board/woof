@@ -1,10 +1,10 @@
-#walkers {
+/* #walkers {
     display: flex;
     flex-direction: row;
     padding: 2rem 5rem 1rem;
     flex-wrap: wrap;
     flex-direction: row;
-}
+} */
 
 h1 {
     color: var(--primary);

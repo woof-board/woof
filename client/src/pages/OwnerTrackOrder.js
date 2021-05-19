@@ -70,9 +70,9 @@ function OwnerTrackOrder() {
                   : (
                     <div className="walks">
                         <div>
-                            <div>Walk Date: {order.service_date}</div>
-                            <div>Start time: {order.service_time}</div>
-                            <div> Walker: {`${order.walker.first_name} ${order.walker.last_name}`} </div>
+                            <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
+                            <div><span className="medium-text">Start time:</span> {order.service_time}</div>
+                            <div><span className="medium-text">Walker:</span> {`${order.walker.first_name} ${order.walker.last_name}`} </div>
                             {/* Add map component */}
                             {/* <Map
                                 order_id = {order.order_id}
