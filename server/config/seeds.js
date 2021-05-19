@@ -388,18 +388,18 @@ db.once('open', async () => {
             reviews: [
                 {
                     owner_id: ownerIds[4],
-                    rating: 1,
-                    review_text: "pretty bad service!"
+                    rating: 5,
+                    review_text: "Great job!"
                 },
                 {
                     owner_id: ownerIds[1],
-                    rating: 2,
-                    review_text: "not recommended"
+                    rating: 4,
+                    review_text: ""
                 },
                 {
                     owner_id: ownerIds[2],
-                    rating: 3,
-                    review_text: "not so bad"
+                    rating: 5,
+                    review_text: "Thanks! My dog loves you!"
                 }
             ],
             earnings: 800.0,

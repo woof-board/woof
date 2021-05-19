@@ -18,7 +18,7 @@ const scheduledWalks = [
     {
         service_date: "2021-05-23",
         service_time: "3pm",
-        owner: "Eric Normann",
+        owner: "Shamim Imtiaz",
         walker: "d45g11r43a333",
         dogs: ["Pixel", "Pudding"]
     }
