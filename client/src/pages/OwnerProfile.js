@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/Profile.css';
+import OwnerAddDog from '../components/OwnerProfileComponents/OwnerAddDog';
 import OwnerDetails from '../components/OwnerProfileComponents/OwnerDetails';
 import OwnerPetDetails from '../components/OwnerProfileComponents/OwnerPetDetails';
 import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswordForm'; 
@@ -122,10 +123,11 @@ return (
                 <Link to="bookwalk"><button>Book a walk</button></Link>
                 <Link to="/ownertrackorder"><button>Upcoming Walks</button></Link>
                 {/* Need to make a new page for past walk */}
-                <Link to="/ownertrackorder"><button>Past Walks</button></Link>
+                <Link to={"/ownerpastorder"}><button>Past Walks</button></Link>
               </div>
             </div>
             }
+            <OwnerAddDog />
             <OwnerDetails user={currentUser}/>
             <OwnerPasswordForm />
             <OwnerPetDetails user={currentUser} />
