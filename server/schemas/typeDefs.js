@@ -167,6 +167,8 @@ const typeDefs = gql`
         phone: String
         avatar: String
         status: String
+        stripe_customer_id: String
+        stripe_setup_intent: String
     }
 
     input WalkerInput {

@@ -49,8 +49,10 @@ function App() {
                         <Switch>
                             <PublicRoute exact path='/' component={Home} />
                             <Route exact path="/about" component={About} />
-                            <PrivateRoute exact path="/paymentScreen" component={PaymentScreen} />
-                            <PrivateRoute exact path="/Success" component={Success} />
+
+                            <PrivateRoute exact path="/paymentScreen" usertype="owner" component={PaymentScreen} />
+                            <PrivateRoute exact path="/Success" usertype="owner" component={Success} />
+                            
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
                             <PrivateRoute exact path="/ownertrackorder" usertype="owner" component={OwnerTrackOrder}/> 
                             <PrivateRoute exact path="/bookwalk" usertype="owner" component={OwnerWalkDetails}/> 
