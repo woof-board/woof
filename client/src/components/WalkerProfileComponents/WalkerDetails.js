@@ -67,10 +67,15 @@ function WalkerDetails({ user }) {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        console.log(user._id);
+        console.log(user.orders);
 
         // need to implement form validation here
         
         const { 
+            first_name, 
+            last_name,
+            email,
             address_street, 
             address_city,
             address_neighbourhood,
@@ -83,6 +88,10 @@ function WalkerDetails({ user }) {
             const { data: { updateWalkerProfile: newProfile } } = await updateWalkerProfile({
                 variables: {
                     input: {
+                        first_name: first_name,
+                        last_name: last_name,
+                        email: email,
+                        status: "ACTIVE",
                         ...rest,
                         address: {
                             street: address_street,

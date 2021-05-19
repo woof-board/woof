@@ -188,6 +188,7 @@ const typeDefs = gql`
         neighbourhoods: [String]
         address: AddressInput
         avatar: String
+        status: String
     }
 
     input DogInput {
