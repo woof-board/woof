@@ -146,10 +146,13 @@ const resolvers = {
         },
 
         chargeOwner: async (parent, {amount, description}, context) => {
+            console.log(amount)
+            console.log(description)
             if (context.owner) {
                 const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
                 const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
 
+                console.log(setupIntent)
                 // create a new charging instance
                 const charge = await stripe.paymentIntents.create({
                     amount: amount,
