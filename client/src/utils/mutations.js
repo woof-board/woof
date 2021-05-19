@@ -71,8 +71,8 @@ export const UPDATE_ORDER_STATUS = gql`
 `;
 
 export const UPDATE_ORDER_COORDS = gql`
-    mutation updateOrderCoords($order_id: ID!, $coords: Array!) {
-        updateOrderCoords(order_id: $order_id, coords: $coords) {
+    mutation updateOrderCoords($order_id: ID!) {
+        updateOrderCoords(order_id: $order_id) {
             _id
             serviceDate
             serviceTime
@@ -85,7 +85,6 @@ export const UPDATE_ORDER_COORDS = gql`
             dogs{
                 _id
             }
-            coords
         }
     }
 `;

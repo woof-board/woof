@@ -6,8 +6,7 @@ import Auth from '../../utils/auth';
 
 function WalkerTrackOrder(order) {
 
-    const [updateOrderCoords] = useMutation(UPDATE_ORDER_COORDS);
-    
+    const [updateOrderCoords, { error }] = useMutation(UPDATE_ORDER_COORDS);
     const {
         order_id,
         service_date,
@@ -24,12 +23,13 @@ function WalkerTrackOrder(order) {
    var myVar;
    function startTrack(event) {
        event.preventDefault();
+       console.log("walk started");
        // change order status to In Progress
-       updateOrderStatus(
-        {
-          "order_id": order_id,
-          "status": "IN_PROGRESS"
-        });
+      //  updateOrderStatus(
+      //   {
+      //     "order_id": order_id,
+      //     "status": "IN_PROGRESS"
+      //   });
        // set timer for one minute
        myVar = setInterval(myTimer, 60000);
        function myTimer() {
@@ -47,15 +47,32 @@ function WalkerTrackOrder(order) {
                trackCoordinates.push([[position.coords.longitude, position.coords.latitude]]);
                const lastcoords = trackCoordinates.lastItem;
                try {
-                   const { data } = updateOrderCoords({ 
-                       variables: { order_id, 
-                        lon: position.coords.longitude, lat:position.coords.latitude} 
-                   });
+                const { data: { updateOrderCoords: newProfile } } = updateOrderCoords({
+                    variables: {
+                        input: {
+                          order_id: order_id,
+                          lon: position.coords.longitude,
+                          lat:position.coords.latitude
+                        }
+                      }
+                    });
+                    alert('Account Updated');
+                  } catch (e) {
+                    alert(e)
+                    console.log(e);
+                  }
+              //  try {
+              //      const { data } = updateOrderCoords({ 
+              //          variables: { order_id, 
+              //           lon: position.coords.longitude, 
+              //           lat:position.coords.latitude
+              //         } 
+              //      });
                
-                   Auth.login(data.loginOwner.token);
-                 } catch (e) {
-                   console.error(e);
-                 } 
+              //      Auth.login(data.loginOwner.token);
+              //    } catch (e) {
+              //      console.error(e);
+              //    } 
            } 
            function error(err) {
                console.warn(`ERROR(${err.code}): ${err.message}`);
@@ -67,18 +84,16 @@ function WalkerTrackOrder(order) {
        clearInterval(myVar);
        console.log("walk stopped");
        // change order status to fulfilled
-       updateOrderStatus(
-        {
-          "order_id": order_id,
-          "status": "FULFILLED"
-        });
+      //  updateOrderStatus(
+      //   {
+      //     "order_id": order_id,
+      //     "status": "FULFILLED"
+      //   });
    } 
 
     return (
         
             <div className="walks">
-              <div>{service_date}</div>
-              <div>{service_time}</div>
               <button type="button" className="button" onClick={startTrack}>Start Walk</button>
               <button type="button" className="button" onClick={stopTrack}>Stop Walk</button>
             </div>
