@@ -1,10 +1,10 @@
-#walkers {
+/* #walkers {
     display: flex;
     flex-direction: row;
     padding: 2rem 5rem 1rem;
     flex-wrap: wrap;
     flex-direction: row;
-}
+} */
 
 h1 {
     color: var(--primary);
@@ -95,6 +95,7 @@ h1 {
     font-size: .85rem;
     padding: 0;
     min-height: 48px;
+    text-transform: none;
 }
 .unavailable {
     background-color: #bebebe;

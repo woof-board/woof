@@ -161,8 +161,10 @@ function OwnerWalkDetails() {
         setModalOpen(true);
     };
 
+
     return (
-        <>
+        
+        <div id="owners">
         <div className="walker-contact-container">
             <div className="walker-header"><h2>Walk Details</h2></div>
             <form
@@ -173,7 +175,7 @@ function OwnerWalkDetails() {
                 <h4>Pick date and time</h4>
                 <div className="row-data">
                     <DatePicker 
-                        className="profile-input profile-name" 
+                        className="profile-input profile-name date-picker" 
                         id="book-date" 
                         name="date"
                         dateFormat="yyyy-MM-dd"
@@ -191,7 +193,7 @@ function OwnerWalkDetails() {
                     />
 
                     <select 
-                        className="profile-input profile-name" 
+                        className=" profile-name time-picker" 
                         id="book-time" 
                         name="time"
                         value={formData.time} 
@@ -205,40 +207,50 @@ function OwnerWalkDetails() {
                         }
                     </select>
                     </div>
-                    <h4>Select your dogs</h4>
-                    <div className="row-data">
-                        
-                    <Select 
-                        customStyles={customStyles}
-                        className="profile-input profile-name" 
-                        options={getDogNames()} 
-                        isMulti={true}
-                        onChange={handleChangeDogSelect}
-                    />
-                    </div>
+                    {/* { formData.dogs > 1 
+                    ?<> */}
+                        <h4>Which dogs are going on the walk?</h4>
+                        <div className="row-data">
+                            
+                        <Select 
+                            customStyles={customStyles}
+                            className="profile-input profile-name" 
+                            options={getDogNames()} 
+                            isMulti={true}
+                            onChange={handleChangeDogSelect}
+                            // defaultValue={getDogNames()}
+                        />
+                        </div>
+                    {/* </>
+                    : <input type="hidden" value={getDogNames()}></input>
+                    } */}
 
                 <button
                     type="submit"
                     className="update-walker-button"
                     id="update-walker-profile-button"
                 >
-                    Place Order
+                    Book Walk
                 </button>
             </form>
              {
                  showWalkerList && 
-                    <div 
+                    <div className="walker-list-container"
                         // onSubmit={handleChangeOrderStatus}
                     >
                         {(WalkerData?.checkWalkerAvailability === undefined || WalkerData.checkWalkerAvailability.length == 0) 
                         ? <div> Sorry, no walker available at your selected time </div>
                         : (
                             <>
-                                <h4> Available Walker</h4>
+
+                                <h4> Available Walkers</h4>
                                 { WalkerData?.checkWalkerAvailability.map((data) => 
-                                <div>
-                                    <h5>Walker: {data.first_name} {data.last_name}</h5>
-                                    <h6>Rating: {data.average_rating}</h6>
+                                <div className = "walker-container">
+                                    <h5>Walker: <span className="regText">{data.first_name} {data.last_name}</span></h5>
+                                    <h6>Rating: <span className="regText">{data.average_rating > 0
+                                                ? data.average_rating 
+                                                : "This walker has not been rated yet."
+                                                }</span></h6>
                                     <button data-id={data._id} onClick={handleUpdateOrder}>Select and confirm booking</button>
                                 </div>
                                 )}
@@ -251,7 +263,7 @@ function OwnerWalkDetails() {
                 <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
                 { redirect && <Redirect to="/ownerprofile" />}
         </div>
-        </>
+        </div>
     )
 }
 

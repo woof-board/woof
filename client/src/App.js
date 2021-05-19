@@ -19,7 +19,7 @@ import WalkerTrackWalks from './pages/WalkerTrackWalks.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
-import Home from './pages/Home2';
+import Home from './pages/Home';
 import Map from './components/OwnerTrackOrder/Map'
 import TestMap from './components/OwnerTrackOrder/TestMap'
 import OwnerWalkDetails from './components/OwnerWalkerForm/OwnerWalkDetails';
