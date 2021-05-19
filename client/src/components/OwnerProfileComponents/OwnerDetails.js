@@ -174,7 +174,7 @@ function OwnerDetails({ user }) {
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
                             neighbourhoods.map( neighbourhood =>
-                                neighbourhood.toLowerCase() === formData.address_neighbourhood.toLowerCase()
+                                neighbourhood === formData.address_neighbourhood
                                     ? <option selected="selected" value={neighbourhood}>{neighbourhood}</option>
                                     : <option value={neighbourhood}>{neighbourhood}</option>
                             )

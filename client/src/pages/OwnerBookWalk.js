@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import { Link } from 'react-router-dom';
 
-import '../css/Profile.css';
+// import '../css/Profile.css';
 
 import { QUERY_OWNER_BOOKING } from '../utils/queries';
 
@@ -20,9 +21,8 @@ function OwnerBookWalk() {
     return (
         <div id="walkers">
             <div className="headline">            
-                <h1>Book a Walk</h1>
+                <button><Link to="/bookwalk">Book a Walk</Link></button>
             </div>
-            <OwnerWalkDetails data={ownerData}/>
         </div>
     )
 
