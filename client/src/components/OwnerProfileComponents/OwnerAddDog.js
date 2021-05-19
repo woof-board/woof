@@ -33,7 +33,7 @@ function OwnerAddDog() {
 
         try {
             console.log(treats);
-            if (name && breed && parseFloat(weight)) {
+            if (name && breed && parseFloat(weight) > 0) {
                 await addOwnerDog({
                     variables: {
                         input: {
