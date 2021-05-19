@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/OwnerProfile.css';
+import OwnerAddDog from '../components/OwnerProfileComponents/OwnerAddDog';
 import OwnerDetails from '../components/OwnerProfileComponents/OwnerDetails';
 import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswordForm'; 
 import { useStoreContext } from "../utils/GlobalState";
@@ -85,10 +86,11 @@ return (
                 <OwnerBookWalk />
                 <Link to={"/ownertrackorder"}><button>Upcoming Walks</button></Link>
                 {/* Need to make a new page for past walk */}
-                <Link to={"/ownertrackorder"}><button>Past Walks</button></Link>
+                <Link to={"/ownerpastorder"}><button>Past Walks</button></Link>
               </div>
             </div>
             }
+            <OwnerAddDog />
             <OwnerDetails user={currentUser}/>
             <OwnerPasswordForm />
             

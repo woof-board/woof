@@ -394,3 +394,21 @@ export const UPDATE_OWNER_PASSWORD = gql`
         }
     }
 `;
+
+export const ADD_DOG = gql`
+    mutation addDog($input: DogInput) {
+        addDog(input: $input){
+            _id
+            first_name
+            last_name
+            email
+            dogs{
+                _id
+                name
+                breed
+                weight
+                treats
+            }
+        }
+    }
+`;
