@@ -3,20 +3,23 @@ import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks';
 import { QUERY_WALKER_AVAILABILITY } from "../../utils/queries";
 import { ADD_ORDER, UPDATE_ORDER } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
+import DatePicker from 'react-datepicker';
+import { formatDate, addDays } from '../../utils/helpers';
+import "react-datepicker/dist/react-datepicker.css";
 // import { UPDATE_CURRENT_USER } from "../../utils/actions";
 // import { cities, neighbourhoods } from '../../utils/helpers';
 
 
-let bookDates = []
-const today = new Date();
-let newDate = new Date(today);
-let newFormattedDate = "";
+// let bookDates = []
+// const today = new Date();
+// let newDate = new Date(today);
+// let newFormattedDate = "";
 
-for (let i=1; i <=14; i++) {
-    newDate.setDate(newDate.getDate() + 1);
-    newFormattedDate = newDate.getFullYear() + "-"+ ('0'+(newDate.getMonth()+1)).slice(-2) + "-" + ('0'+(newDate.getDate())).slice(-2);
-    bookDates.push(newFormattedDate);
-}
+// for (let i=1; i <=14; i++) {
+//     newDate.setDate(newDate.getDate() + 1);
+//     newFormattedDate = newDate.getFullYear() + "-"+ ('0'+(newDate.getMonth()+1)).slice(-2) + "-" + ('0'+(newDate.getDate())).slice(-2);
+//     bookDates.push(newFormattedDate);
+// }
 
 const bookTimes = [
     "9am",
@@ -36,8 +39,9 @@ function OwnerWalkDetails() {
     const [addOrder, {error: addOrderError}] = useMutation(ADD_ORDER);
     const [updateOrder, {error: updateOrderError}] = useMutation(UPDATE_ORDER);
     const [showWalkerList, setShowWalkerList] = useState(false);
-    const [formData, setFormData] = useState({date:bookDates[0], time: bookTimes[0] });
+    const [formData, setFormData] = useState({date: formatDate(new Date()), time: bookTimes[0] });
     const [orderId, setOrderId] = useState("");
+    const [startDate, setStartDate] = useState(new Date());
 
     useEffect(() => {
         if(WalkerData) {
@@ -112,7 +116,20 @@ function OwnerWalkDetails() {
                 id="book-walk-form"
                 onSubmit={handleFormSubmit}
             >
+                <h4>Pick date and time</h4>
                 <div className="row-data">
+                    <DatePicker 
+                        className="profile-input profile-name" 
+                        id="book-date" 
+                        name="date"
+                        dateFormat="yyyy-MM-dd"
+                        minDate={new Date()}
+                        maxDate={addDays(new Date(), 13)}
+                        selected={startDate} 
+                        onChange={date => setStartDate(date)}
+                    />
+
+                {/* <div className="row-data">
                     <select 
                         className="profile-input profile-name" 
                         id="book-date" 
@@ -126,8 +143,7 @@ function OwnerWalkDetails() {
                             <option key={bookDate} value={bookDate}>{bookDate}</option>
                             )
                         }
-                    </select>
-
+                    </select> */}
 
                     <select 
                         className="profile-input profile-name" 
@@ -136,25 +152,33 @@ function OwnerWalkDetails() {
                         value={formData.time} 
                         onChange={handleInputChange}
                     >
-                        <option value="choose" selected disabled>Pick a Time</option>
+                        {/* <option value="choose" selected disabled>Pick a Time</option> */}
                         {
                             bookTimes.map(bookTime => 
                                 <option key={bookTime} value={bookTime}>{bookTime}</option>
                             )
                         }
                     </select>
-
+                    </div>
+                    <h4>Select your dogs</h4>
                     <div className="row-data">
-                    <input
-                        className="profile-input"
-                        type="number"
-                        name="dog_number"
-                        placeholder="#dogs"
-                        onChange={handleInputChange}
-                        value={formData.email}
-                    />
-                </div>
-                </div>
+                        
+                        <select 
+                            className="profile-input profile-name" 
+                            id="book-time" 
+                            name="time"
+                            value={formData.time} 
+                            onChange={handleInputChange}
+                        >
+                            {/* <option value="choose" selected disabled>Pick a Time</option> */}
+                            {
+                                bookTimes.map(bookTime => 
+                                    <option key={bookTime} value={bookTime}>{bookTime}</option>
+                                )
+                            }
+                        </select>
+                    </div>
+                
                 {/* {dogs.length > 1 &&
                 <>
                 <h3>Which dogs need a walk?</h3>
