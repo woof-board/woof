@@ -9,6 +9,18 @@
   margin-bottom: 10rem;
 }
 
+.flex-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+
+.about-page-width {
+  min-width: 1900px;
+}
+
 .about-banner {
   background-image: url('../assets/images/dog-walker.jpeg');
   background-size: cover;
@@ -524,6 +536,12 @@ b {
     color: var(--tertiary);
   }
 } */
+
+@media screen and (max-width: 1900px) {
+  .about-page-width {
+    min-width: 100%;
+  }
+}
 
 @media screen and (max-width: 1250px) {
   .about-us-container {

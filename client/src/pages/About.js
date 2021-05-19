@@ -64,104 +64,106 @@ function About() {
 
     return (
         <>
-        <div className="flex-c page-margin-bottom">
-            <div className="about-imgholder">
-                    <div className="about-banner">
-                        <span className="about-caption">About us</span>
-                    </div>
-            </div>
-
-            <div className="learn-more-container">
-                <h1>Servicing the Greater Toronto Area</h1>
-                <div clasName="learn-more-links">
-                    <span className={`aboutLink ${currentLink.name === 'owner' && `aboutActive`}`} onClick={() => { setCurrentLink(links[0]); }} >Owner</span>
-                    <span className={`aboutLink ${currentLink.name === 'walker' && `aboutActive`}`} onClick={() => { setCurrentLink(links[1]); }} >Walker</span>
+        <div className="flex-page page-margin-bottom">
+            <div className="about-page-width">
+                <div className="about-imgholder">
+                        <div className="about-banner">
+                            <span className="about-caption">About us</span>
+                        </div>
                 </div>
 
+                <div className="learn-more-container">
+                    <h1>Servicing the Greater Toronto Area</h1>
+                    <div clasName="learn-more-links">
+                        <span className={`aboutLink ${currentLink.name === 'owner' && `aboutActive`}`} onClick={() => { setCurrentLink(links[0]); }} >Owner</span>
+                        <span className={`aboutLink ${currentLink.name === 'walker' && `aboutActive`}`} onClick={() => { setCurrentLink(links[1]); }} >Walker</span>
+                    </div>
+
+                    <div className="component-section">
+                        <div className="content">
+                            {currentLink.name === 'owner' && (
+                                <AboutOwner />
+                            )}
+                            {currentLink.name === 'walker' && (
+                                <AboutWalker />
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="about-us-container">
+                        <AboutUs 
+                            dev={dev}
+                            currentDevLink={currentDevLink}
+                            setCurrentDevLink={setCurrentDevLink}
+                        />
+                </div>
+                
+                {currentDevLink.name === 'dev' && (
+                    <div className="component-section">
+                        <h2>Development Team</h2>
+                        <div className="content flex-r">
+                            <AboutDevelopers />
+                        </div>
+                    </div>
+                )}
+
+
                 <div className="component-section">
+                <h2>Technologies</h2>
                     <div className="content">
-                        {currentLink.name === 'owner' && (
-                            <AboutOwner />
-                        )}
-                        {currentLink.name === 'walker' && (
-                            <AboutWalker />
-                        )}
+                        <AboutTechnology
+                            safety={safety}
+                            currentSafeLink={currentSafeLink}
+                            setCurrentSafeLink={setCurrentSafeLink}
+                        />
                     </div>
                 </div>
-            </div>
+                
+                {currentSafeLink.name !== 'null' && (
+                    <div className="component-section">
+                        <div className="content flex-c-center">
+                            {currentSafeLink.name === 'safety' && (
+                                <>
+                                    <h2>Navigation Safety</h2>
+                                    <AboutSafety />
+                                </>
+                            )}
+                            {currentSafeLink.name === 'payment' && (
+                                <>
+                                    <h2>Payment Safety</h2>
+                                    <AboutPayment />
+                                </>
+                            )}
+                        </div>
+                    </div>
+                )}
 
-            <div className="about-us-container">
-                    <AboutUs 
-                        dev={dev}
-                        currentDevLink={currentDevLink}
-                        setCurrentDevLink={setCurrentDevLink}
-                    />
-            </div>
-            
-            {currentDevLink.name === 'dev' && (
-                <div className="component-section">
-                    <h2>Development Team</h2>
+                <div className="about-us-container">
+                        <AboutContact 
+                            contact={contact}
+                            currentContactLink={currentContactLink}
+                            setCurrentContactLink={setCurrentContactLink}
+                        />
+                </div>
+
+                {currentContactLink.name === 'contact' && (
+                    <div className="component-section">
+                        <div className="contact-container flex-r-nospace">
+                            <ContactDetails />
+                            <AboutContactForm />
+                        </div>
+                    </div>
+                )}
+
+                {/* <div className="component-section">
+                <h2>Check out our App!</h2>
                     <div className="content flex-r">
-                        <AboutDevelopers />
+                        <AboutApp />
                     </div>
-                </div>
-            )}
-
-
-            <div className="component-section">
-            <h2>Technologies</h2>
-                <div className="content">
-                    <AboutTechnology
-                        safety={safety}
-                        currentSafeLink={currentSafeLink}
-                        setCurrentSafeLink={setCurrentSafeLink}
-                    />
-                </div>
+                </div> */}
+                
             </div>
-            
-            {currentSafeLink.name !== 'null' && (
-                <div className="component-section">
-                    <div className="content flex-c-center">
-                        {currentSafeLink.name === 'safety' && (
-                            <>
-                                <h2>Navigation Safety</h2>
-                                <AboutSafety />
-                            </>
-                        )}
-                        {currentSafeLink.name === 'payment' && (
-                            <>
-                                <h2>Payment Safety</h2>
-                                <AboutPayment />
-                            </>
-                        )}
-                    </div>
-                </div>
-            )}
-
-            <div className="about-us-container">
-                    <AboutContact 
-                        contact={contact}
-                        currentContactLink={currentContactLink}
-                        setCurrentContactLink={setCurrentContactLink}
-                    />
-            </div>
-
-            {currentContactLink.name === 'contact' && (
-                <div className="component-section">
-                    <div className="contact-container flex-r-nospace">
-                        <ContactDetails />
-                        <AboutContactForm />
-                    </div>
-                </div>
-            )}
-
-            {/* <div className="component-section">
-            <h2>Check out our App!</h2>
-                <div className="content flex-r">
-                    <AboutApp />
-                </div>
-            </div> */}
-            
         </div>
         </>
     )
