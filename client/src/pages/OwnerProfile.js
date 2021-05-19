@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/OwnerProfile.css';
+import OwnerAddDog from '../components/OwnerProfileComponents/OwnerAddDog';
 import OwnerDetails from '../components/OwnerProfileComponents/OwnerDetails';
 import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswordForm'; 
 import { useStoreContext } from "../utils/GlobalState";
@@ -89,6 +90,7 @@ return (
               </div>
             </div>
             }
+            <OwnerAddDog />
             <OwnerDetails user={currentUser}/>
             <OwnerPasswordForm />
             
