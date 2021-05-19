@@ -46,7 +46,7 @@
     margin-bottom: 20px;
     overflow:hidden;
 }
-.walker-contact-container form {
+.walker-contact-container form, .show-walkers {
     padding: 15px 7px 15px 15px;
 }
 

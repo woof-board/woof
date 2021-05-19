@@ -1,92 +1,130 @@
-.background-home {
-    background-image: url('../assets/images/home-samson.jpg');
-    left: 0;
+.home-new {
+    background-image: url('../assets/images/front-page.jpg');
     position: fixed;
-    width: 100%;
+    left: 0;
+    top: 0;
     height: 100%;
-    background-repeat: no-repeat;
+    width: 100%;
     background-size: cover;
-    margin-top: 5rem;
+    background-repeat: no-repeat;
 }
 
-.home-text {
-    color: var(--secondary);
-    font-size: 9rem;
-    font-weight: 800;
-    text-shadow: 5px 5px 10px rgb(0,0,0,0.6);
-    margin: 120px 0 3px;
-    padding: 0;
-}
-
-.home-text-small {
-    font-size: 2rem;
-    color: var(--quinary);
-    font-weight: 500;
-    text-shadow: 3px 3px 5px rgb(0,0,0,0.8);
-    padding-top: 0;
-    margin-top: 0;
-}
-
-.home-content {
-    position: relative;
-    top: 8rem;
+.center-page-vh {
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    height: auto;
-    max-width: 1400px;
-    min-width: 500px;
+    flex-direction: column;
+    align-content: center;
     align-items: center;
-    justify-content: space-between;
-    padding-left: 2rem;
-    padding-right: 2rem;
-}
-
-.button-container {
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: row;
-}
-
-.button {
-    text-decoration: none;
-    color: white;
-    padding: 1rem;
-    margin: 1rem 1rem 1rem 1rem;
-    border: 3px solid white;
-    font-weight: bold;
-    background-color: rgb(0,0,0,0.5);
-}
-
-.button:hover {
-    color: black;
-    background-color: white;
-}
-
-.center-h {
-    display: flex;
-    flex-direction: row;
     justify-content: center;
 }
 
-.home-info-container {
+.home-links {
+    position: fixed;
+    top:1rem;
+    right:0;
+}
+.walker-head {
+    background-color: var(--tertiary);
+}
 
+.home-logo {
+    height: 15rem;
+    margin: 2rem auto 0 2rem
+}
+
+.home-font-small {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    padding: 0 2rem;
+}
+
+.home-button {
+    text-decoration: none;
+    font-family: 'Rokkitt', serif;
+    font-weight: 700;
+    font-size: .85rem;
+    color: white;
+    padding: .35rem .5rem;
+    margin: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.WALKER, .walker {
+    border: 3px solid var(--tertiary);
+    background-color: var(--tertiary);;
+}
+
+.WALKER:hover {
+    color: var(--tertiary);
+    background-color: var(--secondary);
+}
+.OWNER, .owner {
+    border: 3px solid var(--primary);
+    background-color: var(--primary);;
+}
+
+.OWNER:hover {
+    color: var(--primary);
+    background-color: var(--quatenary);
+}
+
+
+.buttonActive {
+    display: none;
+}
+
+.more-link {
+    color: var(--tertiary);
+    padding: 3px 7px;
+    border-radius: 5px;
+    background-color: #DFD8D8;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+.more-link:hover { 
+    color: var(--primary);
+}
+
+.home-form-button {
+    margin: 0 auto;
+    padding: .25rem .5rem;
+    border-radius: 10px;
+    color: white;
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.walker-form .home-form-button {
+    background-color: var(--tertiary);
+    border-color: var(--tertiary);
+}
+
+.home-form-button:hover {
+    color: var(--primary);
+    background-color: var(--quatenary);
+}
+.walker-form .home-form-button:hover {
+    color: var(--tertiary);
+    background-color: var(--secondary);
 }
 
 @media screen and (max-width: 650px) {
-    .home-text {
-        font-size: 6rem;
+    .home-button {
+        width: 100%;
     }
 
-    .background-home {
-        background-image: url('../assets/images/home-pixel.jpg');
+    .home-logo {
+        width: 75%;
+        margin: 3rem auto;
     }
 
-    .home-content {
-        padding: 2rem;
-        top: 9rem;
-    }
+    .home-font-small {
+        font-size: 1rem;
+        text-align: center;
+        padding: 1px;
+        background-color: #DFD8D8;
 
-    .button-container {
-        flex-direction: column;
     }
 }

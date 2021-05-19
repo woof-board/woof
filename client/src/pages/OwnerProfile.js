@@ -3,6 +3,7 @@ import { useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/OwnerProfile.css';
 import OwnerDetails from '../components/OwnerProfileComponents/OwnerDetails';
+import OwnerPetDetails from '../components/OwnerProfileComponents/OwnerPetDetails';
 import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswordForm'; 
 import { useStoreContext } from "../utils/GlobalState";
 import { QUERY_OWNER_ME } from '../utils/queries';
@@ -42,6 +43,8 @@ function OwnerProfile() {
         // }
     }, [currentUser, data, loading, dispatch]);
 
+    console.log(currentUser);
+
   
 return (
   <div id="owners">
@@ -62,7 +65,7 @@ return (
         <>
         {currentUser && currentUser.status === "ACTIVE" && 
           <div className="walker-picture-container">
-            <img src="https://via.placeholder.com/150" alt="profile-img"/>
+            <img src={currentUser.avatar} width="160" alt={`${currentUser.first_name} ${currentUser.last_name}`}/>
           </div>          
         }
         <div className="walker-details-container">
@@ -91,6 +94,7 @@ return (
             }
             <OwnerDetails user={currentUser}/>
             <OwnerPasswordForm />
+            <OwnerPetDetails user={currentUser} />
             
           </div>
         </>
