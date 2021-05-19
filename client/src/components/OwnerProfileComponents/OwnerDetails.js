@@ -51,13 +51,13 @@ function OwnerDetails({ user }) {
         address_city: ''
     });
     
-    const amount = 3500; // in cents
-    const [handleCharge] = useLazyQuery(CHARGE_OWNER, {
-      variables: { 
-        amount: amount,
-        description: 'testing brian2'
-       }
-    });
+    // const amount = 3500; // in cents
+    // const [handleCharge, { called, loading: charging, data }] = useLazyQuery(CHARGE_OWNER, {
+    //   variables: { 
+    //     amount: amount,
+    //     description: 'testing brian2'
+    //    }
+    // });
 
     useEffect(() => {
         if (user) {
@@ -238,6 +238,7 @@ function OwnerDetails({ user }) {
                 >
                     UPDATE CHARGING INFORMATION
                 </button>
+                {/* {!charging ?
                 <button
                     type="button"
                     role="link" 
@@ -245,8 +246,18 @@ function OwnerDetails({ user }) {
                     id="update-owner-charging-button"
                     onClick={handleCharge}
                 >
-                    CHARGE
+                     CHARGE
                 </button>
+                :
+                <button
+                    type="button"
+                    role="link" 
+                    className="update-walker-button"
+                    id="update-owner-charging-button"
+                >
+                     CHARGING
+                </button>} */}
+                
             </form>
         </div>
         </>
