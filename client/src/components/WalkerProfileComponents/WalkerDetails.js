@@ -67,6 +67,8 @@ function WalkerDetails({ user }) {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
+        console.log(user._id);
+        console.log(user.orders);
 
         // need to implement form validation here
         
