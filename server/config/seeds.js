@@ -12,17 +12,32 @@ db.once('open', async () => {
             last_name: 'Normann',
             email: 'eric.n@me.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
-            admin: true,
+            avatar: "/images/eric.jpg",
+            admin: false,
             address: {
-                street: '1st Street NW',
-                city: 'toronto',
-                neighbourhood: 'west toronto',
+                street: '2325 Yolands Dr',
+                city: 'oakville',
+                neighbourhood: 'oakville',
                 province: 'ontario',
-                postal_code: 'AAA AAA'
+                postal_code: 'L6l 2H9'
             },
             phone: '111 111 1111',
-            dogs: [],
+            dogs: [
+                {
+                    name: 'Pixel',
+                    breed: 'Shorky',
+                    weight: 12,
+                    treats: true,
+                    avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t31.18172-8/11222714_10153601420096151_2425722709037660111_o.jpg?_nc_cat=100&ccb=1-3&_nc_sid=730e14&_nc_ohc=46e6WoeQaLEAX-axWzR&_nc_ht=scontent-yyz1-1.xx&oh=b06232133fc570217fb90dc75dfbcef0&oe=60CC4892"
+                },
+                {
+                    name: 'Pudding',
+                    breed: 'Shi-zu mix',
+                    weight: 15,
+                    treats: true,
+                    avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-9/39257859_10158104653536151_4978567789913571328_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=730e14&_nc_ohc=CKtX-w_SiOUAX-6SYVi&_nc_ht=scontent-yyz1-1.xx&oh=0885e71ab8514745b2f93ea3b0c2e5d0&oe=60C96238"
+                }
+            ],
             status: "ACTIVE"
         }
     );
@@ -33,7 +48,7 @@ db.once('open', async () => {
             last_name: 'Choudhury',
             email: 'sc@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "/images/eric.jpg",
             admin: true,
             address: {
                 street: '1st Street NW',
@@ -130,7 +145,7 @@ db.once('open', async () => {
                     avatar: "/images/user-default.png"
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
 
