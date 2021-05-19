@@ -171,6 +171,13 @@ button:hover {
     color: var(--tertiary);
 }
 
+
+@media screen and (max-width: 750px) {
+    .page-wrap {
+        flex-direction: column;
+        align-items: center;
+    }
+
 .button-container {
     display: flex;
     justify-content: flex-end;
@@ -180,6 +187,7 @@ button:hover {
 }
 .right-button {
     margin-left: 0;
+
 }
 
 @media screen and (max-width: 650px) {
