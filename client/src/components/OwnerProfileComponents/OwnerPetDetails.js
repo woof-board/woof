@@ -78,7 +78,7 @@ function OwnerDetails({ user }) {
         <>
         <div className="walker-contact-container">
 
-            <div className="walker-header"><h2>Pet Information</h2></div>
+            <div className="walker-header"><h2>Dog Information</h2></div>
             <form
                 className="walker-update-form"
                 id="walker-update-form"

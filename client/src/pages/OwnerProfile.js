@@ -127,11 +127,11 @@ return (
               </div>
             </div>
             }
-            <OwnerAddDog />
             <OwnerDetails user={currentUser}/>
             <OwnerPasswordForm />
             <OwnerPetDetails user={currentUser} />
-            
+            <OwnerAddDog />
+
           </div>
         </>
       </div>

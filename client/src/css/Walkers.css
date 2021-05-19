@@ -95,6 +95,7 @@ h1 {
     font-size: .85rem;
     padding: 0;
     min-height: 48px;
+    text-transform: none;
 }
 .unavailable {
     background-color: #bebebe;
