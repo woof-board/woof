@@ -10,6 +10,8 @@
   --rgb-quatemary: 128, 71, 31;
   --rgb-quinary:  219, 211, 211;
 }
+/* if adding opacity to VAR, rgb(var(--color), <opacity>); */
+
 
 .error-page {
   padding: 5rem;
@@ -22,7 +24,6 @@
   border-radius: 25px;
 }
 
-/* if adding opacity to VAR, rgb(var(--color), <opacity>); */
 
 html, body, main {
   height: 100%;

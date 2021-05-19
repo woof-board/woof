@@ -37,13 +37,13 @@ function WalkerSignupForm() {
     return (
         <form
             id="owner-signup-form"
-            className="form-container"
+            className="form-container walker-form"
             onSubmit={handleFormSubmit}
         >
             <input
                 className="signup-login-input"
                 type="text"
-                placeholder="Enter First Name"
+                placeholder="First Name"
                 name="first_name"
                 onChange={handleInputChange}
                 value={formData.first_name}
@@ -51,7 +51,7 @@ function WalkerSignupForm() {
             <input
                 className="signup-login-input"
                 type="text"
-                placeholder="Enter Last Name"
+                placeholder="Last Name"
                 name="last_name"
                 onChange={handleInputChange}
                 value={formData.last_name}
@@ -59,7 +59,7 @@ function WalkerSignupForm() {
             <input
                 className="signup-login-input"
                 type="email"
-                placeholder="Enter Email"
+                placeholder="Email address"
                 name="email"
                 onChange={handleInputChange}
                 value={formData.email}
@@ -67,7 +67,7 @@ function WalkerSignupForm() {
             <input
                 className="signup-login-input"
                 type="password"
-                placeholder="Enter Password"
+                placeholder="Password"
                 name="password"
                 onChange={handleInputChange}
                 value={formData.password}

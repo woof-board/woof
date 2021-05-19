@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import Auth from '../../utils/auth';
 import { LOGIN_OWNER } from '../../utils/mutations';
-import '../../css/Walker.css';
 
 
 function OwnerLoginForm() {
@@ -34,14 +33,14 @@ function OwnerLoginForm() {
     
     return (
         <form 
-            id="walker-login-form" 
-            className="form-container" 
+            id="owner-login-form" 
+            className="form-container owner-form" 
             onSubmit={handleFormSubmit}
         >
             <input 
                 className="signup-login-input" 
                 type="email" 
-                placeholder="Enter Email" 
+                placeholder="Email address" 
                 name="email" 
                 onChange={handleInputChange} 
                 value={formData.email}
@@ -49,7 +48,7 @@ function OwnerLoginForm() {
             <input 
                 className="signup-login-input" 
                 type="password" 
-                placeholder="Enter Password" 
+                placeholder="Password" 
                 name="password" 
                 onChange={handleInputChange} 
                 value={formData.password}
