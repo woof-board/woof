@@ -4,27 +4,23 @@ import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 import '../css/WalkerProfile.css';
 import { QUERY_OWNER_ME, QUERY_OWNER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_CURRENT_USER } from "../utils/actions";
-import Map from "../components/OwnerTrackOrder/Map";
+import { UPDATE_CURRENT_USER, UPDATE_CURRENT_USER_ARR_FIELD } from "../utils/actions";
 
+import Map from "../components/OwnerTrackOrder/Map";
 
 
 function OwnerTrackOrder() {
     const [state, dispatch] = useStoreContext();
-    const [orders, setOrders] = useState([]);
-    const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
-
     const { currentUser } = state;
-    const { data: ownerOrderData } = useQuery(QUERY_OWNER_ORDERS, {
-      variables: {
-          owner_id: currentUser._id
-      }
+    const { data: ownerOrderData, loading: orderLoading } = useQuery(QUERY_OWNER_ORDERS, {
+        variables: {
+            owner_id: currentUser._id
+        }
+        
     });
-    
-    
-    // const orders = currentUser.orders;
-    // const totalOrders = currentUser.orders.length;//with status "IN_PROGRESS"
-    // const status = orders.status;
+
+    // const [orders, setOrders] = useState([]);
+    const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
 
     useEffect(() => {
       // if not already in global store
@@ -42,10 +38,20 @@ function OwnerTrackOrder() {
 
     useEffect(() => {
       if(ownerOrderData) {
-        setOrders(ownerOrderData.ownerOrders)
+        console.log(ownerOrderData.ownerOrders);
+        // setOrders(ownerOrderData.ownerOrders);
+        // dispatch({
+        //     type: UPDATE_CURRENT_USER_ARR_FIELD,
+        //     fieldName: "orders",
+        //     fieldValue: ownerOrderData.ownerOrders
+        // });
         // console.log(ownerOrderData);
       }
-    });
+    }, [ownerOrderData]);
+
+    if (orderLoading) {
+        return (<div>Loading data...</div>);
+    }
 
   return (
     <>
@@ -58,23 +64,25 @@ function OwnerTrackOrder() {
                 {/* {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
                   : 'You have no upcoming Walks'} */}
               </div>
-              {orders.map((order) => (
-                // render walk orders
-                <div className="walks">
-                    {order.status=== "PENDING_PROGRESS" &&
-                    <div>
-                        <div>Walk Date: {order.service_date}</div>
-                        <div>Start time: {order.service_time}</div>
-                        {/* Add map component */}
-                        {/* <Map
-                            order_id = {order.order_id}
-                            service_date = {order.service_date}
-                            service_time = {order.service_time}
-                        /> */}
-                    </div>
-                    } 
-                </div>
-              ))}
+              {ownerOrderData?.ownerOrders.map((order) => (
+                  order.status !== "PENDING_PROGRESS" 
+                  ? null 
+                  : (
+                    <div className="walks">
+                        <div>
+                            <div>Walk Date: {order.service_date}</div>
+                            <div>Start time: {order.service_time}</div>
+                            <div> Walker: {`${order.walker.first_name} ${order.walker.last_name}`} </div>
+                            {/* Add map component */}
+                            {/* <Map
+                                order_id = {order.order_id}
+                                service_date = {order.service_date}
+                                service_time = {order.service_time}
+                            /> */}
+                            </div>
+                        </div>
+                    )
+                ))}
             </div>
           }
         </div>

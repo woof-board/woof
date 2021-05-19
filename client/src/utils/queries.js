@@ -19,6 +19,7 @@ export const QUERY_OWNER_ME = gql`
             }
             phone
             dogs {
+                _id
                 name
                 breed
                 weight
@@ -50,6 +51,7 @@ export const QUERY_OWNER = gql`
       last_name
       email
       dogs{
+        _id
         name
       }
     }
@@ -64,6 +66,7 @@ export const QUERY_OWNERS = gql`
       last_name
       email
       dogs{
+        _id
         name
       }
     }
