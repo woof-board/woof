@@ -72,14 +72,19 @@ function Header() {
         event.preventDefault();
         var componentSection = document.querySelectorAll('.component-section');
         var aboutFont = document.querySelectorAll('.content');
-        var fontH2 = document.querySelectorAll('h2, h3, li, .profile-socialmedia');
+        var fontH2 = document.querySelectorAll('.font-night');
         var contactUs = document.querySelectorAll('.contact-us-container-left');
         var walkerEl = document.querySelectorAll('.walker-contact-container')
         var walkerHeaderEl = document.querySelectorAll('.walker-header');
         var headerEl = document.querySelectorAll('.header-container');
         var footerEl = document.querySelectorAll('.footer');
+        var aboutCardEl = document.querySelectorAll('.about-card, .profile-picture');
 
         page.style.setProperty(bg, 'rgb(43, 43, 43)');
+
+        for (var w = 0; w < aboutCardEl.length; w++) {
+            aboutCardEl[w].style.backgroundColor = 'rgb(53, 53, 53)';
+        }
 
         for (var u = 0; u < fontH2.length; u++) {
             fontH2[u].style.color = 'white';
@@ -119,17 +124,22 @@ function Header() {
         event.preventDefault();
         var componentSection = document.querySelectorAll('.component-section');
         var aboutFont = document.querySelectorAll('.content');
-        var fontH2 = document.querySelectorAll('h2, h3, li, .profile-socialmedia');
+        var fontH2 = document.querySelectorAll('.font-night');
         var contactUs = document.querySelectorAll('.contact-us-container-left');
         var walkerEl = document.querySelectorAll('.walker-contact-container')
         var walkerHeaderEl = document.querySelectorAll('.walker-header');
         var headerEl = document.querySelectorAll('.header-container');
         var footerEl = document.querySelectorAll('.footer');
+        var aboutCardEl = document.querySelectorAll('.about-card');
 
         page.style.setProperty(bg, 'var(--quinary)');
 
+        for (var w = 0; w < aboutCardEl.length; w++) {
+            aboutCardEl[w].style.backgroundColor = ''
+        }
+
         for (var u = 0; u < fontH2.length; u++) {
-            fontH2[u].style.color = 'white';
+            fontH2[u].style.color = 'black';
         }
 
         for (var e = 0; e < footerEl.length; e++) {
@@ -172,7 +182,6 @@ function Header() {
                         alt="logo" 
                         width="100" 
                     />
-
                 </Link>
             </div>
             <div className="nav-links-container">
