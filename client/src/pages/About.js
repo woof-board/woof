@@ -8,6 +8,8 @@ import AboutTechnology from '../components/About/AboutTechnology';
 import AboutSafety from '../components/About/AboutSafety';
 import AboutPayment from '../components/About/AboutPayment';
 import AboutUs from '../components/About/AboutUs';
+import AboutContact from '../components/About/AboutContact';
+import AboutContactForm from '../components/About/AboutContactForm';
 // import AboutApp from '../components/About/AboutApp';
 
 
@@ -42,16 +44,26 @@ function About() {
             name: 'dev'
         }
     ])
+
+    const [contact] = useState([
+        {
+            name: 'null'
+        },
+        {
+            name: 'contact'
+        }
+    ])
     
     const [currentLink, setCurrentLink] = useState(links[0]);
     const [currentSafeLink, setCurrentSafeLink] = useState(safety[0])
     const [currentDevLink, setCurrentDevLink] = useState(dev[0])
+    const [currentContactLink, setCurrentContactLink] = useState(contact[0])
 
-    console.log(currentLink);
+    console.log(currentDevLink);
 
     return (
         <>
-        <div className="flex-c" onClick={() => { setCurrentDevLink(dev[0])}}>
+        <div className="flex-c page-margin-bottom">
             <div className="about-imgholder">
                     <div className="about-banner">
                         <span className="about-caption">About us</span>
@@ -121,6 +133,22 @@ function About() {
                                 <AboutPayment />
                             </>
                         )}
+                    </div>
+                </div>
+            )}
+
+            <div className="about-us-container">
+                    <AboutContact 
+                        contact={contact}
+                        currentContactLink={currentContactLink}
+                        setCurrentContactLink={setCurrentContactLink}
+                    />
+            </div>
+
+            {currentContactLink.name === 'contact' && (
+                <div className="component-section">
+                    <div className="content flex-r">
+                        <AboutContactForm />
                     </div>
                 </div>
             )}
