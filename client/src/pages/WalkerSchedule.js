@@ -1,215 +1,180 @@
-import data from '@iconify-icons/ant-design/home-outlined';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { UPDATE_WALKER_AVAILABILITY } from "../utils/mutations";
+import { createInitialState } from "../utils/helpers";
+import { useStoreContext } from "../utils/GlobalState";
+import { UPDATE_CURRENT_USER } from "../utils/actions";
+import ModalDisplay from '../components/ModalDisplay';
 import '../css/Walkers.css';
-
-const schedule = [
-    {
-        date: 'Thurs. May 13',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    },
-    {
-        date: 'Fri. May 14',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        date: 'Sat. May 15',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: true,
-        slot3pm: true,
-        slot5pm: true,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        date: 'Sun. May 16',
-        slot9am: false,
-        slot11am: false,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: false,
-        slot9pm: false,
-    }, 
-    {
-        date: 'Mon. May 17',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        date: 'Tues. May 18',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        date: 'Wed. May 19',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        date: 'Thurs. May 20',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    },
-    {
-        date: 'Fri. May 21',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        date: 'Sat. May 22',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: true,
-        slot3pm: true,
-        slot5pm: true,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        date: 'Sun. May 23',
-        slot9am: false,
-        slot11am: false,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: false,
-        slot9pm: false,
-    }, 
-    {
-        date: 'Mon. May 24',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        date: 'Tues. May 25',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    }, 
-    {
-        date: 'Wed. May 26',
-        slot9am: true,
-        slot11am: true,
-        slot1pm: false,
-        slot3pm: false,
-        slot5pm: false,
-        slot7pm: true,
-        slot9pm: true,
-    },  
- 
-]
-
-const walker = "d45g11r43a333";
  
 const scheduledWalks = [
     {
-        serviceDate: "Mon. May 17",
-        serviceTime: "5pm",
+        service_date: "2021-05-19",
+        service_time: "5pm",
         owner: "Nathan Chow",
         walker: "d45g11r43a333",
         dogs: ["Pixel", "Pudding"]
     },
     {
-        serviceDate: "Wed. May 19",
-        serviceTime: "3pm",
+        service_date: "2021-05-23",
+        service_time: "3pm",
         owner: "Eric Normann",
         walker: "d45g11r43a333",
         dogs: ["Pixel", "Pudding"]
     }
 ]
 
+
 function WalkerSchedule() {
+    const [state, dispatch] = useStoreContext();
+    const { currentUser } = state;
+    const [updateWalkerAvailability, { error }] = useMutation(UPDATE_WALKER_AVAILABILITY);
 
+    const [ schedule, setSchedule ] = useState(createInitialState());
+    const [buttonVisible, setButtonVisible] = useState(false);
+    const [modalJSX, setModalJSX] = useState(<div />);
+    const [modalOpen, setModalOpen] = useState(false);
 
-    
+    const timeSlotArr = ["slot9am", "slot11am", "slot1pm", "slot3pm", "slot5pm", "slot7pm", "slot9pm"];
 
+    useEffect(()=>{
+        const availability = currentUser?.availability || null; 
+        if (availability) {
+            let tempSchedule = createInitialState();  
+            
+            availability.map(availabilityItem => {
+                schedule.map((item, ind) => {
+                    if (item.date === availabilityItem.date) {
+                        // just grab the required fields, there are some additional fields in availabilityItem that we dont need
+                        const {date, slot9am, slot11am, slot1pm, slot3pm, slot5pm, slot7pm, slot9pm } = availabilityItem;
+                        tempSchedule[ind] = {date, slot9am, slot11am, slot1pm, slot3pm, slot5pm, slot7pm, slot9pm };
+                    }        
+                });
+            });
 
-    function scrollSchedule(direction) {
-        const scheduleHolder = document.getElementById('scrolling-schedule');
-        let move = "+50px"
-        if(direction==="right") {
-            move ="-50px"
+            setSchedule([...tempSchedule]);
         }
-        scheduleHolder.style.marginLeft = move;
-    }
+    }, [currentUser]);
 
-    const findBooking = (booking, today, time) => {
+    const changeAvailability = event => {
+        event.preventDefault();
+        const slotStatus = event.target.getAttribute("data-status");
         
-        for (let i = 0; i < booking.length; i++) {
-            const bookDate = booking[i].serviceDate;
-            const bookTime = booking[i].serviceTime;
-            const todaysDate = today.date;
-            if (bookDate === todaysDate && bookTime === time) {
-                return (
-                    <button className="booked">
-                        Walk booked with<br />
-                        {booking[i].owner}
-                    </button>
-                )
+        if (slotStatus === "booked") {
+            return viewWalkDetails();
+        }
+
+        let tempArr = Array.from(schedule, x => x); 
+        const index = parseInt(event.target.getAttribute("data-index"));
+        const timeSlot = event.target.getAttribute("data-time");
+        
+        if(event.target.className === "unavailable"){
+            tempArr[index][timeSlot] = true; 
+        } else {
+            tempArr[index][timeSlot] = false; 
+        }
+        
+        setSchedule([...tempArr]);
+        if(!buttonVisible) {
+            setButtonVisible(true);
+        }
+    };
+
+    const viewWalkDetails = () => {
+        const messageJSX = (
+            <div className="available" width="400px" height="400px">
+                This slot is booked <br />
+                More info and formatting coming soon... 
+            </div>
+        );  
+        setModalJSX(messageJSX);
+        setModalOpen(true); 
+    };
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+        
+        const inputArr = [...schedule];
+         try {
+            const { data: { updateWalkerAvailability: newProfile } } = await updateWalkerAvailability({
+                variables: {
+                    input: [...inputArr]
+                }
+            });
+            
+            dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: newProfile
+            });
+
+            alert('Availability Updated');
+         } catch (e) {
+             console.log(e);
+         }
+    };
+
+    const cancelUpdate = event => {
+        const availability = currentUser?.availability || null; 
+        if (availability) {
+            let tempSchedule = createInitialState();  
+            
+            availability.map(availabilityItem => {
+                schedule.map((item, ind) => {
+                    if (item.date === availabilityItem.date) {
+                        const {date, slot9am, slot11am, slot1pm, slot3pm, slot5pm, slot7pm, slot9pm } = availabilityItem;
+                        tempSchedule[ind] = {date, slot9am, slot11am, slot1pm, slot3pm, slot5pm, slot7pm, slot9pm };
+                    }        
+                });
+            });
+            
+            setSchedule([...tempSchedule]);
+            setButtonVisible(false);
+        }
+    };
+
+    const createScheduleItemComponent = (index, scheduleItem, timeSlot) => {
+        // check with booked services
+        let isBooked = false;
+        let ownerName = "";
+        const slot = timeSlot.replace("slot", "");
+
+        scheduledWalks.map((walk, index) => {
+            if(!isBooked){
+                if(walk.service_date === scheduleItem.date && walk.service_time === slot) {
+                    isBooked = true;
+                    ownerName = walk.owner;
+                }
             }
-        }
-        
-        return ( 
-            <button className="unavailable" id={schedule.date + "U9am"} key={schedule.date + "U9am"}>Unvailable</button>
-        )
+        });
 
-    }
+        return (
+            <button 
+                className={isBooked ? "booked" : (scheduleItem[timeSlot] ? "available" : "unavailable")} 
+                onClick={changeAvailability} 
+                id={index + "-" + timeSlot} 
+                data-index={index} 
+                data-time={timeSlot}
+                data-status={isBooked ? "booked" : (scheduleItem[timeSlot] ? "available" : "unavailable")} 
+            >
+                {isBooked ? `Walk booked with ${ownerName}` : (scheduleItem[timeSlot] ? "Available" : "Unavailable")}
+            </button>
+        );
+    };
+
+    const closeModal = () => {
+        setModalJSX(<div />);
+        setModalOpen(false);
+    };
 
     return (
         <div id="walkers">
             <div className="headline">            
-                <h1>Your Walking Schedule</h1>
+                <h1>My Walking Schedule</h1>
             </div>
-            <div className="schedule-container">
+            <form onSubmit={handleFormSubmit}>
+                <div className="schedule-container">
 
-                <div>
+                    <div>
                         <div className="schedule-item times-header"><h5>Time</h5></div>
                         <div className="schedule-item time-label"><h5>9am</h5></div>
                         <div className="schedule-item time-label"><h5>11am</h5></div>
@@ -218,74 +183,36 @@ function WalkerSchedule() {
                         <div className="schedule-item time-label"><h5>5pm</h5></div>
                         <div className="schedule-item time-label"><h5>7pm</h5></div>
                         <div className="schedule-item time-label bottom-left"><h5>9pm</h5></div>
-                    
-                </div>
-
-
-
-                <div className="scroll-holder">
-                <div className="schedule-days" id="scrolling-schedule">
-                {schedule.map((schedule, index) => (
-
-                    <div>
-                        <div className="schedule-item day-header"><h5>{schedule.date}</h5></div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot9am 
-                                ? <button className="available" id={schedule.date + "9am"} key={schedule.date + "9am"}>Available</button>
-                                : findBooking(scheduledWalks, schedule, "9am")
-                               
-                            }
-                            
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot11am 
-                                ? <button className="available" id={schedule.date + "11am"} key={schedule.date + "11am"}>Available</button> 
-                                : findBooking(scheduledWalks, schedule, "11am")
-                            }
-                            
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot1pm 
-                                ? <button className="available" id={schedule.date + "1pm"} key={schedule.date + "1pm"}>Available</button>   
-                                : findBooking(scheduledWalks, schedule, "1pm")
-                            }
-                            
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot3pm 
-                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
-                            :  findBooking(scheduledWalks, schedule, "3pm")
-                            }     
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot3pm 
-                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
-                            :  findBooking(scheduledWalks, schedule, "5pm")
-                            }     
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot3pm 
-                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
-                            :  findBooking(scheduledWalks, schedule, "7pm")
-                            }     
-                        </div>
-                        <div className="schedule-item time-detail">
-                            {schedule.slot3pm 
-                            ? <button className="available" id={schedule.date + "3pm"} key={schedule.date + "3pm"}>Available</button>
-                            :  findBooking(scheduledWalks, schedule, "9pm")
-                            }     
-                        </div>
                     </div>
-                    ))}
 
+                    <div className="scroll-holder">
+                    
+                    <div className="schedule-days" id="scrolling-schedule">
+                    {
+                        schedule.map((scheduleItem, index) => (
+                            <div key={index}>
+                                <div className="schedule-item day-header"><h5>{scheduleItem.date}</h5></div>
+                                    {
+                                        timeSlotArr.map((timeSlot, timeInd) => (
+                                            <div key={timeInd} className="schedule-item time-detail">
+                                                {createScheduleItemComponent(index, scheduleItem, timeSlot)}
+                                            </div>
+                                        ))
+                                    }
+                            </div>
+                        ))   
+                    }
+                    </div>
+                    </div>    
                 </div>
-                </div>
-
-                
-
-                
-                 
-            </div>
+                {buttonVisible &&
+                    <div className="schedule-button-container">
+                        <button type="button" onClick={cancelUpdate}>Cancel Changes</button>
+                        <button type="submit">Update Changes</button>
+                    </div>
+                }   
+            </form>
+            <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
         </div>
 
     )

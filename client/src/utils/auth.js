@@ -41,12 +41,13 @@ class AuthService {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
 
-    if (this.getProfileType() === 'owner' || this.getProfileType() === 'admin') {
+    if (this.getProfileType() === 'owner') {
       window.location.assign('/ownerprofile');
-    } else {
+    } else if (this.getProfileType() === 'walker') {
       window.location.assign('/walkerprofile');
+    } else if (this.getProfileType() === 'admin') {
+        window.location.assign('/adminprofile');
     }
-    // window.location.assign('/');
   }
 
   logout() {

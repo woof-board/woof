@@ -1,107 +1,168 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Home.css';
 import '../css/About.css';
+import AboutOwner from '../components/About/AboutOwner';
+import AboutWalker from '../components/About/AboutWalker';
+import AboutDevelopers from '../components/About/AboutDevelopers';
+import AboutTechnology from '../components/About/AboutTechnology';
+import AboutSafety from '../components/About/AboutSafety';
+import AboutPayment from '../components/About/AboutPayment';
+import AboutUs from '../components/About/AboutUs';
+import AboutContact from '../components/About/AboutContact';
+import AboutContactForm from '../components/About/AboutContactForm';
+import ContactDetails from '../components/About/ContactDetails';
+// import AboutApp from '../components/About/AboutApp';
 
 
 function About() {
 
-    const developers = [
+    const [links] = useState([
         {
-            name: 'Alex',
-            github: 'https://github.com/AChung92',
-            linked: 'https://www.linkedin.com/in/alex-chung-5b22ba200/',
-            image: '/images/alex.png'
+            name: 'owner'
         },
         {
-            name: 'Benn',
-            github: 'https://github.com/BennAsabir',
-            linked: 'https://www.linkedin.com/in/benasabir/',
-            image: '/images/benn.jpg'
+            name: 'walker'
+        }
+    ])
+
+    const [safety] = useState([
+        {
+            name: 'null'
         },
         {
-            name: 'Brian',
-            github: 'https://github.com/BrianCKWang',
-            linked: 'https://www.linkedin.com/in/chun-kai-brian-wang-292b6b48/',
-            image: '/images/brian.jpg'
+            name: 'safety'
         },
         {
-            name: 'Eric',
-            github: 'https://github.com/e-p-n',
-            linked: 'https://www.linkedin.com/in/eric-normann-b8a4991b2/',
-            image: '/images/eric.jpg'
+            name: 'payment'
+        }
+    ])
+
+    const [dev] = useState([
+        {
+            name: 'null'
         },
         {
-            name: 'Nathan',
-            github: 'https://github.com/nchow18',
-            linked: 'https://www.linkedin.com/in/nathan-chow-1999701b9/',
-            image: '/images/nathan.png'
+            name: 'dev'
+        }
+    ])
+
+    const [contact] = useState([
+        {
+            name: 'null'
         },
         {
-            name: 'Rose',
-            github: 'https://github.com/rosefrancis-tech',
-            linked: 'https://www.linkedin.com/in/francis-tech',
-            image: '/images/rose.jpg'
-        },
-        {
-            name: 'Samiul',
-            github: 'https://github.com/samiul1988',
-            linked: 'https://www.linkedin.com/in/samiul-choudhury/',
-            image: '/images/samiul.jpg'
-        },
-        {
-            name: 'Shamim',
-            github: 'https://github.com/shamimimtiaz',
-            linked: 'https://www.linkedin.com/in/shamim-imtiaz',
-            image: '/images/shamim.jpg'
-        },
-    ]
+            name: 'contact'
+        }
+    ])
+    
+    const [currentLink, setCurrentLink] = useState(links[0]);
+    const [currentSafeLink, setCurrentSafeLink] = useState(safety[0])
+    const [currentDevLink, setCurrentDevLink] = useState(dev[0])
+    const [currentContactLink, setCurrentContactLink] = useState(contact[0])
+
+    console.log(currentDevLink);
 
     return (
         <>
+        <div className="flex-c page-margin-bottom">
             <div className="about-imgholder">
-                <img alt="puppies" src={process.env.PUBLIC_URL + `/images/banner4.jpg`} className="about-image"/>
-                <div className="about-title">About Woof
-                <div className="about-caption">For you and your dogs</div>
-                </div>
-                
-            </div>
-            
-            <div className="about-us">
-                <p>
-                    You need a break. So do your dogs. We will help both! 
-                    Woof connects dog owners with dog walkers who’ll treat your dog like family.
-                    You can trust us to keep your pet happy, healthy, and sweet as ever.
-                </p>
-                <p>
-                    We understand that life can be hectic and it may be hard to fit in a lengthy walk for your furry friend. 
-                    We are here to take that stress away from you to give your pal the exercise and 
-                    relief that it needs so you can focus on other tasks at hand.
-                </p>
-                <p>
-                    We are dog lovers and our dog walkers have lots of experience taking care of dogs. 
-                    Walkers are responsible and caring. They take care of your pet with respect. 
-                    They offer affection and attention to your pet, when you can’t be there.
-                </p>
-                <p>
-                    Woof is also a cutting edge technology business committed to making pet care safe, 
-                    easy, and affordable so that everyone can experience the unconditional love of a pet.
-                </p>
+                    <div className="about-banner">
+                        <span className="about-caption">About us</span>
+                    </div>
             </div>
 
-            <div className="leadership">
-                <h2>Team</h2>
-                <div className="about-row">
-                    {developers.map((dev) => (
-                        <div key={dev.name} className="about-card">
-                            <img alt={dev.name} src={process.env.PUBLIC_URL + `${dev.image}`} className="profile-picture"></img>
-                            <h3>{dev.name}</h3>
-                            <p>I am who I am</p>
-                            <a href={dev.github}><i className="fab fa-github profile-socialmedia"></i></a>
-                            <a href={dev.linked}><i className="fab fa-linkedin-in profile-socialmedia"></i></a>
-                        </div>
-                    ))}
+            <div className="learn-more-container">
+                <h1>Servicing the Greater Toronto Area</h1>
+                <div clasName="learn-more-links">
+                    <span className={`aboutLink ${currentLink.name === 'owner' && `aboutActive`}`} onClick={() => { setCurrentLink(links[0]); }} >Owner</span>
+                    <span className={`aboutLink ${currentLink.name === 'walker' && `aboutActive`}`} onClick={() => { setCurrentLink(links[1]); }} >Walker</span>
+                </div>
+
+                <div className="component-section">
+                    <div className="content">
+                        {currentLink.name === 'owner' && (
+                            <AboutOwner />
+                        )}
+                        {currentLink.name === 'walker' && (
+                            <AboutWalker />
+                        )}
+                    </div>
                 </div>
             </div>
+
+            <div className="about-us-container">
+                    <AboutUs 
+                        dev={dev}
+                        currentDevLink={currentDevLink}
+                        setCurrentDevLink={setCurrentDevLink}
+                    />
+            </div>
+            
+            {currentDevLink.name === 'dev' && (
+                <div className="component-section">
+                    <h2>Development Team</h2>
+                    <div className="content flex-r">
+                        <AboutDevelopers />
+                    </div>
+                </div>
+            )}
+
+
+            <div className="component-section">
+            <h2>Technologies</h2>
+                <div className="content">
+                    <AboutTechnology
+                        safety={safety}
+                        currentSafeLink={currentSafeLink}
+                        setCurrentSafeLink={setCurrentSafeLink}
+                    />
+                </div>
+            </div>
+            
+            {currentSafeLink.name !== 'null' && (
+                <div className="component-section">
+                    <div className="content flex-c-center">
+                        {currentSafeLink.name === 'safety' && (
+                            <>
+                                <h2>Navigation Safety</h2>
+                                <AboutSafety />
+                            </>
+                        )}
+                        {currentSafeLink.name === 'payment' && (
+                            <>
+                                <h2>Payment Safety</h2>
+                                <AboutPayment />
+                            </>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            <div className="about-us-container">
+                    <AboutContact 
+                        contact={contact}
+                        currentContactLink={currentContactLink}
+                        setCurrentContactLink={setCurrentContactLink}
+                    />
+            </div>
+
+            {currentContactLink.name === 'contact' && (
+                <div className="component-section">
+                    <div className="contact-container flex-r-nospace">
+                        <ContactDetails />
+                        <AboutContactForm />
+                    </div>
+                </div>
+            )}
+
+            {/* <div className="component-section">
+            <h2>Check out our App!</h2>
+                <div className="content flex-r">
+                    <AboutApp />
+                </div>
+            </div> */}
+            
+        </div>
         </>
     )
 }

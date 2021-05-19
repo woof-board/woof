@@ -10,6 +10,8 @@
   --rgb-quatemary: 128, 71, 31;
   --rgb-quinary:  219, 211, 211;
 }
+/* if adding opacity to VAR, rgb(var(--color), <opacity>); */
+
 
 .error-page {
   padding: 5rem;
@@ -22,7 +24,10 @@
   border-radius: 25px;
 }
 
-/* if adding opacity to VAR, rgb(var(--color), <opacity>); */
+
+html, body, main {
+  height: 100%;
+}
 
 body {
   background-color: var(--quinary);
@@ -37,8 +42,20 @@ body {
 
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.page {
+  padding-top: 80px;
+  flex: 1 0 auto;
+  
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Rokkitt', 'serif';
+  font-family: 'Rokkitt', 'serif'; 
 
   /* possible font weights for Rokkit
   300: light
@@ -48,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {
   700: bold
   800: extra bold
   900: black */
-  font-weight:600;
+  font-weight:700;
 
 }
 

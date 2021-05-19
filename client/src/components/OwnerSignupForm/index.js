@@ -6,8 +6,8 @@ import '../../css/Walker.css';
 
 function OwnerSignupForm() {
     const [formData, setUserFormData] = useState({
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: ''
     });
@@ -37,29 +37,29 @@ function OwnerSignupForm() {
     return (
         <form
             id="owner-signup-form"
-            className="form-container"
+            className="form-container owner-form"
             onSubmit={handleFormSubmit}
         >
             <input
                 className="signup-login-input"
                 type="text"
-                placeholder="Enter First Name"
-                name="firstName"
+                placeholder="First Name"
+                name="first_name"
                 onChange={handleInputChange}
-                value={formData.firstName}
+                value={formData.first_name}
             />
             <input
                 className="signup-login-input"
                 type="text"
-                placeholder="Enter Last Name"
-                name="lastName"
+                placeholder="Last Name"
+                name="last_name"
                 onChange={handleInputChange}
-                value={formData.lastName}
+                value={formData.last_name}
             />
             <input
                 className="signup-login-input"
                 type="email"
-                placeholder="Enter Email"
+                placeholder="Email address"
                 name="email"
                 onChange={handleInputChange}
                 value={formData.email}
@@ -67,7 +67,7 @@ function OwnerSignupForm() {
             <input
                 className="signup-login-input"
                 type="password"
-                placeholder="Enter Password"
+                placeholder="Password"
                 name="password"
                 onChange={handleInputChange}
                 value={formData.password}
@@ -78,7 +78,7 @@ function OwnerSignupForm() {
                 </div> : null
             }
             <button
-                disabled={!(formData.email && formData.password && formData.firstName && formData.lastName)}
+                disabled={!(formData.email && formData.password && formData.first_name && formData.last_name)}
                 type="submit"
                 className="home-form-button"
                 id="owner-signup-button"

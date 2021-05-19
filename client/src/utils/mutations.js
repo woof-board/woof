@@ -10,8 +10,8 @@ export const ADD_ORDER = gql`
     mutation addOrder($input: OrderInput!) {
         addOrder(input: $input) {
             _id
-            serviceDate
-            serviceTime
+            service_date
+            service_time
             owner{
                 _id
             }
@@ -26,8 +26,8 @@ export const UPDATE_ORDER = gql`
     mutation updateOrder($order_id: ID!, $input: OrderInput!) {
         updateOrder(order_id: $order_id, input: $input) {
             _id
-            serviceDate
-            serviceTime
+            service_date
+            service_time
             owner{
                 _id
             }
@@ -54,8 +54,8 @@ export const UPDATE_ORDER_STATUS = gql`
     mutation updateOrderStatus($order_id: ID!, $status: String!) {
         updateOrderStatus(order_id: $order_id, status: $status) {
             _id
-            serviceDate
-            serviceTime
+            service_date
+            service_time
             status
             owner{
                 _id
@@ -70,12 +70,32 @@ export const UPDATE_ORDER_STATUS = gql`
     }
 `;
 
+export const UPDATE_ORDER_COORDS = gql`
+    mutation updateOrderCoords($order_id: ID!, $coords: Array!) {
+        updateOrderCoords(order_id: $order_id, coords: $coords) {
+            _id
+            serviceDate
+            serviceTime
+            owner{
+                _id
+            }
+            walker{
+                _id
+            }
+            dogs{
+                _id
+            }
+            coords
+        }
+    }
+`;
+
 export const REMOVE_ORDER = gql`
     mutation removeOrder($order_id: ID!) {
         removeOrder(order_id: $order_id) {
             _id
-            serviceDate
-            serviceTime
+            service_date
+            service_time
             owner{
                 _id
             }
@@ -100,12 +120,16 @@ export const ADD_REVIEW = gql`
   mutation addReview( $input: ReviewInput ) {
     addReview( input: $input ) {
       _id
-      firstName
-      lastName
+      first_name
+      last_name
       reviews{
-        owner
+        owner_id{
+            _id
+            first_name
+            last_name
+          }
         rating
-        reviewText
+        review_text
       }
     }
   }
@@ -115,12 +139,16 @@ export const REMOVE_REVIEW = gql`
     mutation removeReview($walker_id: ID! ) {
         removeReview(walker_id: $walker_id ) {
             _id
-            firstName
-            lastName
+            first_name
+            last_name
             reviews{
-                owner_id
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
                 rating
-                reviewText
+                review_text
             }
         }
     }
@@ -130,12 +158,16 @@ export const UPDATE_REVIEW = gql`
     mutation updateReview($input: ReviewInput ) {
         updateReview(input: $input ) {
             _id
-            firstName
-            lastName
+            first_name
+            last_name
             reviews{
-                owner_id
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
                 rating
-                reviewText
+                review_text
             }
         }
     }
@@ -145,10 +177,18 @@ export const CLEAR_REVIEW = gql`
     mutation clearReview($walker_id: ID! ) {
         clearReview(walker_id: $walker_id) {
             _id
-            firstName
-            lastName
-            reviews
-            averageRating
+            first_name
+            last_name
+            reviews{
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
+                rating
+                review_text
+            }
+            average_rating
         }
     }
 `;
@@ -162,29 +202,14 @@ export const CLEAR_REVIEW = gql`
     - UPDATE_WALKER_STATUS
 */
 
-// export const ADD_WALKER = gql`
-//     mutation addWalker($input: WalkerInput) {
-//         addWalker(input: $input) {
-//             token
-//             walker {
-//                 _id
-//                 firstName
-//                 lastName
-//                 email
-//                 ratings
-//                 averageRating
-//             }
-//         }
-//     }
-// `;
 export const ADD_WALKER = gql`
     mutation addWalker($input: WalkerInput) {
         addWalker(input: $input) {
             token
             walker {
                 _id
-                firstName
-                lastName
+                first_name
+                last_name
                 email
             }
         }
@@ -207,17 +232,30 @@ export const UPDATE_WALKER_PROFILE = gql`
     mutation updateWalkerProfile($input: WalkerProfileInput) {
         updateWalkerProfile(input: $input) {
             _id
-            firstName
-            lastName
+            first_name
+            last_name
             email
             avatar
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
             reviews{
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
                 rating
-                reviewText
+                review_text
             }
             earnings
-            averageRating
+            average_rating
             neighbourhoods
+            status
             availability {
                 date
                 slot9am
@@ -232,6 +270,55 @@ export const UPDATE_WALKER_PROFILE = gql`
     }
 `;
 
+export const UPDATE_WALKER_PASSWORD = gql`
+    mutation updateWalkerPassword($old_password: String!, $new_password: String!) {
+        updateWalkerPassword(old_password: $old_password, new_password: $new_password) {
+            _id
+        }
+    }
+`;
+
+export const UPDATE_WALKER_AVAILABILITY = gql`
+    mutation updateWalkerAvailability($input: [AvailabilityInput]) {
+        updateWalkerAvailability(input: $input) {
+            _id
+            first_name
+            last_name
+            email
+            avatar
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
+            reviews{
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
+                rating
+                review_text
+            }
+            earnings
+            average_rating
+            neighbourhoods
+            status
+            availability {
+                date
+                slot9am
+                slot11am
+                slot1pm
+                slot3pm
+                slot5pm
+                slot7pm
+                slot9pm
+            }
+        }
+    }
+`;
 
 /* OWNER mutations
     - ADD_OWNER
@@ -244,8 +331,8 @@ export const ADD_OWNER = gql`
             token
             owner {
                 _id
-                firstName
-                lastName
+                first_name
+                last_name
                 email
                 admin
                 dogs {
@@ -266,4 +353,42 @@ export const LOGIN_OWNER = gql`
             }
         }
 }
+`;
+
+export const UPDATE_OWNER_PROFILE = gql`
+    mutation updateOwnerProfile($input: OwnerProfileInput) {
+        updateOwnerProfile(input: $input) {
+            _id
+            first_name
+            last_name
+            email
+            avatar
+            admin
+            status
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
+            phone
+            dogs {
+                name
+                breed
+                weight
+                treats
+                avatar
+            }
+            dog_count
+        }
+    }
+`;
+
+export const UPDATE_OWNER_PASSWORD = gql`
+    mutation updateOwnerPassword($old_password: String!, $new_password: String!) {
+        updateOwnerPassword(old_password: $old_password, new_password: $new_password) {
+            _id
+        }
+    }
 `;

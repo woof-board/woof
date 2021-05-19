@@ -1,14 +1,26 @@
 const { Schema, model } = require('mongoose');
 const dogSchema = require('./Dog');
 
+const coordsSchema = new Schema( 
+    {
+        lon: {
+            type: Number,
+            required: true
+        },
+        lat: {
+            type: Number,
+            required: true,
+        }
+    }
+);
+
 const orderSchema = new Schema(
     {
-        serviceDate: {
-            type: Date,
+        service_date: {
+            type: String,
             required: true
-            // default: Date.now
         },
-        serviceTime: {
+        service_time: {
             type: String,
             required: true
         },
@@ -28,7 +40,8 @@ const orderSchema = new Schema(
         dogs: [{
             type: Schema.Types.ObjectId,
             ref: 'dogSchema'
-        }]
+        }],
+        coords: [coordsSchema]
     },
     {
         toJSON: {
@@ -37,7 +50,7 @@ const orderSchema = new Schema(
     }
 );
 
-orderSchema.virtual('dogCount').get(function () {
+orderSchema.virtual('dog_count').get(function () {
     return this.dogs.length;
 });
 

@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-
-import '../css/WalkerProfile.css';
-import Auth from '../utils/auth';
-import WalkerDetails from '../components/WalkerProfile/WalkerDetails';
-import WalkerReviews from '../components/WalkerProfile/WalkerReviews';
-import WalkerOrders from '../components/WalkerProfile/WalkerOrders';
-import WalkerEarnings from '../components/WalkerProfile/WalkerEarnings';
-import WalkerNeighbourhoods from '../components/WalkerProfile/WalkerNeighbourhoods';
-import WalkerAvgRating from '../components/WalkerProfile/WalkerAvgRating';
+import { useLazyQuery } from '@apollo/react-hooks';
+import '../css/Profile.css'
+// import Auth from '../utils/auth';
+import WalkerDetails from '../components/WalkerProfileComponents/WalkerDetails';
+import WalkerReviews from '../components/WalkerProfileComponents/WalkerReviews';
+import WalkerOrders from '../components/WalkerProfileComponents/WalkerOrders';
+import WalkerEarnings from '../components/WalkerProfileComponents/WalkerEarnings';
+import WalkerPasswordForm from '../components/WalkerProfileComponents/WalkerPasswordForm';
+import WalkerAvgRating from '../components/WalkerProfileComponents/WalkerAvgRating';
 import { QUERY_WALKER_ME } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
@@ -28,7 +27,7 @@ function WalkerProfile() {
         else if (!currentUser && data) {
             dispatch({
                 type: UPDATE_CURRENT_USER,
-                currentUser: data.walker_me
+                currentUser: data.walkerMe
             });
             
         }
@@ -43,45 +42,65 @@ function WalkerProfile() {
         // }
     }, [currentUser, data, loading, dispatch]);
 
-
   return (
-    <div className="page-body">
-      {currentUser && currentUser.status === "SUSPENDED" && 
-        <>
-          <div className="account-status">
-            ACCOUNT SUSPENDED
+    <div id="walkers">
+      <h1>My Profile</h1>
+      <div className='page-wrap'>
+      
+        {currentUser && currentUser.status === "SUSPENDED" && 
+          <>
+          <div className="walker-contact-container">
+            <div className="walker-header">
+              <h2>Current account status</h2>
+            </div>
+            <div className="account-status">
+                ACCOUNT SUSPENDED
+            </div>
           </div>
-        </>    
-      } 
+
+          </>    
+        } 
         <>
         {currentUser && currentUser.status === "ACTIVE" && 
           <div className="walker-picture-container">
-            IMG HERE
+            <img src="https://via.placeholder.com/150" alt="profile-img"/>
           </div>        
         }
         <div className="walker-details-container">
             {currentUser && currentUser.status === "PENDING_INFORMATION" && 
-              <div className="account-status">
-                COMPLETE ALL FORMS FOR APPROVAL
+              <div className="walker-contact-container">
+                <div className="walker-header">
+                  <h2>Current account status</h2>
+                </div>
+                <div className="account-status">
+                  COMPLETE ALL FORMS FOR APPROVAL
+                </div>
               </div>
+          
             }
             {currentUser && currentUser.status === "PENDING_APPROVAL" && 
-              <div className="account-status">
-                PENDING APPROVAL
+              <div className="walker-contact-container">
+                <div className="walker-header">
+                  <h2>Current account status</h2>
+                </div>
+                <div className="account-status">
+                  PENDING APPROVAL
+                </div>
               </div>
             }
             <WalkerDetails user={currentUser}/>
+            <WalkerPasswordForm />
             {currentUser && currentUser.status === "ACTIVE" && 
               <>
-                <WalkerAvgRating averageRating={currentUser.averageRating}/>
-                <WalkerReviews reviews={currentUser.reviews}/>
+                <WalkerAvgRating average_rating={currentUser.average_rating}/>
+                <WalkerReviews reviews={currentUser.reviews} />
                 <WalkerOrders orders={currentUser.orders}/>
                 <WalkerEarnings earnings={currentUser.earnings}/>
-                <WalkerNeighbourhoods neighbourhoods={currentUser.neighbourhoods}/>
               </>
             }
           </div>
         </>
+    </div>
     </div>
   );
 }
