@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import '../css/Home2.css';
 import OwnerWalkerForm from '../components/OwnerWalkerForm';
-import FormHeader from '../components/LoginSIgnupForm';
+import FormHeader from '../components/LoginSignupForm';
 import WalkerLoginForm from '../components/WalkerLoginForm';
 import WalkerSignupForm from '../components/WalkerSignupForm';
 import OwnerLoginForm from '../components/OwnerLoginForm';

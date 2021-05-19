@@ -11,7 +11,7 @@ import WalkerTrackOrder from "../components/WalkerTrackWalks/WalkerTrackOrder"
 function WalkerTrackWalks() {
     const [state, dispatch] = useStoreContext();
     const [getWalkerProfile, { loading, data }] = useLazyQuery(QUERY_WALKER_ME);
-    const [getWalkerOrder, { loading, data }] = useLazyQuery(QUERY_WALKER_ORDERS);
+    // const [getWalkerOrder, { called,loading, data }] = useLazyQuery(QUERY_WALKER_ORDERS);
     const { currentUser } = state;
     const orders = currentUser.orders;
     const totalOrders = currentUser.orders.length;
@@ -32,11 +32,11 @@ function WalkerTrackWalks() {
     }, [currentUser, data, loading, dispatch]);
 
 
-    useEffect(() => {
-      // if not already in global store
-      getWalkerOrder({ variables: { walker_id: currentUser._id}});
+    // useEffect(() => {
+    //   // if not already in global store
+    //   getWalkerOrder({ variables: { walker_id: currentUser._id}});
       
-    }, [orders]);
+    // }, [orders]);
 
   return (
     <>

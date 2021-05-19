@@ -96,6 +96,7 @@ function OwnerWalkDetails() {
             });
 
             alert("Order Updated with Walker Info!");
+            // remove alert and redirect to owner profile page
         }catch (e){
             console.log(e);
         }

@@ -27,7 +27,7 @@ const orderSchema = new Schema(
         status: {
             type: String,
             enum: ['PENDING_WALKER', 'PENDING_PROGRESS', 'IN_PROGRESS', 'FULLFILLED', 'CHARGED', 'FINALIZED'],
-            default: 'PENDING_WALKER'
+            default: 'PENDING_PROGRESS'
         },
         owner: {
             type: Schema.Types.ObjectId,

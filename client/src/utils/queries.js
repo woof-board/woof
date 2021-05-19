@@ -204,6 +204,7 @@ export const QUERY_OWNER_ORDERS = gql`
       _id
       service_date
       service_time
+      status
       owner{
         _id
         first_name
