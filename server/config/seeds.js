@@ -219,7 +219,7 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
 
@@ -272,7 +272,7 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "PENDING_APPROVAL"
+            status: "ACTIVE"
         }
     );
 
@@ -479,7 +479,7 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "SUSPENDED"
+            status: "PENDING_INFORMATION"
         }
     );
 
