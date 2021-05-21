@@ -101,7 +101,7 @@ function About() {
                 
                 {currentDevLink.name === 'dev' && (
                     <div className="component-section">
-                        <h2>Development Team</h2>
+                        <h2 className="font-night">Development Team</h2>
                         <div className="dev-content flex-r">
                             <AboutDevelopers />
                         </div>
@@ -110,7 +110,7 @@ function About() {
 
 
                 <div className="component-section">
-                <h2>Technologies</h2>
+                <h2 className="font-night">Technologies</h2>
                     <div className="content">
                         <AboutTechnology
                             safety={safety}

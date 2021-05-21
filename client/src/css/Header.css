@@ -31,6 +31,7 @@ li {
     display: flex;
     flex-direction: row;
     padding-right: 1rem;
+    align-items: center;
 }
 
 
