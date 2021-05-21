@@ -13,8 +13,8 @@ function WalkerTrackWalks() {
     const [getWalkerProfile, { loading, data }] = useLazyQuery(QUERY_WALKER_ME);
     // const [getWalkerOrder, { called,loading, data }] = useLazyQuery(QUERY_WALKER_ORDERS);
     const { currentUser } = state;
-    const orders = currentUser.orders;
-    const totalOrders = currentUser.orders.length;
+    const orders = currentUser?.orders;
+    const totalOrders = currentUser?.orders?.length;
     // const totalOrders = 1;
 
     useEffect(() => {
@@ -49,7 +49,7 @@ function WalkerTrackWalks() {
                 {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
                 : 'You have no upcoming Walks'}
               </div>
-              {orders.filter(order => order.status === "PENDING_PROGRESS").map((order) => (
+              {orders?.filter(order => order.status === "PENDING_PROGRESS").map((order) => (
                 // render component
                 <WalkerTrackOrder
                 order_id = {order.order_id}
