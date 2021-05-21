@@ -7,19 +7,41 @@ export const QUERY_OWNER_ME = gql`
             first_name
             last_name
             email
+            avatar
             admin
             status
             address {
+                street
                 city
+                neighbourhood
+                province
+                postal_code
             }
             phone
             dogs {
+                _id
                 name
+                breed
+                weight
+                treats
+                avatar
             }
             dog_count
         }
     }
 `;
+
+export const QUERY_OWNER_BOOKING = gql`
+  query {
+    ownerMe {
+      _id
+      dogs {
+        _id
+        name
+      }
+    }    
+  }
+`
 
 export const QUERY_OWNER = gql`
   query owner($owner_id: ID!) {
@@ -29,6 +51,7 @@ export const QUERY_OWNER = gql`
       last_name
       email
       dogs{
+        _id
         name
       }
     }
@@ -43,6 +66,7 @@ export const QUERY_OWNERS = gql`
       last_name
       email
       dogs{
+        _id
         name
       }
     }
@@ -183,6 +207,7 @@ export const QUERY_OWNER_ORDERS = gql`
       _id
       service_date
       service_time
+      status
       owner{
         _id
         first_name
@@ -207,6 +232,7 @@ export const QUERY_WALKER_ORDERS = gql`
       _id
       service_date
       service_time
+      status
       owner{
         _id
         first_name
@@ -216,6 +242,9 @@ export const QUERY_WALKER_ORDERS = gql`
         _id
         first_name
         last_name
+      }
+      dogs {
+        name
       }
     }
   }

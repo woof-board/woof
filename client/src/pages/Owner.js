@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/Walker.css';
 import OwnerLoginForm from '../components/OwnerLoginForm';
-import FormHeader from '../components/LoginSIgnupForm';
+import FormHeader from '../components/LoginSignupForm';
 import OwnerSignupForm from '../components/OwnerSignupForm';
 
 

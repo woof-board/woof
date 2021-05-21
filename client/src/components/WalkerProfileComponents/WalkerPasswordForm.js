@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-//import '../../css/WalkerProfile.css';
 import { UPDATE_WALKER_PASSWORD } from "../../utils/mutations";
-// import { useStoreContext } from "../../utils/GlobalState";
-// import { UPDATE_CURRENT_USER } from "../../utils/actions";
+import ModalDisplay from '../../components/ModalDisplay';
 
 function WalkerPasswordForm() {
     const [updateWalkerPassword, { error }] = useMutation(UPDATE_WALKER_PASSWORD);
-    // const [state, dispatch] = useStoreContext();
-
+    const [modalJSX, setModalJSX] = useState(<div />);
+    const [modalOpen, setModalOpen] = useState();
+    
     const [formData, setFormData] = useState({ 
         old_password: '', 
         new_password: ''
@@ -35,10 +34,26 @@ function WalkerPasswordForm() {
                 }
             });
 
-            alert('Password Updated');
+            setModalJSX(
+                <div>
+                    <h6>Password has been updated successfully!</h6>
+                    <button type="button" onClick={() => setModalOpen(false)}>Close</button>
+                </div>
+            );
+            setModalOpen(true);
+            setFormData({ 
+                old_password: '', 
+                new_password: ''
+            });
+
          } catch (e) {
              console.log(e);
          }
+    };
+
+    const closeModal = () => {
+        setModalJSX(<div />);
+        setModalOpen(false);
     };
 
     return (
@@ -79,6 +94,7 @@ function WalkerPasswordForm() {
                     UPDATE PASSWORD
                 </button>
             </form>
+            <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
         </div>
     )
 }

@@ -1,12 +1,9 @@
 import React, { useRef, useEffect } from 'react';
-import './Map.css';
+import '../../css/Map.css';
 import { objectToArray, middleValueOfArray } from '../../utils/helpers'
-
 import mapboxgl from '!mapbox-gl'; // eslint-disable-line import/no-webpack-loader-syntax
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-
 function Map(order) {
-    
     const mapContainer = useRef(null);
     const map = useRef(null);
     const coordinates = useRef(null);
@@ -14,18 +11,14 @@ function Map(order) {
     const {
         coords
     } = order;
-
     // convert to array
     const coordinateArr = coords.map((coord, ind) => {
         return objectToArray(coord);
     });
-
     // get center position of the walker path
     const mapCenter = middleValueOfArray(coordinateArr);
-
     useEffect(() => {
         if (map.current) return; // initialize map only once
-        
         coordinates.current = coordinateArr;
         // coordinates.current = [
         //     [-122.483696, 37.833818],
@@ -58,12 +51,10 @@ function Map(order) {
           zoom: 15
         });
     });
-    
     useEffect(() => {
         if (!map.current) return; 
         // event.preventDefault();
         console.log("Hi");
-        
         map.current.on('load', function () {
             map.current.addSource('route', {
                 'type': 'geojson',
@@ -91,17 +82,12 @@ function Map(order) {
             });
         });
     });
-    
-  
     return (
         <>
             <div id="map-container">
                 <div ref={mapContainer} id="map-container"></div>
             </div> 
-
         </>
     )
 };
-
 export default Map;
-

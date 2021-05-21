@@ -12,17 +12,32 @@ db.once('open', async () => {
             last_name: 'Normann',
             email: 'eric.n@me.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
-            admin: true,
+            avatar: "/images/eric.jpg",
+            admin: false,
             address: {
-                street: '1st Street NW',
-                city: 'toronto',
-                neighbourhood: 'west toronto',
+                street: '2325 Yolands Dr',
+                city: 'oakville',
+                neighbourhood: 'oakville',
                 province: 'ontario',
-                postal_code: 'AAA AAA'
+                postal_code: 'L6l 2H9'
             },
             phone: '111 111 1111',
-            dogs: [],
+            dogs: [
+                {
+                    name: 'Pixel',
+                    breed: 'Shorky',
+                    weight: 12,
+                    treats: true,
+                    avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t31.18172-8/11222714_10153601420096151_2425722709037660111_o.jpg?_nc_cat=100&ccb=1-3&_nc_sid=730e14&_nc_ohc=46e6WoeQaLEAX-axWzR&_nc_ht=scontent-yyz1-1.xx&oh=b06232133fc570217fb90dc75dfbcef0&oe=60CC4892"
+                },
+                {
+                    name: 'Pudding',
+                    breed: 'Shi-zu mix',
+                    weight: 15,
+                    treats: true,
+                    avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-9/39257859_10158104653536151_4978567789913571328_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=730e14&_nc_ohc=CKtX-w_SiOUAX-6SYVi&_nc_ht=scontent-yyz1-1.xx&oh=0885e71ab8514745b2f93ea3b0c2e5d0&oe=60C96238"
+                }
+            ],
             status: "ACTIVE"
         }
     );
@@ -33,7 +48,7 @@ db.once('open', async () => {
             last_name: 'Choudhury',
             email: 'sc@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "/images/eric.jpg",
             admin: true,
             address: {
                 street: '1st Street NW',
@@ -130,7 +145,7 @@ db.once('open', async () => {
                     avatar: "/images/user-default.png"
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
 
@@ -167,7 +182,10 @@ db.once('open', async () => {
 
     const owners = await Owner.find({});
     const ownerIds = owners.map(owner => owner._id);
-
+    const dogIds = owners.map(owner => {
+        return owner.dogs.map(dog => dog._id);
+    });
+    
     await Walker.deleteMany();
 
     await Walker.create(
@@ -177,7 +195,7 @@ db.once('open', async () => {
             email: 'pw@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['east toronto', 'south toronto'],
+            neighbourhoods: ['East York', 'North York'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -219,7 +237,7 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
 
@@ -230,7 +248,7 @@ db.once('open', async () => {
             email: 'eh@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['north toronto', 'west toronto'],
+            neighbourhoods: ['North York', 'Scarborough'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -272,7 +290,7 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "PENDING_APPROVAL"
+            status: "ACTIVE"
         }
     );
 
@@ -283,7 +301,7 @@ db.once('open', async () => {
             email: 'kn@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['north toronto', 'west toronto'],
+            neighbourhoods: ['Downtown', 'Etobicoke'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -352,7 +370,7 @@ db.once('open', async () => {
             email: 'rt@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['north toronto', 'west toronto'],
+            neighbourhoods: ['North York', 'East York'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -421,7 +439,7 @@ db.once('open', async () => {
             email: 'ms@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['north toronto', 'west toronto'],
+            neighbourhoods: ['Dwontown', 'York'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -479,12 +497,13 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "SUSPENDED"
+            status: "PENDING_INFORMATION"
         }
     );
 
     console.log('walker seeded');
-
+    const walkers = await Walker.find({});
+    const walkerIds = walkers.map(walker => walker._id);
 
     await Order.deleteMany();
 
@@ -494,71 +513,73 @@ db.once('open', async () => {
         service_date:'2021-05-21',
         service_time: '9am',
         status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac06c',
-        walker: '60a073419ae33509302ac085',
-        dogs: ['60a073419ae33509302ac06e']
+        owner: ownerIds[0],
+        walker: walkerIds[2],
+        dogs: [dogIds[0][0], dogIds[0][1]]
       },
       {
         service_date:'2021-05-20',
         service_time: '9am',
         status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac06f',
-        walker: '60a073419ae33509302ac08a',
-        dogs: ['60a073419ae33509302ac071']
+        owner: ownerIds[3],
+        walker: walkerIds[2],
+        dogs: [dogIds[3][0]]
       },
       {
         service_date:'2021-05-20',
         service_time: '11am',
-        status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac072',
-        walker: '60a073419ae33509302ac08a',
-        dogs: ['60a073419ae33509302ac074']
+        status: 'PENDING_PROGRESS',
+        owner: ownerIds[4],
+        walker: walkerIds[2],
+        dogs: [dogIds[4][0]]
       },
       {
         service_date:'2021-05-20',
         service_time: '1pm',
         status: 'PENDING_PROGRESS',
-        owner: '60a073419ae33509302ac075',
-        walker: '60a073419ae33509302ac08f',
-        dogs: [
-          '60a073419ae33509302ac077',
-          '60a073419ae33509302ac078'
-        ]
+        owner: ownerIds[5],
+        walker: walkerIds[2],
+        dogs: [dogIds[5][0]]
       },
       {
         service_date:'2021-05-21',
         service_time: '11am',
         status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac079',
-        walker: '60a073419ae33509302ac097',
-        dogs: ['60a073419ae33509302ac07b']
+        owner: ownerIds[0],
+        walker: walkerIds[2],
+        dogs: [dogIds[0][0]]
       },
       {
         service_date:'2021-05-21',
         service_time: '3pm',
         status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac07c',
-        walker: '60a073419ae33509302ac09f',
-        dogs: ['60a073419ae33509302ac07e']
+        owner: ownerIds[0],
+        walker: walkerIds[2],
+        dogs: [dogIds[0][0], dogIds[0][1]]
       },
       {
         service_date:'2021-05-20',
         service_time: '5pm',
         status: 'IN_PROGRESS',
-        owner: '60a073419ae33509302ac07c',
-        walker: '60a073419ae33509302ac09f',
-        dogs: ['60a073419ae33509302ac07e']
+        owner: ownerIds[3],
+        walker: walkerIds[2],
+        dogs: [dogIds[3][0]]
       },
       {
         service_date:'2021-05-21',
         service_time: '7pm',
         status: 'PENDING_PROGRESS',
-        owner: '60a073419ae33509302ac075',
-        walker: '60a073419ae33509302ac08f',
-        dogs: [
-          '60a073419ae33509302ac077',
-          '60a073419ae33509302ac078'
-        ]
+        owner: ownerIds[4],
+        walker: walkerIds[2],
+        dogs: [dogIds[4][0]]
+      },
+      {
+        service_date:'2021-05-21',
+        service_time: '7pm',
+        status: 'PENDING_PROGRESS',
+        owner: ownerIds[3],
+        walker: walkerIds[2],
+        dogs: [dogIds[3][1]]
       },
       
     ]);

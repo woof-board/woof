@@ -1,8 +1,13 @@
-import { useLazyQuery } from '@apollo/react-hooks';
+
 import React, { Component } from 'react';
-import { Admin, Resource, ListGuesser } from 'react-admin';
-import { Create, UrlField, DisabledInput, SimpleForm, TextInput } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
+import { UserList } from '../components/Admin/list';
+import { UserEdit } from '../components/Admin/edit';
+import { UserCreate } from '../components/Admin/create';
+
+
 import '../css/WalkerProfile.css';
+import { useLazyQuery } from '@apollo/react-hooks';
 import WalkerDetails from '../components/WalkerProfileComponents/WalkerDetails';
 import WalkerReviews from '../components/WalkerProfileComponents/WalkerReviews';
 import WalkerOrders from '../components/WalkerProfileComponents/WalkerOrders';
@@ -16,33 +21,19 @@ import jsonServerProvider from "ra-data-json-server";
 //const dataProvider = {WalkerDetails, WalkerReviews, WalkerOrders, WalkerEarnings, WalkerAvgRating, OwnerDetails};
 const dataProvider =
   jsonServerProvider("https://jsonplaceholder.typicode.com");
-//import React, { Component } from 'react';
-//import AdminHeader from './components/AdminHeader';
-//import SideBar from './components/SideBar';
-//import Content from './components/AdminContent';
 
-//class AdminPage extends Component {
 
-//  render() {
-//    return (
-//      <div>
-//        <AdminHeader />
-//        <SideBar />
-//        <Content />
-//      </div>
-//    );
-//  }
-//}
 
 
 
 function AdminPage() {  
-    return (
-      <Admin dataProvider={dataProvider}>
-        <Resource name="users" list={ListGuesser} />
-      </Admin>
+  return (
+    <Admin dataProvider={dataProvider}>
+      <Resource name="users" list={UserList} edit={UserEdit} create={UserCreate} />
+    </Admin>
     );
-}
+  }
+
 
 
 

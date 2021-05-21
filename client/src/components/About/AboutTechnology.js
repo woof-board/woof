@@ -24,7 +24,7 @@ function AboutTechnology(props) {
             <div className="tech-card">
                 <img className="tech-picture" alt="gps" src={process.env.PUBLIC_URL + '/images/about-payment.png'} />
                 <p><b>Easy payment options</b></p>
-                <p>Our app is available with the best payment provide, that provides secure, easy and fast payments for our users.</p>
+                <p>Our app is available with the best payment options, which provides secure, easy and fast payments for our users.</p>
 
                 <div className="">
                 <span className={`learnLink ${currentSafeLink.name === 'payment' && `learnActive`}`} onClick={() => { setCurrentSafeLink(safety[2]); }} > Learn More </span>  

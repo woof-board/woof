@@ -23,7 +23,7 @@ export const ADD_ORDER = gql`
 `;
 
 export const UPDATE_ORDER = gql`
-    mutation updateOrder($order_id: ID!, $input: OrderInput!) {
+    mutation updateOrder($order_id: ID!, $input: UpdateOrderInput!) {
         updateOrder(order_id: $order_id, input: $input) {
             _id
             service_date
@@ -353,4 +353,62 @@ export const LOGIN_OWNER = gql`
             }
         }
 }
+`;
+
+export const UPDATE_OWNER_PROFILE = gql`
+    mutation updateOwnerProfile($input: OwnerProfileInput) {
+        updateOwnerProfile(input: $input) {
+            _id
+            first_name
+            last_name
+            email
+            avatar
+            admin
+            status
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
+            phone
+            dogs {
+                name
+                breed
+                weight
+                treats
+                avatar
+            }
+            dog_count
+            stripe_customer_id
+            stripe_setup_intent
+        }
+    }
+`;
+
+export const UPDATE_OWNER_PASSWORD = gql`
+    mutation updateOwnerPassword($old_password: String!, $new_password: String!) {
+        updateOwnerPassword(old_password: $old_password, new_password: $new_password) {
+            _id
+        }
+    }
+`;
+
+export const ADD_DOG = gql`
+    mutation addDog($input: DogInput) {
+        addDog(input: $input){
+            _id
+            first_name
+            last_name
+            email
+            dogs{
+                _id
+                name
+                breed
+                weight
+                treats
+            }
+        }
+    }
 `;

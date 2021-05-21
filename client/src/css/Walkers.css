@@ -1,14 +1,10 @@
-:root {
-    --booked: #6740af;
-}
-
-#walkers {
+/* #walkers {
     display: flex;
     flex-direction: row;
     padding: 2rem 5rem 1rem;
     flex-wrap: wrap;
     flex-direction: row;
-}
+} */
 
 h1 {
     color: var(--primary);
@@ -97,8 +93,9 @@ h1 {
     height: 100%;
     cursor: pointer;
     font-size: .85rem;
-    padding: 0 10px;
+    padding: 0;
     min-height: 48px;
+    text-transform: none;
 }
 .unavailable {
     background-color: #bebebe;
@@ -111,6 +108,7 @@ h1 {
     color: var(--quinary);
     line-height: 1.1em;
     font-weight: 500;
+    padding: 0 10px;
 }
 .schedule-container .booked:hover {
     background-color: var(--quinary);
@@ -122,8 +120,8 @@ h1 {
     grid-template-columns: 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.2% 14.3% 14.3% 14.3% 14.3% 14.3% 14.3% 14.2%;
     grid-template-rows: 1;
     width: 100%;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
     overflow: scroll;
 }
 

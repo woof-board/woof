@@ -15,7 +15,7 @@ function PaymentScreen() {
       handleGettingInformation(data);
     }
   });
-  const amount = 3000; // in cents
+  const amount = 3200; // in cents
   const [handleCharge] = useLazyQuery(CHARGE_OWNER, {
     variables: { 
       amount: amount,
@@ -26,14 +26,14 @@ function PaymentScreen() {
   useEffect(() => {
     if (customer_data) {
       stripePromise.then((res) => {
-        res.redirectToCheckout({ sessionId: customer_data.get_customer_session_id.session });
+        res.redirectToCheckout({ sessionId: customer_data.getCustomerSessionId.session });
       });
     }
   }, [customer_data]);
 
   const handleGettingInformation = async (data) => {
     // Call your backend to create the Checkout session.
-    const sessionId = data.get_customer_session_id.session_id;
+    const sessionId = data.getCustomerSessionId.session_id;
     // When the customer clicks on the button, redirect them to Checkout.
     const stripe = await stripePromise;
     const { error } = await stripe.redirectToCheckout({sessionId});

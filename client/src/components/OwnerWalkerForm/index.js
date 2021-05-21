@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../css/HomeMock.css';
 
 function OwnerWalkerForm(props) {
 
@@ -9,10 +8,11 @@ function OwnerWalkerForm(props) {
         setCurrentLink
     } = props
 
+
     return (
         <div className="home-links">
             {links.map((link) => (
-                <span key={link.name} className={`home-button ${currentLink.name === link.name && `buttonActive`}`} onClick={() => { setCurrentLink(link);}}>{link.name}</span>
+                <span key={link.name} className={`home-button ${link.name} ${currentLink.name === link.name &&  `buttonActive`}`} onClick={() => { setCurrentLink(link);}}>{link.name}</span>
             ))}
         </div>
     )
