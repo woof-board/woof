@@ -81,10 +81,10 @@ There are three types of access:
 
 ## Future Development
 Upcoming features:
-* 
-* 
-* 
-* 
+* Ability for owners to pick favorite walkers
+* Owners can purchase pet related items and have it delivered by the walkers
+* Expansion into wider geographical locations
+
 
 ## Screenshot
 
