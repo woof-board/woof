@@ -1,41 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import React, { useState, useEffect, useContext } from 'react';
+import { useLazyQuery, useQuery, useMutation } from '@apollo/react-hooks';
 import { UPDATE_WALKER_AVAILABILITY } from "../utils/mutations";
+import { QUERY_WALKER_ORDERS, QUERY_WALKER_ME } from "../utils/queries";
 import { createInitialState } from "../utils/helpers";
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
 import ModalDisplay from '../components/ModalDisplay';
+import { idbPromise } from "../utils/helpers";
 import '../css/Walkers.css';
- 
-const scheduledWalks = [
-    {
-        service_date: "2021-05-19",
-        service_time: "5pm",
-        owner: "Nathan Chow",
-        walker: "d45g11r43a333",
-        dogs: ["Pixel", "Pudding"]
-    },
-    {
-        service_date: "2021-05-23",
-        service_time: "3pm",
-        owner: "Eric Normann",
-        walker: "d45g11r43a333",
-        dogs: ["Pixel", "Pudding"]
-    }
-]
-
 
 function WalkerSchedule() {
     const [state, dispatch] = useStoreContext();
     const { currentUser } = state;
     const [updateWalkerAvailability, { error }] = useMutation(UPDATE_WALKER_AVAILABILITY);
+    const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
+    const [ getWalkerOrders, { loading: orderDataLoading, data: walkerOrderData } ] = useLazyQuery(QUERY_WALKER_ORDERS, {
+        variables: {
+            walker_id: currentUser?._id
+        }
+    }); 
+    // const { data: walkerOrderData } = useQuery(QUERY_WALKER_ORDERS, {
+    //     variables: {
+    //         walker_id: currentUser?._id
+    //     }
+    // }); 
 
     const [ schedule, setSchedule ] = useState(createInitialState());
     const [buttonVisible, setButtonVisible] = useState(false);
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState(false);
+    const [ scheduledWalks, setScheduledWalks ] = useState([]);
 
     const timeSlotArr = ["slot9am", "slot11am", "slot1pm", "slot3pm", "slot5pm", "slot7pm", "slot9pm"];
+
+    useEffect(() => {
+        // if not already in global store
+        if (!currentUser && !data) {
+            getWalkerProfile(); // get profile from database
+        } 
+        // retrieved from server
+        else if (!currentUser && data) {
+            dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: data.walkerMe
+            });
+            
+            getWalkerOrders();
+        }
+        // } else if (currentUser && scheduledWalks.length  < 1) {
+        //     getWalkerOrders();
+        // }
+    }, [currentUser, data, loading, dispatch]);
+
+    useEffect(() => {
+        if (walkerOrderData) {
+            console.log("walker orders", walkerOrderData);
+
+            setScheduledWalks(walkerOrderData.walkerOrders);
+        }
+    }, [walkerOrderData]);
 
     useEffect(()=>{
         const availability = currentUser?.availability || null; 
@@ -107,7 +130,8 @@ function WalkerSchedule() {
                 currentUser: newProfile
             });
 
-            alert('Availability Updated');
+            setModalJSX(<div>Availability has been updated successfully!</div>);
+            setModalOpen(true);
          } catch (e) {
              console.log(e);
          }
@@ -132,7 +156,7 @@ function WalkerSchedule() {
         }
     };
 
-    const createScheduleItemComponent = (index, scheduleItem, timeSlot) => {
+    const createScheduleItemJSX = (index, scheduleItem, timeSlot) => {
         // check with booked services
         let isBooked = false;
         let ownerName = "";
@@ -142,7 +166,7 @@ function WalkerSchedule() {
             if(!isBooked){
                 if(walk.service_date === scheduleItem.date && walk.service_time === slot) {
                     isBooked = true;
-                    ownerName = walk.owner;
+                    ownerName = walk.owner.first_name + " " + walk.owner.last_name;
                 }
             }
         });
@@ -195,7 +219,7 @@ function WalkerSchedule() {
                                     {
                                         timeSlotArr.map((timeSlot, timeInd) => (
                                             <div key={timeInd} className="schedule-item time-detail">
-                                                {createScheduleItemComponent(index, scheduleItem, timeSlot)}
+                                                {createScheduleItemJSX(index, scheduleItem, timeSlot)}
                                             </div>
                                         ))
                                     }

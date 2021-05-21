@@ -22,18 +22,8 @@ const customStyles = {
       borderBottom: '1px dotted pink',
       color: state.isSelected ? 'red' : 'blue',
       padding: 20,
-    }),
-    // control: () => ({
-    //   // none of react-select's styles are passed to <Control />
-    //   width: 200,
-    // }),
-    // singleValue: (provided, state) => {
-    //   const opacity = state.isDisabled ? 0.5 : 1;
-    //   const transition = 'opacity 300ms';
-  
-    //   return { ...provided, opacity, transition };
-    // }
-  }
+    })
+};
 
 const bookTimes = [ "9am", "11am", "1pm", "3pm", "5pm", "7pm", "9pm" ];
 
@@ -135,11 +125,9 @@ function OwnerWalkDetails() {
                 </div>
             );
             setModalOpen(true);
-            // remove alert and redirect to owner profile page
         }catch (e){
             console.log(e);
         }
-
     };
 
      const getDogNames = () => {
@@ -199,7 +187,6 @@ function OwnerWalkDetails() {
                         value={formData.time} 
                         onChange={handleInputChange}
                     >
-                        {/* <option value="choose" selected disabled>Pick a Time</option> */}
                         {
                             bookTimes.map(bookTime => 
                                 <option key={bookTime} value={bookTime}>{bookTime}</option>
@@ -207,24 +194,17 @@ function OwnerWalkDetails() {
                         }
                     </select>
                     </div>
-                    {/* { formData.dogs > 1 
-                    ?<> */}
                         <h4>Which dogs are going on the walk?</h4>
-                        <div className="row-data">
-                            
+                        <div className="row-data">  
                         <Select 
                             customStyles={customStyles}
                             className="profile-input profile-name" 
                             options={getDogNames()} 
                             isMulti={true}
                             onChange={handleChangeDogSelect}
-                            // defaultValue={getDogNames()}
+                            defaultValue={getDogNames()}
                         />
                         </div>
-                    {/* </>
-                    : <input type="hidden" value={getDogNames()}></input>
-                    } */}
-
                 <button
                     type="submit"
                     className="update-walker-button"
@@ -236,7 +216,6 @@ function OwnerWalkDetails() {
              {
                  showWalkerList && 
                     <div className="walker-list-container"
-                        // onSubmit={handleChangeOrderStatus}
                     >
                         {(WalkerData?.checkWalkerAvailability === undefined || WalkerData.checkWalkerAvailability.length == 0) 
                         ? <div> Sorry, no walker available at your selected time </div>

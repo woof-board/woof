@@ -7,7 +7,7 @@ import { RatingIconSVG } from '../../utils/helpers'
 function SingleReview( { review }) {
     const { owner_id, review_text, rating } = review;
     const {first_name, last_name} = owner_id;
-    const displayName = first_name + ', ' + last_name.charAt(0).toUpperCase();
+    const displayName = first_name + ', ' + last_name?.charAt(0).toUpperCase();
     return (
         review_text !== '' && 
         <>
