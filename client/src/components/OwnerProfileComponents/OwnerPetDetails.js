@@ -93,7 +93,7 @@ function OwnerDetails({ user }) {
                     <div className="row-data">
 
                         <input
-                            className="profile-input profile-name"
+                            className="dog-info"
                             type="text"
                             name="dog_name"
                             placeholder="Name"
@@ -102,25 +102,24 @@ function OwnerDetails({ user }) {
                         />
                     
                     <input
-                        className="profile-input profile-name"
+                        className="dog-info"
                         type="text"
                         name="breed"
                         placeholder="Breed"
                         onChange={handleInputChange}
                         value={dog.breed}
                     />
-                    </div>
-                    <div className="row-data">
+
                      <input
-                        className="profile-input profile-name"
+                        className="dog-weight"
                         type="text"
                         name="weight"
                         placeholder="Weight"
                         onChange={handleInputChange}
                         value={dog.weight}
-                    />lbs.
-                    <label>Dog Treats allowed</label>
-                    <select className="profile-input profile-name" id="walker-cities" name="address_city" onChange={handleInputChange}>
+                    /><label className="weight-label">lbs.</label>
+                    <label className="treats-label">Dog Treats allowed</label>
+                    <select className="treats-input" id="walker-cities" name="address_city" onChange={handleInputChange}>
                                 {console.log(dog.treats)}
                                 {dog.treats
                                     ? <><option selected value="true">Yes</option><option value="false">No</option></>

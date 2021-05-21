@@ -259,9 +259,11 @@ export const QUERY_WALKER_AVAILABILITY = gql`
             email
             neighbourhoods
             reviews {
-                review_text
+              review_text
+              rating
             }
             average_rating
+            avatar
         }
     }
 `;

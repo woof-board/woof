@@ -4,6 +4,7 @@
     width: 100%;
     padding: 1rem;
     color: white;
+    border-top: 4px solid var(--quatenary);
 }
 
 .footer-left {
