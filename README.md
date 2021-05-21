@@ -21,7 +21,8 @@ You need a break. So do your dogs. We will help both! Woof connects dog owners w
 
 
 ## General Info
-The application follows the MERN paradigm in its architectural structure, using React as the templating language and the express-session npm package for authentication.
+The application follows the MERN paradigm in its architectural structure, using React as the templating language and the JSON web token for authentication.
+[Presentation](client/public/images/Woof.pdf)
 
 ## Technologies
 Project is created with 
@@ -59,7 +60,7 @@ Once all that is done, navigate to - http://localhost:3000 to begin!
 
 
 ## Usage
-This application is deployed on Heroku at ....
+This application is deployed on Heroku at https://woof-app-2021.herokuapp.com
 
 There are three types of access:
 * **Owner access**
@@ -68,12 +69,9 @@ There are three types of access:
 
 **Owner access** allows one to 
 * 
-* 
-* 
 
-**Walker access** 
-* 
-* 
+
+**Walker access** allows one to 
 * 
 * 
 
