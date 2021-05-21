@@ -121,9 +121,9 @@ return (
 
               <div className="button-container">
                 <Link to="bookwalk"><button>Book a walk</button></Link>
-                <Link to="/ownertrackorder"><button>Upcoming Walks</button></Link>
+                <Link to="/ownertrackorder"><button>Walks Schedule</button></Link>
                 {/* Need to make a new page for past walk */}
-                <Link to={"/ownerpastorder"}><button>Past Walks</button></Link>
+                {/* <Link to={"/ownerpastorder"}><button>Past Walks</button></Link> */}
               </div>
             </div>
             }
