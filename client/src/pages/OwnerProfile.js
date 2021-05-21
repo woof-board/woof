@@ -77,7 +77,7 @@ return (
         <>
         {currentUser && currentUser.status === "ACTIVE" && 
           <div className="walker-picture-container">
-            <img src={currentUser.avatar} width="160" alt={`${currentUser.first_name} ${currentUser.last_name}`}/>
+            <img src={currentUser.avatar} width="180" alt={`${currentUser.first_name} ${currentUser.last_name}`}/>
           </div>          
         }
         <div className="walker-details-container">

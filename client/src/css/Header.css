@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding: .5rem 0;
-    background-color: var(--primary);
+    padding: .3rem 0 .5rem;
+    background-color: var(--tertiary);
     z-index: 999;
     position: fixed;
     top: 0;
@@ -13,13 +13,14 @@
     align-items: center;
 }
 
-.header-logo {
-    padding: 0 1rem 0 1rem;
+.walker-nav {
+    background-color: var(--primary);
 }
-/* 
-.logo {
-    color: white;
-} */
+
+.header-logo {
+    margin: 0 0 -20px 10px;
+}
+
 
 li {
     list-style: none;
@@ -90,5 +91,8 @@ li {
 
     .header-container {
         flex-direction: column;
+    }
+    .header-logo {
+        margin: 0;
     }
 }

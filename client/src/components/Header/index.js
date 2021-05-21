@@ -63,17 +63,22 @@ function Header() {
         });
         Auth.logout();
     };
+    
+    let headerClass="header-container";
+    if(result==="walker" || result === "guest") {
+         headerClass="header-container walker-nav"
+    }
 
     return (
         location.pathname !== "/" &&
-        <nav className="header-container">
+        <nav className={headerClass}>
             <div className="logo">
                 <Link to="/">
                     <img 
                         className="header-logo" 
                         src={Logo} 
                         alt="logo" 
-                        width="100" 
+                        width="120" 
                     />
                 </Link>
             </div>

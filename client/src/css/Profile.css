@@ -1,4 +1,4 @@
-#walkers, #owners {
+#owners {
     display: flex;
     flex-direction: row;
     padding: 2rem 5rem 1rem;
@@ -20,12 +20,15 @@
     padding: 0 15px;
 }
 .walker-picture-container {
-    margin: 0 1rem 1rem 1rem;
+    margin: 0 2rem 0 0;
+
+    
 }
 .walker-picture-container img, .walker-update-form img {
     border: 8px solid var(--tertiary);
     border-radius: 50%;
     object-fit: cover;
+    margin: 0 auto 0 0;
 }
 
 .walker-update-form img  {
@@ -82,17 +85,38 @@
     font-weight: bold;
 }
 
-.profile-input, .time-picker {
+.profile-input, .time-picker, .dog-weight, .treats-input, .dog-info {
     border: none;
     margin: 0 8px 8px 0;
     padding: 12px 8px;
     background:rgb(var(--rgb-quinary),0.5);
     border: none;
-    width: 50%
+}
+.profile-input {
+    width: 50%;
 }
 .time-picker, .date-picker {
-    width: fit-content; 
+    width: fit-content;
 }
+
+.dog-info {
+    width: 30%;
+}
+.dog-weight, .treats-input {
+    width: 4rem; 
+}
+.dog-weight {
+    margin-left: 20px;
+}
+.weight-label {
+    margin-top: 12px;
+    margin-right: 45px;
+}
+.treats-label {
+    margin-top: 12px;
+    margin-right: 13px;
+}
+
 
 .profile-input:focus {
     background-color: rgb(var(--rgb-tertiary),0.1);
@@ -103,7 +127,7 @@
 }
 
 
-.average-rating {
+.average-rating, .average-rating-mobile {
     width: 90%;
     background-color: rgb(var(--rgb-quinary),0.5);
     padding: .5rem;
@@ -112,6 +136,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.average-rating-mobile {
+    display:none;
 }
 
 .account-status {
@@ -151,6 +179,8 @@ h3 .light {
     font-weight: 300;
     color: var(--secondary);
     font-size: .75em;
+    white-space: nowrap;
+    line-height: 1.2em;
 }
 
 button {
@@ -175,8 +205,6 @@ button:hover {
     display: flex;
     justify-content: flex-end;
     flex-wrap: wrap;
-
-
 }
 .right-button {
     margin-left: 0;
@@ -193,5 +221,24 @@ button:hover {
     }
     .walker-contact-container {
         width: 20rem;
+    }
+    .average-rating {
+        display:none;
+    }
+    .average-rating-mobile {
+        display: flex;
+    }
+    .profile-input {
+        width: 97%;
+    }
+    .row-data {
+        flex-direction: column;
+    }
+    .button-container {
+        display: flex;
+        flex-direction: column;
+    }
+    button {
+        width: 100%;
     }
 }

@@ -218,14 +218,14 @@ function WalkerDetails({ user }) {
                         value={formData.address_postal_code}
                     />
                 </div>
-                
-                <button
-                    type="submit"
-                    className="update-walker-button"
-                    id="update-walker-profile-button"
-                >
-                    UPDATE
-                </button>
+                <div className="button-container">
+                    <button
+                        type="submit"
+                        id="update-walker-profile-button"
+                    >
+                        UPDATE
+                    </button>
+                </div>
             </form>
         </div>
         </>
