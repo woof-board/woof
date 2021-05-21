@@ -21,7 +21,7 @@ You need a break. So do your dogs. We will help both! Woof connects dog owners w
 
 
 ## General Info
-The application follows the MERN paradigm in its architectural structure.
+The application follows the MERN paradigm in its architectural structure, using React as the templating language and the express-session npm package for authentication.
 
 ## Technologies
 Project is created with 
@@ -39,6 +39,8 @@ Project is created with
 * [bcrypt](https://www.npmjs.com/package/bcrypt)
 * [graphql](https://graphql.org/)
 * [mapbox-gl](https://www.mapbox.com/mapbox-gljs)
+* [Dotenv](https://www.npmjs.com/package/dotenv)
+* [bcrypt](https://www.npmjs.com/package/bcrypt)
 
 ## Installation
 To get started clone this repository using 
