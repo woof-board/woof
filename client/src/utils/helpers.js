@@ -192,7 +192,8 @@ export const cities = [
         name: "Whitchurch-Stouffville", 
         group: false
       }
-]
+];
+
 export const neighbourhoods = [
   "Downtown",
   "East York",
@@ -215,4 +216,118 @@ export function middleValueOfArray(arr) {
     return []; // Tracking not started
   }
 }
+
+export const validateInput = (inputArr) => {
+    let errors = [];
+    inputArr.forEach(( {input_title, input_val, criteria} )=> {
+        criteria.forEach(criteriaItem => {
+            switch (criteriaItem) {
+                case 'required':
+                    if (input_val === undefined || input_val === '') {
+                        errors.push(`"${input_title}" is a required field;`);
+                    }
+                    break;
+                // case 'url':
+                //     if(input_val) {
+                //         if (!validator.isURL(input_val)){
+                //             errors.push(`"${input_title}" must be a valid web url;`);
+                //         }
+                //     }
+                //     break;
+                case 'email':
+                    if(input_val) {
+                        if (!validateEmail(input_val)){
+                            errors.push(`"${input_title}" must be a valid email format;`);
+                        }
+                    }
+                    break;
+                case 'not_null':
+                    if(input_val) {
+                        if (input_val === "null") {
+                            errors.push(`Please select a valid "${input_title}";`);
+                        }
+                    }
+                    break;
+                case 'positive_num':
+                    if(input_val) {
+                        if (input_val < 0) {
+                            errors.push(`Please select a valid "${input_title}";`);
+                        }
+                    }
+                    break;
+                case 'char_len_8':
+                    if(input_val) {
+                        if (input_val.length < 8) {
+                            errors.push(`"${input_title}" must be at least 8 characters long;`);
+                        }
+                    }
+                    break;
+                case 'non_empty_array':
+                    if(input_val) {
+                        if (input_val.length == 0) {
+                            errors.push(`Please select at least one "${input_title}";`);
+                        }
+                    }
+            }
+        });
+    });
+    return errors;
+};
+
+export function idbPromise(storeName, method, object) {
+    return new Promise((resolve, reject) => {
+      const request = window.indexedDB.open('woof', 1);
+      let db, tx, store;
+      // if version has changed (or if this is the first time using the database), run this method and create the three object stores 
+      request.onupgradeneeded = function(e) {
+        const db = request.result;
+        // create object store for each type of data and set "primary" key index to be the `_id` of the data
+        db.createObjectStore('user', { keyPath: '_id' });
+        db.createObjectStore('orders', { keyPath: '_id' });
+        // db.createObjectStore('cart', { keyPath: '_id' });
+      };
+  
+      request.onerror = function(e) {
+        console.log('There was an error');
+      };
+  
+      request.onsuccess = function(e) {
+          // save a reference of the database to the `db` variable
+        db = request.result;
+        // open a transaction do whatever we pass into `storeName` (must match one of the object store names)
+        tx = db.transaction(storeName, 'readwrite');
+        // save a reference to that object store
+        store = tx.objectStore(storeName);
+  
+        db.onerror = function(e) {
+          console.log('error', e);
+        };
+  
+        switch (method) {
+          case 'put':
+            store.put(object);
+            resolve(object);
+            break;
+          case 'get':
+            const all = store.getAll();
+            all.onsuccess = function() {
+              resolve(all.result);
+            };
+            break;
+          case 'delete':
+            store.delete(object._id);
+            break;
+          default:
+            console.log('No valid method');
+            break;
+        }
+        
+        // when the transaction is complete, close the connection
+        tx.oncomplete = function() {
+          db.close();
+        };
+      };
+    });
+  }
+
 

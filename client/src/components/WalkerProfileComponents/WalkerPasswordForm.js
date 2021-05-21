@@ -53,7 +53,7 @@ function WalkerPasswordForm() {
 
     const closeModal = () => {
         setModalJSX(<div />);
-        setModalOpen(true);
+        setModalOpen(false);
     };
 
     return (

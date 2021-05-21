@@ -88,6 +88,27 @@ function OwnerTrackOrder() {
                 ))}
             </div>
           }
+           {currentUser && currentUser.status === "ACTIVE" &&   
+            <div className="walker-profile-container">
+              
+              {orders.map((order) => (
+                  order.status !== "FINALIZED" 
+                  ? null 
+                  : (
+                    <div className="walks">
+                        <div>
+                            <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
+                            <div><span className="medium-text">Start time:</span> {order.service_time}</div>
+                            {/* <div> Walker: {`${order.walker.first_name} ${order.walker.last_name}`} </div> */}
+                            {/* Add map component */}
+                            <Link to={"/testmap"}><button>See on Map</button></Link>
+                            </div>
+                        </div>
+                    )
+                ))}
+            </div>
+          }
+          
         </div>
       </div>
     </>

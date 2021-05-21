@@ -44,7 +44,7 @@ class AuthService {
     if (this.getProfileType() === 'owner') {
       window.location.assign('/ownerprofile');
     } else if (this.getProfileType() === 'walker') {
-      window.location.assign('/walkerprofile');
+      window.location.assign('/walkerschedule');
     } else if (this.getProfileType() === 'admin') {
         window.location.assign('/adminprofile');
     }
