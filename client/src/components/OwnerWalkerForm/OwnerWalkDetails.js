@@ -10,6 +10,9 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { formatDate, addDays } from '../../utils/helpers';
 import "react-datepicker/dist/react-datepicker.css";
 import { Redirect } from 'react-router';
+import StarRatings from 'react-star-ratings';
+import { RatingIconSVG } from '../../utils/helpers'
+
 
 // import { UPDATE_CURRENT_USER } from "../../utils/actions";
 // import { cities, neighbourhoods } from '../../utils/helpers';
@@ -153,7 +156,12 @@ function OwnerWalkDetails() {
     return (
         
         <div id="owners">
+            <div className="headline">            
+                <h1>Book a walk</h1>
+            </div>
+            
         <div className="walker-contact-container">
+            
             <div className="walker-header"><h2>Walk Details</h2></div>
             <form
                 className="walker-update-form"
@@ -225,12 +233,42 @@ function OwnerWalkDetails() {
                                 <h4> Available Walkers</h4>
                                 { WalkerData?.checkWalkerAvailability.map((data) => 
                                 <div className = "walker-container">
+                                    <img src={data.avatar} width="85" />
                                     <h5>Walker: <span className="regText">{data.first_name} {data.last_name}</span></h5>
                                     <h6>Rating: <span className="regText">{data.average_rating > 0
-                                                ? data.average_rating 
+                                                ? <>
+                                                <StarRatings
+                                                    rating= {data.average_rating}
+                                                    starDimension="18px"
+                                                    starSpacing="3px"
+                                                    starRatedColor="#254e9b"
+                                                    starEmptyColor="#98b4e7"
+                                                    svgIconViewBox={RatingIconSVG.box}
+                                                    svgIconPath={RatingIconSVG.coords}
+                                                />&nbsp;<span className="light">({data.average_rating.toFixed(1)})</span>
+                                                </>
+                                                 
                                                 : "This walker has not been rated yet."
                                                 }</span></h6>
-                                    <button data-id={data._id} onClick={handleUpdateOrder}>Select and confirm booking</button>
+                                    {data.reviews[0] && <h6>Reviews</h6>}
+                                    {data.reviews.map(review =>
+                                        <>
+                                        
+
+                                        <div><StarRatings
+                                            rating= {review.rating}
+                                            starDimension="12px"
+                                            starSpacing="2px"
+                                            starRatedColor="#254e9b"
+                                            starEmptyColor="#98b4e7"
+                                            svgIconViewBox={RatingIconSVG.box}
+                                            svgIconPath={RatingIconSVG.coords}
+                                        /> {review.review_text}</div> 
+                                        </>
+                                    )}
+                                    <div className="button-container">
+                                        <button data-id={data._id} onClick={handleUpdateOrder}>Select and confirm booking</button>
+                                    </div>
                                 </div>
                                 )}
                             </>

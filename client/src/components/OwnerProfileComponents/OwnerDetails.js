@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-//import '../../css/OwnerProfile.css';
 import { GET_CUSTOMER_SESSION_ID, CHARGE_OWNER } from '../../utils/queries';
 import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
@@ -237,7 +236,7 @@ function OwnerDetails({ user }) {
                 <div className="button-container">
                     <button
                         type="submit"
-                        // className="update-walker-button"
+                        className="update-walker-button"
                         id="update-owner-profile-button"
                     >
                         UPDATE PROFILE
@@ -245,7 +244,7 @@ function OwnerDetails({ user }) {
                     <button
                         type="button"
                         role="link" 
-                        // className="update-walker-button right-button"
+                        className="update-walker-button right-button"
                         id="update-owner-Credit-Info-button"
                         onClick={handleGetSessionId}
                     >

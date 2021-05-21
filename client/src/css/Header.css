@@ -3,7 +3,8 @@
     justify-content: space-between;
     flex-direction: row;
     padding: .3rem 0 .5rem;
-    background-color: var(--tertiary);
+    /* background-color: var(--tertiary); */
+    background-color: var(--primary);
     z-index: 999;
     position: fixed;
     top: 0;
@@ -13,7 +14,7 @@
     align-items: center;
 }
 
-.walker-nav {
+.blue-back {
     background-color: var(--primary);
 }
 
