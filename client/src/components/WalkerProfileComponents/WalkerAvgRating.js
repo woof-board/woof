@@ -22,6 +22,17 @@ function WalkerAvgRating({average_rating}) {
             svgIconPath={RatingIconSVG.coords}
           />
           </div>
+          <div className="average-rating-mobile">
+          <StarRatings
+            rating= {average_rating}
+            starDimension="36px"
+            starSpacing="3px"
+            starRatedColor="#254e9b"
+            starEmptyColor="#98b4e7"
+            svgIconViewBox={RatingIconSVG.box}
+            svgIconPath={RatingIconSVG.coords}
+          />
+          </div>
         </div>
     )
 }

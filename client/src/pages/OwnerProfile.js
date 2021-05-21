@@ -77,7 +77,7 @@ return (
         <>
         {currentUser && currentUser.status === "ACTIVE" && 
           <div className="walker-picture-container">
-            <img src={currentUser.avatar} width="160" alt={`${currentUser.first_name} ${currentUser.last_name}`}/>
+            <img src={currentUser.avatar} width="180" alt={`${currentUser.first_name} ${currentUser.last_name}`}/>
           </div>          
         }
         <div className="walker-details-container">
@@ -120,8 +120,8 @@ return (
 
 
               <div className="button-container">
-                <Link to="bookwalk"><button>Book a walk</button></Link>
-                <Link to="/ownertrackorder"><button>Walks Schedule</button></Link>
+                <Link to="/bookwalk"><button>Book a walk</button></Link>
+                <Link to="/ownertrackorder"><button>Upcoming Walks</button></Link>
                 {/* Need to make a new page for past walk */}
                 {/* <Link to={"/ownerpastorder"}><button>Past Walks</button></Link> */}
               </div>
