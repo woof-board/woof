@@ -41,11 +41,8 @@ function OwnerProfile() {
         type: UPDATE_CURRENT_USER,
         currentUser: data.ownerMe
       });
-
     }
   }, [currentUser, data, loading, dispatch]);
-
-  console.log(currentUser);
 
   /// SHOW UPCOMING WALKS ///
 
@@ -64,19 +61,23 @@ function OwnerProfile() {
       cloud_name: 'w-oo-f',
       upload_preset: 'iqgryfiq' //Create an unsigned upload preset and update this
     };
-    console.log(uploadOptions);
 
     openUploadWidget(uploadOptions, (error, result) => {
       if (!error) {
         const {event, info} = result;
         if (event === "success") {
-          
-          console.log(info.public_id)
           updateOwnerAvatar({
             variables:{
               avatar: info.public_id
             }
           })
+          .then(newOwner => {
+            dispatch({
+              type: UPDATE_CURRENT_USER,
+              currentUser: newOwner.data.updateOwnerAvatar
+            });
+          });
+
         }
       } else {
         console.log(error);
@@ -104,8 +105,11 @@ function OwnerProfile() {
           {currentUser && currentUser.status === "ACTIVE" &&
             <div className="walker-picture-container">
               <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + currentUser.avatar} width="180" alt={`${currentUser.first_name} ${currentUser.last_name}`}  />
-              <button className="upload_button"  onClick={uploadImageWithCloudinary}>Upload</button>
+              <div>
+                <button className="upload_button"  onClick={uploadImageWithCloudinary}>Upload</button>
+              </div>
             </div>
+            
 
           }
           <div className="walker-details-container">

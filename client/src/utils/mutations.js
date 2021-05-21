@@ -416,10 +416,30 @@ export const ADD_DOG = gql`
 export const UPDATE_OWNER_AVATAR = gql`
     mutation updateOwnerAvatar($avatar: String!) {
         updateOwnerAvatar(avatar: $avatar) {
-        _id
-        first_name
-        last_name
-        avatar
+            _id
+            first_name
+            last_name
+            email
+            avatar
+            admin
+            status
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
+            phone
+            dogs {
+                _id
+                name
+                breed
+                weight
+                treats
+                avatar
+            }
+            dog_count
         }
     }
 `;

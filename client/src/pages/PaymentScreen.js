@@ -61,18 +61,18 @@ useEffect(() => {
       cloud_name: 'w-oo-f',
       upload_preset: 'iqgryfiq' //Create an unsigned upload preset and update this
     };
-    console.log(uploadOptions);
+    // console.log(uploadOptions);
 
     openUploadWidget(uploadOptions, (error, result) => {
       if (!error) {
         const {event, info} = result;
         if (event === "success") {
           // this.props.onPhotosUploaded([info]);
-          console.log(info.public_id)
+          // console.log(info.public_id)
           const srcLink = 'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + info?.public_id;
           setPhoto(srcLink);
-          console.log('srcLink')
-          console.log(srcLink)
+          // console.log('srcLink')
+          // console.log(srcLink)
         }
       } else {
         console.log(error);
