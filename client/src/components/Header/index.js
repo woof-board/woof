@@ -216,8 +216,8 @@ function Header() {
 
                             </li>)}                    
                         </div>
-                        <div onClick={setDark}><i class="far fa-moon header-icon"></i></div>
-                        <div onClick={setLight}><i class="far fa-sun header-icon"></i></div>
+                        {/* <div onClick={setDark}><i class="far fa-moon header-icon"></i></div>
+                        <div onClick={setLight}><i class="far fa-sun header-icon"></i></div> */}
                     </>
                 {/* } */}
             </div>
