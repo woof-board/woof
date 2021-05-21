@@ -9,7 +9,7 @@ function WalkerOrders({ orders=[] }) {
     return (
         <div className="walker-contact-container">
           <div className="walker-header">
-            <h3>My Walks <span className="light">{totalOrders ? `Viewing ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
+            <h3>My Woof <span className="light">{totalOrders ? `Viewing ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
             : 'You have no upcoming walks'}</span></h3>
           </div>
             {orders.map((order, ind) => (
@@ -20,7 +20,7 @@ function WalkerOrders({ orders=[] }) {
             ))}
           <form className="user-update-form">
             <Link to="/walkerschedule"><button>My Schedule</button></Link>
-            <Link to="/walkertrackwalks"><button>Track My Walk</button></Link>
+            <Link to="/walkertrackwalks"><button>My Walks</button></Link>
           </form>
         </div>
     )

@@ -18,7 +18,8 @@ function WalkerTrackWalks() {
           walker_id: currentUser._id
       }
     });
-
+    
+    // const totalOrders = orders?.length;
     
     useEffect(() => {
       // if not already in global store
@@ -44,25 +45,50 @@ function WalkerTrackWalks() {
 
   return (
     <>
-      <h1>My UpComing Walks</h1>
+      <h1>My Walks</h1>
       <div className='page-wrap'>
         <div className="walker-details-container">
           {currentUser && currentUser.status === "ACTIVE" &&   
             <div className="walker-profile-container">
+              <h2>Upcoming Walks</h2>
               {/* <div>
                 {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
                 : 'You have no upcoming Walks'}
               </div> */}
-              {orders.filter(order => order.status === "PENDING_PROGRESS").map((order) => (
+              {orders.filter(order => order.status === "PENDING_PROGRESS" || order.status === "IN_PROGRESS" ).map((order) => (
                 <div className="walks">
                   <div>Walk Date: {order.service_date}</div>
                   <div>Start time: {order.service_time}</div>
+                  <div>Status: {order.status}</div>
                   <WalkerTrackOrder 
-                order_id = {order.order_id}
+                order_id = {order._id}
                 service_date = {order.service_date}
                 service_time = {order.service_time}
                 status = {order.status}
                 />
+                </div>
+                
+                // )
+              ))}
+
+              
+            </div>
+          }
+        </div>
+        {/* fulfilled walks */}
+        <div className="walker-details-container">
+          {currentUser && currentUser.status === "ACTIVE" &&   
+            <div className="walker-profile-container">
+              <h2>Completed Walks</h2>
+              {/* <div>
+                {totalOrders ? `You have ${totalOrders} fulfilled ${totalOrders === 1 ? 'walk' : 'walks'}:`
+                : 'You have no fulfilled Walks'}
+              </div> */}
+              {orders.filter(order => order.status === "FULLFILLED").map((order) => (
+                <div className="walks">
+                  <div>Walk Date: {order.service_date}</div>
+                  <div>Start time: {order.service_time}</div>
+                  <div>Status: {order.status}</div>
                 </div>
                 
                 // )
