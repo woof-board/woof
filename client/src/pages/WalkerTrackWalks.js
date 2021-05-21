@@ -68,7 +68,6 @@ function WalkerTrackWalks() {
                 />
                 </div>
                 
-                // )
               ))}
 
               
@@ -91,7 +90,6 @@ function WalkerTrackWalks() {
                   <div>Status: {order.status}</div>
                 </div>
                 
-                // )
               ))}
 
               

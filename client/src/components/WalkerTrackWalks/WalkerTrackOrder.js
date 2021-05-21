@@ -15,10 +15,7 @@ function WalkerTrackOrder(order) {
     service_time,
     status
   } = order;
-
   const [updateOrderStatus] = useMutation(UPDATE_ORDER_STATUS);
-
-  
   const trackCoordinates = [];
 
   useEffect(() => {
@@ -49,14 +46,13 @@ function WalkerTrackOrder(order) {
     setButtonClicked(true);
   }
 
+  // function for changing order status to IN_PROGRESS
   function changeStatusToProgress() {
     try {
       updateOrderStatus({
       variables: {
         order_id: order_id,
         status: "IN_PROGRESS",
-
-
       }
     });
 
@@ -66,24 +62,22 @@ function WalkerTrackOrder(order) {
     }
   }
 
-
+   // function for changing order status to FULFILLED
   function changeStatusToFulfilled() {
     try {
       updateOrderStatus({
       variables: {
         order_id: order_id,
         status: "FULLFILLED",
-
-
       }
     });
-
       // alert('status Updated !!!!');
     } catch (e) {
       console.log(e);
     }
   }
 
+  // function for pushing the current position coordinates to Order
   function success(position) {
     // push the coords to database
     console.log(order_id);
@@ -111,7 +105,7 @@ function WalkerTrackOrder(order) {
 
   }
  
-
+  // render button for starting and stopping walk
   return (
 
     <div className="walks">
