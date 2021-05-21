@@ -1,8 +1,17 @@
-body {
-    background-image: url('../assets/images/front-page.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    
+.home-back {
+background-image: url('../assets/images/front-page.jpg');
+
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+.home-new {
+
+    height: 100%;
+    width: 100%;
+    margin-top: -4rem;
+    padding: 0;
+
 }
 
 .center-page-vh {

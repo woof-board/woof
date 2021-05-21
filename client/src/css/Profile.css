@@ -126,6 +126,12 @@
     width:100%;
 }
 
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
 
 .average-rating, .average-rating-mobile {
     width: 90%;
@@ -208,11 +214,7 @@ button:hover {
         align-items: center;
     }
 
-.button-container {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-}
+
 .right-button {
     margin-left: 0;
 

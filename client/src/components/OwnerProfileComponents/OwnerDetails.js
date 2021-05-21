@@ -237,7 +237,7 @@ function OwnerDetails({ user }) {
                 <div className="button-container">
                     <button
                         type="submit"
-                        className="update-walker-button"
+                        // className="update-walker-button"
                         id="update-owner-profile-button"
                     >
                         UPDATE PROFILE
@@ -245,7 +245,7 @@ function OwnerDetails({ user }) {
                     <button
                         type="button"
                         role="link" 
-                        className="update-walker-button right-button"
+                        // className="update-walker-button right-button"
                         id="update-owner-Credit-Info-button"
                         onClick={handleGetSessionId}
                     >
