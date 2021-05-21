@@ -195,13 +195,13 @@ function OwnerDetails({ user }) {
                         }
                         
                         {
-                        cities.map(({name, group}) => 
+                        cities?.map(({name, group}) => 
                             (group 
                                 ? <optgroup label={name} ></optgroup>
                                 // ? city.name!=="close" 
                                 //     ? <optgroup label={city}>
                                 //     : </optgroup>
-                                : name.toLowerCase() === formData.city.toLowerCase()
+                                : name.toLowerCase() === formData.city?.toLowerCase()
                                     ? <option selected value={name} >{name}</option>
                                     : <option value={name} >  {name}</option>
                             )
