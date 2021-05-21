@@ -84,7 +84,7 @@ function WalkerTrackWalks() {
                 {totalOrders ? `You have ${totalOrders} fulfilled ${totalOrders === 1 ? 'walk' : 'walks'}:`
                 : 'You have no fulfilled Walks'}
               </div> */}
-              {orders.filter(order => order.status === "FULLFILLED").map((order) => (
+              {orders.filter(order => order.status === "FULLFILLED" || order.status === "CHARGED" || order.status === "FINALIZED").map((order) => (
                 <div className="walks">
                   <div>Walk Date: {order.service_date}</div>
                   <div>Start time: {order.service_time}</div>
