@@ -23,6 +23,8 @@ import Home from './pages/Home';
 import Map from './components/OwnerTrackOrder/Map'
 import TestMap from './components/OwnerTrackOrder/TestMap'
 import OwnerWalkDetails from './components/OwnerWalkerForm/OwnerWalkDetails';
+import AdminPage from './pages/Admin';
+
 const client = new ApolloClient({
     request: operation => {
         const token = localStorage.getItem('id_token');
@@ -64,6 +66,8 @@ function App() {
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
                             <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
                             <PrivateRoute exact path="/walkertrackwalks" usertype="walker" component={WalkerTrackWalks} />
+                            <Route exact path="/admin" component={AdminPage}/>
+
                             <Route component={NoMatch} />
                         </Switch>
                     </div>
