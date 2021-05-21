@@ -412,3 +412,14 @@ export const ADD_DOG = gql`
         }
     }
 `;
+
+export const UPDATE_OWNER_AVATAR = gql`
+    mutation updateOwnerAvatar($avatar: String!) {
+        updateOwnerAvatar(avatar: $avatar) {
+        _id
+        first_name
+        last_name
+        avatar
+        }
+    }
+`;

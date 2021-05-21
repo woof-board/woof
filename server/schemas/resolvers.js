@@ -218,6 +218,7 @@ const resolvers = {
            - addDog
            - updateOwnerProfile
            - updateOwnerPassword
+           - updateOwnerAvatar
         */
         addOwner: async (parent, { input }) => {
             const owner = await Owner.create(input);
@@ -289,6 +290,21 @@ const resolvers = {
                 //     { password: new_password }, 
                 //     { new: true, runValidators: true }
                 // );
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateOwnerAvatar: async (parent, { avatar }, context) => {
+            if (context.owner) {
+                // find the owner by id
+                const owner = await Owner.findByIdAndUpdate(
+                    context.owner._id,
+                    {avatar: avatar},
+                    { new: true, runValidators: true }
+                ); 
+                
+                return owner;
             }
       
             throw new AuthenticationError('Not logged in');

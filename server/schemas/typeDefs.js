@@ -260,6 +260,7 @@ const typeDefs = gql`
         addDog(input: DogInput): Owner
         updateOwnerProfile(input: OwnerProfileInput): Owner
         updateOwnerPassword(old_password: String!, new_password: String!): Owner
+        updateOwnerAvatar(avatar: String!): Owner
 
         addOrder(input: OrderInput): Order
         updateOrder(order_id: ID!, input: UpdateOrderInput): Order
