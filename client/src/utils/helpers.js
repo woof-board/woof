@@ -282,10 +282,8 @@ export function idbPromise(storeName, method, object) {
       request.onupgradeneeded = function(e) {
         const db = request.result;
         // create object store for each type of data and set "primary" key index to be the `_id` of the data
-        db.createObjectStore('owner', { keyPath: '_id' });
-        db.createObjectStore('walker', { keyPath: '_id' });
-        db.createObjectStore('owner_orders', { keyPath: '_id' });
-        db.createObjectStore('walker_orders', { keyPath: '_id' });
+        db.createObjectStore('user', { keyPath: '_id' });
+        db.createObjectStore('orders', { keyPath: '_id' });
         // db.createObjectStore('cart', { keyPath: '_id' });
       };
   

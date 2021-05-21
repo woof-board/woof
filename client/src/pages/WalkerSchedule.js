@@ -4,34 +4,34 @@ import { UPDATE_WALKER_AVAILABILITY } from "../utils/mutations";
 import { QUERY_WALKER_ORDERS, QUERY_WALKER_ME } from "../utils/queries";
 import { createInitialState } from "../utils/helpers";
 import { useStoreContext } from "../utils/GlobalState";
-import { UPDATE_CURRENT_USER } from "../utils/actions";
+import { UPDATE_CURRENT_USER, UPDATE_CURRENT_USER_ORDERS } from "../utils/actions";
 import ModalDisplay from '../components/ModalDisplay';
 import { idbPromise } from "../utils/helpers";
+import OrderCard from '../components/OrderCard';
 import '../css/Walkers.css';
 
 function WalkerSchedule() {
     const [state, dispatch] = useStoreContext();
-    const { currentUser } = state;
+    const { currentUser, currentUserOrders } = state;
     const [updateWalkerAvailability, { error }] = useMutation(UPDATE_WALKER_AVAILABILITY);
     const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
-    const [ getWalkerOrders, { loading: orderDataLoading, data: walkerOrderData } ] = useLazyQuery(QUERY_WALKER_ORDERS, {
+    const [ getWalkerOrders, { called: calledWalkerOrder, loading: orderDataLoading, data: walkerOrderData } ] = useLazyQuery(QUERY_WALKER_ORDERS, {
         variables: {
             walker_id: currentUser?._id
         }
     }); 
-    // const { data: walkerOrderData } = useQuery(QUERY_WALKER_ORDERS, {
-    //     variables: {
-    //         walker_id: currentUser?._id
-    //     }
-    // }); 
-
     const [ schedule, setSchedule ] = useState(createInitialState());
     const [buttonVisible, setButtonVisible] = useState(false);
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState(false);
-    const [ scheduledWalks, setScheduledWalks ] = useState([]);
 
     const timeSlotArr = ["slot9am", "slot11am", "slot1pm", "slot3pm", "slot5pm", "slot7pm", "slot9pm"];
+
+    useEffect(() => {
+        if(currentUserOrders?.length === 0  && !calledWalkerOrder) {
+            getWalkerOrders();
+        }
+    }, [currentUserOrders]);
 
     useEffect(() => {
         // if not already in global store
@@ -44,21 +44,24 @@ function WalkerSchedule() {
                 type: UPDATE_CURRENT_USER,
                 currentUser: data.walkerMe
             });
-            
+            idbPromise('user', 'put', data.walkerMe);
             getWalkerOrders();
         }
-        // } else if (currentUser && scheduledWalks.length  < 1) {
-        //     getWalkerOrders();
-        // }
     }, [currentUser, data, loading, dispatch]);
 
     useEffect(() => {
         if (walkerOrderData) {
             console.log("walker orders", walkerOrderData);
+            dispatch({
+                type: UPDATE_CURRENT_USER_ORDERS,
+                orders: walkerOrderData.walkerOrders
+            });
 
-            setScheduledWalks(walkerOrderData.walkerOrders);
+            walkerOrderData.walkerOrders.forEach( order => {
+                idbPromise('orders', 'put', order);
+            });
         }
-    }, [walkerOrderData]);
+    }, [walkerOrderData, calledWalkerOrder]);
 
     useEffect(()=>{
         const availability = currentUser?.availability || null; 
@@ -84,7 +87,8 @@ function WalkerSchedule() {
         const slotStatus = event.target.getAttribute("data-status");
         
         if (slotStatus === "booked") {
-            return viewWalkDetails();
+            const orderId = event.target.getAttribute("data-orderid");
+            return viewWalkDetails(orderId);
         }
 
         let tempArr = Array.from(schedule, x => x); 
@@ -103,12 +107,11 @@ function WalkerSchedule() {
         }
     };
 
-    const viewWalkDetails = () => {
+    const viewWalkDetails = (orderId) => {
+        const selectedOrder = currentUserOrders.filter(order => order._id === orderId)[0];
+        
         const messageJSX = (
-            <div className="available" width="400px" height="400px">
-                This slot is booked <br />
-                More info and formatting coming soon... 
-            </div>
+            <OrderCard orderItem={selectedOrder}/>
         );  
         setModalJSX(messageJSX);
         setModalOpen(true); 
@@ -160,13 +163,15 @@ function WalkerSchedule() {
         // check with booked services
         let isBooked = false;
         let ownerName = "";
+        let dataId = "";
         const slot = timeSlot.replace("slot", "");
 
-        scheduledWalks.map((walk, index) => {
+        currentUserOrders?.map((walk, index) => {
             if(!isBooked){
                 if(walk.service_date === scheduleItem.date && walk.service_time === slot) {
                     isBooked = true;
                     ownerName = walk.owner.first_name + " " + walk.owner.last_name;
+                    dataId = walk._id;
                 }
             }
         });
@@ -176,7 +181,8 @@ function WalkerSchedule() {
                 className={isBooked ? "booked" : (scheduleItem[timeSlot] ? "available" : "unavailable")} 
                 onClick={changeAvailability} 
                 id={index + "-" + timeSlot} 
-                data-index={index} 
+                data-index={index}
+                data-orderid={dataId} 
                 data-time={timeSlot}
                 data-status={isBooked ? "booked" : (scheduleItem[timeSlot] ? "available" : "unavailable")} 
             >
