@@ -64,6 +64,11 @@ function Header() {
         });
         Auth.logout();
     };
+    
+    let headerClass="header-container";
+    if(result==="walker" || result === "guest") {
+         headerClass="header-container walker-nav"
+    }
 
     var page = document.querySelector('body');
     var bg = 'background-color';
@@ -173,14 +178,14 @@ function Header() {
 
     return (
         location.pathname !== "/" &&
-        <nav className="header-container">
+        <nav className={headerClass}>
             <div className="logo">
                 <Link to="/">
                     <img 
                         className="header-logo" 
                         src={Logo} 
                         alt="logo" 
-                        width="100" 
+                        width="120" 
                     />
                 </Link>
             </div>
@@ -211,8 +216,8 @@ function Header() {
 
                             </li>)}                    
                         </div>
-                        <div onClick={setDark}><i className="far fa-moon header-icon"></i></div>
-                        <div onClick={setLight}><i className="far fa-sun header-icon"></i></div>
+                        {/* <div onClick={setDark}><i class="far fa-moon header-icon"></i></div>
+                        <div onClick={setLight}><i class="far fa-sun header-icon"></i></div> */}
                     </>
                 {/* } */}
             </div>

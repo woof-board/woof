@@ -1,12 +1,17 @@
+.home-back {
+background-image: url('../assets/images/front-page.jpg');
+
+background-size: cover;
+background-repeat: no-repeat;
+}
+
 .home-new {
-    background-image: url('../assets/images/front-page.jpg');
-    position: fixed;
-    left: 0;
-    top: 0;
+
     height: 100%;
     width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
+    margin-top: -4rem;
+    padding: 0;
+
 }
 
 .center-page-vh {
@@ -37,6 +42,9 @@
     font-weight: bold;
     margin-bottom: 1rem;
     padding: 0 2rem;
+    padding: 1px 5px;
+    background-color: rgb(var(--rgb-quinary),0.8);
+    border-radius: 10px;
 }
 
 .home-button {
@@ -78,7 +86,7 @@
     color: var(--tertiary);
     padding: 3px 7px;
     border-radius: 5px;
-    background-color: #DFD8D8;
+    background-color: rgb(var(--rgb-quinary),0.8);
     margin-top: 8px;
     font-weight: 500;
 }
@@ -123,8 +131,7 @@
     .home-font-small {
         font-size: 1rem;
         text-align: center;
-        padding: 1px;
-        background-color: #DFD8D8;
+
 
     }
 }

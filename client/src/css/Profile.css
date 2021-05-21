@@ -1,4 +1,4 @@
-#walkers, #owners {
+#owners {
     display: flex;
     flex-direction: row;
     padding: 2rem 5rem 1rem;
@@ -20,12 +20,15 @@
     padding: 0 15px;
 }
 .walker-picture-container {
-    margin: 0 1rem 1rem 1rem;
+    margin: 0 2rem 0 0;
+
+    
 }
 .walker-picture-container img, .walker-update-form img {
     border: 8px solid var(--tertiary);
     border-radius: 50%;
     object-fit: cover;
+    margin: 0 auto 0 0;
 }
 
 .walker-update-form img  {
@@ -33,10 +36,6 @@
     margin: 25px 0 11px;
     width: 150px;
     height: 150px;
-}
-
-.walker-list-container {
-    margin: 25px 15px ;
 }
 
 .walker-details-container {
@@ -82,17 +81,38 @@
     font-weight: bold;
 }
 
-.profile-input, .time-picker {
+.profile-input, .time-picker, .dog-weight, .treats-input, .dog-info {
     border: none;
     margin: 0 8px 8px 0;
     padding: 12px 8px;
     background:rgb(var(--rgb-quinary),0.5);
     border: none;
-    width: 50%
+}
+.profile-input {
+    width: 50%;
 }
 .time-picker, .date-picker {
-    width: fit-content; 
+    width: fit-content;
 }
+
+.dog-info {
+    width: 30%;
+}
+.dog-weight, .treats-input {
+    width: 4rem; 
+}
+.dog-weight {
+    margin-left: 20px;
+}
+.weight-label {
+    margin-top: 12px;
+    margin-right: 45px;
+}
+.treats-label {
+    margin-top: 12px;
+    margin-right: 13px;
+}
+
 
 .profile-input:focus {
     background-color: rgb(var(--rgb-tertiary),0.1);
@@ -102,8 +122,14 @@
     width:100%;
 }
 
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
 
-.average-rating {
+
+.average-rating, .average-rating-mobile {
     width: 90%;
     background-color: rgb(var(--rgb-quinary),0.5);
     padding: .5rem;
@@ -112,6 +138,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.average-rating-mobile {
+    display:none;
 }
 
 .account-status {
@@ -123,13 +153,19 @@
     font-size: 1.2rem;
 }
 
+.walker-list-container {
+    margin: 12px 15px ;
+}
+
 .walker-list-container .walker-container {
     background-color: rgb(var(--rgb-quinary),0.5);
     padding: 12px;
     margin-top: 16px;
     border-radius: 10px;
-    width:35%;
+    width:100%;
 }
+
+
 
 
 .walks {
@@ -151,6 +187,8 @@ h3 .light {
     font-weight: 300;
     color: var(--secondary);
     font-size: .75em;
+    white-space: nowrap;
+    line-height: 1.2em;
 }
 
 button {
@@ -170,7 +208,13 @@ button:hover {
     background-color: var(--quinary);
     color: var(--tertiary);
 }
-
+.right-button {
+    margin-left: 0;
+}
+.walker-container img {
+    border-radius: 50%;
+    border: 3px solid var(--tertiary);
+}
 
 @media screen and (max-width: 750px) {
     .page-wrap {
@@ -178,20 +222,12 @@ button:hover {
         align-items: center;
     }
 
-.button-container {
-    display: flex;
-    justify-content: flex-end;
-    flex-wrap: wrap;
-
-
-}
-.right-button {
-    margin-left: 0;
-
-}
 }
 
 @media screen and (max-width: 650px) {
+    #owners {
+        margin-top: 7rem;
+    }
     .page-body {
         flex-direction: column;
         align-items: center;
@@ -201,6 +237,29 @@ button:hover {
         min-height: 20rem;
     }
     .walker-contact-container {
-        width: 20rem;
+        width: 100%;
     }
+    .average-rating {
+        display:none;
+    }
+    .average-rating-mobile {
+        display: flex;
+    }
+    .profile-input {
+        width: 97%;
+    }
+    .row-data {
+        flex-direction: column;
+    }
+    .button-container {
+        display: flex;
+        flex-direction: column;
+    }
+    button {
+        width: 100%;
+    }
+    .walker-container {
+        margin: 5px auto;
+    }
+    h4 { text-align: center;}
 }

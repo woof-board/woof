@@ -1,10 +1,10 @@
-/* #walkers {
+#walkers {
     display: flex;
     flex-direction: row;
     padding: 2rem 5rem 1rem;
     flex-wrap: wrap;
     flex-direction: row;
-} */
+}
 
 h1 {
     color: var(--primary);
@@ -53,7 +53,7 @@ h1 {
     margin-top: 1rem;
 }
 
-
+/* 
 
 .profile-button {
     padding: 1rem;
@@ -65,7 +65,7 @@ h1 {
 .profile-button:hover {
     background-color: black;
     color: white;
-}
+} */
 
 
 
@@ -146,24 +146,6 @@ h1 {
     margin: 12px 0 12px 8px
 }
 
-
-/* .arrow-right, .arrow-left {
-    width: 0; 
-    height: 0; 
-    border-top: 20px solid transparent;
-    border-bottom: 20px solid transparent;  
-} */
-/* .arrow-right {
-    border-left: 20px solid var(--quinary);
-    margin-left: 5px;
-}
-
-.arrow-left {
-    border-right:20px solid var(--quinary); 
-    margin-right: 5px;
-} */
-
-
 .times-header, .day-header {
     color: var(--quinary);
     padding: 8px 0;
@@ -236,8 +218,10 @@ h1 {
 @media screen and (max-width: 650px) {
     #walkers {
         flex-direction: column;
-        top: 5rem;
-        padding: 8rem 1rem;
+        padding: 7rem 1rem 0;
+    }
+    h1 {
+        text-align: center;
     }
 
     .picture-container {
@@ -251,9 +235,20 @@ h1 {
     }
     .schedule-container {
         grid-template-columns: 25% 75%;
+        margin-bottom: 12px;
     }
     .schedule-days {
         grid-template-columns: 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100% 100%;
 
+    }
+
+    .schedule-button-container {
+        flex-direction: column;
+    }
+
+    .schedule-button-container button{
+        clear: both;
+        margin: 0 0 12px;
+        width: 100%;
     }
 }
