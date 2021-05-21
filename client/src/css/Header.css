@@ -2,7 +2,8 @@
     display: flex;
     justify-content: space-between;
     flex-direction: row;
-    padding: .5rem 0;
+    padding: .3rem 0 .5rem;
+    /* background-color: var(--tertiary); */
     background-color: var(--primary);
     z-index: 999;
     position: fixed;
@@ -13,13 +14,14 @@
     align-items: center;
 }
 
-.header-logo {
-    padding: 0 1rem 0 1rem;
+.blue-back {
+    background-color: var(--primary);
 }
-/* 
-.logo {
-    color: white;
-} */
+
+.header-logo {
+    margin: 0 0 -20px 10px;
+}
+
 
 li {
     list-style: none;
@@ -30,6 +32,7 @@ li {
     display: flex;
     flex-direction: row;
     padding-right: 1rem;
+    align-items: center;
 }
 
 
@@ -90,5 +93,8 @@ li {
 
     .header-container {
         flex-direction: column;
+    }
+    .header-logo {
+        margin: 0;
     }
 }

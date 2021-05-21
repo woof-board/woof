@@ -405,6 +405,14 @@ const resolvers = {
             if (context.owner) {
                 const order = await Order.create(input);
 
+                if( input.walker ){
+                    const walker = await Walker.findById(input.walker); 
+                    const targetIndex = walker.availability.findIndex(item => item.date === input.service_date);
+
+                    walker.availability[targetIndex][input.service_time] = false;
+                    await walker.save();
+                }
+
                 return order;
             }
       
@@ -413,11 +421,28 @@ const resolvers = {
 
         updateOrder: async (parent, {order_id, input }, context) => {
             if (context.owner || context.walker) {
+                const originalOrder = await Order.findById(order_id);
+
                 const order = await Order.findByIdAndUpdate(
                     order_id,
                     {...input},
                     { new: true, runValidators: true }
                 );
+
+                if(originalOrder.walker){
+                    // change the original walker's time slot back to available
+                    const originalWalker = await Walker.findById(originalOrder.walker); 
+                    const targetOriginalDateIndex = originalWalker.availability.findIndex(item => item.date === originalOrder.service_date);
+                    originalWalker.availability[targetOriginalDateIndex][originalOrder.service_time] = true;    
+                    await originalWalker.save();
+                }
+                if( input.walker ){
+                    // change the new walker's time slot to unavailable
+                    const walker = await Walker.findById(input.walker); 
+                    const targetNewDateIndex = walker.availability.findIndex(item => item.date === input.service_date);
+                    walker.availability[targetNewDateIndex][input.service_time] = false;        
+                    await walker.save();
+                }
 
                 return order;
             }
@@ -452,9 +477,18 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        removeOrder: async (parent, {order_id, input }, context) => {
-            if (context.owner && context.owner.admin) {
+        removeOrder: async (parent, { order_id }, context) => {
+            if (context.owner) {
+
                 const order = await Order.findByIdAndDelete(order_id);
+
+                if( order.walker ){
+                    // change the original walker's time slot back to available
+                    const originalWalker = await Walker.findById(order.walker); 
+                    const targetOriginalDateIndex = originalWalker.availability.findIndex(item => item.date === order.service_date);
+                    originalWalker.availability[targetOriginalDateIndex][order.service_time] = true;    
+                    await originalWalker.save();
+                }
 
                 return order;
             }

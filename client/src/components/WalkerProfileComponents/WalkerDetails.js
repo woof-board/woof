@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-//import '../../css/WalkerProfile.css';
+import Select from 'react-select';
 import { UPDATE_WALKER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
-import { cities, neighbourhoods } from '../../utils/helpers';
+import ModalDisplay from '../ModalDisplay';
+import { cities, neighbourhoods, validateEmail, validateInput } from '../../utils/helpers';
+
 
 function WalkerDetails({ user }) {
     const [updateWalkerProfile, { error }] = useMutation(UPDATE_WALKER_PROFILE);
     const [state, dispatch] = useStoreContext();
+    const [modalJSX, setModalJSX] = useState(<div />);
+    const [modalOpen, setModalOpen] = useState();
 
     const [formData, setFormData] = useState({ 
         first_name: '', 
@@ -24,6 +28,10 @@ function WalkerDetails({ user }) {
     });
 
     useEffect(() => {
+
+    });
+
+    useEffect(() => {
         if (user) {
             const { first_name, last_name, email, avatar, neighbourhoods, address, status } = user;
             if(status === "PENDING_INFORMATION") {
@@ -32,7 +40,7 @@ function WalkerDetails({ user }) {
                     last_name,
                     email,
                     avatar: "",
-                    neighbourhoods:"",
+                    neighbourhoods: [],
                     address_street: "",
                     address_city: "",
                     address_neighbourhood: "",
@@ -67,66 +75,94 @@ function WalkerDetails({ user }) {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        console.log(user._id);
-        console.log(user.orders);
-
-        // need to implement form validation here
         
+        // need to implement form validation here
         const { 
             first_name, 
             last_name,
             email,
+            neighbourhoods,
             address_street, 
             address_city,
             address_neighbourhood,
             address_province,
             address_postal_code,
-            ...rest
          } = formData;
 
-         try {
-            const { data: { updateWalkerProfile: newProfile } } = await updateWalkerProfile({
-                variables: {
-                    input: {
-                        first_name: first_name,
-                        last_name: last_name,
-                        email: email,
-                        status: "ACTIVE",
-                        ...rest,
-                        address: {
-                            street: address_street,
-                            city: address_city,
-                            neighbourhood: address_neighbourhood,
-                            province: address_province,
-                            postal_code: address_postal_code,
-                        }
-                    }
-                }
-            });
-            
-            dispatch({
-                type: UPDATE_CURRENT_USER,
-                currentUser: newProfile
-            });
-
-            alert('Account Updated');
-         } catch (e) {
-             console.log(e);
+         const neighbourhoodArr = address_city.toLocaleLowerCase() === "toronto" ? neighbourhoods : []; 
+         // Validation
+         const errors = validateInput([
+            {input_title: 'First Name', input_val: first_name, criteria: ['required']},
+            {input_title: 'Last Name', input_val: last_name, criteria: ['required']},
+            {input_title: 'Email', input_val: email, criteria: ['required','email']},
+            {input_title: 'Street Name', input_val: address_street, criteria: ['required']},
+            {input_title: 'City', input_val: address_city, criteria: ['required']},
+            {input_title: 'Province', input_val: address_province, criteria: ['required']},
+            {input_title: 'Postal Code', input_val: address_postal_code, criteria: ['required']}
+        ]);
+         
+         if (errors.length > 0) {
+             setModalJSX(
+                <div>
+                    {errors.map((error, index) => <p key={index}>{error}</p>)}
+                </div>
+            );
+             setModalOpen(true);
+             return;
          }
+         console.log("formData", formData);
+        //  try {
+        //     const { data: { updateWalkerProfile: newProfile } } = await updateWalkerProfile({
+        //         variables: {
+        //             input: {
+        //                 first_name,
+        //                 last_name,
+        //                 email,
+        //                 status: "ACTIVE",
+        //                 neighbourhoods: neighbourhoodArr,
+        //                 address: {
+        //                     street: address_street,
+        //                     city: address_city,
+        //                     neighbourhood: address_neighbourhood,
+        //                     province: address_province,
+        //                     postal_code: address_postal_code,
+        //                 }
+        //             }
+        //         }
+        //     });
+            
+        //     dispatch({
+        //         type: UPDATE_CURRENT_USER,
+        //         currentUser: newProfile
+        //     });
+
+        //     setModalJSX(<div>Profile has been updated successfully!</div>);
+        //     setModalOpen(true);
+        //  } catch (e) {
+        //      console.log(e);
+        //  }
     };
 
-    const provinces = [
-        { displayName: 'Ontario', value: "ontario"},
-        { displayName: 'Quebec', value: "quebec"},
-        { displayName: 'New Foundland', value: "new-foundland"},
-        { displayName: 'Nova Scotia', value: "nova-scotia"},
-        { displayName: 'New Brunswick', value: "new-brunswick"},
-        { displayName: 'Manitoba', value: "manitoba"},
-        { displayName: 'Saskatchewan', value: "saskatchewan"},
-        { displayName: 'Alberta', value: "alberta"},
-        { displayName: 'British Columbia', value: "british-columbia"},
-        { displayName: 'Prince Edward Island', value: "prince-edward-island"},
-    ]
+    const getNeighbourhoodOptions = () => {
+        return neighbourhoods.map(neighbourhood=> ({value: neighbourhood.toLocaleLowerCase(), label: neighbourhood }))
+    };
+
+    const getNeighbourhoodDefaultValues = () => {
+        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood.toLocaleLowerCase(), label: neighbourhood }))
+    };
+
+    const closeModal = () => {
+        setModalJSX(<div />);
+        setModalOpen(false);
+    };
+
+    const handleNeighbourhoodSelect = (selectedOption) => {
+        const selectedNieghbourhoods = selectedOption.map(option => option.value);
+        setFormData({
+            ...formData,
+            neighbourhoods: [...selectedNieghbourhoods]
+        });
+    };
 
     return (
         <>
@@ -163,6 +199,18 @@ function WalkerDetails({ user }) {
                         onChange={handleInputChange}
                         value={formData.email}
                     />
+                    {
+                        formData.address_city.toLocaleLowerCase() === "toronto" &&
+                        <Select 
+                            className="profile-input profile-name" 
+                            options={getNeighbourhoodOptions()} 
+                            isMulti={true}
+                            placeholder="Select your neighbourhoods"
+                            onChange={handleNeighbourhoodSelect}
+                            defaultValue={getNeighbourhoodDefaultValues()}
+                        />
+                    }
+                    
                 </div>
                 <div><h4>Address</h4></div>
                 <div className="row-data">
@@ -175,34 +223,55 @@ function WalkerDetails({ user }) {
                     />
                 </div>
                 <div className="row-data">
-                    <select className="profile-input profile-name" id="walker-cities" name="walker-province">
-                        {formData.address_city ==="" 
+                    <select 
+                            className="profile-input profile-name" 
+                            id="address_city" 
+                            name="address_city"
+                            onChange={handleInputChange}
+                            value={formData.address_city}
+                            placeholder="Choose your City"
+                        >
+                            {
+                            cities.map(({name, group}, index) => 
+                                (group 
+                                    ? <optgroup key={index} label={name}></optgroup>
+                                    : <option key={index} value={name}>{name}</option>
+                                )
+                            )
+                            }
+                        </select>
+                    {/* <select 
+                        className="profile-input profile-name" 
+                        id="address_city" 
+                        name="address_city"
+                        onChange={handleInputChange}
+                    >
+                        {formData.address_city === "" 
                             ? <option value="choose" selected disabled>Choose your City</option>
-                            : <option value="choose" disabled>Choose your City</option>
+                            : <option value="choose" disabled>Choose your City</option> 
                         }
                         
                         {
-                        cities.map(({name, group}) => 
+                        cities.map(({name, group}, index) => 
                             (group 
-                                ? <optgroup label={name}></optgroup>
-                                // ? city.name!=="close" 
-                                //     ? <optgroup label={city}>
-                                //     : </optgroup>
+                                ? <optgroup key={index} label={name}></optgroup>
                                 : name.toLowerCase() === formData.address_city.toLowerCase()
                                     ? <option selected="selected" value={name}>{name}</option>
                                     : <option value={name}>  {name}</option>
                             )
                         )
                         }
-                    </select>
-                {formData.address_city === "toronto" &&
-                    <select className="profile-input profile-name" id="walker-province" name="walker-province">
+                    </select> */}
+                {formData.address_city.toLocaleLowerCase() === "toronto" &&
+                    <select 
+                        className="profile-input profile-name" 
+                        id="address_neighbourhood" 
+                        name="address_neighbourhood"
+                    >
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
-                            neighbourhoods.map( neighbourhood =>
-                                neighbourhood.toLowerCase() === formData.address_neighbourhood.toLowerCase()
-                                    ? <option selected="selected" value={neighbourhood}>{neighbourhood}</option>
-                                    : <option value={neighbourhood}>{neighbourhood}</option>
+                            neighbourhoods.map( (neighbourhood, index) => 
+                                <option key={index} value={neighbourhood.toLocaleLowerCase()}>{neighbourhood}</option>
                             )
                         }
                     </select>
@@ -218,15 +287,16 @@ function WalkerDetails({ user }) {
                         value={formData.address_postal_code}
                     />
                 </div>
-                
-                <button
-                    type="submit"
-                    className="update-walker-button"
-                    id="update-walker-profile-button"
-                >
-                    UPDATE
-                </button>
+                <div className="button-container">
+                    <button
+                        type="submit"
+                        id="update-walker-profile-button"
+                    >
+                        UPDATE
+                    </button>
+                </div>
             </form>
+            <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
         </div>
         </>
     )

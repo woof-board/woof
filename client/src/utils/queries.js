@@ -243,6 +243,9 @@ export const QUERY_WALKER_ORDERS = gql`
         first_name
         last_name
       }
+      dogs {
+        name
+      }
     }
   }
 `;
@@ -256,9 +259,11 @@ export const QUERY_WALKER_AVAILABILITY = gql`
             email
             neighbourhoods
             reviews {
-                review_text
+              review_text
+              rating
             }
             average_rating
+            avatar
         }
     }
 `;

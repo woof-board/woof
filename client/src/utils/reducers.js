@@ -1,7 +1,8 @@
 import { useReducer } from "react";
 import {
     UPDATE_CURRENT_USER,
-    UPDATE_CURRENT_USER_ARR_FIELD
+    UPDATE_CURRENT_USER_ARR_FIELD,
+    UPDATE_CURRENT_USER_ORDERS
 } from "./actions";
 
 export const reducer = (state, action) => {
@@ -17,6 +18,11 @@ export const reducer = (state, action) => {
         return {
             ...state,
             currentUser: oldUserState
+        };
+    case UPDATE_CURRENT_USER_ORDERS:
+        return {
+            ...state,
+            currentUserOrders: [...action.orders]
         };
     default:
       return state;

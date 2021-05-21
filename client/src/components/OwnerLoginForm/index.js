@@ -18,7 +18,6 @@ function OwnerLoginForm() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(formData.email, formData.password)
 
         try {
           const { data } = await loginOwner({

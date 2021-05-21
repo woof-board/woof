@@ -3,12 +3,12 @@
   --secondary: #bad1a4;
   --tertiary: #266e34;
   --quatenary: #98b4e7;
-  --quinary:  #DBD3D3;
+  --quinary:  #DFD8D8;
   --rgb-primary: 38, 79, 156;
   --rgb-secondary: 186, 209, 164;
   --rgb-tertiary: 38, 110, 52;
   --rgb-quatemary: 128, 71, 31;
-  --rgb-quinary:  219, 211, 211;
+  --rgb-quinary:  223, 216, 216;
 }
 /* if adding opacity to VAR, rgb(var(--color), <opacity>); */
 

@@ -63,7 +63,7 @@ function WalkerProfile() {
         <>
         {currentUser && currentUser.status === "ACTIVE" && 
           <div className="walker-picture-container">
-            <img src="https://via.placeholder.com/150" alt="profile-img"/>
+            <img src={currentUser.avatar} width="160" alt="profile-img"/>
           </div>        
         }
         <div className="walker-details-container">

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-//import '../../css/OwnerProfile.css';
 import { GET_CUSTOMER_SESSION_ID, CHARGE_OWNER } from '../../utils/queries';
 import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";

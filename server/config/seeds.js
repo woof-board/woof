@@ -15,7 +15,7 @@ db.once('open', async () => {
             avatar: "/images/eric.jpg",
             admin: false,
             address: {
-                street: '2325 Yolands Dr',
+                street: '2325 Yolanda Dr',
                 city: 'oakville',
                 neighbourhood: 'oakville',
                 province: 'ontario',
@@ -106,14 +106,14 @@ db.once('open', async () => {
                     breed: 'Husky',
                     weight: 70,
                     treats: true,
-                    avatar: "/images/user-default.png"
+                    avatar: "/images/mylo.jpg"
                 },
                 {
                     name: 'Monty',
                     breed: 'AusiSheppard',
                     weight: 90,
                     treats: true,
-                    avatar: "/images/user-default.png"
+                    avatar: "/images/monty.jpg"
                 }
             ],
             status: "ACTIVE"
@@ -142,7 +142,7 @@ db.once('open', async () => {
                     breed: 'Doberman',
                     weight: 70,
                     treats: false,
-                    avatar: "/images/user-default.png"
+                    avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-9/87142813_3275290815826955_9075443982971961344_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=n7nY1OkFTDgAX9aUiMu&_nc_oc=AQlwkKBkBHKDIbwHP0jv7Vt_1n0jdL65W0-fxR0fkeKYDhhmJXMg7fqjU7bYIyzIY3E&_nc_ht=scontent-yyz1-1.xx&oh=fd13fa42abfb06c1f6469558ce3ba71c&oe=60CA1595"
                 }
             ],
             status: "ACTIVE"
@@ -182,7 +182,10 @@ db.once('open', async () => {
 
     const owners = await Owner.find({});
     const ownerIds = owners.map(owner => owner._id);
-
+    const dogIds = owners.map(owner => {
+        return owner.dogs.map(dog => dog._id);
+    });
+    
     await Walker.deleteMany();
 
     await Walker.create(
@@ -192,7 +195,7 @@ db.once('open', async () => {
             email: 'pw@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['east toronto', 'south toronto'],
+            neighbourhoods: ['East York', 'North York'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -245,7 +248,7 @@ db.once('open', async () => {
             email: 'eh@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['north toronto', 'west toronto'],
+            neighbourhoods: ['North York', 'Scarborough'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -297,8 +300,8 @@ db.once('open', async () => {
             last_name: 'Nuvoski',
             email: 'kn@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
-            neighbourhoods: ['north toronto', 'west toronto'],
+            avatar: "https://i2.wp.com/www.hadviser.com/wp-content/uploads/2019/04/5-choppy-cut-for-a-square-face-CF4Tf1tMDJu.jpg?resize=1078%2C1078&ssl=1",
+            neighbourhoods: ['Downtown', 'Etobicoke'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -308,13 +311,23 @@ db.once('open', async () => {
             },
             reviews: [
                 {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "My dogs love her!"
+                },
+                {
+                    owner_id: ownerIds[3],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                },
+                {
                     owner_id: ownerIds[0],
                     rating: 4,
                     review_text: "keep up good work"
                 },
                 {
                     owner_id: ownerIds[4],
-                    rating: 1,
+                    rating: 2,
                     review_text: "bad!!!"
                 },
                 {
@@ -323,7 +336,7 @@ db.once('open', async () => {
                     review_text: "not so bad"
                 }
             ],
-            earnings: 1000.0,
+            earnings: 672.0,
             availability: [
                 {
                     date: '2021-05-20',
@@ -367,7 +380,7 @@ db.once('open', async () => {
             email: 'rt@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['north toronto', 'west toronto'],
+            neighbourhoods: ['North York', 'East York'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -378,18 +391,18 @@ db.once('open', async () => {
             reviews: [
                 {
                     owner_id: ownerIds[4],
-                    rating: 1,
-                    review_text: "pretty bad service!"
+                    rating: 5,
+                    review_text: "Great job!"
                 },
                 {
                     owner_id: ownerIds[1],
-                    rating: 2,
-                    review_text: "not recommended"
+                    rating: 4,
+                    review_text: ""
                 },
                 {
                     owner_id: ownerIds[2],
-                    rating: 3,
-                    review_text: "not so bad"
+                    rating: 5,
+                    review_text: "Thanks! My dog loves you!"
                 }
             ],
             earnings: 800.0,
@@ -436,7 +449,7 @@ db.once('open', async () => {
             email: 'ms@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['north toronto', 'west toronto'],
+            neighbourhoods: ['Dwontown', 'York'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
@@ -499,7 +512,8 @@ db.once('open', async () => {
     );
 
     console.log('walker seeded');
-
+    const walkers = await Walker.find({});
+    const walkerIds = walkers.map(walker => walker._id);
 
     await Order.deleteMany();
 
@@ -509,82 +523,73 @@ db.once('open', async () => {
         service_date:'2021-05-21',
         service_time: '9am',
         status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac06c',
-        walker: '60a073419ae33509302ac085',
-        dogs: ['60a073419ae33509302ac06e']
+        owner: ownerIds[0],
+        walker: walkerIds[2],
+        dogs: [dogIds[0][0], dogIds[0][1]]
       },
       {
         service_date:'2021-05-20',
         service_time: '9am',
         status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac06f',
-        walker: '60a073419ae33509302ac08a',
-        dogs: ['60a073419ae33509302ac071']
+        owner: ownerIds[3],
+        walker: walkerIds[2],
+        dogs: [dogIds[3][0]]
       },
       {
         service_date:'2021-05-20',
         service_time: '11am',
-        status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac072',
-        walker: '60a073419ae33509302ac08a',
-        dogs: ['60a073419ae33509302ac074']
+        status: 'PENDING_PROGRESS',
+        owner: ownerIds[4],
+        walker: walkerIds[2],
+        dogs: [dogIds[4][0]]
       },
       {
         service_date:'2021-05-20',
         service_time: '1pm',
         status: 'PENDING_PROGRESS',
-        owner: '60a073419ae33509302ac075',
-        walker: '60a073419ae33509302ac08f',
-        dogs: [
-          '60a073419ae33509302ac077',
-          '60a073419ae33509302ac078'
-        ]
+        owner: ownerIds[5],
+        walker: walkerIds[2],
+        dogs: [dogIds[5][0]]
       },
       {
         service_date:'2021-05-21',
         service_time: '11am',
         status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac079',
-        walker: '60a073419ae33509302ac097',
-        dogs: ['60a073419ae33509302ac07b']
+        owner: ownerIds[0],
+        walker: walkerIds[2],
+        dogs: [dogIds[0][0]]
       },
       {
         service_date:'2021-05-21',
         service_time: '3pm',
         status: 'PENDING_WALKER',
-        owner: '60a073419ae33509302ac07c',
-        walker: '60a073419ae33509302ac09f',
-        dogs: ['60a073419ae33509302ac07e']
+        owner: ownerIds[0],
+        walker: walkerIds[2],
+        dogs: [dogIds[0][0], dogIds[0][1]]
       },
       {
         service_date:'2021-05-20',
         service_time: '5pm',
         status: 'IN_PROGRESS',
-        owner: '60a073419ae33509302ac07c',
-        walker: '60a073419ae33509302ac09f',
-        dogs: ['60a073419ae33509302ac07e']
+        owner: ownerIds[3],
+        walker: walkerIds[2],
+        dogs: [dogIds[3][0]]
       },
       {
         service_date:'2021-05-21',
         service_time: '7pm',
         status: 'PENDING_PROGRESS',
-        owner: '60a073419ae33509302ac075',
-        walker: '60a073419ae33509302ac08f',
-        dogs: [
-          '60a073419ae33509302ac077',
-          '60a073419ae33509302ac078'
-        ]
+        owner: ownerIds[4],
+        walker: walkerIds[2],
+        dogs: [dogIds[4][0]]
       },
       {
         service_date:'2021-05-21',
         service_time: '7pm',
         status: 'PENDING_PROGRESS',
-        owner: '60a073419ae33509302ac075',
-        walker: '60a4607dafbe01234063522c',
-        dogs: [
-          '60a073419ae33509302ac077',
-          '60a073419ae33509302ac078'
-        ]
+        owner: ownerIds[3],
+        walker: walkerIds[2],
+        dogs: [dogIds[3][1]]
       },
       
     ]);

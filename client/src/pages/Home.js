@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import '../css/Home.css';
@@ -9,7 +9,11 @@ import WalkerSignupForm from '../components/WalkerSignupForm';
 import OwnerLoginForm from '../components/OwnerLoginForm';
 import OwnerSignupForm from '../components/OwnerSignupForm';
 import Logo from '../assets/images/woof-logo-circle.svg'
+
+
 function HomeMock() {
+
+    document.body.classList.add('home-back');
 
     const [links] = useState([
         {

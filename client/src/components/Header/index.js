@@ -64,6 +64,11 @@ function Header() {
         });
         Auth.logout();
     };
+    
+    let headerClass="header-container";
+    if(result==="walker" || result === "guest") {
+         headerClass="header-container walker-nav"
+    }
 
     var page = document.querySelector('body');
     var bg = 'background-color';
@@ -72,14 +77,19 @@ function Header() {
         event.preventDefault();
         var componentSection = document.querySelectorAll('.component-section');
         var aboutFont = document.querySelectorAll('.content');
-        var fontH2 = document.querySelectorAll('h2, h3, li, .profile-socialmedia');
+        var fontH2 = document.querySelectorAll('.font-night');
         var contactUs = document.querySelectorAll('.contact-us-container-left');
         var walkerEl = document.querySelectorAll('.walker-contact-container')
         var walkerHeaderEl = document.querySelectorAll('.walker-header');
         var headerEl = document.querySelectorAll('.header-container');
         var footerEl = document.querySelectorAll('.footer');
+        var aboutCardEl = document.querySelectorAll('.about-card, .profile-picture');
 
         page.style.setProperty(bg, 'rgb(43, 43, 43)');
+
+        for (var w = 0; w < aboutCardEl.length; w++) {
+            aboutCardEl[w].style.backgroundColor = 'rgb(53, 53, 53)';
+        }
 
         for (var u = 0; u < fontH2.length; u++) {
             fontH2[u].style.color = 'white';
@@ -119,14 +129,19 @@ function Header() {
         event.preventDefault();
         var componentSection = document.querySelectorAll('.component-section');
         var aboutFont = document.querySelectorAll('.content');
-        var fontH2 = document.querySelectorAll('h2, h3, li, .profile-socialmedia');
+        var fontH2 = document.querySelectorAll('.font-night');
         var contactUs = document.querySelectorAll('.contact-us-container-left');
         var walkerEl = document.querySelectorAll('.walker-contact-container')
         var walkerHeaderEl = document.querySelectorAll('.walker-header');
         var headerEl = document.querySelectorAll('.header-container');
         var footerEl = document.querySelectorAll('.footer');
+        var aboutCardEl = document.querySelectorAll('.about-card');
 
         page.style.setProperty(bg, 'var(--quinary)');
+
+        for (var w = 0; w < aboutCardEl.length; w++) {
+            aboutCardEl[w].style.backgroundColor = ''
+        }
 
         for (var u = 0; u < fontH2.length; u++) {
             fontH2[u].style.color = 'black';
@@ -163,16 +178,15 @@ function Header() {
 
     return (
         location.pathname !== "/" &&
-        <nav className="header-container">
+        <nav className={headerClass}>
             <div className="logo">
                 <Link to="/">
                     <img 
                         className="header-logo" 
                         src={Logo} 
                         alt="logo" 
-                        width="100" 
+                        width="120" 
                     />
-
                 </Link>
             </div>
             <div className="nav-links-container">
@@ -202,8 +216,8 @@ function Header() {
 
                             </li>)}                    
                         </div>
-                        <div onClick={setDark}><i class="far fa-moon header-icon"></i></div>
-                        <div onClick={setLight}><i class="far fa-sun header-icon"></i></div>
+                        {/* <div onClick={setDark}><i class="far fa-moon header-icon"></i></div>
+                        <div onClick={setLight}><i class="far fa-sun header-icon"></i></div> */}
                     </>
                 {/* } */}
             </div>
