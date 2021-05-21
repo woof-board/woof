@@ -1,12 +1,8 @@
-.home-new {
+body {
     background-image: url('../assets/images/front-page.jpg');
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
+    
 }
 
 .center-page-vh {
