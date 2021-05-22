@@ -268,7 +268,7 @@ export const validateInput = (inputArr) => {
                     break;
                 case 'non_empty_array':
                     if(input_val) {
-                        if (input_val.length == 0) {
+                        if (input_val.length === 0) {
                             errors.push(`Please select at least one "${input_title}";`);
                         }
                     }

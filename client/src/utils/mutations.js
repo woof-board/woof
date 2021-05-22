@@ -312,6 +312,16 @@ export const UPDATE_WALKER_AVAILABILITY = gql`
     }
 `;
 
+export const UPDATE_WALKER_STATUS = gql`
+    mutation updateWalkerStatus($walker_id: ID!, $status: String!) {
+        updateWalkerStatus(walker_id: $walker_id, status: $status) {
+            _id
+            first_name
+            last_name
+        }
+    }
+`;
+
 /* OWNER mutations
     - ADD_OWNER
     - LOGIN_OWNER

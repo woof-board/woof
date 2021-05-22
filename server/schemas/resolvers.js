@@ -96,7 +96,7 @@ const resolvers = {
         },
 
         getPendingWalkers: async (parent, args, context) => {
-            if (context.owner&&context.owner.admin) {
+            if (context.owner && context.owner.admin) {
                 const walker = await Walker.find({ status: "PENDING_APPROVAL" })
                     .select('-__v -password')
                     .populate({
