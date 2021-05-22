@@ -162,30 +162,32 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        chargeOwner: async (parent, {amount, description}, context) => {
-            if (context.owner) {
-                const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
-                const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
+        chargeOwner: async (parent, {order_id, amount, description}, context) => {
+                const order = await Order.findById(order_id);
+                if(order.status !== 'FULFILLED'){
+                    const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(order.owner).select('-__v -password');
+                    const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
+    
+                    // create a new charging instance
+                    const charge = await stripe.paymentIntents.create({
+                        amount: amount,
+                        currency: 'cad',
+                        customer: customer_id,
+                        payment_method: setupIntent.payment_method,
+                        confirmation_method: 'automatic',
+                        description: description,
+                    });
+    
+                    // confirm charging
+                    await stripe.paymentIntents.confirm(charge.id);
+    
+                    // get finalized charging information
+                    const newCharge = await stripe.paymentIntents.retrieve(charge.id);
 
-                // create a new charging instance
-                const charge = await stripe.paymentIntents.create({
-                    amount: amount,
-                    currency: 'cad',
-                    customer: customer_id,
-                    payment_method: setupIntent.payment_method,
-                    confirmation_method: 'automatic',
-                    description: description,
-                });
-
-                // confirm charging
-                await stripe.paymentIntents.confirm(charge.id);
-
-                // get finalized charging information
-                const newCharge = await stripe.paymentIntents.retrieve(charge.id);
-                return newCharge;
-            }
-
-            throw new AuthenticationError('Not logged in');
+                    return newCharge;
+                }
+                
+                return null;
         },
 
         retrievePayments: async (parent, arg, context) => {
