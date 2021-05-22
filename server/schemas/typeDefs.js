@@ -72,10 +72,18 @@ const typeDefs = gql`
     }
     
     type Review {
-        owner: Owner
+        _id: ID
         owner_id: Owner
-        rating: Int!
+        rating: Int
         review_text: String
+    }
+
+    type ReviewWithWalkerId {
+        _id: ID
+        owner_id: Owner
+        rating: Int
+        review_text: String
+        walker: Walker 
     }
 
     type Coords {
@@ -247,6 +255,7 @@ const typeDefs = gql`
         owner(owner_id: ID!): Owner
         owners: [Owner]
         ownerMe: Owner
+        getOwnerReviews: [ReviewWithWalkerId]
         
         walker(walker_id: ID!): Walker
         walkers: [Walker]

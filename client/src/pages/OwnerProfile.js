@@ -13,6 +13,7 @@ import { UPDATE_CURRENT_USER } from "../utils/actions";
 import OwnerBookWalk from './OwnerBookWalk';
 import { Link } from 'react-router-dom';
 import { openUploadWidget } from '../utils/CloudinaryService';
+import OwnerReviews from '../components/OwnerProfileComponents/OwnerReviews';
 
 function OwnerProfile() {
   const [state, dispatch] = useStoreContext();
@@ -161,7 +162,10 @@ function OwnerProfile() {
             <OwnerPasswordForm />
             <OwnerPetDetails user={currentUser} />
             <OwnerAddDog />
-
+            {
+                currentUser && currentUser.status === "ACTIVE" &&
+                <OwnerReviews user={currentUser}/>
+            }
           </div>
         </>
       </div>

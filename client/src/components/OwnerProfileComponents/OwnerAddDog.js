@@ -130,14 +130,14 @@ function OwnerAddDog() {
                             placeholder="Weight in pounds"
                             onChange={handleInputChange}
                         />      
-                        <label className="checkbox" for="treats"><span className="normal-text">Check box if dog is allowed treats</span>      
+                        <label className="checkbox" htmlFor="treats"><span className="normal-text">Check box if dog is allowed treats</span>      
                             <input
                                 type="checkBox"
                                 name="treats"
                                 placeholder="Treats"
                                 onChange={handleInputChange}
                             />
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
                         </label>
                     </div>
                     <div className="button-container">

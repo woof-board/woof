@@ -81,7 +81,7 @@ function WalkerDetails({ user }) {
             address_postal_code,
          } = formData;
 
-         const neighbourhoodArr = address_city?.toLowerCase() === "toronto" ? neighbourhoods : []; 
+         const neighbourhoodArr = address_city === "Toronto" ? neighbourhoods : []; 
          // Validation
          const errors = validateInput([
             {input_title: 'First Name', input_val: first_name, criteria: ['required']},
@@ -202,7 +202,7 @@ function WalkerDetails({ user }) {
                         className="profile-input profile-name"
                         type="text"
                         name="last_name"
-                        placeholder="First Name"
+                        placeholder="Last Name"
                         onChange={handleInputChange}
                         value={formData.last_name}
                     />
@@ -216,7 +216,7 @@ function WalkerDetails({ user }) {
                         value={formData.email}
                     />
                     {
-                        formData.address_city?.toLowerCase() === "toronto" &&
+                        formData.address_city === "Toronto" &&
                         <Select 
                             className="profile-input profile-name" 
                             options={loadServiceArea()} 
@@ -278,7 +278,7 @@ function WalkerDetails({ user }) {
                         )
                         }
                     </select> */}
-                {formData.address_city?.toLowerCase() === "toronto" &&
+                {formData.address_city === "Toronto" &&
                     <select 
                         className="profile-input profile-name" 
                         id="address_neighbourhood" 
@@ -289,7 +289,7 @@ function WalkerDetails({ user }) {
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
                             neighbourhoods.map( (neighbourhood, index) => 
-                                <option key={index} value={neighbourhood?.toLowerCase()}>{neighbourhood}</option>
+                                <option key={index} value={neighbourhood}>{neighbourhood}</option>
                             )
                         }
                     </select>
