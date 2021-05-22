@@ -85,7 +85,17 @@ function OwnerTrackOrder() {
                             <div><span className="medium-text">Start time:</span> {order.service_time}</div>
                             {/* <div> Walker: {`${order.walker.first_name} ${order.walker.last_name}`} </div> */}
                             {/* Add map component */}
-                            <Link to={"/testmap"}><button>See on Map</button></Link>
+                            {/* <Link to={
+                              {
+                                pathname: '/map',
+                                order_id: order._id,
+                                coords: order.coords
+                            }
+                          }><button>See on Map</button></Link> */}
+                          {/* <Map
+                            order_id = {order._id}
+                            coords = {order.coords}
+                            ></Map> */}
                             </div>
                         </div>
                     )

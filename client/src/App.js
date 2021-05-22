@@ -12,7 +12,7 @@ import Success from "./pages/Success";
 import WalkerSchedule from './pages/WalkerSchedule';
 import OwnerProfile from './pages/OwnerProfile.js';
 import OwnerTrackOrder from './pages/OwnerTrackOrder';
-import OwnerPastOrder from './pages/OwnerPastOrder';
+import OwnerLiveMap from './pages/OwnerLiveMap';
 import OwnerBookWalk from './pages/OwnerBookWalk';
 import WalkerProfile from './pages/WalkerProfile.js';
 import WalkerTrackWalks from './pages/WalkerTrackWalks.js';
@@ -58,7 +58,7 @@ function App() {
                             
                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
                             <PrivateRoute exact path="/ownertrackorder" usertype="owner" component={OwnerTrackOrder}/> 
-                            <PrivateRoute exact path="/ownerpastorder" usertype="owner" component={OwnerPastOrder}/> 
+                            <PrivateRoute exact path="/ownerlivemap" usertype="owner" component={OwnerLiveMap}/> 
                             <PrivateRoute exact path="/bookwalk" usertype="owner" component={OwnerWalkDetails}/> 
                             <PrivateRoute exact path="/map" usertype="owner" component={Map}/>
                             <Route exact path="/testmap" usertype="owner" component={TestMap}/> 
