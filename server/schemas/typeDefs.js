@@ -271,7 +271,7 @@ const typeDefs = gql`
 
         getCustomerSessionId: Checkout
         getCustomerInfoFromStripe: Customer
-        chargeOwner(amount: Int!, description: String!): Charge
+        chargeOwner(order_id: ID!, amount: Int!, description: String!): Charge
         retrievePayments: Payments
     }
 
