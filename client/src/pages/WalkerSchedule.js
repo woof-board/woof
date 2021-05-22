@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useLazyQuery, useQuery, useMutation } from '@apollo/react-hooks';
+import React, { useState, useEffect } from 'react';
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { UPDATE_WALKER_AVAILABILITY } from "../utils/mutations";
 import { QUERY_WALKER_ORDERS, QUERY_WALKER_ME } from "../utils/queries";
 import { createInitialState } from "../utils/helpers";
@@ -68,8 +68,8 @@ function WalkerSchedule() {
         if (availability) {
             let tempSchedule = createInitialState();  
             
-            availability.map(availabilityItem => {
-                schedule.map((item, ind) => {
+            availability.forEach(availabilityItem => {
+                schedule.forEach((item, ind) => {
                     if (item.date === availabilityItem.date) {
                         // just grab the required fields, there are some additional fields in availabilityItem that we dont need
                         const {date, slot9am, slot11am, slot1pm, slot3pm, slot5pm, slot7pm, slot9pm } = availabilityItem;
@@ -145,8 +145,8 @@ function WalkerSchedule() {
         if (availability) {
             let tempSchedule = createInitialState();  
             
-            availability.map(availabilityItem => {
-                schedule.map((item, ind) => {
+            availability.forEach(availabilityItem => {
+                schedule.forEach((item, ind) => {
                     if (item.date === availabilityItem.date) {
                         const {date, slot9am, slot11am, slot1pm, slot3pm, slot5pm, slot7pm, slot9pm } = availabilityItem;
                         tempSchedule[ind] = {date, slot9am, slot11am, slot1pm, slot3pm, slot5pm, slot7pm, slot9pm };
@@ -166,7 +166,7 @@ function WalkerSchedule() {
         let dataId = "";
         const slot = timeSlot.replace("slot", "");
 
-        currentUserOrders?.map((walk, index) => {
+        currentUserOrders?.forEach((walk, index) => {
             if(!isBooked){
                 if(walk.service_date === scheduleItem.date && walk.service_time === slot) {
                     isBooked = true;

@@ -36,6 +36,7 @@ const client = new ApolloClient({
     },
     uri: '/graphql'
 });
+
 function App() {
     const footerLinks = [
         {
@@ -63,10 +64,10 @@ function App() {
                             <PrivateRoute exact path="/map" usertype="owner" component={Map}/>
                             <Route exact path="/testmap" usertype="owner" component={TestMap}/> 
                             <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/>
+                            <PrivateRoute exact path="/admindashboard" usertype="admin" component={AdminPage}/>
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
                             <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
                             <PrivateRoute exact path="/walkertrackwalks" usertype="walker" component={WalkerTrackWalks} />
-                            <Route exact path="/admin" component={AdminPage}/>
 
                             <Route component={NoMatch} />
                         </Switch>
