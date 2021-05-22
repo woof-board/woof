@@ -5,14 +5,15 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import ModalDisplay from '../../components/ModalDisplay';
 import { validateInput } from '../../utils/helpers';
+import { UPDATE_DOG_AVATAR } from '../../utils/mutations';
 import { openUploadWidget } from '../../utils/CloudinaryService';
 
 function OwnerPetDetails({ user }) {
 
     const [updateOwnerProfile, { error }] = useMutation(UPDATE_OWNER_PROFILE);
-    // const [updateOwnerAvatar] = useMutation(UPDATE_OWNER_AVATAR);
     const [updateDog] = useMutation(UPDATE_DOG);
     const [removeDog] = useMutation(REMOVE_DOG);
+    const [updateDogAvatar] = useMutation(UPDATE_DOG_AVATAR);
     const [state, dispatch] = useStoreContext();
     const { currentUser } = state;
     const [formData, setFormData] = useState({
@@ -131,34 +132,35 @@ function OwnerPetDetails({ user }) {
         setModalOpen(false);
     };
 
-    // const uploadImageWithCloudinary = async () => {
-    //     const uploadOptions = {
-    //       cloud_name: 'w-oo-f',
-    //       upload_preset: 'iqgryfiq' //Create an unsigned upload preset and update this
-    //     };
+    const uploadImageWithCloudinary = async (e) => {
+        const dogId = e.target.getAttribute("data-dogid");
+        const uploadOptions = {
+          cloud_name: 'w-oo-f',
+          upload_preset: 'iqgryfiq' //Create an unsigned upload preset and update this
+        };
     
-    //     openUploadWidget(uploadOptions, (error, result) => {
-    //       if (!error) {
-    //         const {event, info} = result;
-    //         if (event === "success") {
-    //           updateOwnerAvatar({
-    //             variables:{
-    //               avatar: info.public_id
-    //             }
-    //           })
-    //           .then(newOwner => {
-    //             dispatch({
-    //               type: UPDATE_CURRENT_USER,
-    //               currentUser: newOwner.data.updateOwnerAvatar
-    //             });
-    //           });
-    
-    //         }
-    //       } else {
-    //         console.log(error);
-    //       }
-    //     });
-    //   }
+        openUploadWidget(uploadOptions, (error, result) => {
+          if (!error) {
+            const {event, info} = result;
+            if (event === "success") {
+              updateDogAvatar({
+                variables:{
+                    dog_id: dogId,
+                    avatar: info.public_id
+                }
+              })
+              .then(newOwner => {
+                dispatch({
+                  type: UPDATE_CURRENT_USER,
+                  currentUser: newOwner.data.updateOwnerAvatar
+                });
+              });
+            }
+          } else {
+            console.log(error);
+          }
+        });
+      }
 
     return (
         <>
@@ -226,6 +228,13 @@ function OwnerPetDetails({ user }) {
                                     
                                 </div>
                                 <div className="row-data">
+                                <button 
+                                    type="button"
+                                    onClick={uploadImageWithCloudinary}
+                                    data-dogid={dog._id} 
+                                >
+                                    Update Avatar
+                                </button>
                                 <button 
                                     type="button"
                                     onClick={handleUpdateDog}
