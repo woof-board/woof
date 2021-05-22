@@ -28,10 +28,6 @@ function WalkerTrackOrder(order) {
       description: 'Walk fee'
      },
      onCompleted: charge => {
-      console.log('charge')
-      console.log(charge)
-        console.log('charge.chargeOwner.status')
-        console.log(charge.chargeOwner.status)
         if(charge.chargeOwner.status === 'succeeded'){
           changeStatusToFulfilled();
           setOrderChargeStatus('fulfilled');
