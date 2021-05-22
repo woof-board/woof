@@ -95,7 +95,24 @@ const resolvers = {
                 .populate('walker');
         },
 
+        getPendingWalkers: async (parent, args, context) => {
+            if (context.owner && context.owner.admin) {
+                const walker = await Walker.find({ status: "PENDING_APPROVAL" })
+                    .select('-__v -password')
+                    .populate({
+                        path: 'reviews.owner_id',
+                        model: 'Owner'
+                    });
+
+                return walker;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+        
+
         getCustomerSessionId: async (parent, args, context) => {
+    
 
             if (context.owner) {
                 const url = new URL(context.headers.referer).origin;
@@ -251,6 +268,37 @@ const resolvers = {
                 );
 
                 return updatedOwner;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateDog: async (parent, { dog_id, name, breed, weight, treats, avatar }, context) => {
+            if (context.owner) {
+                return await Owner.findOneAndUpdate(
+                    {_id: context.owner._id, "dogs._id": dog_id},
+                    { $set: { 
+                        "dogs.$.name":  name,
+                        "dogs.$.breed":  breed,
+                        "dogs.$.weight":  weight,
+                        "dogs.$.treats":  treats,
+                        "dogs.$.avatar":  avatar,
+                     } 
+                    },
+                    { new: true, runValidators: true }
+                );
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+
+        removeDog: async (parent, { dog_id }, context) => {
+            if (context.owner) {
+                return await Owner.findByIdAndUpdate(
+                    context.owner._id,
+                    { $pull: { dogs: { _id: mongoose.Types.ObjectId(dog_id) } } },
+                    { new: true, runValidators: true }
+                );
             }
 
             throw new AuthenticationError('Not logged in');

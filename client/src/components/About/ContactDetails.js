@@ -18,9 +18,9 @@ function ContactDetails() {
                     <div className="icon-list">
                         <i className="fab fa-github profile-socialmedia hover-item font-night"></i>
                         <i className="fab fa-linkedin-in profile-socialmedia hover-item font-night"></i>
-                        <i class="fab fa-twitter profile-socialmedia hover-item font-night"></i>
-                        <i class="fab fa-youtube profile-socialmedia hover-item font-night"></i>
-                        <i class="fab fa-linkedin-in profile-socialmedia hover-item font-night"></i>
+                        <i className="fab fa-twitter profile-socialmedia hover-item font-night"></i>
+                        <i className="fab fa-youtube profile-socialmedia hover-item font-night"></i>
+                        <i className="fab fa-linkedin-in profile-socialmedia hover-item font-night"></i>
                     </div>
                 </div>
             </div>

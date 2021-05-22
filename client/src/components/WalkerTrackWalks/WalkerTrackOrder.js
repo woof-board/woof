@@ -19,6 +19,21 @@ function WalkerTrackOrder(order) {
   const trackCoordinates = [];
 
   useEffect(() => {
+    // Please do not delete these codes
+    // try {
+    //   updateOrderStatus({
+    //   variables: {
+    //     // order_id: order_id,
+    //     // status: "IN_PROGRESS",
+    //     order_id: "60a48c986740bf2a040f98e3",
+    //     status: "PENDING_PROGRESS",
+    //   }
+    // });
+
+    //   // alert('status Updated !!!!');
+    // } catch (e) {
+    //   console.log(e);
+    // }
     let interval;
     if (realTime) {
       changeStatusToProgress();
@@ -53,6 +68,8 @@ function WalkerTrackOrder(order) {
       variables: {
         order_id: order_id,
         status: "IN_PROGRESS",
+        // order_id: "60a48c986740bf2a040f98e3",
+        // status: "PENDING_PROGRESS",
       }
     });
 
@@ -69,6 +86,8 @@ function WalkerTrackOrder(order) {
       variables: {
         order_id: order_id,
         status: "FULLFILLED",
+        // order_id: "60a48c986740bf2a040f98e3",
+        // status: "PENDING_PROGRESS",
       }
     });
       // alert('status Updated !!!!');
@@ -88,15 +107,12 @@ function WalkerTrackOrder(order) {
 
     try {
       updateOrderCoords({
-      variables: {
-        input: {
+        variables: {
+          // order_id: order_id,
           order_id: order_id,
-          cords: {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          }
+          lon: position.coords.longitude,
+          lat: position.coords.latitude,
         }
-      }
     });
       // alert('Cords Updated !!!');
     } catch (e) {
@@ -109,7 +125,7 @@ function WalkerTrackOrder(order) {
   return (
 
     <div className="walks">
-      <button type="button" className="button" onClick={manageRealTime}>{realTime ? '...Walk Finished!' : 'Start Walk'}</button>
+      <button type="button" className="button" onClick={manageRealTime}>{realTime ? 'Stop My Current Walk' : 'Start Walk'}</button>
       {/* <button type="button" className="button" onClick={stopTrack}>Stop Walk</button>*/}
     </div>
 

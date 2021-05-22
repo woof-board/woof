@@ -301,3 +301,23 @@ export const RETRIEVE_PAYMENTS = gql`
     }
   }
 `;
+
+export const QUERY_PENDING_WALKERS = gql
+`query getPendingWalkers {
+  getPendingWalkers {
+    _id
+    first_name
+    last_name
+    email
+    reviews{
+      owner_id{
+        _id
+        first_name
+        last_name
+      }
+      rating
+      review_text
+    }
+    average_rating
+  }
+}`;

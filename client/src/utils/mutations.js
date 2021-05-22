@@ -71,8 +71,8 @@ export const UPDATE_ORDER_STATUS = gql`
 `;
 
 export const UPDATE_ORDER_COORDS = gql`
-    mutation updateOrderCoords($input: UpdateOrderCoordsInput ) {
-        updateOrderCoords(input: $input) {
+    mutation updateOrderCoords($order_id: ID!, $lon: Float!, $lat: Float! ) {
+        updateOrderCoords(order_id: $order_id, lon: $lon, lat: $lat) {
             _id
             coords{
                 lon
@@ -312,6 +312,16 @@ export const UPDATE_WALKER_AVAILABILITY = gql`
     }
 `;
 
+export const UPDATE_WALKER_STATUS = gql`
+    mutation updateWalkerStatus($walker_id: ID!, $status: String!) {
+        updateWalkerStatus(walker_id: $walker_id, status: $status) {
+            _id
+            first_name
+            last_name
+        }
+    }
+`;
+
 /* OWNER mutations
     - ADD_OWNER
     - LOGIN_OWNER
@@ -400,6 +410,45 @@ export const ADD_DOG = gql`
                 breed
                 weight
                 treats
+                avatar
+            }
+        }
+    }
+`;
+
+export const UPDATE_DOG = gql`
+    mutation updateDog($dog_id:ID!, $name:String, $breed:String, $weight:Float, $treats:Boolean, $avatar:String ) {
+        updateDog(dog_id: $dog_id, name:$name, breed:$breed, weight:$weight, treats: $treats, avatar:$avatar ){
+            _id
+            first_name
+            last_name
+            email
+            dogs{
+                _id
+                name
+                breed
+                weight
+                treats
+                avatar
+            }
+        }
+    }
+`;
+
+export const REMOVE_DOG = gql`
+    mutation removeDog($dog_id: ID!) {
+        removeDog(dog_id: $dog_id){
+            _id
+            first_name
+            last_name
+            email
+            dogs{
+                _id
+                name
+                breed
+                weight
+                treats
+                avatar
             }
         }
     }

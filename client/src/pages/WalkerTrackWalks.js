@@ -11,7 +11,7 @@ import WalkerTrackOrder from "../components/WalkerTrackWalks/WalkerTrackOrder"
 function WalkerTrackWalks() {
     const [state, dispatch] = useStoreContext();
     const [orders, setOrders] = useState([]);
-    const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
+    const [getWalkerProfile, { loading, data }] = useLazyQuery(QUERY_WALKER_ME);
     const { currentUser } = state;
     const { data: walkerOrderData } = useQuery(QUERY_WALKER_ORDERS, {
       variables: {
@@ -33,7 +33,7 @@ function WalkerTrackWalks() {
           currentUser: data.walkerMe
         });
       }
-    }, [currentUser, data, loading, dispatch]);
+    }, [currentUser, data, loading, dispatch, getWalkerProfile]);
 
 
     useEffect(() => {
@@ -41,7 +41,7 @@ function WalkerTrackWalks() {
         setOrders(walkerOrderData.walkerOrders);
       }
       console.log(walkerOrderData);
-    });
+    }, [walkerOrderData]);
 
   return (
     <>
@@ -83,7 +83,7 @@ function WalkerTrackWalks() {
                 {totalOrders ? `You have ${totalOrders} fulfilled ${totalOrders === 1 ? 'walk' : 'walks'}:`
                 : 'You have no fulfilled Walks'}
               </div> */}
-              {orders.filter(order => order.status === "FULLFILLED" || order.status === "CHARGED" || order.status === "FINALIZED").map((order) => (
+              {orders.filter(order => order.status === "FULLFILLED" || order.status === "DENIED").map((order) => (
                 <div className="walks">
                   <div>Walk Date: {order.service_date}</div>
                   <div>Start time: {order.service_time}</div>

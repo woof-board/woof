@@ -1,5 +1,5 @@
 #owners {
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
     padding: 2rem 5rem 1rem;
     flex-wrap: wrap;
@@ -107,9 +107,9 @@
 .dog-weight, .treats-input {
     width: 4rem; 
 }
-.dog-weight {
+/* .dog-weight {
     margin-left: 20px;
-}
+} */
 .weight-label {
     margin-top: 12px;
     margin-right: 45px;
@@ -247,6 +247,10 @@ button:hover {
     .upload-button {
         margin: 20px auto 0;
     }
+
+    .walker-update-form img  {
+        margin: 5% 0 10% 22%;
+    }   
     .walker-contact-container {
         width: 100%;
     }
@@ -256,7 +260,7 @@ button:hover {
     .average-rating-mobile {
         display: flex;
     }
-    .profile-input {
+    .profile-input, .dog-info, .treats-input, .dog-weight {
         width: 97%;
     }
     .row-data {

@@ -34,7 +34,7 @@ function OwnerWalkDetails() {
     const [state, dispatch] = useStoreContext();
     const { currentUser } = state;
 
-    const [checkWalkerAvailability, { called, loading, data: WalkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY);
+    const [checkWalkerAvailability, { called, loading, data: walkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY);
     const [addOrder, {error: addOrderError}] = useMutation(ADD_ORDER);
     const [updateOrder, {error: updateOrderError}] = useMutation(UPDATE_ORDER);
     
@@ -51,10 +51,20 @@ function OwnerWalkDetails() {
     const [redirect, setRedirect ] = useState(false);
 
     useEffect(() => {
-        if(WalkerData) {
+        if(walkerData) {
             setShowWalkerList(true);
         }
-    }, [WalkerData]);
+    }, [walkerData]);
+
+    useEffect(() => {
+        if(currentUser) {
+            const dogIds = currentUser.dogs.map(dog => dog._id);
+            setFormData({
+                ...formData,
+                dogIdList: [...dogIds]
+            });
+        }
+    }, [currentUser]);
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -225,13 +235,13 @@ function OwnerWalkDetails() {
                  showWalkerList && 
                     <div className="walker-list-container"
                     >
-                        {(WalkerData?.checkWalkerAvailability === undefined || WalkerData.checkWalkerAvailability.length == 0) 
+                        {(walkerData?.checkWalkerAvailability === undefined || walkerData.checkWalkerAvailability.length == 0) 
                         ? <div> Sorry, no walker available at your selected time </div>
                         : (
                             <>
 
                                 <h4> Available Walkers</h4>
-                                { WalkerData?.checkWalkerAvailability.map((data) => 
+                                { walkerData?.checkWalkerAvailability.map((data) => 
                                 <div className = "walker-container">
                                     <img src={data.avatar} width="85" />
                                     <h5>Walker: <span className="regText">{data.first_name} {data.last_name}</span></h5>
