@@ -81,7 +81,7 @@ export const cities = [
         group: false
       },
       { 
-        name: "Brock", 
+        name: "Scarborough", 
         group: false
       },
       { 
@@ -137,7 +137,7 @@ export const cities = [
         group: false
       },
       { 
-        name: "Simcoe County", 
+        name: "Shelburne", 
         group: true
       },
       { 
@@ -190,6 +190,10 @@ export const cities = [
       },
       { 
         name: "Whitchurch-Stouffville", 
+        group: false
+      },
+      { 
+        name: "Eglinton", 
         group: false
       }
 ];
