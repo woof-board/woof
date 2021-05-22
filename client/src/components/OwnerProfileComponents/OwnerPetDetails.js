@@ -5,10 +5,12 @@ import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import ModalDisplay from '../../components/ModalDisplay';
 import { validateInput } from '../../utils/helpers';
+import { openUploadWidget } from '../../utils/CloudinaryService';
 
 function OwnerPetDetails({ user }) {
 
     const [updateOwnerProfile, { error }] = useMutation(UPDATE_OWNER_PROFILE);
+    // const [updateOwnerAvatar] = useMutation(UPDATE_OWNER_AVATAR);
     const [updateDog] = useMutation(UPDATE_DOG);
     const [removeDog] = useMutation(REMOVE_DOG);
     const [state, dispatch] = useStoreContext();
@@ -128,6 +130,35 @@ function OwnerPetDetails({ user }) {
         setModalJSX(<div />);
         setModalOpen(false);
     };
+
+    // const uploadImageWithCloudinary = async () => {
+    //     const uploadOptions = {
+    //       cloud_name: 'w-oo-f',
+    //       upload_preset: 'iqgryfiq' //Create an unsigned upload preset and update this
+    //     };
+    
+    //     openUploadWidget(uploadOptions, (error, result) => {
+    //       if (!error) {
+    //         const {event, info} = result;
+    //         if (event === "success") {
+    //           updateOwnerAvatar({
+    //             variables:{
+    //               avatar: info.public_id
+    //             }
+    //           })
+    //           .then(newOwner => {
+    //             dispatch({
+    //               type: UPDATE_CURRENT_USER,
+    //               currentUser: newOwner.data.updateOwnerAvatar
+    //             });
+    //           });
+    
+    //         }
+    //       } else {
+    //         console.log(error);
+    //       }
+    //     });
+    //   }
 
     return (
         <>
