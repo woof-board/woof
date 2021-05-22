@@ -141,7 +141,7 @@ function OwnerPetDetails({ user }) {
                     {
                         dogs.map((dog, index) =>
                             <div key={index}>
-                                <img src={dog.avatar} width="150"></img>
+                                <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + dog.avatar} width="150"></img>
                                 <div className="row-data">
 
                                     <input
