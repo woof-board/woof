@@ -485,6 +485,37 @@ export const UPDATE_OWNER_AVATAR = gql`
     }
 `;
 
+export const UPDATE_DOG_AVATAR = gql`
+mutation updateDogAvatar($dog_id: ID!, $avatar: String!) {
+    updateDogAvatar(dog_id: $dog_id, avatar: $avatar) {
+        _id
+        first_name
+        last_name
+        email
+        avatar
+        admin
+        status
+        address {
+            street
+            city
+            neighbourhood
+            province
+            postal_code
+        }
+        phone
+        dogs {
+            _id
+            name
+            breed
+            weight
+            treats
+            avatar
+        }
+        dog_count
+    }
+}
+`;
+
 export const UPDATE_WALKER_AVATAR = gql`
     mutation updateWalkerAvatar($avatar: String!) {
         updateWalkerAvatar(avatar: $avatar) {
