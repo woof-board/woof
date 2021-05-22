@@ -65,12 +65,16 @@ function OwnerTrackOrder() {
 
   return (
     <>
-      <h1>My Walk In Progress</h1>
+      <h1>My Walks</h1>
       <div className='page-wrap'>
         <div className="walker-details-container">
           {currentUser && currentUser.status === "ACTIVE" &&   
             <div className="walker-profile-container">
-              
+              <h2>Upcoming Walks</h2>
+              {/* <div>
+                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
+                : 'You have no upcoming Walks'}
+              </div> */}
               {orders.map((order) => (
                   order.status !== "PENDING_PROGRESS" 
                   ? null 
@@ -88,28 +92,39 @@ function OwnerTrackOrder() {
                 ))}
             </div>
           }
+          </div>
+          <div className="walker-details-container">
            {currentUser && currentUser.status === "ACTIVE" &&   
             <div className="walker-profile-container">
-              
+              <h2>Past Walks</h2>
+              {/* <div>
+                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
+                : 'You have no upcoming Walks'}
+              </div> */}
               {orders.map((order) => (
-                  order.status !== "FINALIZED" 
+                  order.status !== "FULLFILLED" 
                   ? null 
                   : (
                     <div className="walks">
                         <div>
                             <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
                             <div><span className="medium-text">Start time:</span> {order.service_time}</div>
+                            <div><span className="medium-text">Status:</span> {order.status}</div>
                             {/* <div> Walker: {`${order.walker.first_name} ${order.walker.last_name}`} </div> */}
                             {/* Add map component */}
-                            <Link to={"/testmap"}><button>See on Map</button></Link>
+                            <Map
+                            order_id = {order._id}
+                            coords = {order.coords}
+                            ></Map>
                             </div>
                         </div>
                     )
                 ))}
             </div>
-          }
+            }
+          </div>
           
-        </div>
+        
       </div>
     </>
   );
