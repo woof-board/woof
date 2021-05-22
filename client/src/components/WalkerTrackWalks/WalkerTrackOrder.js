@@ -125,7 +125,7 @@ function WalkerTrackOrder(order) {
   return (
 
     <div className="walks">
-      <button type="button" className="button" onClick={manageRealTime}>{realTime ? '...Walk Finished!' : 'Start Walk'}</button>
+      <button type="button" className="button" onClick={manageRealTime}>{realTime ? 'Stop My Current Walk' : 'Start Walk'}</button>
       {/* <button type="button" className="button" onClick={stopTrack}>Stop Walk</button>*/}
     </div>
 
