@@ -6,7 +6,7 @@ import { UPDATE_WALKER_STATUS } from '../utils/mutations';
 import ModalDisplay from '../components/ModalDisplay';
 
 function AdminPage() {
-    const { data: walkersToBeApproved, loading } = useQuery(QUERY_PENDING_WALKERS, {pollInterval:500});
+    const { data: walkersToBeApproved, loading } = useQuery(QUERY_PENDING_WALKERS);
     const [updateWalkerStatus] = useMutation(UPDATE_WALKER_STATUS);
     const [pendingWalkerList, setPendingWalkerList] = useState([]);
     const [modalJSX, setModalJSX] = useState(<div />);
