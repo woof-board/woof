@@ -13,13 +13,17 @@ function Map(order) {
         coords
     } = order;
     // convert to array
-    const coordinateArr = coords.map((coord, ind) => {
-        return objectToArray(coord);
+    const coordinateArr = coords?.map((coord, ind) => {
+        if (coord) {
+            return objectToArray(coord);
+        }
     });
-    // get center position of the walker path
-    const mapCenter = middleValueOfArray(coordinateArr);
+    
     useEffect(() => {
-        if (map.current) return; // initialize map only once
+        if (coordinateArr) {
+            // get center position of the walker path
+            const mapCenter = middleValueOfArray(coordinateArr);
+            if (map.current) return; // initialize map only once
         coordinates.current = coordinateArr;
         map.current = new mapboxgl.Map({
           container: mapContainer.current,
@@ -28,6 +32,8 @@ function Map(order) {
         //   center:[-122.4861, 37.828802],
           zoom: 15
         });
+        }
+        
     });
     useEffect(() => {
         if (!map.current) return; 
@@ -62,8 +68,10 @@ function Map(order) {
     });
     return (
         <>
-            <div id="map-container">
-                <div ref={mapContainer} id="map-container"></div>
+            <div className="page-container">
+                <div className="map-container">
+                    <div ref={mapContainer} className="map-content"></div>
+                </div>
             </div> 
         </>
     )

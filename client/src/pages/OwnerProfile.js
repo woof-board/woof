@@ -155,7 +155,7 @@ function OwnerProfile() {
                 <Link to="/bookwalk"><button>Book a walk</button></Link>
                 <Link to="/ownertrackorder"><button>My Walks</button></Link>
                 {/* Need to make a new page for past walk */}
-                {/* <Link to={"/ownerpastorder"}><button>Past Walks</button></Link> */}
+                <Link to={"/ownerlivemap"}><button>View Tracker</button></Link>
               </div>
               </div>
             }

@@ -19,6 +19,21 @@ function WalkerTrackOrder(order) {
   const trackCoordinates = [];
 
   useEffect(() => {
+    // Please do not delete these codes
+    // try {
+    //   updateOrderStatus({
+    //   variables: {
+    //     // order_id: order_id,
+    //     // status: "IN_PROGRESS",
+    //     order_id: "60a48c986740bf2a040f98e3",
+    //     status: "PENDING_PROGRESS",
+    //   }
+    // });
+
+    //   // alert('status Updated !!!!');
+    // } catch (e) {
+    //   console.log(e);
+    // }
     let interval;
     if (realTime) {
       changeStatusToProgress();
@@ -30,7 +45,7 @@ function WalkerTrackOrder(order) {
           maximumAge: 0
         };
         navigator.geolocation.getCurrentPosition(success, error, options);
-      }, 10000);
+      }, 60000);
     } else {
       if (buttonClicked) {
         changeStatusToFulfilled();
@@ -53,7 +68,7 @@ function WalkerTrackOrder(order) {
       variables: {
         order_id: order_id,
         status: "IN_PROGRESS",
-        // order_id: "60a489466740bf2a040f98d1",
+        // order_id: "60a48c986740bf2a040f98e3",
         // status: "PENDING_PROGRESS",
       }
     });
@@ -71,7 +86,7 @@ function WalkerTrackOrder(order) {
       variables: {
         order_id: order_id,
         status: "FULLFILLED",
-        // order_id: "60a489466740bf2a040f98d1",
+        // order_id: "60a48c986740bf2a040f98e3",
         // status: "PENDING_PROGRESS",
       }
     });
@@ -110,7 +125,7 @@ function WalkerTrackOrder(order) {
   return (
 
     <div className="walks">
-      <button type="button" className="button" onClick={manageRealTime}>{realTime ? '...Walk Finished!' : 'Start Walk'}</button>
+      <button type="button" className="button" onClick={manageRealTime}>{realTime ? 'Stop My Current Walk' : 'Start Walk'}</button>
       {/* <button type="button" className="button" onClick={stopTrack}>Stop Walk</button>*/}
     </div>
 
