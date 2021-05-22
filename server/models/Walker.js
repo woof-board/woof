@@ -55,7 +55,7 @@ const walkerSchema = new Schema(
             minlength: 5
         },
         avatar: {
-            Type: String,
+            type: String,
             default: 'Default/nymkl8vks2eyom7rgp3f'
         },
         neighbourhoods: {
