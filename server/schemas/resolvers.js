@@ -371,6 +371,20 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+        updateDogAvatar: async (parent, { dog_id, avatar }, context) => {
+            if (context.owner) {
+                // find the owner by id
+                const owner = await Owner.findById(context.owner._id); 
+                const targetIndex = owner.dogs.findIndex(dog => dog._id.toString() === dog_id);
+                owner.dogs[targetIndex].avatar = avatar;
+                await owner.save();
+
+                return owner;
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
         updateOwnerProfile: async (parent, { input }, context) => {
             if (context.owner) {
                 return await Owner.findByIdAndUpdate(
@@ -572,19 +586,22 @@ const resolvers = {
                     { new: true, runValidators: true }
                 );
 
-                if(originalOrder.walker){
-                    // change the original walker's time slot back to available
-                    const originalWalker = await Walker.findById(originalOrder.walker); 
-                    const targetOriginalDateIndex = originalWalker.availability.findIndex(item => item.date === originalOrder.service_date);
-                    originalWalker.availability[targetOriginalDateIndex][originalOrder.service_time] = true;    
-                    await originalWalker.save();
-                }
-                if( input.walker ){
-                    // change the new walker's time slot to unavailable
-                    const walker = await Walker.findById(input.walker); 
-                    const targetNewDateIndex = walker.availability.findIndex(item => item.date === input.service_date);
-                    walker.availability[targetNewDateIndex][input.service_time] = false;        
-                    await walker.save();
+                if(originalOrder.walker !== input.walker){
+                    if(originalOrder.walker){
+                        // change the original walker's time slot back to available
+                        const originalWalker = await Walker.findById(originalOrder.walker); 
+                        const targetOriginalDateIndex = originalWalker.availability.findIndex(item => item.date === originalOrder.service_date);
+                        originalWalker.availability[targetOriginalDateIndex][originalOrder.service_time] = true;    
+                        await originalWalker.save();
+                    }
+
+                    if(input.walker){
+                        // change the new walker's time slot to unavailable
+                        const walker = await Walker.findById(input.walker); 
+                        const targetNewDateIndex = walker.availability.findIndex(item => item.date === input.service_date?input.service_date:originalOrder.service_date);
+                        walker.availability[targetNewDateIndex][input.service_time?input.service_time:originalOrder.service_time] = false;        
+                        await walker.save();
+                    }
                 }
 
                 return order;
