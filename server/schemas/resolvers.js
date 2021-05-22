@@ -407,6 +407,21 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+        updateWalkerAvatar: async (parent, { avatar }, context) => {
+            if (context.walker) {
+                // find the walker by id
+                const walker = await Walker.findByIdAndUpdate(
+                    context.walker._id,
+                    {avatar: avatar},
+                    { new: true, runValidators: true }
+                ); 
+                
+                return walker;
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
         /* Order mutations
            - addOrder
            - updateOrder

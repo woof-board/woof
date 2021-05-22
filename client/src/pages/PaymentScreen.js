@@ -4,9 +4,8 @@ import { useLazyQuery } from '@apollo/react-hooks';
 import { GET_CUSTOMER_SESSION_ID, CHARGE_OWNER } from '../utils/queries';
 import { loadStripe } from '@stripe/stripe-js';
 import '../css/PaymentScreen.css';
-import {CloudinaryContext} from "cloudinary-react";
-import request from 'superagent';
-import { openUploadWidget } from '../utils/CloudinaryService';
+// import {CloudinaryContext} from "cloudinary-react";
+// import { openUploadWidget } from '../utils/CloudinaryService';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 const stripePromise = loadStripe('pk_test_51Ir7BPLlbUYQkEo2A2L6kb3YbdMv9jh8IJjshFAJOn3UXJEox2CDMpQoI8AS5HiTiccN6CzYnNbbCnaBJVgb8t08002TgJCE4p');
@@ -56,29 +55,29 @@ useEffect(() => {
     }
   };
 
-  const uploadImageWithCloudinary = async () => {
-    const uploadOptions = {
-      cloud_name: 'w-oo-f',
-      upload_preset: 'iqgryfiq' //Create an unsigned upload preset and update this
-    };
-    // console.log(uploadOptions);
+  // const uploadImageWithCloudinary = async () => {
+  //   const uploadOptions = {
+  //     cloud_name: 'w-oo-f',
+  //     upload_preset: 'iqgryfiq' //Create an unsigned upload preset and update this
+  //   };
+  //   // console.log(uploadOptions);
 
-    openUploadWidget(uploadOptions, (error, result) => {
-      if (!error) {
-        const {event, info} = result;
-        if (event === "success") {
-          // this.props.onPhotosUploaded([info]);
-          // console.log(info.public_id)
-          const srcLink = 'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + info?.public_id;
-          setPhoto(srcLink);
-          // console.log('srcLink')
-          // console.log(srcLink)
-        }
-      } else {
-        console.log(error);
-      }
-    });
-  }
+  //   openUploadWidget(uploadOptions, (error, result) => {
+  //     if (!error) {
+  //       const {event, info} = result;
+  //       if (event === "success") {
+  //         // this.props.onPhotosUploaded([info]);
+  //         // console.log(info.public_id)
+  //         const srcLink = 'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + info?.public_id;
+  //         setPhoto(srcLink);
+  //         // console.log('srcLink')
+  //         // console.log(srcLink)
+  //       }
+  //     } else {
+  //       console.log(error);
+  //     }
+  //   });
+  // }
   
   return (
     <>
@@ -88,12 +87,6 @@ useEffect(() => {
       </button>
       <button className="payment-button" role="link" onClick={handleCharge}>
         Charge User
-      </button>
-      <button
-          className="upload_button"
-          onClick={uploadImageWithCloudinary}
-      >
-          Upload
       </button>
       <img src={photo}></img>
     </div>

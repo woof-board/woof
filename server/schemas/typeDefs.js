@@ -279,6 +279,7 @@ const typeDefs = gql`
         updateWalkerPassword(old_password: String!, new_password: String!): Walker
         updateWalkerAvailability(input: [AvailabilityInput]): Walker
         updateWalkerStatus(walker_id: ID!, status: String!): Walker
+        updateWalkerAvatar(avatar: String!): Walker
 
         clearSetupIntent: Owner
     }
