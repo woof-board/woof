@@ -1,5 +1,5 @@
 #owners {
-    display: flex;
+    /* display: flex; */
     flex-direction: row;
     padding: 2rem 5rem 1rem;
     flex-wrap: wrap;
@@ -20,9 +20,7 @@
     padding: 0 15px;
 }
 .walker-picture-container {
-    margin: 0 2rem 0 0;
-
-    
+    margin: 0 2rem 0 0;  
 }
 .walker-picture-container img, .walker-update-form img {
     border: 8px solid var(--tertiary);
@@ -101,9 +99,9 @@
 .dog-weight, .treats-input {
     width: 4rem; 
 }
-.dog-weight {
+/* .dog-weight {
     margin-left: 20px;
-}
+} */
 .weight-label {
     margin-top: 12px;
     margin-right: 45px;
@@ -233,9 +231,12 @@ button:hover {
         align-items: center;
     }
     .walker-picture-container {
-        min-width: 20rem;
-        min-height: 20rem;
+        margin: 10% 0 20% 0;
     }
+
+    .walker-update-form img  {
+        margin: 5% 0 10% 22%;
+    }   
     .walker-contact-container {
         width: 100%;
     }
@@ -245,7 +246,7 @@ button:hover {
     .average-rating-mobile {
         display: flex;
     }
-    .profile-input {
+    .profile-input, .dog-info, .treats-input, .dog-weight {
         width: 97%;
     }
     .row-data {

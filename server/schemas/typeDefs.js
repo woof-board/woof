@@ -253,6 +253,8 @@ const typeDefs = gql`
         walkerMe: Walker
         checkWalkerAvailability(date: String!, time: String!): [Walker]
 
+        getPendingWalkers: [Walker]
+
         order(order_id: ID): Order
         orders: [Order]
         ownerOrders(owner_id: ID): [Order]
@@ -268,6 +270,8 @@ const typeDefs = gql`
         addOwner(input: OwnerInput): AuthOwner
         loginOwner(email: String!, password: String!): AuthOwner
         addDog(input: DogInput): Owner
+        updateDog(dog_id: ID!, name: String, breed: String, weight: Float, treats: Boolean, avatar: String ): Owner
+        removeDog(dog_id: ID!): Owner
         updateOwnerProfile(input: OwnerProfileInput): Owner
         updateOwnerPassword(old_password: String!, new_password: String!): Owner
         updateOwnerAvatar(avatar: String!): Owner
@@ -275,7 +279,7 @@ const typeDefs = gql`
         addOrder(input: OrderInput): Order
         updateOrder(order_id: ID!, input: UpdateOrderInput): Order
         updateOrderStatus(order_id: ID!, status: String!): Order
-        updateOrderCoords(input: UpdateOrderCoordsInput): Order
+        updateOrderCoords(order_id: ID!, lon: Float!, lat: Float! ): Order
         removeOrder(order_id: ID!): Order
         
         addReview(input: ReviewInput): Walker
