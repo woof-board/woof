@@ -146,13 +146,10 @@ const resolvers = {
         },
 
         chargeOwner: async (parent, {amount, description}, context) => {
-            console.log(amount)
-            console.log(description)
             if (context.owner) {
                 const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
                 const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
 
-                console.log(setupIntent)
                 // create a new charging instance
                 const charge = await stripe.paymentIntents.create({
                     amount: amount,
@@ -218,6 +215,7 @@ const resolvers = {
            - addDog
            - updateOwnerProfile
            - updateOwnerPassword
+           - updateOwnerAvatar
         */
         addOwner: async (parent, { input }) => {
             const owner = await Owner.create(input);
@@ -289,6 +287,21 @@ const resolvers = {
                 //     { password: new_password }, 
                 //     { new: true, runValidators: true }
                 // );
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateOwnerAvatar: async (parent, { avatar }, context) => {
+            if (context.owner) {
+                // find the owner by id
+                const owner = await Owner.findByIdAndUpdate(
+                    context.owner._id,
+                    {avatar: avatar},
+                    { new: true, runValidators: true }
+                ); 
+                
+                return owner;
             }
       
             throw new AuthenticationError('Not logged in');
@@ -389,6 +402,21 @@ const resolvers = {
                     { status }, 
                     { new: true, runValidators: true }
                 );
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateWalkerAvatar: async (parent, { avatar }, context) => {
+            if (context.walker) {
+                // find the walker by id
+                const walker = await Walker.findByIdAndUpdate(
+                    context.walker._id,
+                    {avatar: avatar},
+                    { new: true, runValidators: true }
+                ); 
+                
+                return walker;
             }
       
             throw new AuthenticationError('Not logged in');

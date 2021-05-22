@@ -11,7 +11,7 @@ import TestMap from "../components/OwnerTrackOrder/TestMap";
 import { Link } from 'react-router-dom';
 
 
-function OwnerPastOrder() {
+function OwnerTrackOrder() {
   const [state, dispatch] = useStoreContext();
   const [orders, setOrders] = useState([]);
   const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
@@ -65,35 +65,53 @@ function OwnerPastOrder() {
 
   return (
     <>
-      <h1>My Past Walks</h1>
+      <h1>Live Tracker</h1>
       <div className='page-wrap'>
         <div className="walker-details-container">
           {currentUser && currentUser.status === "ACTIVE" &&   
             <div className="walker-profile-container">
-              
+              <h2>Live Tracker is active when the dog walk starts</h2>
+              {/* <div>
+                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
+                : 'You have no upcoming Walks'}
+              </div> */}
               {orders.map((order) => (
-                  order.status !== "PENDING_PROGRESS" 
+                  order.status !== "IN_PROGRESS" 
                   ? null 
                   : (
                     <div className="walks">
                         <div>
-                            <div>Walk Date: {order.service_date}</div>
-                            <div>Start time: {order.service_time}</div>
+                            <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
+                            <div><span className="medium-text">Start time:</span> {order.service_time}</div>
                             {/* <div> Walker: {`${order.walker.first_name} ${order.walker.last_name}`} </div> */}
                             {/* Add map component */}
-                            <TestMap></TestMap>
+                            {/* <Link to={
+                              {
+                                pathname: '/map',
+                                order_id: order._id,
+                                coords: order.coords
+                            }
+                          }><button>See on Map</button></Link> */}
+                          <Map
+                            order_id = {order._id}
+                            coords = {order.coords}
+                            ></Map>
                             </div>
                         </div>
                     )
                 ))}
             </div>
           }
-        </div>
+          </div>
+          
+          
+          
+        
       </div>
     </>
   );
 }
 
-export default OwnerPastOrder;
+export default OwnerTrackOrder;
 
 
