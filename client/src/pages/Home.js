@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import '../css/Home.css';
 import OwnerWalkerForm from '../components/OwnerWalkerForm';
-import FormHeader from '../components/LoginSignupForm';
 import WalkerLoginForm from '../components/WalkerLoginForm';
 import WalkerSignupForm from '../components/WalkerSignupForm';
 import OwnerLoginForm from '../components/OwnerLoginForm';
@@ -11,7 +10,7 @@ import OwnerSignupForm from '../components/OwnerSignupForm';
 import Logo from '../assets/images/woof-logo-circle.svg'
 
 
-function HomeMock() {
+function Home() {
 
     document.body.classList.add('home-back');
 
@@ -55,52 +54,53 @@ function HomeMock() {
                     WHERE DOGS GET THEIR PERFECT WALK
                 </h1>
 
-                <h3 className="smaller-font">{currentLink.name} {currentFormLink.name}</h3>
                     <OwnerWalkerForm 
                         links={links}
                         currentLink={currentLink}
                         setCurrentLink={setCurrentLink}
                     />
+                        
+                            <div className={`form-title ${currentLink.action}`}>
+                                <h3>{currentLink.name} {currentFormLink.name}</h3>
+                            </div>
                     {currentLink.name === 'WALKER' &&  (
-                        <>
-                            <FormHeader
-                                currentLink={currentLink}
-                                setCurrentLink={setCurrentLink}
-                                formLinks={formLinks}
-                                currentFormLink={currentFormLink}
-                                setFormCurrentLink={setFormCurrentLink}
-                            />
-                            
+          
+                        <>   
                             {currentFormLink.name === 'LOGIN' && (
                                 <>
-                                    <WalkerLoginForm />
+                                    <WalkerLoginForm 
+                                        formLinks={formLinks}
+                                        setFormCurrentLink={setFormCurrentLink}
+                                    />
                                 </>
                             )}
                             {currentFormLink.name === 'SIGNUP' && (
                                 <>
-                                    <WalkerSignupForm />
+                                    <WalkerSignupForm 
+                                        formLinks={formLinks}
+                                        setFormCurrentLink={setFormCurrentLink}
+                                    />
                                 </>
                             )}
                         </>
                     )}
                     {currentLink.name === 'OWNER' && (
                         <>
-                        <FormHeader
-                            currentLink={currentLink}
-                            setCurrentLink={setCurrentLink}
-                            formLinks={formLinks}
-                            currentFormLink={currentFormLink}
-                            setFormCurrentLink={setFormCurrentLink}
-                        />
              
                         {currentFormLink.name === 'LOGIN' && (
                             <>
-                                <OwnerLoginForm />
+                                <OwnerLoginForm 
+                                    formLinks={formLinks}
+                                    setFormCurrentLink={setFormCurrentLink}
+                                />
                             </>
                         )}
                         {currentFormLink.name === 'SIGNUP' && (
                             <>
-                                <OwnerSignupForm />
+                                <OwnerSignupForm 
+                                    formLinks={formLinks}
+                                    setFormCurrentLink={setFormCurrentLink}
+                                />
                             </>
                         )}
                         </>
@@ -112,4 +112,4 @@ function HomeMock() {
     )
 }
 
-export default HomeMock;
+export default Home;

@@ -81,11 +81,15 @@ export const cities = [
         group: false
       },
       { 
-        name: "Scarborough", 
+        name: "Brock", 
         group: false
       },
       { 
         name: "Clarington", 
+        group: false
+      },
+      { 
+        name: "Oshawa", 
         group: false
       },
       { 
@@ -94,6 +98,10 @@ export const cities = [
       },
       { 
         name: "Scugog", 
+        group: false
+      },
+      { 
+        name: "Uxbridge", 
         group: false
       },
       { 
@@ -137,7 +145,7 @@ export const cities = [
         group: false
       },
       { 
-        name: "Shelburne", 
+        name: "Simcoe County", 
         group: true
       },
       { 
@@ -154,10 +162,6 @@ export const cities = [
       },
       { 
         name: "Aurora", 
-        group: false
-      },
-      { 
-        name: "Halton Hills", 
         group: false
       },
       { 
@@ -190,10 +194,6 @@ export const cities = [
       },
       { 
         name: "Whitchurch-Stouffville", 
-        group: false
-      },
-      { 
-        name: "Eglinton", 
         group: false
       }
 ];
