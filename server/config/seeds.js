@@ -497,7 +497,7 @@ db.once('open', async () => {
                     slot9pm: false
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "PENDING_APPROVAL"
         }
     );
 
