@@ -4,14 +4,26 @@ import { GET_CUSTOMER_SESSION_ID, CHARGE_OWNER } from '../../utils/queries';
 import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
-import { cities, neighbourhoods } from '../../utils/helpers';
+import { cities, neighbourhoods, validateInput } from '../../utils/helpers';
 import { loadStripe } from '@stripe/stripe-js';
+import ModalDisplay from '../ModalDisplay';
 const stripePromise = loadStripe('pk_test_51Ir7BPLlbUYQkEo2A2L6kb3YbdMv9jh8IJjshFAJOn3UXJEox2CDMpQoI8AS5HiTiccN6CzYnNbbCnaBJVgb8t08002TgJCE4p');
 
 function OwnerDetails({ user }) {
 
     const [updateOwnerProfile, { error }] = useMutation(UPDATE_OWNER_PROFILE);
     const [state, dispatch] = useStoreContext();
+    const [modalJSX, setModalJSX] = useState(<div />);
+    const [modalOpen, setModalOpen] = useState();
+    const [formData, setFormData] = useState({ 
+        first_name: '', 
+        last_name: '', 
+        email: '',
+        address_street: "",
+        address_city: "",
+        address_neighbourhood: "",
+        address_postal_code: "",
+    });
 
     const [handleGetSessionId, {data:customer_data}] = useLazyQuery(GET_CUSTOMER_SESSION_ID,{
         onCompleted: (data) => {
@@ -43,12 +55,7 @@ function OwnerDetails({ user }) {
         }
       }, [customer_data]);
 
-    const [formData, setFormData] = useState({ 
-        first_name: '', 
-        last_name: '', 
-        email: '',
-        city: ''
-    });
+    
     
     // const amount = 3500; // in cents
     // const [handleCharge, { called, loading: charging, data }] = useLazyQuery(CHARGE_OWNER, {
@@ -65,13 +72,11 @@ function OwnerDetails({ user }) {
                 first_name,
                 last_name,
                 email,
-                street: address?.street,
-                city: address?.city,
-                neighbourhood: address?.neighbourhood,
-                postal_code: address?.postal_code
-
-            })
-  
+                address_street: address?.street,
+                address_city: address?.city,
+                address_neighbourhood: address?.neighbourhood,
+                address_postal_code: address?.postal_code
+            });
         }
     
     }, [user]);
@@ -84,41 +89,54 @@ function OwnerDetails({ user }) {
         });
     };
 
-
     const handleFormSubmit = async (e) => {
+        console.log("asdadasdadsadsassdasd");
         e.preventDefault();
-
-        // need to implement form validation here
 
         const { 
             first_name, 
             last_name,
             email,
-            street,
-            city,
-            neighbourhood,
-            postal_code,
-            status,
-            ...rest
+            address_street,
+            address_city,
+            address_neighbourhood,
+            address_postal_code
          } = formData;
+
+         // Validation
+         const errors = validateInput([
+            {input_title: 'First Name', input_val: first_name, criteria: ['required']},
+            {input_title: 'Last Name', input_val: last_name, criteria: ['required']},
+            {input_title: 'Email', input_val: email, criteria: ['required','email']},
+            {input_title: 'Street Name', input_val: address_street, criteria: ['required']},
+            {input_title: 'City', input_val: address_city, criteria: ['required']},
+            {input_title: 'Postal Code', input_val: address_postal_code, criteria: ['required']}
+        ]);
+         
+         if (errors.length > 0) {
+             setModalJSX(
+                <div>
+                    {errors.map((error, index) => <p key={index}>{error}</p>)}
+                </div>
+            );
+             setModalOpen(true);
+             return;
+         }
 
          try {
             const { data: { updateOwnerProfile: newProfile } } = await updateOwnerProfile({
                 variables: {
                     input: {
-                        first_name: first_name,
-                        last_name: last_name,
-                        email: email,
+                        first_name,
+                        last_name,
+                        email,
                         status: "ACTIVE",
-                        // ...rest,
                         address: {
-                            street,
-                            city,
-                            neighbourhood,
-                            postal_code,
-                            ...rest
-                        },
-                        ...rest
+                            street: address_street,
+                            city: address_city,
+                            neighbourhood: address_city.toLowerCase() === "toronto" ? address_neighbourhood : address_city,
+                            postal_code: address_postal_code
+                        }
                     }
                 }
             });
@@ -128,18 +146,20 @@ function OwnerDetails({ user }) {
                 currentUser: newProfile
             });
 
-            alert('Account Updated');
+            setModalJSX(<div>Profile has been updated successfully!</div>);
+            setModalOpen(true);
          } catch (e) {
              console.log(e);
          }
+    };
 
-    }
-
+    const closeModal = () => {
+        setModalJSX(<div />);
+        setModalOpen(false);
+    };
 
     return (
-        
         <>
-        {console.log(formData)}
         <div className="walker-contact-container">
             <div className="walker-header"><h2>Personal Information</h2></div>
             <form
@@ -180,45 +200,50 @@ function OwnerDetails({ user }) {
                     <input
                         className="profile-input street-input"
                         type="text"
-                        name="street"
+                        name="address_street"
                         placeholder="Street"
                         onChange={handleInputChange}
-                        value={formData.street}
+                        value={formData.address_street}
                     />
                 </div>
                 <div className="row-data">
-                    <select className="profile-input profile-name" id="walker-cities" name="city" onChange={handleInputChange}>
-                        {formData.city ==="" 
+                    <select 
+                        className="profile-input profile-name" 
+                        id="address_city" 
+                        name="address_city"
+                        value={formData.address_city} 
+                        onChange={handleInputChange}
+                        placeholder="Choose your City"
+                    >
+                        {/* {formData.city ==="" 
                             ? <option value="choose" selected disabled>Choose your City</option>
                             : <option value="choose" disabled>Choose your City</option>
-                        }
+                        } */}
                         
                         {
-                        cities?.map(({name, group}) => 
+                        cities?.map(({name, group}, index) => 
                             (group 
-                                ? <optgroup label={name} ></optgroup>
-                                // ? city.name!=="close" 
-                                //     ? <optgroup label={city}>
-                                //     : </optgroup>
-                                : name.toLowerCase() === formData.city?.toLowerCase()
-                                    ? <option selected value={name} >{name}</option>
-                                    : <option value={name} >  {name}</option>
+                                ? <optgroup key={index} label={name}></optgroup>
+                                : <option key={index} value={name}>{name}</option>
                             )
                         )
                         }
                     </select>
-                {formData.city === "toronto" &&
-                    <select className="profile-input profile-name" id="walker-province" name="walker-province">
+                 {formData.address_city.toLowerCase() === "toronto" &&
+                    <select 
+                        className="profile-input profile-name" 
+                        id="address_neighbourhood" 
+                        name="address_neighbourhood"
+                        value={formData.address_neighbourhood}
+                        onChange={handleInputChange}
+                    >
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
-                            neighbourhoods.map( neighbourhood =>
-                                neighbourhood === formData.address_neighbourhood
-                                    ? <option selected="selected" value={neighbourhood}>{neighbourhood}</option>
-                                    : <option value={neighbourhood}>{neighbourhood}</option>
+                            neighbourhoods.map( (neighbourhood, index) =>
+                            <option key={index} value={neighbourhood.toLowerCase()}>{neighbourhood}</option>
                             )
                         }
-                    </select>
-                
+                    </select> 
                     
                 }
                 </div>
@@ -227,10 +252,10 @@ function OwnerDetails({ user }) {
                     <input
                         className="profile-input"
                         type="text"
-                        name="postal_code"
+                        name="address_postal_code"
                         placeholder="Postal Code"
                         onChange={handleInputChange}
-                        value={formData.postal_code}
+                        value={formData.address_postal_code}
                     />
                 </div>
                 <div className="button-container">
@@ -272,6 +297,7 @@ function OwnerDetails({ user }) {
                 </button>} */}
                 
             </form>
+            <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
         </div>
         </>
     )

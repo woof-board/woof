@@ -579,9 +579,9 @@ db.once('open', async () => {
         service_date:'2021-05-21',
         service_time: '7pm',
         status: 'FULLFILLED',
-        owner: ownerIds[4],
+        owner: ownerIds[3],
         walker: walkerIds[2],
-        dogs: [dogIds[4][0]]
+        dogs: [dogIds[3][0]]
       },
       {
         service_date:'2021-05-21',

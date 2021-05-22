@@ -109,12 +109,14 @@ function OwnerAddDog() {
                             type="text"
                             name="name"
                             placeholder="Name"
+                            value={formData.name}
                             onChange={handleInputChange}
                         />
                         <input
                             className="profile-input profile-name"
                             type="text"
                             name="breed"
+                            value={formData.breed}
                             placeholder="Breed"
                             onChange={handleInputChange}
                         />
@@ -124,6 +126,7 @@ function OwnerAddDog() {
                             className="profile-input profile-name"
                             type="text"
                             name="weight"
+                            value={formData.weight}
                             placeholder="Weight in pounds"
                             onChange={handleInputChange}
                         />      

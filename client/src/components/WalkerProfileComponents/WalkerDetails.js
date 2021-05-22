@@ -18,7 +18,6 @@ function WalkerDetails({ user }) {
         first_name: '', 
         last_name: '', 
         email: '',
-        avatar: '',
         neighbourhoods: [],
         address_street: '',
         address_city: '',
@@ -28,18 +27,13 @@ function WalkerDetails({ user }) {
     });
 
     useEffect(() => {
-
-    });
-
-    useEffect(() => {
         if (user) {
-            const { first_name, last_name, email, avatar, neighbourhoods, address, status } = user;
+            const { first_name, last_name, email, neighbourhoods, address, status } = user;
             if(status === "PENDING_INFORMATION") {
                 setFormData({
                     first_name,
                     last_name,
                     email,
-                    avatar: "",
                     neighbourhoods: [],
                     address_street: "",
                     address_city: "",
@@ -52,7 +46,6 @@ function WalkerDetails({ user }) {
                     first_name,
                     last_name,
                     email,
-                    avatar,
                     neighbourhoods,
                     address_street: address.street,
                     address_city: address.city,
@@ -76,7 +69,6 @@ function WalkerDetails({ user }) {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         
-        // need to implement form validation here
         const { 
             first_name, 
             last_name,
@@ -89,7 +81,7 @@ function WalkerDetails({ user }) {
             address_postal_code,
          } = formData;
 
-         const neighbourhoodArr = address_city.toLocaleLowerCase() === "toronto" ? neighbourhoods : []; 
+         const neighbourhoodArr = address_city.toLowerCase() === "toronto" ? neighbourhoods : []; 
          // Validation
          const errors = validateInput([
             {input_title: 'First Name', input_val: first_name, criteria: ['required']},
@@ -97,7 +89,6 @@ function WalkerDetails({ user }) {
             {input_title: 'Email', input_val: email, criteria: ['required','email']},
             {input_title: 'Street Name', input_val: address_street, criteria: ['required']},
             {input_title: 'City', input_val: address_city, criteria: ['required']},
-            {input_title: 'Province', input_val: address_province, criteria: ['required']},
             {input_title: 'Postal Code', input_val: address_postal_code, criteria: ['required']}
         ]);
          
@@ -144,11 +135,11 @@ function WalkerDetails({ user }) {
     };
 
     const getNeighbourhoodOptions = () => {
-        return neighbourhoods.map(neighbourhood=> ({value: neighbourhood.toLocaleLowerCase(), label: neighbourhood }))
+        return neighbourhoods.map(neighbourhood=> ({value: neighbourhood.toLowerCase(), label: neighbourhood }))
     };
 
     const getNeighbourhoodDefaultValues = () => {
-        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood.toLocaleLowerCase(), label: neighbourhood }))
+        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood.toLowerCase(), label: neighbourhood }))
     };
 
     const closeModal = () => {
@@ -200,7 +191,7 @@ function WalkerDetails({ user }) {
                         value={formData.email}
                     />
                     {
-                        formData.address_city.toLocaleLowerCase() === "toronto" &&
+                        formData.address_city.toLowerCase() === "toronto" &&
                         <Select 
                             className="profile-input profile-name" 
                             options={getNeighbourhoodOptions()} 
@@ -262,16 +253,18 @@ function WalkerDetails({ user }) {
                         )
                         }
                     </select> */}
-                {formData.address_city.toLocaleLowerCase() === "toronto" &&
+                {formData.address_city.toLowerCase() === "toronto" &&
                     <select 
                         className="profile-input profile-name" 
                         id="address_neighbourhood" 
                         name="address_neighbourhood"
+                        value={formData.address_neighbourhood}
+                        onChange={handleInputChange}
                     >
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
                             neighbourhoods.map( (neighbourhood, index) => 
-                                <option key={index} value={neighbourhood.toLocaleLowerCase()}>{neighbourhood}</option>
+                                <option key={index} value={neighbourhood.toLowerCase()}>{neighbourhood}</option>
                             )
                         }
                     </select>
