@@ -565,8 +565,8 @@ const resolvers = {
                 if( input.walker ){
                     const walker = await Walker.findById(input.walker); 
                     const targetIndex = walker.availability.findIndex(item => item.date === input.service_date);
-
-                    walker.availability[targetIndex][input.service_time] = false;
+                    const timeSlot = getTimeSlot(input.service_time);
+                    walker.availability[targetIndex][timeSlot] = false;
                     await walker.save();
                 }
 
@@ -591,15 +591,17 @@ const resolvers = {
                         // change the original walker's time slot back to available
                         const originalWalker = await Walker.findById(originalOrder.walker); 
                         const targetOriginalDateIndex = originalWalker.availability.findIndex(item => item.date === originalOrder.service_date);
-                        originalWalker.availability[targetOriginalDateIndex][originalOrder.service_time] = true;    
+                        const timeSlot = getTimeSlot(input.service_time?input.service_time:originalOrder.service_time);
+                        originalWalker.availability[targetOriginalDateIndex][timeSlot] = true;    
                         await originalWalker.save();
                     }
 
                     if(input.walker){
                         // change the new walker's time slot to unavailable
                         const walker = await Walker.findById(input.walker); 
-                        const targetNewDateIndex = walker.availability.findIndex(item => item.date === input.service_date?input.service_date:originalOrder.service_date);
-                        walker.availability[targetNewDateIndex][input.service_time?input.service_time:originalOrder.service_time] = false;        
+                        const targetNewDateIndex = walker.availability.findIndex(item => item.date === (input.service_date?input.service_date:originalOrder.service_date));
+                        const timeSlot = getTimeSlot(input.service_time?input.service_time:originalOrder.service_time);
+                        walker.availability[targetNewDateIndex][timeSlot] = false;    
                         await walker.save();
                     }
                 }
@@ -646,7 +648,8 @@ const resolvers = {
                     // change the original walker's time slot back to available
                     const originalWalker = await Walker.findById(order.walker); 
                     const targetOriginalDateIndex = originalWalker.availability.findIndex(item => item.date === order.service_date);
-                    originalWalker.availability[targetOriginalDateIndex][order.service_time] = true;    
+                    const timeSlot = getTimeSlot(order.service_date);
+                    originalWalker.availability[targetOriginalDateIndex][timeSlot] = true;    
                     await originalWalker.save();
                 }
 
