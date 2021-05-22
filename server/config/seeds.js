@@ -449,7 +449,211 @@ db.once('open', async () => {
             email: 'ms@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['Dwontown', 'York'],
+            neighbourhoods: ['Downtown', 'York'],
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-20',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-21',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    await Walker.create(
+        {
+            first_name: 'Mark',
+            last_name: 'Spencer',
+            email: 'ms@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            neighbourhoods: ['Downtown', 'York'],
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-20',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-21',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    await Walker.create(
+        {
+            first_name: 'Mark',
+            last_name: 'Spencer',
+            email: 'ms@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            neighbourhoods: ['Downtown', 'York'],
+            address: {
+                street: '1st Street NW',
+                city: 'toronto',
+                neighbourhood: 'east toronto',
+                province: 'ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-20',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-21',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: false,
+                    slot7pm: false,
+                    slot9pm: false
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    await Walker.create(
+        {
+            first_name: 'Mark',
+            last_name: 'Spencer',
+            email: 'ms@gmail.com',
+            password: 'passs',
+            avatar: "/images/user-default.png",
+            neighbourhoods: ['Downtown', 'York'],
             address: {
                 street: '1st Street NW',
                 city: 'toronto',
