@@ -216,6 +216,16 @@ const typeDefs = gql`
         status: String
     }
 
+    input UpdateOrderCoordsInput {
+        order_id: ID!
+        cords: OrderCoordsInput
+    }
+
+    input OrderCoordsInput {
+        lon: Float
+        lat: Float
+    }
+
     input ReviewInput {
         walker_id: ID!
         rating: Int!
@@ -260,11 +270,12 @@ const typeDefs = gql`
         addDog(input: DogInput): Owner
         updateOwnerProfile(input: OwnerProfileInput): Owner
         updateOwnerPassword(old_password: String!, new_password: String!): Owner
+        updateOwnerAvatar(avatar: String!): Owner
 
         addOrder(input: OrderInput): Order
         updateOrder(order_id: ID!, input: UpdateOrderInput): Order
         updateOrderStatus(order_id: ID!, status: String!): Order
-        updateOrderCoords(order_id: ID!, lat: Float!, lon: Float!): Order
+        updateOrderCoords(input: UpdateOrderCoordsInput): Order
         removeOrder(order_id: ID!): Order
         
         addReview(input: ReviewInput): Walker
@@ -278,6 +289,7 @@ const typeDefs = gql`
         updateWalkerPassword(old_password: String!, new_password: String!): Walker
         updateWalkerAvailability(input: [AvailabilityInput]): Walker
         updateWalkerStatus(walker_id: ID!, status: String!): Walker
+        updateWalkerAvatar(avatar: String!): Walker
 
         clearSetupIntent: Owner
     }

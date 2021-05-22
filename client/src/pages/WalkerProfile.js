@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import '../css/Profile.css'
 // import Auth from '../utils/auth';
 import WalkerDetails from '../components/WalkerProfileComponents/WalkerDetails';
@@ -9,12 +9,15 @@ import WalkerEarnings from '../components/WalkerProfileComponents/WalkerEarnings
 import WalkerPasswordForm from '../components/WalkerProfileComponents/WalkerPasswordForm';
 import WalkerAvgRating from '../components/WalkerProfileComponents/WalkerAvgRating';
 import { QUERY_WALKER_ME } from '../utils/queries';
+import { UPDATE_WALKER_AVATAR } from '../utils/mutations';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
+import { openUploadWidget } from '../utils/CloudinaryService';
 
 function WalkerProfile() {
     const [state, dispatch] = useStoreContext();
     const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
+    const [updateWalkerAvatar] = useMutation(UPDATE_WALKER_AVATAR);
     // const { loading, data } = useQuery(QUERY_WALKER_ME);
     const { currentUser } = state;
 
@@ -42,6 +45,35 @@ function WalkerProfile() {
         // }
     }, [currentUser, data, loading, dispatch]);
 
+    const uploadImageWithCloudinary = async () => {
+      const uploadOptions = {
+        cloud_name: 'w-oo-f',
+        upload_preset: 'iqgryfiq' //Create an unsigned upload preset and update this
+      };
+  
+      openUploadWidget(uploadOptions, (error, result) => {
+        if (!error) {
+          const {event, info} = result;
+          if (event === "success") {
+            updateWalkerAvatar({
+              variables:{
+                avatar: info.public_id
+              }
+            })
+            .then(newOwner => {
+              dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: newOwner.data.updateWalkerAvatar
+              });
+            });
+  
+          }
+        } else {
+          console.log(error);
+        }
+      });
+    }
+
   return (
     <div id="walkers">
       <h1>My Profile</h1>
@@ -63,7 +95,10 @@ function WalkerProfile() {
         <>
         {currentUser && currentUser.status === "ACTIVE" && 
           <div className="walker-picture-container">
-            <img src={currentUser.avatar} width="160" alt="profile-img"/>
+            <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + currentUser.avatar} width="160" alt="profile-img"/>
+            <div>
+                <button className="upload_button" onClick={uploadImageWithCloudinary}>Upload</button>
+              </div>
           </div>        
         }
         <div className="walker-details-container">
@@ -88,13 +123,16 @@ function WalkerProfile() {
                 </div>
               </div>
             }
+            {currentUser && currentUser.status === "ACTIVE" && 
+                <WalkerOrders orders={currentUser.orders}/>
+            }
             <WalkerDetails user={currentUser}/>
             <WalkerPasswordForm />
             {currentUser && currentUser.status === "ACTIVE" && 
               <>
                 <WalkerAvgRating average_rating={currentUser.average_rating}/>
                 <WalkerReviews reviews={currentUser.reviews} />
-                <WalkerOrders orders={currentUser.orders}/>
+                
                 <WalkerEarnings earnings={currentUser.earnings}/>
               </>
             }

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import React, { useState, useEffect } from 'react';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 
-//import '../css/WalkerProfile.css';
+import '../css/WalkerProfile.css';
 import { QUERY_WALKER_ME, QUERY_WALKER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
@@ -10,13 +10,17 @@ import WalkerTrackOrder from "../components/WalkerTrackWalks/WalkerTrackOrder"
 
 function WalkerTrackWalks() {
     const [state, dispatch] = useStoreContext();
-    const [getWalkerProfile, { loading, data }] = useLazyQuery(QUERY_WALKER_ME);
-    // const [getWalkerOrder, { called,loading, data }] = useLazyQuery(QUERY_WALKER_ORDERS);
+    const [orders, setOrders] = useState([]);
+    const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
     const { currentUser } = state;
-    const orders = currentUser.orders;
-    const totalOrders = currentUser.orders.length;
-    // const totalOrders = 1;
-
+    const { data: walkerOrderData } = useQuery(QUERY_WALKER_ORDERS, {
+      variables: {
+          walker_id: currentUser._id
+      }
+    });
+    
+    // const totalOrders = orders?.length;
+    
     useEffect(() => {
       // if not already in global store
       if (!currentUser && !data) {
@@ -32,32 +36,63 @@ function WalkerTrackWalks() {
     }, [currentUser, data, loading, dispatch]);
 
 
-    // useEffect(() => {
-    //   // if not already in global store
-    //   getWalkerOrder({ variables: { walker_id: currentUser._id}});
-      
-    // }, [orders]);
+    useEffect(() => {
+      if(walkerOrderData) {
+        setOrders(walkerOrderData.walkerOrders);
+      }
+      console.log(walkerOrderData);
+    });
 
   return (
     <>
-      <h1>My UpComing Walks</h1>
+      <h1>My Walks</h1>
       <div className='page-wrap'>
         <div className="walker-details-container">
           {currentUser && currentUser.status === "ACTIVE" &&   
             <div className="walker-profile-container">
-              <div>
+              <h2>Upcoming Walks</h2>
+              {/* <div>
                 {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
                 : 'You have no upcoming Walks'}
-              </div>
-              {orders.filter(order => order.status === "PENDING_PROGRESS").map((order) => (
-                // render component
-                <WalkerTrackOrder
-                order_id = {order.order_id}
+              </div> */}
+              {orders.filter(order => order.status === "PENDING_PROGRESS" || order.status === "IN_PROGRESS" ).map((order) => (
+                <div className="walks">
+                  <div>Walk Date: {order.service_date}</div>
+                  <div>Start time: {order.service_time}</div>
+                  <div>Status: {order.status}</div>
+                  <WalkerTrackOrder 
+                order_id = {order._id}
                 service_date = {order.service_date}
                 service_time = {order.service_time}
                 status = {order.status}
                 />
+                </div>
+                
               ))}
+
+              
+            </div>
+          }
+        </div>
+        {/* fulfilled walks */}
+        <div className="walker-details-container">
+          {currentUser && currentUser.status === "ACTIVE" &&   
+            <div className="walker-profile-container">
+              <h2>Completed Walks</h2>
+              {/* <div>
+                {totalOrders ? `You have ${totalOrders} fulfilled ${totalOrders === 1 ? 'walk' : 'walks'}:`
+                : 'You have no fulfilled Walks'}
+              </div> */}
+              {orders.filter(order => order.status === "FULLFILLED" || order.status === "CHARGED" || order.status === "FINALIZED").map((order) => (
+                <div className="walks">
+                  <div>Walk Date: {order.service_date}</div>
+                  <div>Start time: {order.service_time}</div>
+                  <div>Status: {order.status}</div>
+                </div>
+                
+              ))}
+
+              
             </div>
           }
         </div>

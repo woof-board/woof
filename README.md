@@ -1,5 +1,6 @@
 # <img src="client/public/images/woof-logo.svg" height="90" alt="Woof" title="Woof">
 
+
 You need a break. So do your dogs. We will help both! Woof connects dog owners with dog walkers who’ll treat your dog like family. You can trust us to keep your pet happy, healthy, and sweet as ever!
 
 ## Table Of Content
@@ -8,6 +9,7 @@ You need a break. So do your dogs. We will help both! Woof connects dog owners w
 * [Technologies](#technologies)
 * [Installation](#installation)
 * [Usage](#usage)
+* [Wireframe](#wireframe)
 * [Future Development](#future-development)
 * [Screenshot](#screenshot)
 * [License](#license)
@@ -21,7 +23,8 @@ You need a break. So do your dogs. We will help both! Woof connects dog owners w
 
 
 ## General Info
-The application follows the MERN paradigm in its architectural structure, using React as the templating language and the express-session npm package for authentication.
+The application follows the MERN paradigm in its architectural structure, using React as the templating language and the JSON web token for authentication.
+[Presentation](client/public/images/Woof.pdf)
 
 ## Technologies
 Project is created with 
@@ -31,16 +34,17 @@ Project is created with
 * [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
 * [React](https://reactjs.org/)
 * [React Router](https://reactrouter.com/)
+* [React Datepicker](https://www.npmjs.com/package/react-datepicker)
+* [React modal](https://www.npmjs.com/package/react-modal)
 * [Concurrently](https://www.npmjs.com/package/concurrently)
 * [if-env](https://www.npmjs.com/package/if-env)
 * [Nodemon](https://www.npmjs.com/package/nodemon)
 * [JsonWebToken](https://www.npmjs.com/package/jsonwebtoken)
 * [jwt-decode"](https://jwt.io/)
 * [bcrypt](https://www.npmjs.com/package/bcrypt)
-* [graphql](https://graphql.org/)
 * [mapbox-gl](https://www.mapbox.com/mapbox-gljs)
 * [Dotenv](https://www.npmjs.com/package/dotenv)
-* [bcrypt](https://www.npmjs.com/package/bcrypt)
+* [stripe](https://stripe.com/)
 
 ## Installation
 To get started clone this repository using 
@@ -59,7 +63,7 @@ Once all that is done, navigate to - http://localhost:3000 to begin!
 
 
 ## Usage
-This application is deployed on Heroku at ....
+This application is deployed on Heroku at https://woof-app-2021.herokuapp.com
 
 There are three types of access:
 * **Owner access**
@@ -67,19 +71,27 @@ There are three types of access:
 * **Administrator access**
 
 **Owner access** allows one to 
-* 
-* 
-* 
+* Submit a Signup form for create profile then signin in order to get access. 
+* Edit their profile as well as dog profile as needed.
+* Able to request a walk, select a available walker and see the progress on their order.
+* Able to track their dogs when walker is taking them for a walk-through GPS map.
+* Able to rate the walker.
+* Able to pay through a secured payment method.
 
-**Walker access** 
-* 
-* 
-* 
-* 
+
+**Walker access** allows one to 
+* Submit a Signup form for create profile then signin in order to get employed. 
+* Able to mark their availability in the schedule calender for next two weeks.
+* Able to see their confirmed schedule for next 14 days.
+* Able to get payout through a secured payment method.
+
 
 **Administrator access** 
 * 
 *  
+
+## Wireframe
+[wireframe.pdf](https://github.com/woof-board/woof/files/6524517/wireframe.pdf)
 
 ## Future Development
 Upcoming features:
@@ -89,7 +101,7 @@ Upcoming features:
 
 
 ## Screenshot
-
+![Snap](https://user-images.githubusercontent.com/75001492/119169857-7f304b00-ba30-11eb-9477-e9ab8e3845b2.JPG)
 
 ## License
 This repository is licensed under the MIT license.
