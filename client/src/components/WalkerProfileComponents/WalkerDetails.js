@@ -134,12 +134,20 @@ function WalkerDetails({ user }) {
          }
     };
 
-    const getNeighbourhoodOptions = () => {
-        return neighbourhoods.map(neighbourhood=> ({value: neighbourhood, label: neighbourhood }))
-    };
-
+    // const getNeighbourhoodOptions = () => {
+    //     return neighbourhoods.map(neighbourhood=> {({value: neighbourhood?.toLowerCase(), label: neighbourhood })})
+    // };
+    const capitalize = (string) => {
+        var neighbourhood = string.toLowerCase().split(" ");
+        let finalNeighbourhood = "";
+        for(var i = 0; i< neighbourhood.length; i++){
+            neighbourhood[i] = neighbourhood[i][0].toUpperCase() + neighbourhood[i].slice(1);
+            finalNeighbourhood += " " + neighbourhood[i]
+        }
+     return finalNeighbourhood.trim();
+    }
     const getNeighbourhoodDefaultValues = () => {
-        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood, label: neighbourhood }))
+        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood?.toLowerCase(), label: capitalize(neighbourhood) }))
     };
 
     const closeModal = () => {
@@ -154,6 +162,23 @@ function WalkerDetails({ user }) {
             neighbourhoods: [...selectedNieghbourhoods]
         });
     };
+
+    const loadServiceArea = () => {
+        let serviceArea =[]
+        cities.map(city => {
+            if (!city.group) {
+                if(city.name==='Toronto') {
+                    console.log (neighbourhoods);
+                    neighbourhoods.map(neighbourhood => 
+                        serviceArea.push({value: neighbourhood?.toLowerCase(), label: 'Toronto: '+ neighbourhood}))
+                } else {
+                    serviceArea.push({value: city.name?.toLowerCase(), label: city.name})
+                }
+            }
+        })
+        return serviceArea
+    }
+
 
     return (
         <>
@@ -194,9 +219,9 @@ function WalkerDetails({ user }) {
                         formData.address_city === "Toronto" &&
                         <Select 
                             className="profile-input profile-name" 
-                            options={getNeighbourhoodOptions()} 
+                            options={loadServiceArea()} 
                             isMulti={true}
-                            placeholder="Select your neighbourhoods"
+                            placeholder="What areas can you serve?"
                             onChange={handleNeighbourhoodSelect}
                             defaultValue={getNeighbourhoodDefaultValues()}
                         />

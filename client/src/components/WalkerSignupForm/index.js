@@ -4,7 +4,7 @@ import Auth from '../../utils/auth';
 import { ADD_WALKER } from '../../utils/mutations';
 import '../../css/Walker.css';
 
-function WalkerSignupForm() {
+function WalkerSignupForm(props) {
     const [formData, setUserFormData] = useState({
         first_name: '',
         last_name: '',
@@ -33,6 +33,11 @@ function WalkerSignupForm() {
             console.log(e);
         }
     };
+
+    const {
+        formLinks = [],
+        setFormCurrentLink,
+    } = props
 
     return (
         <form
@@ -77,14 +82,21 @@ function WalkerSignupForm() {
                     <p className="error-text" >The provided credentials are incorrect</p>
                 </div> : null
             }
-            <button
-                disabled={!(formData.email && formData.password && formData.first_name && formData.last_name)}
-                type="submit"
-                className="home-form-button"
-                id="owner-signup-button"
-            >
-                SUBMIT
-            </button>
+            <div className="home-button-container">
+                <button onClick={() => { setFormCurrentLink(formLinks[0]) }} 
+                    className="home-form-button" 
+                >
+                    LOGIN
+                </button>
+                <button
+                    disabled={!(formData.email && formData.password && formData.first_name && formData.last_name)}
+                    type="submit"
+                    className="home-form-button"
+                    id="owner-signup-button"
+                >
+                    SIGNUP
+                </button>
+            </div>
         </form>
     );
 }
