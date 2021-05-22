@@ -2,21 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks';
 import DatePicker from 'react-datepicker';
 import Select from 'react-select';
-
-import ModalDisplay from '../ModalDisplay';
-import { QUERY_WALKER_AVAILABILITY } from "../../utils/queries";
-import { ADD_ORDER, UPDATE_ORDER } from "../../utils/mutations";
-import { useStoreContext } from "../../utils/GlobalState";
-import { formatDate, addDays } from '../../utils/helpers';
-import "react-datepicker/dist/react-datepicker.css";
 import { Redirect } from 'react-router';
 import StarRatings from 'react-star-ratings';
+
+import ModalDisplay from '../ModalDisplay';
+import { QUERY_WALKER_AVAILABILITY, QUERY_OWNER_ME } from "../../utils/queries";
+import { ADD_ORDER, UPDATE_ORDER } from "../../utils/mutations";
+import { useStoreContext } from "../../utils/GlobalState";
+import { UPDATE_CURRENT_USER } from "../../utils/actions";
+import { formatDate, addDays } from '../../utils/helpers';
+import "react-datepicker/dist/react-datepicker.css";
 import { RatingIconSVG } from '../../utils/helpers'
-
-
-// import { UPDATE_CURRENT_USER } from "../../utils/actions";
-// import { cities, neighbourhoods } from '../../utils/helpers';
-
+import { idbPromise } from "../../utils/helpers";
 
 // for react-select
 const customStyles = {
@@ -33,8 +30,12 @@ const bookTimes = [ "9am", "11am", "1pm", "3pm", "5pm", "7pm", "9pm" ];
 function OwnerWalkDetails() {
     const [state, dispatch] = useStoreContext();
     const { currentUser } = state;
-
-    const [checkWalkerAvailability, { called, loading, data: walkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY);
+    const [getProfile, { data: profileData }] = useLazyQuery(QUERY_OWNER_ME, {
+        fetchPolicy: 'network-only'
+    });
+    const [checkWalkerAvailability, { called, loading, data: walkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY, {
+        fetchPolicy: 'network-only'
+    });
     const [addOrder, {error: addOrderError}] = useMutation(ADD_ORDER);
     const [updateOrder, {error: updateOrderError}] = useMutation(UPDATE_ORDER);
     
@@ -44,11 +45,27 @@ function OwnerWalkDetails() {
     const [formData, setFormData] = useState({
         date: formatDate(new Date()), 
         time: bookTimes[0],
-        dogIdList: [] 
+        dogIdList: [],
+        dogListOptions: [] 
     });
     const [orderId, setOrderId] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [redirect, setRedirect ] = useState(false);
+
+    useEffect(() => {
+        if (!currentUser && !profileData) {
+            getProfile();
+        } 
+        // retrieved from server
+        else if (!currentUser && profileData) {
+            console.log("profileData",profileData)
+            dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: { ...profileData.ownerMe}
+            });
+            idbPromise('user', 'put', profileData.ownerMe);
+        }
+    }, [currentUser, profileData, dispatch]);
 
     useEffect(() => {
         if(walkerData) {
@@ -59,9 +76,12 @@ function OwnerWalkDetails() {
     useEffect(() => {
         if(currentUser) {
             const dogIds = currentUser.dogs.map(dog => dog._id);
+            const dogOptions = currentUser.dogs.map(dog => ({ value: dog._id, label: dog.name }));
+            
             setFormData({
                 ...formData,
-                dogIdList: [...dogIds]
+                dogIdList: dogIds,
+                dogListOptions: dogOptions
             });
         }
     }, [currentUser]);
@@ -90,17 +110,17 @@ function OwnerWalkDetails() {
         }
 
         try {
-            const { data } = await addOrder({
-                variables: {
-                    input: {
-                        service_date: formData.date,
-                        service_time: formData.time,
-                        owner: currentUser._id,
-                        dogs: formData.dogIdList
-                    }
-                }
-            });
-            setOrderId(data.addOrder._id);
+            // const { data } = await addOrder({
+            //     variables: {
+            //         input: {
+            //             service_date: formData.date,
+            //             service_time: formData.time,
+            //             owner: currentUser._id,
+            //             dogs: formData.dogIdList
+            //         }
+            //     }
+            // });
+            // setOrderId(data.addOrder._id);
 
             checkWalkerAvailability({
                 variables: {
@@ -114,19 +134,33 @@ function OwnerWalkDetails() {
         }
     };
 
-    const handleUpdateOrder = async (e) => {
+    const handleAddOrder = async (e) => {
         e.preventDefault();
         const walkerId = e.target.getAttribute("data-id");
         try {
-            await updateOrder({
-                variables:{
-                    order_id: orderId,
+            // await updateOrder({
+            //     variables:{
+            //         order_id: orderId,
+            //         input: {
+            //             walker: walkerId,
+            //             status: "PENDING_PROGRESS"
+            //         }
+            //     }
+            // });
+
+            const { data } = await addOrder({
+                variables: {
                     input: {
+                        service_date: formData.date,
+                        service_time: formData.time,
+                        owner: currentUser._id,
                         walker: walkerId,
+                        dogs: formData.dogIdList,
                         status: "PENDING_PROGRESS"
                     }
                 }
             });
+
 
             setModalJSX(
                 <div>
@@ -141,12 +175,6 @@ function OwnerWalkDetails() {
         }catch (e){
             console.log(e);
         }
-    };
-
-     const getDogNames = () => {
-        return currentUser.dogs.map( dog =>
-            ({ value: dog._id, label: dog.name })
-        );
     };
     
     const handleChangeDogSelect = (selectedOption) => {
@@ -217,10 +245,10 @@ function OwnerWalkDetails() {
                         <Select 
                             customStyles={customStyles}
                             className="profile-input profile-name" 
-                            options={getDogNames()} 
+                            options={formData.dogListOptions}
                             isMulti={true}
                             onChange={handleChangeDogSelect}
-                            defaultValue={getDogNames()}
+                            value={formData.dogListOptions}
                         />
                         </div>
                 <button
@@ -277,7 +305,7 @@ function OwnerWalkDetails() {
                                         </>
                                     )}
                                     <div className="button-container">
-                                        <button data-id={data._id} onClick={handleUpdateOrder}>Select and confirm booking</button>
+                                        <button data-id={data._id} onClick={handleAddOrder}>Select and confirm booking</button>
                                     </div>
                                 </div>
                                 )}

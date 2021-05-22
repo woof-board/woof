@@ -18,7 +18,8 @@ function WalkerSchedule() {
     const [ getWalkerOrders, { called: calledWalkerOrder, loading: orderDataLoading, data: walkerOrderData } ] = useLazyQuery(QUERY_WALKER_ORDERS, {
         variables: {
             walker_id: currentUser?._id
-        }
+        },
+        fetchPolicy: 'network-only'
     }); 
     const [ schedule, setSchedule ] = useState(createInitialState());
     const [buttonVisible, setButtonVisible] = useState(false);
