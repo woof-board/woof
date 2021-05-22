@@ -56,11 +56,7 @@ const walkerSchema = new Schema(
         },
         avatar: {
             type: String,
-<<<<<<< HEAD
-            default: 'Avatar/sxx1eh60qbxrtzqfowat.png'
-=======
             default: 'Default/nymkl8vks2eyom7rgp3f'
->>>>>>> develop
         },
         neighbourhoods: {
             type: [String],
