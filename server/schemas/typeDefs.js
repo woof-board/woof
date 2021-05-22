@@ -268,6 +268,8 @@ const typeDefs = gql`
         addOwner(input: OwnerInput): AuthOwner
         loginOwner(email: String!, password: String!): AuthOwner
         addDog(input: DogInput): Owner
+        updateDog(dog_id: ID!, name: String, breed: String, weight: Float, treats: Boolean, avatar: String ): Owner
+        removeDog(dog_id: ID!): Owner
         updateOwnerProfile(input: OwnerProfileInput): Owner
         updateOwnerPassword(old_password: String!, new_password: String!): Owner
         updateOwnerAvatar(avatar: String!): Owner

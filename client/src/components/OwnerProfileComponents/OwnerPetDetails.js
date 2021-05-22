@@ -1,152 +1,233 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
+import { UPDATE_OWNER_PROFILE, UPDATE_DOG, REMOVE_DOG } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
-import { cities, neighbourhoods } from '../../utils/helpers';
+import ModalDisplay from '../../components/ModalDisplay';
+import { validateInput } from '../../utils/helpers';
 
-function OwnerDetails({ user }) {
+function OwnerPetDetails({ user }) {
 
     const [updateOwnerProfile, { error }] = useMutation(UPDATE_OWNER_PROFILE);
+    const [updateDog] = useMutation(UPDATE_DOG);
+    const [removeDog] = useMutation(REMOVE_DOG);
     const [state, dispatch] = useStoreContext();
-
-
-
-    const [formData, setFormData] = useState({ 
+    const { currentUser } = state;
+    const [formData, setFormData] = useState({
         dogs: []
     });
-    
+    const [modalJSX, setModalJSX] = useState(<div />);
+    const [modalOpen, setModalOpen] = useState();
 
     useEffect(() => {
         if (user) {
             const { dogs } = user;
+            console.log("dogs in useeffc", user, dogs);
             setFormData({
-                dogs
-
+                dogs: [...dogs]
             })
-  
+
         }
-    
+
     }, [user]);
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setFormData({ 
-            ...formData, 
-            [name]: value
+        const dogId = event.target.getAttribute("data-dogid");
+
+        let oldState = [...formData.dogs];
+        let newState = oldState.map((item)=>{
+            if(item._id === dogId) {
+                item[name] = value;        
+            }
+            return item;
+        });
+        setFormData({
+            dogs: [...newState]
         });
     };
-    const {dogs} = formData;
-    const handleFormSubmit = async (e) => {
+
+    const { dogs } = formData;
+
+    const handleUpdateDog = async (e) => {
         e.preventDefault();
+        const dogId = e.target.getAttribute("data-dogid");
 
-        // need to implement form validation here
-
-        const { 
-            dogs,
-            ...rest
-         } = formData;
-
-         try {
-            const { data: { updateOwnerProfile: newProfile } } = await updateOwnerProfile({
-                variables: {
-                    input: {
-                        dogs: {
-                            breed: dogs.breed,
-                            weight: dogs.weight,
-                            treats: dogs.treats,
-                            avatar: dogs.avatar,
-                            ...rest
-                        },
-                        ...rest
-                    }
-                }
-            });
-            
-            dispatch({
-                type: UPDATE_CURRENT_USER,
-                currentUser: newProfile
-            });
-
-            alert('Account Updated');
-         } catch (e) {
-             console.log(e);
+        const { dogs } = formData;
+        const updatedDog = dogs.filter(dog => dog._id === dogId)[0];
+        
+        // validation
+        const errors = validateInput([
+            {input_title: 'Name', input_val: updatedDog.name, criteria: ['required']},
+            {input_title: 'Breed', input_val: updatedDog.breed, criteria: ['required']}
+        ]);
+         
+         if (errors.length > 0) {
+             setModalJSX(
+                <div>
+                    {errors.map((error, index) => <p key={index}>{error}</p>)}
+                </div>
+            );
+             setModalOpen(true);
+             return;
          }
 
+        try {    
+            const { data: { updateDog: newProfile } } = await updateDog({
+                variables: {
+                        dog_id: updatedDog._id,
+                        name: updatedDog.name,
+                        breed: updatedDog.breed,
+                        weight: parseFloat(updatedDog.weight),
+                        treats: updatedDog.treats,
+                        avatar: updatedDog.avatar
+                    } 
+            });
+
+            dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: {
+                    ...currentUser,
+                    dogs: [...newProfile.dogs]
+                }
+            });
+
+            setModalJSX(<div>Dog info has been updated successfully!</div>);
+            setModalOpen(true);
+        } catch (e) {
+            console.log(e);
+        }
     }
+    const handleRemoveDog = async (e) => {
+        e.preventDefault();
+        const dogId = e.target.getAttribute("data-dogid");
+        
+        try {    
+            const { data: { removeDog: newProfileFromRemoveAction } } = await removeDog({
+                variables: {
+                    dog_id: dogId
+                } 
+            });
+
+            dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: {
+                    ...currentUser,
+                    dogs: [...newProfileFromRemoveAction.dogs]
+                }
+            });
+
+            setModalJSX(<div>Dog has been removed from database successfully!</div>);
+            setModalOpen(true);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    const closeModal = () => {
+        setModalJSX(<div />);
+        setModalOpen(false);
+    };
 
     return (
         <>
-        <div className="walker-contact-container">
-
-            <div className="walker-header"><h2>Dog Information</h2></div>
-            <form
-                className="walker-update-form"
-                id="walker-update-form"
-                onSubmit={handleFormSubmit}
-            >
-
-
-                    {
-                    dogs.map((dog) => 
-                    <>
-                    <img src={dog.avatar} width="150"></img>
-                    <div className="row-data">
-
-                        <input
-                            className="dog-info"
-                            type="text"
-                            name="dog_name"
-                            placeholder="Name"
-                            onChange={handleInputChange}
-                            value={dog.name}
-                        />
-                    
-                    <input
-                        className="dog-info"
-                        type="text"
-                        name="breed"
-                        placeholder="Breed"
-                        onChange={handleInputChange}
-                        value={dog.breed}
-                    />
-
-                     <input
-                        className="dog-weight"
-                        type="text"
-                        name="weight"
-                        placeholder="Weight"
-                        onChange={handleInputChange}
-                        value={dog.weight}
-                    /><label className="weight-label">lbs.</label>
-                    <label className="treats-label">Dog Treats allowed</label>
-                    <select className="treats-input" id="walker-cities" name="address_city" onChange={handleInputChange}>
-                                {console.log(dog.treats)}
-                                {dog.treats
-                                    ? <><option selected value="true">Yes</option><option value="false">No</option></>
-                                    : <><option value="true">Yes</option><option selected value="false">No</option></>
-                                }
-                    </select>
-
-                    </div>
-                    </>
-                    )}
-                    
-            
-                
-                
-                <div className="button-container">
-                <button
-                    type="submit"
-                    className="update-walker-button"
-                    id="update-owner-profile-button"
+            <div className="walker-contact-container">
+                <div className="walker-header"><h2>Dog Information</h2></div>
+                <form
+                    className="walker-update-form"
+                    id="walker-update-form"
+                    // onSubmit={handleFormSubmit}
                 >
-                    UPDATE
+                    {
+                        dogs.map((dog, index) =>
+                            <div key={index}>
+                                <img src={dog.avatar} width="150"></img>
+                                <div className="row-data">
+
+                                    <input
+                                        className="dog-info"
+                                        type="text"
+                                        name="name"
+                                        placeholder="Name"
+                                        data-dogid={dog._id}
+                                        onChange={handleInputChange}
+                                        value={dog.name}
+                                    />
+
+                                    <input
+                                        className="dog-info"
+                                        type="text"
+                                        name="breed"
+                                        placeholder="Breed"
+                                        data-dogid={dog._id}
+                                        onChange={handleInputChange}
+                                        value={dog.breed}
+                                    />
+
+                                    <input
+                                        className="dog-weight"
+                                        type="text"
+                                        name="weight"
+                                        placeholder="Weight"
+                                        data-dogid={dog._id}
+                                        onChange={handleInputChange}
+                                        value={dog.weight}
+                                    /><label className="weight-label">lbs.</label>
+                                    <label className="treats-label">Dog Treats allowed</label>
+                                    <select 
+                                        className="treats-input" 
+                                        id="walker-cities" 
+                                        name="treats"
+                                        data-dogid={dog._id} 
+                                        value={dog.treats ? "true" : "false"}
+                                        onChange={handleInputChange}
+                                    >
+                                        <>
+                                            <option value="true">Yes</option>
+                                            <option value="false">No</option>
+                                        </>
+                                        {/* {console.log(dog.treats)}
+                                        {dog.treats
+                                            ? <><option selected value="true">Yes</option><option value="false">No</option></>
+                                            : <><option value="true">Yes</option><option selected value="false">No</option></>
+                                        } */}
+                                    </select>
+                                    
+                                </div>
+                                <div className="row-data">
+                                <button 
+                                    type="button"
+                                    onClick={handleUpdateDog}
+                                    data-dogid={dog._id} 
+                                >
+                                    Update
+                                </button>
+                                <button 
+                                    type="button"
+                                    onClick={handleRemoveDog}
+                                    data-dogid={dog._id} 
+                                >
+                                    Remove
+                                </button>
+                                </div>
+                            </div>
+                        )}
+
+
+                    {/* <div className="button-container">
+                        <button
+                            type="submit"
+                            className="update-walker-button"
+                            id="update-owner-profile-button"
+                        >
+                            UPDATE
                 </button>
-                </div>
-            </form>
-        </div>
+                    </div> */}
+                </form>
+                <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
+            </div>
         </>
     )
 }
 
-export default OwnerDetails;
+export default OwnerPetDetails;

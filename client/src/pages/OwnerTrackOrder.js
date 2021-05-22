@@ -5,8 +5,9 @@ import '../css/WalkerProfile.css';
 import { QUERY_OWNER_ME, QUERY_OWNER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER, UPDATE_CURRENT_USER_ARR_FIELD } from "../utils/actions";
-
+import ModalDisplay from '../components/ModalDisplay';
 import Map from "../components/OwnerTrackOrder/Map";
+import ReviewForm from '../components/ReviewForm';
 import TestMap from "../components/OwnerTrackOrder/TestMap";
 import { Link } from 'react-router-dom';
 
@@ -15,7 +16,8 @@ function OwnerTrackOrder() {
   const [state, dispatch] = useStoreContext();
   const [orders, setOrders] = useState([]);
   const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
-
+  const [modalJSX, setModalJSX] = useState(<div />);
+    const [modalOpen, setModalOpen] = useState();  
   const { currentUser } = state;
   const { data: ownerOrderData } = useQuery(QUERY_OWNER_ORDERS, {
     variables: {
@@ -62,6 +64,20 @@ function OwnerTrackOrder() {
     // if (orderLoading) {
     //     return (<div>Loading data...</div>);
     // }
+
+    const handleReview = (e) => {
+        const walker_id = e.target.getAttribute("data-walkerid");
+        setModalJSX(
+            <ReviewForm walker_id={walker_id} closeModal={closeModal}/>
+        );
+        setModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setModalJSX(<div />);
+        setModalOpen(false);
+    };
+
 
   return (
     <>
@@ -120,7 +136,12 @@ function OwnerTrackOrder() {
                             <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
                             <div><span className="medium-text">Start time:</span> {order.service_time}</div>
                             <div><span className="medium-text">Status:</span> {order.status}</div>
-                            {/* <div> Walker: {`${order.walker.first_name} ${order.walker.last_name}`} </div> */}
+                            <div><span className="medium-text">Walker</span>: {`${order.walker.first_name} ${order.walker.last_name}`} </div>
+                            <button 
+                                type="button"
+                                data-walkerid={order.walker._id}
+                                onClick={handleReview}
+                            >Add a review</button>
                             {/* Add map component */}
                             <Map
                             order_id = {order._id}
@@ -133,7 +154,7 @@ function OwnerTrackOrder() {
             </div>
             }
           </div>
-          
+          <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
         
       </div>
     </>

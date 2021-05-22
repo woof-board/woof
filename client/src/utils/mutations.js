@@ -400,6 +400,45 @@ export const ADD_DOG = gql`
                 breed
                 weight
                 treats
+                avatar
+            }
+        }
+    }
+`;
+
+export const UPDATE_DOG = gql`
+    mutation updateDog($dog_id:ID!, $name:String, $breed:String, $weight:Float, $treats:Boolean, $avatar:String ) {
+        updateDog(dog_id: $dog_id, name:$name, breed:$breed, weight:$weight, treats: $treats, avatar:$avatar ){
+            _id
+            first_name
+            last_name
+            email
+            dogs{
+                _id
+                name
+                breed
+                weight
+                treats
+                avatar
+            }
+        }
+    }
+`;
+
+export const REMOVE_DOG = gql`
+    mutation removeDog($dog_id: ID!) {
+        removeDog(dog_id: $dog_id){
+            _id
+            first_name
+            last_name
+            email
+            dogs{
+                _id
+                name
+                breed
+                weight
+                treats
+                avatar
             }
         }
     }
