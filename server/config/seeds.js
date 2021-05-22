@@ -522,7 +522,7 @@ db.once('open', async () => {
       {
         service_date:'2021-05-21',
         service_time: '9am',
-        status: 'PENDING_WALKER',
+        status: 'PENDING_PROGRESS',
         owner: ownerIds[0],
         walker: walkerIds[2],
         dogs: [dogIds[0][0], dogIds[0][1]]
@@ -530,7 +530,7 @@ db.once('open', async () => {
       {
         service_date:'2021-05-20',
         service_time: '9am',
-        status: 'PENDING_WALKER',
+        status: 'PENDING_PROGRESS',
         owner: ownerIds[3],
         walker: walkerIds[2],
         dogs: [dogIds[3][0]]
@@ -554,7 +554,7 @@ db.once('open', async () => {
       {
         service_date:'2021-05-21',
         service_time: '11am',
-        status: 'PENDING_WALKER',
+        status: 'PENDING_PROGRESS',
         owner: ownerIds[0],
         walker: walkerIds[2],
         dogs: [dogIds[0][0]]
@@ -562,7 +562,7 @@ db.once('open', async () => {
       {
         service_date:'2021-05-21',
         service_time: '3pm',
-        status: 'PENDING_WALKER',
+        status: 'PENDING_PROGRESS',
         owner: ownerIds[0],
         walker: walkerIds[2],
         dogs: [dogIds[0][0], dogIds[0][1]]
@@ -570,7 +570,7 @@ db.once('open', async () => {
       {
         service_date:'2021-05-20',
         service_time: '5pm',
-        status: 'IN_PROGRESS',
+        status: 'PENDING_PROGRESS',
         owner: ownerIds[3],
         walker: walkerIds[2],
         dogs: [dogIds[3][0]]
@@ -578,7 +578,7 @@ db.once('open', async () => {
       {
         service_date:'2021-05-21',
         service_time: '7pm',
-        status: 'PENDING_PROGRESS',
+        status: 'FULLFILLED',
         owner: ownerIds[4],
         walker: walkerIds[2],
         dogs: [dogIds[4][0]]
@@ -586,7 +586,7 @@ db.once('open', async () => {
       {
         service_date:'2021-05-21',
         service_time: '7pm',
-        status: 'PENDING_PROGRESS',
+        status: 'DENIED',
         owner: ownerIds[3],
         walker: walkerIds[2],
         dogs: [dogIds[3][1]]

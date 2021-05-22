@@ -71,8 +71,8 @@ export const UPDATE_ORDER_STATUS = gql`
 `;
 
 export const UPDATE_ORDER_COORDS = gql`
-    mutation updateOrderCoords($input: UpdateOrderCoordsInput ) {
-        updateOrderCoords(input: $input) {
+    mutation updateOrderCoords($order_id: ID!, $lon: Float!, $lat: Float! ) {
+        updateOrderCoords(order_id: $order_id, lon: $lon, lat: $lat) {
             _id
             coords{
                 lon

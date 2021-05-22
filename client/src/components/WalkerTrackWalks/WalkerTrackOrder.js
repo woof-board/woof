@@ -30,7 +30,7 @@ function WalkerTrackOrder(order) {
           maximumAge: 0
         };
         navigator.geolocation.getCurrentPosition(success, error, options);
-      }, 60000);
+      }, 10000);
     } else {
       if (buttonClicked) {
         changeStatusToFulfilled();
@@ -53,6 +53,8 @@ function WalkerTrackOrder(order) {
       variables: {
         order_id: order_id,
         status: "IN_PROGRESS",
+        // order_id: "60a489466740bf2a040f98d1",
+        // status: "PENDING_PROGRESS",
       }
     });
 
@@ -69,6 +71,8 @@ function WalkerTrackOrder(order) {
       variables: {
         order_id: order_id,
         status: "FULLFILLED",
+        // order_id: "60a489466740bf2a040f98d1",
+        // status: "PENDING_PROGRESS",
       }
     });
       // alert('status Updated !!!!');
@@ -88,15 +92,12 @@ function WalkerTrackOrder(order) {
 
     try {
       updateOrderCoords({
-      variables: {
-        input: {
+        variables: {
+          // order_id: order_id,
           order_id: order_id,
-          cords: {
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          }
+          lon: position.coords.longitude,
+          lat: position.coords.latitude,
         }
-      }
     });
       // alert('Cords Updated !!!');
     } catch (e) {
