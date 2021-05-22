@@ -26,7 +26,10 @@ const ownerSchema = new Schema(
             required: true,
             minlength: 5
         },
-        avatar: String,
+        avatar: {
+            type: String,
+            default: 'Default/nymkl8vks2eyom7rgp3f'
+        },
         admin: {
             type: Boolean,
             default: false
