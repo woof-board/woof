@@ -1,38 +1,55 @@
 
-import React, { Component } from 'react';
-import { Admin, Resource } from 'react-admin';
-import { UserList } from '../components/Admin/list';
-import { UserEdit } from '../components/Admin/edit';
-import { UserCreate } from '../components/Admin/create';
+import React, { Component, useEffect } from 'react';
+//import { Admin, Resource } from 'react-admin';
+import { useQuery } from '@apollo/react-hooks';
+////import { UserList } from '../components/Admin/list';
+//import { UserEdit } from '../components/Admin/edit';
+//import { UserCreate } from '../components/Admin/create';
+import { QUERY_PENDING_WALKERS } from '../utils/queries';
 
 
 import '../css/WalkerProfile.css';
-import { useLazyQuery } from '@apollo/react-hooks';
-import WalkerDetails from '../components/WalkerProfileComponents/WalkerDetails';
-import WalkerReviews from '../components/WalkerProfileComponents/WalkerReviews';
-import WalkerOrders from '../components/WalkerProfileComponents/WalkerOrders';
-import WalkerEarnings from '../components/WalkerProfileComponents/WalkerEarnings';
 
-import WalkerAvgRating from '../components/WalkerProfileComponents/WalkerAvgRating';
-
-import OwnerDetails from '../components/OwnerProfile/OwnerDetails';
-import jsonServerProvider from "ra-data-json-server";
+//import jsonServerProvider from "ra-data-json-server";
 
 //const dataProvider = {WalkerDetails, WalkerReviews, WalkerOrders, WalkerEarnings, WalkerAvgRating, OwnerDetails};
-const dataProvider =
-  jsonServerProvider("https://jsonplaceholder.typicode.com");
+//const dataProvider =
+
+//jsonServerProvider("https://jsonplaceholder.typicode.com");
 
 
 
 
 
 function AdminPage() {  
+
+
+  const {data, loading} = useQuery(QUERY_PENDING_WALKERS);
+
+
+  
+  useEffect(() => {
+    // if not already in global store
+    if (data) {
+        console.log(data); // get profile from database
+    } 
+
+
+}, [ data]);
+
+
   return (
-    <Admin dataProvider={dataProvider}>
-      <Resource name="users" list={UserList} edit={UserEdit} create={UserCreate} />
-    </Admin>
-    );
-  }
+    <div className="walker-contact-container">
+    <div className="walker-header">
+      <h2>Admin</h2>
+    </div>
+    <div className="account-status">
+        Test
+    </div>
+  </div>
+  )
+};
+
 
 
 

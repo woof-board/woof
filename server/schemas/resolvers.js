@@ -95,7 +95,24 @@ const resolvers = {
                 .populate('walker');
         },
 
+        getPendingWalkers: async (parent, args, context) => {
+            if (context.owner&&context.owner.admin) {
+                const walker = await Walker.find({ status: "PENDING_APPROVAL" })
+                    .select('-__v -password')
+                    .populate({
+                        path: 'reviews.owner_id',
+                        model: 'Owner'
+                    });
+
+                return walker;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+        
+
         getCustomerSessionId: async (parent, args, context) => {
+    
 
             if (context.owner) {
                 const url = new URL(context.headers.referer).origin;

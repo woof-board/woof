@@ -253,6 +253,8 @@ const typeDefs = gql`
         walkerMe: Walker
         checkWalkerAvailability(date: String!, time: String!): [Walker]
 
+        getPendingWalkers: [Walker]
+
         order(order_id: ID): Order
         orders: [Order]
         ownerOrders(owner_id: ID): [Order]
