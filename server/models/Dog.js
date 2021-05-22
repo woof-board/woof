@@ -21,7 +21,10 @@ const dogSchema = new Schema(
             type: Boolean,
             required: true
         },
-        avatar: String
+        avatar: {
+            type: String,
+            default: 'Avatar/sxx1eh60qbxrtzqfowat.png'
+        }
     }
 );
 

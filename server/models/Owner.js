@@ -26,7 +26,10 @@ const ownerSchema = new Schema(
             required: true,
             minlength: 5
         },
-        avatar: String,
+        avatar: {
+            type: String,
+            default: 'Avatar/sxx1eh60qbxrtzqfowat.png'
+        },
         admin: {
             type: Boolean,
             default: false
