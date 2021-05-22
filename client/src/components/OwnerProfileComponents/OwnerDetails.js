@@ -134,7 +134,7 @@ function OwnerDetails({ user }) {
                         address: {
                             street: address_street,
                             city: address_city,
-                            neighbourhood: address_city.toLowerCase() === "toronto" ? address_neighbourhood : address_city,
+                            neighbourhood: address_city?.toLowerCase() === "toronto" ? address_neighbourhood : address_city,
                             postal_code: address_postal_code
                         }
                     }
@@ -229,7 +229,7 @@ function OwnerDetails({ user }) {
                         )
                         }
                     </select>
-                 {formData.address_city.toLowerCase() === "toronto" &&
+                 {formData.address_city?.toLowerCase() === "toronto" &&
                     <select 
                         className="profile-input profile-name" 
                         id="address_neighbourhood" 
@@ -240,7 +240,7 @@ function OwnerDetails({ user }) {
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
                             neighbourhoods.map( (neighbourhood, index) =>
-                            <option key={index} value={neighbourhood.toLowerCase()}>{neighbourhood}</option>
+                            <option key={index} value={neighbourhood?.toLowerCase()}>{neighbourhood}</option>
                             )
                         }
                     </select> 

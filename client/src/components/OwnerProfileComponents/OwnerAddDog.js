@@ -25,7 +25,7 @@ function OwnerAddDog() {
 
         setFormData({
             ...formData,
-            [name]: name === 'treats'? (value.toLowerCase() === 'false'? false : true ): value
+            [name]: name === 'treats'? (value?.toLowerCase() === 'false'? false : true ): value
         });
     };
 
