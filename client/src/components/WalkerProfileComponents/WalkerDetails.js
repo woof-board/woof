@@ -5,7 +5,7 @@ import { UPDATE_WALKER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import ModalDisplay from '../ModalDisplay';
-import { cities, neighbourhoods, validateEmail, validateInput } from '../../utils/helpers';
+import { cities, neighbourhoods, validateInput } from '../../utils/helpers';
 
 
 function WalkerDetails({ user }) {
@@ -110,37 +110,37 @@ function WalkerDetails({ user }) {
              setModalOpen(true);
              return;
          }
-         console.log("formData", formData);
-        //  try {
-        //     const { data: { updateWalkerProfile: newProfile } } = await updateWalkerProfile({
-        //         variables: {
-        //             input: {
-        //                 first_name,
-        //                 last_name,
-        //                 email,
-        //                 status: "ACTIVE",
-        //                 neighbourhoods: neighbourhoodArr,
-        //                 address: {
-        //                     street: address_street,
-        //                     city: address_city,
-        //                     neighbourhood: address_neighbourhood,
-        //                     province: address_province,
-        //                     postal_code: address_postal_code,
-        //                 }
-        //             }
-        //         }
-        //     });
+         
+         try {
+            const { data: { updateWalkerProfile: newProfile } } = await updateWalkerProfile({
+                variables: {
+                    input: {
+                        first_name,
+                        last_name,
+                        email,
+                        status: "ACTIVE",
+                        neighbourhoods: neighbourhoodArr,
+                        address: {
+                            street: address_street,
+                            city: address_city,
+                            neighbourhood: address_neighbourhood,
+                            province: address_province,
+                            postal_code: address_postal_code,
+                        }
+                    }
+                }
+            });
             
-        //     dispatch({
-        //         type: UPDATE_CURRENT_USER,
-        //         currentUser: newProfile
-        //     });
+            dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: newProfile
+            });
 
-        //     setModalJSX(<div>Profile has been updated successfully!</div>);
-        //     setModalOpen(true);
-        //  } catch (e) {
-        //      console.log(e);
-        //  }
+            setModalJSX(<div>Profile has been updated successfully!</div>);
+            setModalOpen(true);
+         } catch (e) {
+             console.log(e);
+         }
     };
 
     const getNeighbourhoodOptions = () => {

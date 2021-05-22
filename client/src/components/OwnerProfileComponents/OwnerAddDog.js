@@ -1,10 +1,18 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_DOG } from "../../utils/mutations";
+import { useStoreContext } from "../../utils/GlobalState";
+import { UPDATE_CURRENT_USER } from "../../utils/actions";
+import ModalDisplay from '../../components/ModalDisplay';
+import { validateInput } from '../../utils/helpers';
 
 function OwnerAddDog() {
     const [addOwnerDog] = useMutation(ADD_DOG);
+    const [state, dispatch] = useStoreContext();
+    const { currentUser } = state;
 
+    const [modalJSX, setModalJSX] = useState(<div />);
+    const [modalOpen, setModalOpen] = useState();
     const [formData, setFormData] = useState({
         name: '',
         breed: '',
@@ -17,7 +25,7 @@ function OwnerAddDog() {
 
         setFormData({
             ...formData,
-            [name]: name === 'treats'? (value.toLowerCase() === 'false'? true : false ): value
+            [name]: name === 'treats'? (value.toLowerCase() === 'false'? false : true ): value
         });
     };
 
@@ -31,10 +39,25 @@ function OwnerAddDog() {
             treats
         } = formData;
 
+        // validation
+        const errors = validateInput([
+            {input_title: 'Name', input_val: name, criteria: ['required']},
+            {input_title: 'Breed', input_val: breed, criteria: ['required']}
+        ]);
+         
+         if (errors.length > 0) {
+             setModalJSX(
+                <div>
+                    {errors.map((error, index) => <p key={index}>{error}</p>)}
+                </div>
+            );
+             setModalOpen(true);
+             return;
+         }
+
         try {
-            console.log(treats);
             if (name && breed && parseFloat(weight) > 0) {
-                await addOwnerDog({
+                const { data: { addDog: newProfile } } = await addOwnerDog({
                     variables: {
                         input: {
                             'name': name,
@@ -44,11 +67,20 @@ function OwnerAddDog() {
                         }
                     }
                 });
-
-                alert('Dog added');
+                
+                dispatch({
+                    type: UPDATE_CURRENT_USER,
+                    currentUser: {
+                        ...currentUser,
+                        dogs: [...newProfile.dogs]
+                    }
+                });
+                setModalJSX(<div>Dog has been added successfully!</div>);
+                setModalOpen(true);
             }
             else{
-                alert('Incomplete dog information!');
+                setModalJSX(<div>Dog has been added successfully!</div>);
+                setModalOpen(true);
             }
 
         } catch (e) {
@@ -57,6 +89,11 @@ function OwnerAddDog() {
 
     }
 
+    const closeModal = () => {
+        setModalJSX(<div />);
+        setModalOpen(false);
+    };
+    
     return (
         <>
             <div className="walker-contact-container">
@@ -110,6 +147,7 @@ function OwnerAddDog() {
                         </button>
                     </div>
                 </form>
+                <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
             </div>
         </>
     )
