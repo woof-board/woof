@@ -4,7 +4,7 @@ import Auth from '../../utils/auth';
 import { LOGIN_OWNER } from '../../utils/mutations';
 
 
-function OwnerLoginForm() {
+function OwnerLoginForm(props) {
     const [formData, setUserFormData] = useState({ email: '', password: '' });
     const [loginOwner, { error }] = useMutation(LOGIN_OWNER);
 
@@ -30,6 +30,11 @@ function OwnerLoginForm() {
         }
     };
     
+    const {
+        formLinks = [],
+        setFormCurrentLink,
+    } = props
+
     return (
         <form 
             id="owner-login-form" 
@@ -57,15 +62,22 @@ function OwnerLoginForm() {
                     <p className="error-text" >The provided credentials are incorrect</p>
                 </div> : null
             }
-            <button 
-                disabled={!(formData.email && formData.password)} 
-                type="submit" 
-                variant="success" 
-                className="home-form-button" 
-                id="walker-login-button"
-            >
-                SUBMIT
-            </button>
+            <div className="home-button-container">
+                <button onClick={() => { setFormCurrentLink(formLinks[1]) }} 
+                    className="home-form-button" 
+                >
+                    SIGNUP
+                </button>
+                <button 
+                    disabled={!(formData.email && formData.password)} 
+                    type="submit" 
+                    variant="success" 
+                    className="home-form-button" 
+                    id="walker-login-button"
+                >
+                    LOGIN
+                </button>
+            </div>
          </form>
     );
 }

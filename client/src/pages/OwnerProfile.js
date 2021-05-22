@@ -13,6 +13,7 @@ import { UPDATE_CURRENT_USER } from "../utils/actions";
 import OwnerBookWalk from './OwnerBookWalk';
 import { Link } from 'react-router-dom';
 import { openUploadWidget } from '../utils/CloudinaryService';
+import OwnerReviews from '../components/OwnerProfileComponents/OwnerReviews';
 
 function OwnerProfile() {
   const [state, dispatch] = useStoreContext();
@@ -102,15 +103,13 @@ function OwnerProfile() {
           </>
         }
         <>
-          {currentUser && currentUser.status === "ACTIVE" &&
+          {currentUser &&
             <div className="walker-picture-container">
-              <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + currentUser.avatar} width="180" alt={`${currentUser.first_name} ${currentUser.last_name}`}  />
+              <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + currentUser.avatar} alt={`${currentUser.first_name} ${currentUser.last_name}`}  />
               <div>
-                <button className="upload_button" onClick={uploadImageWithCloudinary}>Upload</button>
+                <button className="upload-button" onClick={uploadImageWithCloudinary}>Update your picture</button>
               </div>
             </div>
-            
-
           }
           <div className="walker-details-container">
             {currentUser && currentUser.status === "PENDING_INFORMATION" &&
@@ -163,7 +162,10 @@ function OwnerProfile() {
             <OwnerPasswordForm />
             <OwnerPetDetails user={currentUser} />
             <OwnerAddDog />
-
+            {
+                currentUser && currentUser.status === "ACTIVE" &&
+                <OwnerReviews user={currentUser}/>
+            }
           </div>
         </>
       </div>

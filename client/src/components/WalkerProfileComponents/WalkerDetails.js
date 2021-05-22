@@ -81,7 +81,7 @@ function WalkerDetails({ user }) {
             address_postal_code,
          } = formData;
 
-         const neighbourhoodArr = address_city?.toLowerCase() === "toronto" ? neighbourhoods : []; 
+         const neighbourhoodArr = address_city === "Toronto" ? neighbourhoods : []; 
          // Validation
          const errors = validateInput([
             {input_title: 'First Name', input_val: first_name, criteria: ['required']},
@@ -134,12 +134,20 @@ function WalkerDetails({ user }) {
          }
     };
 
-    const getNeighbourhoodOptions = () => {
-        return neighbourhoods.map(neighbourhood=> ({value: neighbourhood?.toLowerCase(), label: neighbourhood }))
-    };
-
+    // const getNeighbourhoodOptions = () => {
+    //     return neighbourhoods.map(neighbourhood=> {({value: neighbourhood?.toLowerCase(), label: neighbourhood })})
+    // };
+    const capitalize = (string) => {
+        var neighbourhood = string.toLowerCase().split(" ");
+        let finalNeighbourhood = "";
+        for(var i = 0; i< neighbourhood.length; i++){
+            neighbourhood[i] = neighbourhood[i][0].toUpperCase() + neighbourhood[i].slice(1);
+            finalNeighbourhood += " " + neighbourhood[i]
+        }
+     return finalNeighbourhood.trim();
+    }
     const getNeighbourhoodDefaultValues = () => {
-        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood?.toLowerCase(), label: neighbourhood }))
+        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood?.toLowerCase(), label: capitalize(neighbourhood) }))
     };
 
     const closeModal = () => {
@@ -154,6 +162,23 @@ function WalkerDetails({ user }) {
             neighbourhoods: [...selectedNieghbourhoods]
         });
     };
+
+    const loadServiceArea = () => {
+        let serviceArea =[]
+        cities.map(city => {
+            if (!city.group) {
+                if(city.name==='Toronto') {
+                    console.log (neighbourhoods);
+                    neighbourhoods.map(neighbourhood => 
+                        serviceArea.push({value: neighbourhood?.toLowerCase(), label: 'Toronto: '+ neighbourhood}))
+                } else {
+                    serviceArea.push({value: city.name?.toLowerCase(), label: city.name})
+                }
+            }
+        })
+        return serviceArea
+    }
+
 
     return (
         <>
@@ -177,7 +202,7 @@ function WalkerDetails({ user }) {
                         className="profile-input profile-name"
                         type="text"
                         name="last_name"
-                        placeholder="First Name"
+                        placeholder="Last Name"
                         onChange={handleInputChange}
                         value={formData.last_name}
                     />
@@ -191,12 +216,12 @@ function WalkerDetails({ user }) {
                         value={formData.email}
                     />
                     {
-                        formData.address_city?.toLowerCase() === "toronto" &&
+                        formData.address_city === "Toronto" &&
                         <Select 
                             className="profile-input profile-name" 
-                            options={getNeighbourhoodOptions()} 
+                            options={loadServiceArea()} 
                             isMulti={true}
-                            placeholder="Select your neighbourhoods"
+                            placeholder="What areas can you serve?"
                             onChange={handleNeighbourhoodSelect}
                             defaultValue={getNeighbourhoodDefaultValues()}
                         />
@@ -253,7 +278,7 @@ function WalkerDetails({ user }) {
                         )
                         }
                     </select> */}
-                {formData.address_city?.toLowerCase() === "toronto" &&
+                {formData.address_city === "Toronto" &&
                     <select 
                         className="profile-input profile-name" 
                         id="address_neighbourhood" 
@@ -264,7 +289,7 @@ function WalkerDetails({ user }) {
                         <option value="choose" disabled>Choose your neighbourhood</option>
                         {
                             neighbourhoods.map( (neighbourhood, index) => 
-                                <option key={index} value={neighbourhood?.toLowerCase()}>{neighbourhood}</option>
+                                <option key={index} value={neighbourhood}>{neighbourhood}</option>
                             )
                         }
                     </select>
