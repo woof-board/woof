@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { CHARGE_OWNER } from '../../utils/queries';
 import { UPDATE_ORDER_COORDS, UPDATE_ORDER_STATUS } from "../../utils/mutations";
 import Auth from '../../utils/auth';
 
@@ -17,6 +18,26 @@ function WalkerTrackOrder(order) {
   } = order;
   const [updateOrderStatus] = useMutation(UPDATE_ORDER_STATUS);
   const trackCoordinates = [];
+
+  const amount = 3000; // in cents
+  const [orderChargeStatus, setOrderChargeStatus] = useState('uncharged');
+  const [handleCharge, {loading: chargingLoading}] = useLazyQuery(CHARGE_OWNER, {
+    variables: { 
+      order_id: order_id,
+      amount: amount,
+      description: 'Walk fee'
+     },
+     onCompleted: charge => {
+        if(charge.chargeOwner.status === 'succeeded'){
+          changeStatusToFulfilled();
+          setOrderChargeStatus('fulfilled');
+        }
+        else{
+          changeStatusToDenied();
+          setOrderChargeStatus('denied');
+        }
+      }
+  });
 
   useEffect(() => {
     // Please do not delete these codes
@@ -48,7 +69,7 @@ function WalkerTrackOrder(order) {
       }, 10000);
     } else {
       if (buttonClicked) {
-        changeStatusToFulfilled();
+        handleCharge();
         setButtonClicked(false);
       }
       clearInterval(interval);
@@ -96,6 +117,23 @@ function WalkerTrackOrder(order) {
     }
   }
 
+     // function for changing order status to FULFILLED
+     function changeStatusToDenied() {
+      try {
+        updateOrderStatus({
+        variables: {
+          order_id: order_id,
+          status: "DENIED",
+          // order_id: "60a48c986740bf2a040f98e3",
+          // status: "PENDING_PROGRESS",
+        }
+      });
+        // alert('status Updated !!!!');
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
   // function for pushing the current position coordinates to Order
   function success(position) {
     // push the coords to database
@@ -125,7 +163,14 @@ function WalkerTrackOrder(order) {
   return (
 
     <div className="walks">
-      <button type="button" className="button" onClick={manageRealTime}>{realTime ? 'Stop My Current Walk' : 'Start Walk'}</button>
+      {orderChargeStatus === 'uncharged' ? 
+        <button type="button" className="button" onClick={manageRealTime}>{chargingLoading?'Charging':(realTime ? ('Stop My Current Walk') : 'Start Walk')}</button>
+        :
+        (orderChargeStatus === 'fulfilled') ?
+        <button type="button" className="button">{'FULLFILLED'}</button>
+        :
+        <button type="button" className="button">{'DENIED'}</button>
+      }
       {/* <button type="button" className="button" onClick={stopTrack}>Stop Walk</button>*/}
     </div>
 

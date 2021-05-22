@@ -72,10 +72,18 @@ const typeDefs = gql`
     }
     
     type Review {
-        owner: Owner
+        _id: ID
         owner_id: Owner
-        rating: Int!
+        rating: Int
         review_text: String
+    }
+
+    type ReviewWithWalkerId {
+        _id: ID
+        owner_id: Owner
+        rating: Int
+        review_text: String
+        walker: Walker 
     }
 
     type Coords {
@@ -247,6 +255,7 @@ const typeDefs = gql`
         owner(owner_id: ID!): Owner
         owners: [Owner]
         ownerMe: Owner
+        getOwnerReviews: [ReviewWithWalkerId]
         
         walker(walker_id: ID!): Walker
         walkers: [Walker]
@@ -262,7 +271,7 @@ const typeDefs = gql`
 
         getCustomerSessionId: Checkout
         getCustomerInfoFromStripe: Customer
-        chargeOwner(amount: Int!, description: String!): Charge
+        chargeOwner(order_id: ID!, amount: Int!, description: String!): Charge
         retrievePayments: Payments
     }
 
@@ -272,6 +281,7 @@ const typeDefs = gql`
         addDog(input: DogInput): Owner
         updateDog(dog_id: ID!, name: String, breed: String, weight: Float, treats: Boolean, avatar: String ): Owner
         removeDog(dog_id: ID!): Owner
+        updateDogAvatar(dog_id: ID!, avatar: String!): Owner
         updateOwnerProfile(input: OwnerProfileInput): Owner
         updateOwnerPassword(old_password: String!, new_password: String!): Owner
         updateOwnerAvatar(avatar: String!): Owner

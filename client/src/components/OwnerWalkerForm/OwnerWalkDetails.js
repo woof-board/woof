@@ -34,7 +34,9 @@ function OwnerWalkDetails() {
     const [state, dispatch] = useStoreContext();
     const { currentUser } = state;
 
-    const [checkWalkerAvailability, { called, loading, data: walkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY);
+    const [checkWalkerAvailability, { called, loading, data: walkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY, {
+        fetchPolicy: "no-cache"
+    });
     const [addOrder, {error: addOrderError}] = useMutation(ADD_ORDER);
     const [updateOrder, {error: updateOrderError}] = useMutation(UPDATE_ORDER);
     
@@ -108,7 +110,6 @@ function OwnerWalkDetails() {
                     time
                 }
             });
-
         } catch(e) {
             console.log(e);
         }
@@ -235,7 +236,7 @@ function OwnerWalkDetails() {
                  showWalkerList && 
                     <div className="walker-list-container"
                     >
-                        {(walkerData?.checkWalkerAvailability === undefined || walkerData.checkWalkerAvailability.length == 0) 
+                        {(!loading && (walkerData?.checkWalkerAvailability === undefined || walkerData.checkWalkerAvailability.length == 0)) 
                         ? <div> Sorry, no walker available at your selected time </div>
                         : (
                             <>
@@ -243,7 +244,7 @@ function OwnerWalkDetails() {
                                 <h4> Available Walkers</h4>
                                 { walkerData?.checkWalkerAvailability.map((data) => 
                                 <div className = "walker-container">
-                                    <img src={data.avatar} width="85" />
+                                    <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + data.avatar} width="85" />
                                     <h5>Walker: <span className="regText">{data.first_name} {data.last_name}</span></h5>
                                     <h6>Rating: <span className="regText">{data.average_rating > 0
                                                 ? <>

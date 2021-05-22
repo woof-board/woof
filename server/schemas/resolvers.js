@@ -33,6 +33,38 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+        getOwnerReviews: async (parent, args, context) => {
+            if (context.owner) {
+                const walkers = await Walker.find(
+                    {
+                        reviews: {
+                            $elemMatch : { 
+                                owner_id: mongoose.Types.ObjectId(context.owner._id)
+                            }
+                        }
+                    }
+                );
+                let reviews = [];
+
+                walkers.forEach(walker => {
+                    walker.reviews.forEach(review => {
+                        
+                        if( review.owner_id.toString() === context.owner._id) {
+                            reviews.push({
+                                _id: review._id,
+                                review_text: review.review_text,
+                                rating: review.rating,
+                                walker: walker
+                            });
+                        };
+                    });
+                });
+                return reviews;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+        
         walker: async (parent, { walker_id }, context) => {
             return await Walker.findById(walker_id)
                 .select('-__v -password')
@@ -96,7 +128,7 @@ const resolvers = {
         },
 
         getPendingWalkers: async (parent, args, context) => {
-            if (context.owner&&context.owner.admin) {
+            if (context.owner && context.owner.admin) {
                 const walker = await Walker.find({ status: "PENDING_APPROVAL" })
                     .select('-__v -password')
                     .populate({
@@ -116,12 +148,13 @@ const resolvers = {
 
             if (context.owner) {
                 const url = new URL(context.headers.referer).origin;
-
-                const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
+                let customer_id = '';
+                const {stripe_customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
+                customer_id = stripe_customer_id;
                 if(!customer_id){
                     // if owner customer_id is empty, create a customer through stripe
-                    const {id: customer_id} = await stripe.customers.create();
-
+                    const {id} = await stripe.customers.create();
+                    customer_id = id;
                     // save customer id into owner
                     await Owner.findByIdAndUpdate(
                         context.owner._id,
@@ -162,30 +195,42 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
-        chargeOwner: async (parent, {amount, description}, context) => {
-            if (context.owner) {
-                const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(context.owner._id).select('-__v -password');
-                const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
+        chargeOwner: async (parent, {order_id, amount, description}, context) => {
+                const order = await Order.findById(order_id);
+                const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(order.owner).select('-__v -password');
 
-                // create a new charging instance
-                const charge = await stripe.paymentIntents.create({
-                    amount: amount,
-                    currency: 'cad',
-                    customer: customer_id,
-                    payment_method: setupIntent.payment_method,
-                    confirmation_method: 'automatic',
-                    description: description,
-                });
+                if(order && order.status !== 'FULFILLED' && customer_id && setup_intent){
+                    
+                    const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
+    
+                    // create a new charging instance
+                    const charge = await stripe.paymentIntents.create({
+                        amount: amount,
+                        currency: 'cad',
+                        customer: customer_id||'',
+                        payment_method: setupIntent.payment_method||'',
+                        confirmation_method: 'automatic',
+                        description: description,
+                    });
+    
+                    // confirm charging
+                    await stripe.paymentIntents.confirm(charge.id);
+    
+                    // get finalized charging information
+                    const newCharge = await stripe.paymentIntents.retrieve(charge.id);
 
-                // confirm charging
-                await stripe.paymentIntents.confirm(charge.id);
-
-                // get finalized charging information
-                const newCharge = await stripe.paymentIntents.retrieve(charge.id);
-                return newCharge;
-            }
-
-            throw new AuthenticationError('Not logged in');
+                    return newCharge;
+                }
+                
+                return {
+                    chargeOwner:{
+                        id: '',
+                        object: '',
+                        amount: 0,
+                        receipt_url: '',
+                        status:'denied'
+                    }
+                };
         },
 
         retrievePayments: async (parent, arg, context) => {
@@ -205,25 +250,60 @@ const resolvers = {
 
         checkWalkerAvailability: async (parent, { date, time }, context) => {
             if(context.owner){
-                // const owner = await Owner.findById(context.owner._id)
-                //     .select('-__v -password');
                 const timeSlot = getTimeSlot(time);
-                
-                const filteredWalker = await Walker.find(
-                    {
-                        availability: {
-                            $elemMatch : { 
-                                date,
-                                [timeSlot]: true
+                const owner = await Owner.findById(context.owner._id);
+
+                if (owner.address.city === "Toronto") {
+                    const filteredWalker = await Walker.find(
+                        {
+                            'address.city': 'Toronto',
+                            availability: {
+                                $elemMatch : { 
+                                    date,
+                                    [timeSlot]: true
+                                }
                             }
                         }
-                    }
-                );
-                return filteredWalker;
+                    );
+                    return filteredWalker.filter(walker => walker.neighbourhoods.includes(owner.address.neighbourhood));
+                } else {
+                    return await Walker.find(
+                        {
+                            'address.city': owner.address.city,
+                            availability: {
+                                $elemMatch : { 
+                                    date,
+                                    [timeSlot]: true
+                                }
+                            }
+                        }
+                    );
+                }
             }
 
             throw new AuthenticationError('Not logged in');
         },
+        // checkWalkerAvailability: async (parent, { date, time }, context) => {
+        //     if(context.owner){
+        //         // const owner = await Owner.findById(context.owner._id)
+        //         //     .select('-__v -password');
+        //         const timeSlot = getTimeSlot(time);
+                
+        //         const filteredWalker = await Walker.find(
+        //             {
+        //                 availability: {
+        //                     $elemMatch : { 
+        //                         date,
+        //                         [timeSlot]: true
+        //                     }
+        //                 }
+        //             }
+        //         );
+        //         return filteredWalker;
+        //     }
+
+        //     throw new AuthenticationError('Not logged in');
+        // },
     },
     Mutation: {
         /* Owner mutations
@@ -301,6 +381,20 @@ const resolvers = {
                 );
             }
 
+            throw new AuthenticationError('Not logged in');
+        },
+
+        updateDogAvatar: async (parent, { dog_id, avatar }, context) => {
+            if (context.owner) {
+                // find the owner by id
+                const owner = await Owner.findById(context.owner._id); 
+                const targetIndex = owner.dogs.findIndex(dog => dog._id.toString() === dog_id);
+                owner.dogs[targetIndex].avatar = avatar;
+                await owner.save();
+
+                return owner;
+            }
+      
             throw new AuthenticationError('Not logged in');
         },
 
@@ -484,8 +578,8 @@ const resolvers = {
                 if( input.walker ){
                     const walker = await Walker.findById(input.walker); 
                     const targetIndex = walker.availability.findIndex(item => item.date === input.service_date);
-
-                    walker.availability[targetIndex][input.service_time] = false;
+                    const timeSlot = getTimeSlot(input.service_time);
+                    walker.availability[targetIndex][timeSlot] = false;
                     await walker.save();
                 }
 
@@ -505,19 +599,24 @@ const resolvers = {
                     { new: true, runValidators: true }
                 );
 
-                if(originalOrder.walker){
-                    // change the original walker's time slot back to available
-                    const originalWalker = await Walker.findById(originalOrder.walker); 
-                    const targetOriginalDateIndex = originalWalker.availability.findIndex(item => item.date === originalOrder.service_date);
-                    originalWalker.availability[targetOriginalDateIndex][originalOrder.service_time] = true;    
-                    await originalWalker.save();
-                }
-                if( input.walker ){
-                    // change the new walker's time slot to unavailable
-                    const walker = await Walker.findById(input.walker); 
-                    const targetNewDateIndex = walker.availability.findIndex(item => item.date === input.service_date);
-                    walker.availability[targetNewDateIndex][input.service_time] = false;        
-                    await walker.save();
+                if(originalOrder.walker !== input.walker){
+                    if(originalOrder.walker){
+                        // change the original walker's time slot back to available
+                        const originalWalker = await Walker.findById(originalOrder.walker); 
+                        const targetOriginalDateIndex = originalWalker.availability.findIndex(item => item.date === originalOrder.service_date);
+                        const timeSlot = getTimeSlot(input.service_time?input.service_time:originalOrder.service_time);
+                        originalWalker.availability[targetOriginalDateIndex][timeSlot] = true;    
+                        await originalWalker.save();
+                    }
+
+                    if(input.walker){
+                        // change the new walker's time slot to unavailable
+                        const walker = await Walker.findById(input.walker); 
+                        const targetNewDateIndex = walker.availability.findIndex(item => item.date === (input.service_date?input.service_date:originalOrder.service_date));
+                        const timeSlot = getTimeSlot(input.service_time?input.service_time:originalOrder.service_time);
+                        walker.availability[targetNewDateIndex][timeSlot] = false;    
+                        await walker.save();
+                    }
                 }
 
                 return order;
@@ -562,7 +661,8 @@ const resolvers = {
                     // change the original walker's time slot back to available
                     const originalWalker = await Walker.findById(order.walker); 
                     const targetOriginalDateIndex = originalWalker.availability.findIndex(item => item.date === order.service_date);
-                    originalWalker.availability[targetOriginalDateIndex][order.service_time] = true;    
+                    const timeSlot = getTimeSlot(order.service_date);
+                    originalWalker.availability[targetOriginalDateIndex][timeSlot] = true;    
                     await originalWalker.save();
                 }
 

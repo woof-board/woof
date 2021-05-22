@@ -89,11 +89,19 @@ export const cities = [
         group: false
       },
       { 
+        name: "Oshawa", 
+        group: false
+      },
+      { 
         name: "Pickering", 
         group: false
       },
       { 
         name: "Scugog", 
+        group: false
+      },
+      { 
+        name: "Uxbridge", 
         group: false
       },
       { 
@@ -154,10 +162,6 @@ export const cities = [
       },
       { 
         name: "Aurora", 
-        group: false
-      },
-      { 
-        name: "Halton Hills", 
         group: false
       },
       { 
@@ -264,7 +268,7 @@ export const validateInput = (inputArr) => {
                     break;
                 case 'non_empty_array':
                     if(input_val) {
-                        if (input_val.length == 0) {
+                        if (input_val.length === 0) {
                             errors.push(`Please select at least one "${input_title}";`);
                         }
                     }

@@ -312,6 +312,16 @@ export const UPDATE_WALKER_AVAILABILITY = gql`
     }
 `;
 
+export const UPDATE_WALKER_STATUS = gql`
+    mutation updateWalkerStatus($walker_id: ID!, $status: String!) {
+        updateWalkerStatus(walker_id: $walker_id, status: $status) {
+            _id
+            first_name
+            last_name
+        }
+    }
+`;
+
 /* OWNER mutations
     - ADD_OWNER
     - LOGIN_OWNER
@@ -473,6 +483,37 @@ export const UPDATE_OWNER_AVATAR = gql`
             dog_count
         }
     }
+`;
+
+export const UPDATE_DOG_AVATAR = gql`
+mutation updateDogAvatar($dog_id: ID!, $avatar: String!) {
+    updateDogAvatar(dog_id: $dog_id, avatar: $avatar) {
+        _id
+        first_name
+        last_name
+        email
+        avatar
+        admin
+        status
+        address {
+            street
+            city
+            neighbourhood
+            province
+            postal_code
+        }
+        phone
+        dogs {
+            _id
+            name
+            breed
+            weight
+            treats
+            avatar
+        }
+        dog_count
+    }
+}
 `;
 
 export const UPDATE_WALKER_AVATAR = gql`
