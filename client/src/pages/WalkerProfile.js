@@ -123,13 +123,16 @@ function WalkerProfile() {
                 </div>
               </div>
             }
+            {currentUser && currentUser.status === "ACTIVE" && 
+                <WalkerOrders orders={currentUser.orders}/>
+            }
             <WalkerDetails user={currentUser}/>
             <WalkerPasswordForm />
             {currentUser && currentUser.status === "ACTIVE" && 
               <>
                 <WalkerAvgRating average_rating={currentUser.average_rating}/>
                 <WalkerReviews reviews={currentUser.reviews} />
-                <WalkerOrders orders={currentUser.orders}/>
+                
                 <WalkerEarnings earnings={currentUser.earnings}/>
               </>
             }
