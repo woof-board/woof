@@ -116,12 +116,13 @@ const resolvers = {
 
             if (context.owner) {
                 const url = new URL(context.headers.referer).origin;
-
-                const {stripe_customer_id:customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
+                let customer_id = '';
+                const {stripe_customer_id} = await Owner.findById(context.owner._id).select('-__v -password');
+                customer_id = stripe_customer_id;
                 if(!customer_id){
                     // if owner customer_id is empty, create a customer through stripe
-                    const {id: customer_id} = await stripe.customers.create();
-
+                    const {id} = await stripe.customers.create();
+                    customer_id = id;
                     // save customer id into owner
                     await Owner.findByIdAndUpdate(
                         context.owner._id,
@@ -164,16 +165,18 @@ const resolvers = {
 
         chargeOwner: async (parent, {order_id, amount, description}, context) => {
                 const order = await Order.findById(order_id);
-                if(order.status !== 'FULFILLED'){
-                    const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(order.owner).select('-__v -password');
+                const {stripe_customer_id:customer_id, stripe_setup_intent:setup_intent} = await Owner.findById(order.owner).select('-__v -password');
+
+                if(order && order.status !== 'FULFILLED' && customer_id && setup_intent){
+                    
                     const setupIntent = await stripe.setupIntents.retrieve(setup_intent);
     
                     // create a new charging instance
                     const charge = await stripe.paymentIntents.create({
                         amount: amount,
                         currency: 'cad',
-                        customer: customer_id,
-                        payment_method: setupIntent.payment_method,
+                        customer: customer_id||'',
+                        payment_method: setupIntent.payment_method||'',
                         confirmation_method: 'automatic',
                         description: description,
                     });
@@ -187,7 +190,15 @@ const resolvers = {
                     return newCharge;
                 }
                 
-                return null;
+                return {
+                    chargeOwner:{
+                        id: '',
+                        object: '',
+                        amount: 0,
+                        receipt_url: '',
+                        status:'denied'
+                    }
+                };
         },
 
         retrievePayments: async (parent, arg, context) => {
