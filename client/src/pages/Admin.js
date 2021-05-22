@@ -66,17 +66,15 @@ function AdminPage() {
                     pendingWalkerList.map((walker, index) => (
                         <div className="walks">
                             <div>
-                                <div>
-                                    <span className="medium-text">Name:</span> {`${walker.first_name} ${walker.last_name}`}
-                                </div>
-                                <button 
-                                    type="button" 
-                                    data-walkerid={walker._id}
-                                    onClick={handleWalkerStatus}
-                                >
-                                    Approve
-                                </button>
+                                <span className="medium-text">Name:</span> {`${walker.first_name} ${walker.last_name}`}
                             </div>
+                            <button 
+                                type="button" 
+                                data-walkerid={walker._id}
+                                onClick={handleWalkerStatus}
+                            >
+                                Approve
+                            </button>
                         </div>
                     )) 
 

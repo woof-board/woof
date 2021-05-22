@@ -33,6 +33,38 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+        getOwnerReviews: async (parent, args, context) => {
+            if (context.owner) {
+                const walkers = await Walker.find(
+                    {
+                        reviews: {
+                            $elemMatch : { 
+                                owner_id: mongoose.Types.ObjectId(context.owner._id)
+                            }
+                        }
+                    }
+                );
+                let reviews = [];
+
+                walkers.forEach(walker => {
+                    walker.reviews.forEach(review => {
+                        
+                        if( review.owner_id.toString() === context.owner._id) {
+                            reviews.push({
+                                _id: review._id,
+                                review_text: review.review_text,
+                                rating: review.rating,
+                                walker: walker
+                            });
+                        };
+                    });
+                });
+                return reviews;
+            }
+
+            throw new AuthenticationError('Not logged in');
+        },
+        
         walker: async (parent, { walker_id }, context) => {
             return await Walker.findById(walker_id)
                 .select('-__v -password')
@@ -205,25 +237,60 @@ const resolvers = {
 
         checkWalkerAvailability: async (parent, { date, time }, context) => {
             if(context.owner){
-                // const owner = await Owner.findById(context.owner._id)
-                //     .select('-__v -password');
                 const timeSlot = getTimeSlot(time);
-                
-                const filteredWalker = await Walker.find(
-                    {
-                        availability: {
-                            $elemMatch : { 
-                                date,
-                                [timeSlot]: true
+                const owner = await Owner.findById(context.owner._id);
+
+                if (owner.address.city === "Toronto") {
+                    const filteredWalker = await Walker.find(
+                        {
+                            'address.city': 'Toronto',
+                            availability: {
+                                $elemMatch : { 
+                                    date,
+                                    [timeSlot]: true
+                                }
                             }
                         }
-                    }
-                );
-                return filteredWalker;
+                    );
+                    return filteredWalker.filter(walker => walker.neighbourhoods.includes(owner.address.neighbourhood));
+                } else {
+                    return await Walker.find(
+                        {
+                            'address.city': owner.address.city,
+                            availability: {
+                                $elemMatch : { 
+                                    date,
+                                    [timeSlot]: true
+                                }
+                            }
+                        }
+                    );
+                }
             }
 
             throw new AuthenticationError('Not logged in');
         },
+        // checkWalkerAvailability: async (parent, { date, time }, context) => {
+        //     if(context.owner){
+        //         // const owner = await Owner.findById(context.owner._id)
+        //         //     .select('-__v -password');
+        //         const timeSlot = getTimeSlot(time);
+                
+        //         const filteredWalker = await Walker.find(
+        //             {
+        //                 availability: {
+        //                     $elemMatch : { 
+        //                         date,
+        //                         [timeSlot]: true
+        //                     }
+        //                 }
+        //             }
+        //         );
+        //         return filteredWalker;
+        //     }
+
+        //     throw new AuthenticationError('Not logged in');
+        // },
     },
     Mutation: {
         /* Owner mutations

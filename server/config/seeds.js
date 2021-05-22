@@ -16,9 +16,9 @@ db.once('open', async () => {
             admin: false,
             address: {
                 street: '2325 Yolanda Dr',
-                city: 'oakville',
-                neighbourhood: 'oakville',
-                province: 'ontario',
+                city: 'Oakville',
+                neighbourhood: 'Oakville',
+                province: 'Ontario',
                 postal_code: 'L6l 2H9'
             },
             phone: '111 111 1111',
@@ -52,9 +52,9 @@ db.once('open', async () => {
             admin: true,
             address: {
                 street: '1st Street NW',
-                city: 'calgary',
+                city: 'Brampton',
                 neighbourhood: '',
-                province: 'alberta',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
@@ -73,9 +73,9 @@ db.once('open', async () => {
             admin: true,
             address: {
                 street: '1st Street NW',
-                city: 'toronto',
-                neighbourhood: 'south toronto',
-                province: 'ontario',
+                city: 'Toronto',
+                neighbourhood: 'Downtown',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
@@ -94,9 +94,9 @@ db.once('open', async () => {
             admin: false,
             address: {
                 street: '1st Street NW',
-                city: 'toronto',
-                neighbourhood: 'east toronto',
-                province: 'ontario',
+                city: 'Toronto',
+                neighbourhood: 'East York',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
@@ -130,9 +130,9 @@ db.once('open', async () => {
             admin: false,
             address: {
                 street: '1st Street NW',
-                city: 'toronto',
-                neighbourhood: 'east toronto',
-                province: 'ontario',
+                city: 'Toronto',
+                neighbourhood: 'Etobicoke',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
@@ -159,9 +159,9 @@ db.once('open', async () => {
             admin: false,
             address: {
                 street: '1st Street NW',
-                city: 'toronto',
-                neighbourhood: 'east toronto',
-                province: 'ontario',
+                city: 'Toronto',
+                neighbourhood: 'North York',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             phone: '111 111 1111',
@@ -195,12 +195,12 @@ db.once('open', async () => {
             email: 'pw@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['East York', 'North York', 'Markham', 'Scarborough'],
+            neighbourhoods: ['East York', 'North York', 'Scarborough'],
             address: {
                 street: '1st Street NW',
-                city: 'toronto',
+                city: 'Toronto',
                 neighbourhood: 'Scarborough',
-                province: 'ontario',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             reviews: [
@@ -289,12 +289,12 @@ db.once('open', async () => {
             email: 'eh@gmail.com',
             password: 'passs',
             avatar: "/images/user-default.png",
-            neighbourhoods: ['North York', 'Scarborough', 'Markham', 'Eglinton'],
+            neighbourhoods: ['North York', 'Scarborough'],
             address: {
                 street: '1st Street NW',
-                city: 'toronto',
-                neighbourhood: 'east toronto',
-                province: 'ontario',
+                city: 'Toronto',
+                neighbourhood: 'North York',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             reviews: [
@@ -366,9 +366,9 @@ db.once('open', async () => {
             neighbourhoods: ['Whitchurch-Stouffville', 'Newmarket', 'Aurora'],
             address: {
                 street: '1st Street NW',
-                city: 'Newmarket',
-                neighbourhood: 'Newmarket',
-                province: 'ontario',
+                city: 'Brampton',
+                neighbourhood: 'Brampton',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             reviews: [
@@ -477,7 +477,7 @@ db.once('open', async () => {
                 street: '1st Street NW',
                 city: 'Richmond Hill',
                 neighbourhood: 'Richmond Hill',
-                province: 'ontario',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             reviews: [
@@ -566,7 +566,7 @@ db.once('open', async () => {
                 street: '655 Lyndebrook road',
                 city: 'Whitby',
                 neighbourhood: 'Durham',
-                province: 'ontario',
+                province: 'Ontario',
                 postal_code: 'L1P 2A2'
             },
             reviews: [
@@ -664,7 +664,7 @@ db.once('open', async () => {
                 street: '1st Street NW',
                 city: 'East Gwillimbury',
                 neighbourhood: 'East Gwillimbury',
-                province: 'ontario',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             reviews: [
@@ -762,7 +762,7 @@ db.once('open', async () => {
                 street: '1st Street NW',
                 city: 'Mississauga',
                 neighbourhood: 'Peel',
-                province: 'ontario',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             reviews: [
@@ -850,7 +850,7 @@ db.once('open', async () => {
                 street: '1st Street NW',
                 city: 'Halton',
                 neighbourhood: 'Halton',
-                province: 'ontario',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             reviews: [
@@ -938,7 +938,7 @@ db.once('open', async () => {
                 street: '1st Street NW',
                 city: 'Orangeville',
                 neighbourhood: 'Orangeville',
-                province: 'ontario',
+                province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
             reviews: [

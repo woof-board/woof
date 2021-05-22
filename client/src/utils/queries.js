@@ -321,3 +321,18 @@ export const QUERY_PENDING_WALKERS = gql
     average_rating
   }
 }`;
+
+export const QUERY_OWNER_REVIEWS = gql
+`query getOwnerReviews {
+    getOwnerReviews {
+      _id
+      review_text
+      rating
+      walker{
+        _id
+        first_name
+        last_name
+      }
+    }
+}
+`;
