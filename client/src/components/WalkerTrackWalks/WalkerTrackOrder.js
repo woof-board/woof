@@ -21,7 +21,7 @@ function WalkerTrackOrder(order) {
 
   const amount = 3000; // in cents
   const [orderChargeStatus, setOrderChargeStatus] = useState('uncharged');
-  const [handleCharge, {error: chargingError, data: chargingInfo, loading: chargingLoading}] = useLazyQuery(CHARGE_OWNER, {
+  const [handleCharge, {loading: chargingLoading}] = useLazyQuery(CHARGE_OWNER, {
     variables: { 
       order_id: order_id,
       amount: amount,
