@@ -20,20 +20,20 @@ function WalkerTrackOrder(order) {
 
   useEffect(() => {
     // Please do not delete these codes
-    // try {
-    //   updateOrderStatus({
-    //   variables: {
-    //     // order_id: order_id,
-    //     // status: "IN_PROGRESS",
-    //     order_id: "60a48c986740bf2a040f98e3",
-    //     status: "PENDING_PROGRESS",
-    //   }
-    // });
+    try {
+      updateOrderStatus({
+      variables: {
+        // order_id: order_id,
+        // status: "IN_PROGRESS",
+        order_id: "60a48c986740bf2a040f98e3",
+        status: "PENDING_PROGRESS",
+      }
+    });
 
-    //   // alert('status Updated !!!!');
-    // } catch (e) {
-    //   console.log(e);
-    // }
+      // alert('status Updated !!!!');
+    } catch (e) {
+      console.log(e);
+    }
     let interval;
     if (realTime) {
       changeStatusToProgress();
@@ -45,7 +45,7 @@ function WalkerTrackOrder(order) {
           maximumAge: 0
         };
         navigator.geolocation.getCurrentPosition(success, error, options);
-      }, 60000);
+      }, 10000);
     } else {
       if (buttonClicked) {
         changeStatusToFulfilled();
