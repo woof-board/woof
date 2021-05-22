@@ -304,6 +304,20 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+        updateDogAvatar: async (parent, { dog_id, avatar }, context) => {
+            if (context.owner) {
+                // find the owner by id
+                const owner = await Owner.findById(context.owner._id); 
+                const targetIndex = owner.dogs.findIndex(dog => dog._id.toString() === dog_id);
+                owner.dogs[targetIndex].avatar = avatar;
+                await owner.save();
+
+                return owner;
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
         updateOwnerProfile: async (parent, { input }, context) => {
             if (context.owner) {
                 return await Owner.findByIdAndUpdate(
