@@ -304,6 +304,7 @@ const typeDefs = gql`
         updateWalkerAvailability(input: [AvailabilityInput]): Walker
         updateWalkerStatus(walker_id: ID!, status: String!): Walker
         updateWalkerAvatar(avatar: String!): Walker
+        addWalkerEarnings(earnings: Float!): Walker
 
         clearSetupIntent: Owner
     }

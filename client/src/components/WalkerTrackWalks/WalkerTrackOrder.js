@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { CHARGE_OWNER } from '../../utils/queries';
-import { UPDATE_ORDER_COORDS, UPDATE_ORDER_STATUS } from "../../utils/mutations";
+import { UPDATE_ORDER_COORDS, UPDATE_ORDER_STATUS, ADD_WALKER_EARNINGS } from "../../utils/mutations";
 import Auth from '../../utils/auth';
+import { useStoreContext } from "../../utils/GlobalState";
+import { UPDATE_CURRENT_USER } from "../../utils/actions";
 
 
 function WalkerTrackOrder(order) {
-
+  const [state, dispatch] = useStoreContext();
   const [updateOrderCoords, { error }] = useMutation(UPDATE_ORDER_COORDS);
   const [realTime, setRealTime] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
@@ -17,9 +19,10 @@ function WalkerTrackOrder(order) {
     status
   } = order;
   const [updateOrderStatus] = useMutation(UPDATE_ORDER_STATUS);
+  const [addWalkerEarnings] = useMutation(ADD_WALKER_EARNINGS);
   const trackCoordinates = [];
 
-  const amount = 3000; // in cents
+  const amount = 2500; // in cents
   const [orderChargeStatus, setOrderChargeStatus] = useState('uncharged');
   const [handleCharge, {loading: chargingLoading}] = useLazyQuery(CHARGE_OWNER, {
     variables: { 
@@ -31,6 +34,25 @@ function WalkerTrackOrder(order) {
         if(charge.chargeOwner.status === 'succeeded'){
           changeStatusToFulfilled();
           setOrderChargeStatus('fulfilled');
+
+          try {
+            // add amount to walker in database
+            addWalkerEarnings({
+              variables: {
+                earnings: (amount/100)
+              }
+            })
+            .then(newWalker => {
+              // update global state
+              dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: newWalker.data.addWalkerEarnings
+              });
+            })
+            .catch();
+          } catch (e) {
+            console.log(e);
+          }
         }
         else{
           changeStatusToDenied();
@@ -86,13 +108,13 @@ function WalkerTrackOrder(order) {
   function changeStatusToProgress() {
     try {
       updateOrderStatus({
-      variables: {
-        order_id: order_id,
-        status: "IN_PROGRESS",
-        // order_id: "60a48c986740bf2a040f98e3",
-        // status: "PENDING_PROGRESS",
-      }
-    });
+        variables: {
+          order_id: order_id,
+          status: "IN_PROGRESS",
+          // order_id: "60a48c986740bf2a040f98e3",
+          // status: "PENDING_PROGRESS",
+        }
+      });
 
       // alert('status Updated !!!!');
     } catch (e) {

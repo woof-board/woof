@@ -1,6 +1,7 @@
 import React from 'react';
 //import '../../css/WalkerProfile.css';
 
+
 function WalkerEarnings({earnings=0}) {
     return (
         <div className="walker-contact-container">
@@ -9,7 +10,7 @@ function WalkerEarnings({earnings=0}) {
           </div>
           <form  className="user-update-form">
             <div key="prop" className="walks">
-              <div>Earnings: ${earnings?.toFixed(2)}</div>
+              <div>Earnings: ${earnings.toFixed(2)}</div>
             </div>
             <button
                     type="submit"
