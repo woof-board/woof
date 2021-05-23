@@ -52,11 +52,12 @@ function WalkerTrackWalks() {
     return (
         <div id="walkers">
             <h1>My Walks</h1>
+            {console.log("order: ", orders[0])}
             <div className='page-wrap'>
-                <div className="walker-details-container">
+                <div className="walk-container">
                     {currentUser && currentUser.status === "ACTIVE" &&
-                        <div className="walker-profile-container">
-                            <h2>Upcoming Walks</h2>
+                        <>
+                            <div className="walker-header"><h2>Upcoming Walks</h2></div>
                             {orders.filter(order => order.status === "PENDING_PROGRESS" || order.status === "IN_PROGRESS").map((order) => (
                                 <div className="walks">
                                     <div>Walk Date: {order.service_date}</div>
@@ -70,14 +71,14 @@ function WalkerTrackWalks() {
                                     />
                                 </div>
                             ))}
-                        </div>
+                        </>
                     }
                 </div>
                 {/* fulfilled walks */}
-                <div className="walker-details-container">
+                <div className="walk-container">
                     {currentUser && currentUser.status === "ACTIVE" &&
-                        <div className="walker-profile-container">
-                            <h2>Completed Walks</h2>
+                        <>
+                            <div className="walker-header"><h2>Completed Walks</h2></div>
                             {orders.filter(order => order.status === "FULLFILLED" || order.status === "DENIED").map((order) => (
                                 <div className="walks">
                                     <div>Walk Date: {order.service_date}</div>
@@ -85,7 +86,7 @@ function WalkerTrackWalks() {
                                     <div>Status: {order.status}</div>
                                 </div>
                             ))}
-                        </div>
+                        </>
                     }
                 </div>
             </div>

@@ -202,6 +202,7 @@ function WalkerSchedule() {
             <div className="headline">            
                 <h1>My Walking Schedule</h1>
             </div>
+            <div className='page-wrap'>
             <form onSubmit={handleFormSubmit}>
                 <div className="schedule-container">
 
@@ -243,6 +244,7 @@ function WalkerSchedule() {
                     </div>
                 }   
             </form>
+            </div>
             <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
         </div>
 
