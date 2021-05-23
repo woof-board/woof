@@ -12,7 +12,7 @@ db.once('open', async () => {
             last_name: 'Normann',
             email: 'eric.n@me.com',
             password: 'passs',
-            avatar: "Avatar/fpntsgfahqpjexh5yesr",
+            avatar: "Avatar/fph5dcgapirzaajhdopi",
             admin: false,
             address: {
                 street: '2325 Yolanda Dr',
@@ -28,14 +28,14 @@ db.once('open', async () => {
                     breed: 'Shorky',
                     weight: 12,
                     treats: true,
-                    avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t31.18172-8/11222714_10153601420096151_2425722709037660111_o.jpg?_nc_cat=100&ccb=1-3&_nc_sid=730e14&_nc_ohc=46e6WoeQaLEAX-axWzR&_nc_ht=scontent-yyz1-1.xx&oh=b06232133fc570217fb90dc75dfbcef0&oe=60CC4892"
+                    avatar: "Avatar/cdlcsvirw6is8dqvsow7"
                 },
                 {
                     name: 'Pudding',
                     breed: 'Shi-zu mix',
                     weight: 15,
                     treats: true,
-                    avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-9/39257859_10158104653536151_4978567789913571328_n.jpg?_nc_cat=109&ccb=1-3&_nc_sid=730e14&_nc_ohc=CKtX-w_SiOUAX-6SYVi&_nc_ht=scontent-yyz1-1.xx&oh=0885e71ab8514745b2f93ea3b0c2e5d0&oe=60C96238"
+                    avatar: "Avatar/xnlpc8qmyss6vabwbfwv"
                 }
             ],
             status: "ACTIVE"
@@ -106,14 +106,14 @@ db.once('open', async () => {
                     breed: 'Husky',
                     weight: 70,
                     treats: true,
-                    avatar: "/images/mylo.jpg"
+                    avatar: "Avatar/sxx1eh60qbxrtzqfowat"
                 },
                 {
                     name: 'Monty',
                     breed: 'AusiSheppard',
                     weight: 90,
                     treats: true,
-                    avatar: "/images/monty.jpg"
+                    avatar: "Avatar/sxx1eh60qbxrtzqfowat"
                 }
             ],
             status: "ACTIVE"
@@ -142,7 +142,7 @@ db.once('open', async () => {
                     breed: 'Doberman',
                     weight: 70,
                     treats: false,
-                    avatar: "https://scontent-yyz1-1.xx.fbcdn.net/v/t1.6435-9/87142813_3275290815826955_9075443982971961344_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=n7nY1OkFTDgAX9aUiMu&_nc_oc=AQlwkKBkBHKDIbwHP0jv7Vt_1n0jdL65W0-fxR0fkeKYDhhmJXMg7fqjU7bYIyzIY3E&_nc_ht=scontent-yyz1-1.xx&oh=fd13fa42abfb06c1f6469558ce3ba71c&oe=60CA1595"
+                    avatar: "Avatar/sxx1eh60qbxrtzqfowat"
                 }
             ],
             status: "ACTIVE"
@@ -156,7 +156,7 @@ db.once('open', async () => {
             email: 'ac@gmail.com',
             password: 'passs',
             avatar: "Avatar/cgfhllh4ggu3wnrjsvoe",
-            admin: false,
+            admin: true,
             address: {
                 street: '1st Street NW',
                 city: 'Toronto',
@@ -174,7 +174,7 @@ db.once('open', async () => {
                     avatar: "/images/user-default.png"
                 }
             ],
-            status: "SUSPENDED"
+            status: "ACTIVE"
         }
     );
     await Owner.create(
@@ -199,7 +199,7 @@ db.once('open', async () => {
                     breed: 'Poodle',
                     weight: 70,
                     treats: true,
-                    avatar: "/images/user-default.png"
+                    avatar: "Avatar/sxx1eh60qbxrtzqfowat"
                 }
             ],
             status: "ACTIVE"
@@ -223,7 +223,7 @@ db.once('open', async () => {
             email: 'pw@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['East York', 'North York', 'Scarborough'],
+            neighbourhoods: ['Downtown', 'Etobicoke', 'York'],
             address: {
                 street: '1st Street NW',
                 city: 'Toronto',
@@ -243,7 +243,7 @@ db.once('open', async () => {
                     review_text: "bad!!!"
                 }
             ],
-            earnings: 5.75,
+            earnings: 575,
             availability: [
                 {
                     date: '2021-05-22',
@@ -317,7 +317,7 @@ db.once('open', async () => {
             email: 'eh@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['North York', 'Scarborough'],
+            neighbourhoods: ['North York', 'East York', 'Scarborough'],
             address: {
                 street: '1st Street NW',
                 city: 'Toronto',
@@ -390,7 +390,7 @@ db.once('open', async () => {
             last_name: 'Nuvoski',
             email: 'kn@gmail.com',
             password: 'passs',
-            avatar: "https://i2.wp.com/www.hadviser.com/wp-content/uploads/2019/04/5-choppy-cut-for-a-square-face-CF4Tf1tMDJu.jpg?resize=1078%2C1078&ssl=1",
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
             neighbourhoods: ['Whitchurch-Stouffville', 'Newmarket', 'Aurora'],
             address: {
                 street: '1st Street NW',
@@ -426,7 +426,7 @@ db.once('open', async () => {
                     review_text: "not so bad"
                 }
             ],
-            earnings: 672.0,
+            earnings: 700,
             availability: [
                 {
                     date: '2021-05-23',
@@ -499,7 +499,7 @@ db.once('open', async () => {
             last_name: 'Turnbull',
             email: 'rt@gmail.com',
             password: 'passs',
-            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            avatar: "Avatar/lztkswrqptaotv5vioe6",
             neighbourhoods: ['Vaughan', 'Richmond Hill', 'King'],
             address: {
                 street: '1st Street NW',
@@ -588,8 +588,8 @@ db.once('open', async () => {
             last_name: 'Hofman',
             email: 'rh@gmail.com',
             password: 'passs',
-            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['Ajax', 'Pickering', 'whitby', 'Scugog', 'Durham'],
+            avatar: "Avatar/sxx1eh60qbxrtzqfowat",
+            neighbourhoods: ['Ajax', 'Pickering', 'whitby', 'Scugog'],
             address: {
                 street: '655 Lyndebrook road',
                 city: 'Whitby',
@@ -686,8 +686,8 @@ db.once('open', async () => {
             last_name: 'Costa',
             email: 'dc@gmail.com',
             password: 'passs',
-            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['East Gwillimbury', 'Newmarket',  'Aurora', 'Georgina', 'Bradford West Gwillimbury', 'New Tecumseth' ],
+            avatar: "Avatar/sxx1eh60qbxrtzqfowat",
+            neighbourhoods: ['East Gwillimbury', 'Newmarket', 'Aurora', 'Georgina', 'Bradford West Gwillimbury', 'New Tecumseth' ],
             address: {
                 street: '1st Street NW',
                 city: 'East Gwillimbury',
@@ -784,8 +784,8 @@ db.once('open', async () => {
             last_name: 'MacArthurr',
             email: 'nm@gmail.com',
             password: 'passs',
-            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['Brampton', 'Caledon', 'Mississauga', 'Peel'],
+            avatar: "Avatar/sxx1eh60qbxrtzqfowat",
+            neighbourhoods: ['Brampton', 'Caledon', 'Mississauga'],
             address: {
                 street: '1st Street NW',
                 city: 'Mississauga',
@@ -873,7 +873,7 @@ db.once('open', async () => {
             email: 'ce@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['Halton', 'Halton Hills', 'Milton', 'Oakville', 'Burlington'],
+            neighbourhoods: ['Halton Hills', 'Milton', 'Oakville', 'Burlington'],
             address: {
                 street: '1st Street NW',
                 city: 'Halton',
@@ -961,7 +961,7 @@ db.once('open', async () => {
             email: 'cg@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['Mono', 'Orangeville', 'Dufferin County', 'Shelburne'],
+            neighbourhoods: ['Mono', 'Orangeville', 'Shelburne'],
             address: {
                 street: '1st Street NW',
                 city: 'Orangeville',

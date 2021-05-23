@@ -1,7 +1,7 @@
 #owners, #walkers {
 
     padding: 2rem 5rem 1rem;
-    width:fit-content;
+    width: fit-content;
     margin: 0 auto;
 
 }
@@ -63,7 +63,7 @@
     overflow: hidden;
 }
 
-.walker-contact-container {
+.walker-contact-container, .walk-container {
     display: flex;
     flex-direction: column;
     background-color: var(--secondary);
@@ -72,6 +72,11 @@
     overflow:hidden;
     padding-bottom: 15px;
     width: 60vw;
+}
+
+.walk-container {
+    width: 35vw;
+    margin-right: 15px;
 }
 .walker-contact-container form, .show-walkers {
     padding: 15px 7px 0 15px;
@@ -260,10 +265,19 @@ button:hover {
 
     .walker-update-form img  {
         margin: 5% 0 10% 22%;
-    }   
-    .walker-contact-container {
+    }
+    #owners, #walkers {
+        width: 100vw;
+    }
+    .page-wrap {
         width: 100%;
     }
+       
+    .walker-contact-container, .walk-container  {
+        width: 90vw;
+        margin-right: 0;
+    }
+    
     .average-rating {
         display:none;
     }

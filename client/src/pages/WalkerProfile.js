@@ -73,7 +73,7 @@ function WalkerProfile() {
 
   return (
     <div id="walkers">
-      <h1>My Walker Profile</h1>
+      <h1>My Profile</h1>
       <div className='page-wrap'>
       
         {currentUser && currentUser.status === "SUSPENDED" && 
@@ -90,14 +90,12 @@ function WalkerProfile() {
           </>    
         } 
         <>
-        {currentUser && currentUser.status === "ACTIVE" && 
           <div className="walker-picture-container">
-            <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + currentUser.avatar} width="160" alt="profile-img"/>
+            <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + currentUser?.avatar} width="160" alt="profile-img"/>
             <div>
                 <button className="upload_button" onClick={uploadImageWithCloudinary}>Update your picture</button>
               </div>
           </div>        
-        }
         <div className="walker-details-container">
             {currentUser && currentUser.status === "PENDING_INFORMATION" && 
               <div className="walker-contact-container">
