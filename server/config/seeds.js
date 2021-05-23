@@ -223,11 +223,11 @@ db.once('open', async () => {
             email: 'pw@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['East York', 'North York', 'Scarborough'],
+            neighbourhoods: ['York', 'Downtown'],
             address: {
                 street: '1st Street NW',
                 city: 'Toronto',
-                neighbourhood: 'Scarborough',
+                neighbourhood: 'York',
                 province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
@@ -239,14 +239,14 @@ db.once('open', async () => {
                 },
                 {
                     owner_id: ownerIds[4],
-                    rating: 2,
-                    review_text: "bad!!!"
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
                 }
             ],
-            earnings: 5.75,
+            earnings: 500.75,
             availability: [
                 {
-                    date: '2021-05-22',
+                    date: '2021-05-24',
                     slot9am: true,
                     slot11am: true,
                     slot1pm: true,
@@ -255,6 +255,96 @@ db.once('open', async () => {
                     slot7pm: true,
                     slot9pm: true
                 },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-29',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    
+    await Walker.create(
+        {
+            first_name: 'Kristie',
+            last_name: 'Washington',
+            email: 'kw@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['North York', 'Etobicoke'],
+            address: {
+                street: '1st Street NW',
+                city: 'Toronto',
+                neighbourhood: 'North York',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[0],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text:  "Thanks for taking care of my babies."
+                },
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "My dogs love her!"
+                }
+            ],
+            earnings: 700.75,
+            availability: [
                 {
                     date: '2021-05-23',
                     slot9am: true,
@@ -273,7 +363,7 @@ db.once('open', async () => {
                     slot3pm: true,
                     slot5pm: true,
                     slot7pm: true,
-                    slot9pm: false
+                    slot9pm: true
                 },
                 {
                     date: '2021-05-25',
@@ -296,6 +386,16 @@ db.once('open', async () => {
                     slot9pm: false
                 },
                 {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
                     date: '2021-05-28',
                     slot9am: true,
                     slot11am: true,
@@ -309,7 +409,101 @@ db.once('open', async () => {
             status: "ACTIVE"
         }
     );
-
+    
+    await Walker.create(
+        {
+            first_name: 'George',
+            last_name: 'Hamilton',
+            email: 'gh@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Scarborough'],
+            address: {
+                street: '1st Street NW',
+                city: 'Toronto',
+                neighbourhood: 'Scarborough',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[0],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 800.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
     await Walker.create(
         {
             first_name: 'Elijah',
@@ -317,11 +511,11 @@ db.once('open', async () => {
             email: 'eh@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['North York', 'Scarborough'],
+            neighbourhoods: ['Downtown', 'East York'],
             address: {
                 street: '1st Street NW',
                 city: 'Toronto',
-                neighbourhood: 'North York',
+                neighbourhood: 'Downtown',
                 province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
@@ -335,6 +529,11 @@ db.once('open', async () => {
                 owner_id: ownerIds[0],
                 rating: 4,
                 review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
                 }
             ],
             earnings: 0.0,
@@ -383,19 +582,19 @@ db.once('open', async () => {
             status: "PENDING_APPROVAL"
         }
     );
-
+    
     await Walker.create(
         {
             first_name: 'Karen',
             last_name: 'Nuvoski',
             email: 'kn@gmail.com',
             password: 'passs',
-            avatar: "https://i2.wp.com/www.hadviser.com/wp-content/uploads/2019/04/5-choppy-cut-for-a-square-face-CF4Tf1tMDJu.jpg?resize=1078%2C1078&ssl=1",
-            neighbourhoods: ['Whitchurch-Stouffville', 'Newmarket', 'Aurora'],
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Whitchurch-Stouffville'],
             address: {
                 street: '1st Street NW',
-                city: 'Brampton',
-                neighbourhood: 'Brampton',
+                city: 'Whitchurch-Stouffville',
+                neighbourhood: 'Whitchurch-Stouffville',
                 province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
@@ -417,8 +616,8 @@ db.once('open', async () => {
                 },
                 {
                     owner_id: ownerIds[4],
-                    rating: 2,
-                    review_text: "bad!!!"
+                    rating: 5,
+                    review_text: "keep up good work"
                 },
                 {
                     owner_id: ownerIds[1],
@@ -492,7 +691,226 @@ db.once('open', async () => {
             status: "ACTIVE"
         }
     );
-
+    
+    await Walker.create(
+        {
+            first_name: 'Jordan',
+            last_name: 'Nuvoski',
+            email: 'jn@gmail.com',
+            password: 'passs',
+            avatar: 'Avatar/pxkrwzzo0pzmdotbt1bo',
+            neighbourhoods: ['Vaughan'],
+            address: {
+                street: '1st Street NW',
+                city: 'Vaughan',
+                neighbourhood: 'Vaughan',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "My dogs love her!"
+                },
+                {
+                    owner_id: ownerIds[3],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                },
+                {
+                    owner_id: ownerIds[0],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 672.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-31',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Blair',
+            last_name: 'Jenati',
+            email: 'bj@gmail.com',
+            password: 'passs',
+            avatar: 'Avatar/pxkrwzzo0pzmdotbt1bo',
+            neighbourhoods: ['Aurora'],
+            address: {
+                street: '1st Street NW',
+                city: 'Aurora',
+                neighbourhood: 'Aurora',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "My dogs love her!"
+                },
+                {
+                    owner_id: ownerIds[3],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                },
+                {
+                    owner_id: ownerIds[0],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 600.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    
     await Walker.create(
         {
             first_name: 'Ryan',
@@ -500,7 +918,7 @@ db.once('open', async () => {
             email: 'rt@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['Vaughan', 'Richmond Hill', 'King'],
+            neighbourhoods: ['Richmond Hill'],
             address: {
                 street: '1st Street NW',
                 city: 'Richmond Hill',
@@ -525,7 +943,7 @@ db.once('open', async () => {
                     review_text: "Thanks! My dog loves you!"
                 }
             ],
-            earnings: 800.0,
+            earnings: 875.0,
             availability: [
                 {
                     date: '2021-05-24',
@@ -581,21 +999,649 @@ db.once('open', async () => {
             status: "ACTIVE"
         }
     );
-
+    
     await Walker.create(
         {
-            first_name: 'Rodny',
-            last_name: 'Hofman',
-            email: 'rh@gmail.com',
+            first_name: 'Ryan',
+            last_name: 'Turnbull',
+            email: 'rt@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['Ajax', 'Pickering', 'whitby', 'Scugog', 'Durham'],
+            neighbourhoods: ['King'],
             address: {
-                street: '655 Lyndebrook road',
-                city: 'Whitby',
-                neighbourhood: 'Durham',
+                street: '1st Street NW',
+                city: 'King',
+                neighbourhood: 'King',
                 province: 'Ontario',
-                postal_code: 'L1P 2A2'
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Great job!"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 4,
+                    review_text: ""
+                },
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "Thanks! My dog loves you!"
+                }
+            ],
+            earnings: 800.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-31',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Team',
+            last_name: 'Shan',
+            email: 'ts@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Uxbridge'],
+            address: {
+                street: '1st Street NW',
+                city: 'Uxbridge',
+                neighbourhood: 'Uxbridge',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Great job!"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 4,
+                    review_text: ""
+                },
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "Thanks! My dog loves you!"
+                }
+            ],
+            earnings: 800.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-30',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-31',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Tong',
+            last_name: 'Yang',
+            email: 'ts@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Ajax'],
+            address: {
+                street: '1st Street NW',
+                city: 'Ajax',
+                neighbourhood: 'Ajax',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Great job!"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 4,
+                    review_text: ""
+                },
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "Thanks! My dog loves you!"
+                }
+            ],
+            earnings: 800.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Team',
+            last_name: 'Shan',
+            email: 'ts@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Pickering'],
+            address: {
+                street: '1st Street NW',
+                city: 'Pickering',
+                neighbourhood: 'Pickering',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Great job!"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "Thanks! My dog loves you!"
+                }
+            ],
+            earnings: 585.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-30',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-31',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Richard',
+            last_name: 'Branson',
+            email: 'rb@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Whitby'],
+            address: {
+                street: '1st Street NW',
+                city: 'Whitby',
+                neighbourhood: 'Whitby',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Great job!"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 4,
+                    review_text: ""
+                },
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "Thanks! My dog loves you!"
+                }
+            ],
+            earnings: 800.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-29',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Luther',
+            last_name: 'Nyanin',
+            email: 'ln@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Scugog'],
+            address: {
+                street: '1st Street NW',
+                city: 'Scugog',
+                neighbourhood: 'Scugog',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Great job!"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 4,
+                    review_text: ""
+                },
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "Thanks! My dog loves you!"
+                }
+            ],
+            earnings: 800.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-29',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Lateef',
+            last_name: 'Johar',
+            email: 'lj@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Oshawa'],
+            address: {
+                street: '1st Street NW',
+                city: 'Oshawa',
+                neighbourhood: 'Oshawa',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Great job!"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 4,
+                    review_text: ""
+                },
+                {
+                    owner_id: ownerIds[2],
+                    rating: 5,
+                    review_text: "Thanks! My dog loves you!"
+                },
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                }
+            ],
+            earnings: 925.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: false
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-29',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Neil',
+            last_name: 'MacArthurr',
+            email: 'nm@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Brampton'],
+            address: {
+                street: '1st Street NW',
+                city: 'Brampton',
+                neighbourhood: 'Brampton',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
             },
             reviews: [
                 {
@@ -605,8 +1651,8 @@ db.once('open', async () => {
                 },
                 {
                     owner_id: ownerIds[4],
-                    rating: 2,
-                    review_text: "not recommended"
+                    rating: 4,
+                    review_text: "keep up good work"
                 },
                 {
                     owner_id: ownerIds[1],
@@ -614,7 +1660,184 @@ db.once('open', async () => {
                     review_text: "not so bad"
                 }
             ],
-            earnings: 800.0,
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Neil',
+            last_name: 'MacArthurr',
+            email: 'nm@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Mississauga'],
+            address: {
+                street: '1st Street NW',
+                city: 'Mississauga',
+                neighbourhood: 'Mississauga',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 745.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-30',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    await Walker.create(
+        {
+            first_name: 'Neil',
+            last_name: 'MacArthurr',
+            email: 'nm@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Caledon'],
+            address: {
+                street: '1st Street NW',
+                city: 'Caledon',
+                neighbourhood: 'Caledon',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
             availability: [
                 {
                     date: '2021-05-23',
@@ -657,6 +1880,896 @@ db.once('open', async () => {
                     slot9pm: true
                 },
                 {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Chris',
+            last_name: 'Evan',
+            email: 'ce@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Halton Hills'],
+            address: {
+                street: '1st Street NW',
+                city: 'Halton Hills',
+                neighbourhood: 'Halton Hills',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-30',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    await Walker.create(
+        {
+            first_name: 'Ron',
+            last_name: 'Wells',
+            email: 'rw@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Burlington'],
+            address: {
+                street: '1st Street NW',
+                city: 'Burlington',
+                neighbourhood: 'Burlington',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Mark',
+            last_name: 'Carney',
+            email: 'mc@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Milton'],
+            address: {
+                street: '1st Street NW',
+                city: 'Milton',
+                neighbourhood: 'Milton',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Cara',
+            last_name: 'Goldin',
+            email: 'cg@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Oakville'],
+            address: {
+                street: '1st Street NW',
+                city: 'Oakville',
+                neighbourhood: 'Oakville',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 900.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    
+    
+    await Walker.create(
+        {
+            first_name: 'Steve',
+            last_name: 'Deline',
+            email: 'sd@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Orangeville'],
+            address: {
+                street: '1st Street NW',
+                city: 'Orangeville',
+                neighbourhood: 'Orangeville',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 2,
+                    review_text: "not recommended"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Crista',
+            last_name: 'Galli',
+            email: 'cg@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Mono'],
+            address: {
+                street: '1st Street NW',
+                city: 'Mono',
+                neighbourhood: 'Mono',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 3,
+                    review_text: "not so bad"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                }
+            ],
+            earnings: 955.0,
+            availability: [
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-29',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_APPROVAL"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Ashley',
+            last_name: 'D',
+            email: 'ad@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Brock'],
+            address: {
+                street: '1st Street NW',
+                city: 'Brock',
+                neighbourhood: 'Dufferin',
+                province: 'Brock',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 3,
+                    review_text: "not so bad"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                }
+            ],
+            earnings: 955.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-30',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_APPROVAL"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Ashley',
+            last_name: 'D',
+            email: 'ad@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Clarington'],
+            address: {
+                street: '1st Street NW',
+                city: 'Clarington',
+                neighbourhood: 'Clarington',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 3,
+                    review_text: "not so bad"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                }
+            ],
+            earnings: 955.0,
+            availability: [
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-30',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_APPROVAL"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Odane',
+            last_name: 'Williams',
+            email: 'ow@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Dufferin'],
+            address: {
+                street: '1st Street NW',
+                city: 'Dufferin County',
+                neighbourhood: 'Dufferin',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 3,
+                    review_text: "not so bad"
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                }
+            ],
+            earnings: 955.0,
+            availability: [
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-30',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_APPROVAL"
+        }
+    );
+    
+    await Walker.create(
+        {
+            first_name: 'Nani',
+            last_name: 'Cuban',
+            email: 'nc@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Newmarket'],
+            address: {
+                street: '1st Street NW',
+                city: 'Newmarket',
+                neighbourhood: 'Newmarket',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-22',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
                     date: '2021-05-28',
                     slot9am: true,
                     slot11am: true,
@@ -680,14 +2793,15 @@ db.once('open', async () => {
             status: "PENDING_INFORMATION"
         }
     );
+    
     await Walker.create(
         {
-            first_name: 'Douglas',
-            last_name: 'Costa',
-            email: 'dc@gmail.com',
+            first_name: 'Sabrina',
+            last_name: 'Zulu',
+            email: 'sz@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['East Gwillimbury', 'Newmarket',  'Aurora', 'Georgina', 'Bradford West Gwillimbury', 'New Tecumseth' ],
+            neighbourhoods: ['East Gwillimbury'],
             address: {
                 street: '1st Street NW',
                 city: 'East Gwillimbury',
@@ -778,18 +2892,19 @@ db.once('open', async () => {
             status: "PENDING_INFORMATION"
         }
     );
+    
     await Walker.create(
         {
-            first_name: 'Neil',
-            last_name: 'MacArthurr',
-            email: 'nm@gmail.com',
+            first_name: 'Saurav',
+            last_name: 'Dole',
+            email: 'sd@gmail.com',
             password: 'passs',
             avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['Brampton', 'Caledon', 'Mississauga', 'Peel'],
+            neighbourhoods: ['Georgina'],
             address: {
                 street: '1st Street NW',
-                city: 'Mississauga',
-                neighbourhood: 'Peel',
+                city: 'Georgina',
+                neighbourhood: 'Georgina',
                 province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
@@ -801,195 +2916,19 @@ db.once('open', async () => {
                 },
                 {
                     owner_id: ownerIds[4],
-                    rating: 4,
-                    review_text: "keep up good work"
-                },
-                {
-                    owner_id: ownerIds[1],
-                    rating: 3,
-                    review_text: "not so bad"
-                }
-            ],
-            earnings: 1000.0,
-            availability: [
-                {
-                    date: '2021-05-23',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                },
-                {
-                    date: '2021-05-24',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                },
-                {
-                    date: '2021-05-26',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                },
-                {
-                    date: '2021-05-28',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                },
-                {
-                    date: '2021-05-30',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                }
-            ],
-            status: "PENDING_INFORMATION"
-        }
-    );
-    await Walker.create(
-        {
-            first_name: 'Chris',
-            last_name: 'Evan',
-            email: 'ce@gmail.com',
-            password: 'passs',
-            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['Halton', 'Halton Hills', 'Milton', 'Oakville', 'Burlington'],
-            address: {
-                street: '1st Street NW',
-                city: 'Halton',
-                neighbourhood: 'Halton',
-                province: 'Ontario',
-                postal_code: 'AAA AAA'
-            },
-            reviews: [
-                {
-                    owner_id: ownerIds[5],
-                    rating: 4,
-                    review_text: "keep up good work"
-                },
-                {
-                    owner_id: ownerIds[4],
-                    rating: 2,
-                    review_text: "not recommended"
-                },
-                {
-                    owner_id: ownerIds[1],
-                    rating: 3,
-                    review_text: "not so bad"
-                }
-            ],
-            earnings: 1000.0,
-            availability: [
-                {
-                    date: '2021-05-23',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                },
-                {
-                    date: '2021-05-24',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                },
-                {
-                    date: '2021-05-26',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                },
-                {
-                    date: '2021-05-28',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                },
-                {
-                    date: '2021-05-30',
-                    slot9am: true,
-                    slot11am: true,
-                    slot1pm: true,
-                    slot3pm: true,
-                    slot5pm: true,
-                    slot7pm: true,
-                    slot9pm: true
-                }
-            ],
-            status: "PENDING_INFORMATION"
-        }
-    );
-    await Walker.create(
-        {
-            first_name: 'Crista',
-            last_name: 'Galli',
-            email: 'cg@gmail.com',
-            password: 'passs',
-            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
-            neighbourhoods: ['Mono', 'Orangeville', 'Dufferin County', 'Shelburne'],
-            address: {
-                street: '1st Street NW',
-                city: 'Orangeville',
-                neighbourhood: 'Orangeville',
-                province: 'Ontario',
-                postal_code: 'AAA AAA'
-            },
-            reviews: [
-                {
-                    owner_id: ownerIds[5],
-                    rating: 4,
-                    review_text: "keep up good work"
-                },
-                {
-                    owner_id: ownerIds[4],
-                    rating: 3,
-                    review_text: "not so bad"
-                },
-                {
-                    owner_id: ownerIds[1],
                     rating: 5,
                     review_text: "Thanks for taking care of my babies."
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
                 }
             ],
-            earnings: 955.0,
+            earnings: 690.0,
             availability: [
                 {
-                    date: '2021-05-22',
+                    date: '2021-05-23',
                     slot9am: true,
                     slot11am: true,
                     slot1pm: true,
@@ -999,7 +2938,7 @@ db.once('open', async () => {
                     slot9pm: true
                 },
                 {
-                    date: '2021-05-23',
+                    date: '2021-05-24',
                     slot9am: true,
                     slot11am: true,
                     slot1pm: true,
@@ -1019,6 +2958,114 @@ db.once('open', async () => {
                     slot9pm: true
                 },
                 {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-31',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    await Walker.create(
+        {
+            first_name: 'Christofer',
+            last_name: 'Ocampo',
+            email: 'co@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['King'],
+            address: {
+                street: '1st Street NW',
+                city: 'King',
+                neighbourhood: 'King',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
                     date: '2021-05-27',
                     slot9am: true,
                     slot11am: true,
@@ -1029,7 +3076,7 @@ db.once('open', async () => {
                     slot9pm: true
                 },
                 {
-                    date: '2021-05-30',
+                    date: '2021-05-28',
                     slot9am: true,
                     slot11am: true,
                     slot1pm: true,
@@ -1039,10 +3086,306 @@ db.once('open', async () => {
                     slot9pm: true
                 }
             ],
-            status: "PENDING_APPROVAL"
+            status: "PENDING_INFORMATION"
         }
     );
-
+    
+    await Walker.create(
+        {
+            first_name: 'Keith',
+            last_name: 'Pua',
+            email: 'kp@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Markham'],
+            address: {
+                street: '1st Street NW',
+                city: 'Markham',
+                neighbourhood: 'Markham',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    await Walker.create(
+        {
+            first_name: 'Allison',
+            last_name: 'Potter',
+            email: 'ap@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['Bradford West Gwillimbury'],
+            address: {
+                street: '1st Street NW',
+                city: 'Bradford West Gwillimbury',
+                neighbourhood: 'Bradford West Gwillimbury',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    await Walker.create(
+        {
+            first_name: 'Shimon',
+            last_name: 'Saha',
+            email: 'ss@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
+            neighbourhoods: ['New Tecumseth'],
+            address: {
+                street: '1st Street NW',
+                city: 'New Tecumseth',
+                neighbourhood: 'New Tecumseth',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            reviews: [
+                {
+                    owner_id: ownerIds[5],
+                    rating: 4,
+                    review_text: "keep up good work"
+                },
+                {
+                    owner_id: ownerIds[4],
+                    rating: 5,
+                    review_text: "Thanks for taking care of my babies."
+                },
+                {
+                    owner_id: ownerIds[1],
+                    rating: 3,
+                    review_text: "not so bad"
+                }
+            ],
+            earnings: 1000.0,
+            availability: [
+                {
+                    date: '2021-05-23',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-24',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-25',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-26',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-27',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                },
+                {
+                    date: '2021-05-28',
+                    slot9am: true,
+                    slot11am: true,
+                    slot1pm: true,
+                    slot3pm: true,
+                    slot5pm: true,
+                    slot7pm: true,
+                    slot9pm: true
+                }
+            ],
+            status: "PENDING_INFORMATION"
+        }
+    );
+    
+    
     console.log('walker seeded');
     const walkers = await Walker.find({});
     const walkerIds = walkers.map(walker => walker._id);
