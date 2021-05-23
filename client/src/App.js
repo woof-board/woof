@@ -61,11 +61,12 @@ function App() {
                             <PrivateRoute exact path="/ownertrackorder" usertype="owner" component={OwnerTrackOrder}/> 
                             <PrivateRoute exact path="/ownerlivemap" usertype="owner" component={OwnerLiveMap}/> 
                             <PrivateRoute exact path="/bookwalk" usertype="owner" component={OwnerWalkDetails}/> 
-                            
+                             
+                            <PrivateRoute exact path="/dashboard" usertype="admin" component={AdminPage}/>
                             {/* <PrivateRoute exact path="/map" usertype="owner" component={Map}/>
                             <Route exact path="/testmap" usertype="owner" component={TestMap}/>  */}
                             {/* <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/> */}
-                            <PrivateRoute exact path="/dashboard" usertype="admin" component={AdminPage}/>
+                            
                             
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
                             <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
