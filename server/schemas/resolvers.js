@@ -456,6 +456,8 @@ const resolvers = {
            - updateWalkerPassword
            - updateWalkerAvailability
            - updateWalkerStatus
+           - updateWalkerAvatar
+           - addWalkerEarnings
         */
 
         addWalker: async (parent, { input }) => {
