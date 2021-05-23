@@ -108,7 +108,7 @@ function WalkerDetails({ user }) {
                         first_name,
                         last_name,
                         email,
-                        status: "ACTIVE",
+                        status: user.status === "PENDING_INFORMATION"? "PENDING_APPROVAL" : user.status,
                         neighbourhoods,
                         address: {
                             street: address_street,
