@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import '../../css/Header.css';
 import Logo from '../../assets/images/woof-logo.svg';
@@ -43,18 +43,9 @@ function Header() {
         }
     ]);
 
-    const [state, dispatch] = useStoreContext();
+    const [, dispatch] = useStoreContext();
     const location = useLocation();
     const result = Auth.getProfileType();
-
-    
-    const [currentLink, setCurrentLink] = useState(links[0]);
-    
-    useEffect(() => {
-        if(result === 'owner' || result === 'admin'){
-            setCurrentLink(result === 'owner' ? links[1] : links[2]);
-        }
-    }, [result, links]);
 
     const logout = event => {
         event.preventDefault();
@@ -89,7 +80,6 @@ function Header() {
                 </Link>
             </div>
             <div className="nav-links-container">
-                {/* {result !== 'guest' && ( */}
                     <>
                         <div className="nav-row">
                             {links.map((link) => (
