@@ -64,7 +64,10 @@ const walkerSchema = new Schema(
         },
         address: addressSchema,
         reviews: [reviewSchema],
-        earnings: Number,
+        earnings: {
+            type: Number,
+            default: 0
+        },
         availability: [
             {
                 // date: {

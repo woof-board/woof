@@ -12,7 +12,7 @@ db.once('open', async () => {
             last_name: 'Normann',
             email: 'eric.n@me.com',
             password: 'passs',
-            avatar: "/images/eric.jpg",
+            avatar: "Avatar/fpntsgfahqpjexh5yesr",
             admin: false,
             address: {
                 street: '2325 Yolanda Dr',
@@ -48,7 +48,7 @@ db.once('open', async () => {
             last_name: 'Choudhury',
             email: 'sc@gmail.com',
             password: 'passs',
-            avatar: "/images/eric.jpg",
+            avatar: "Avatar/c5eaous5xg8yvybfpduh",
             admin: true,
             address: {
                 street: '1st Street NW',
@@ -90,7 +90,7 @@ db.once('open', async () => {
             last_name: 'Imtiaz',
             email: 'si@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/jpho9qelncqgse4qdi94",
             admin: false,
             address: {
                 street: '1st Street NW',
@@ -122,11 +122,11 @@ db.once('open', async () => {
 
     await Owner.create(
         {
-            first_name: 'Mike',
-            last_name: 'Smith',
-            email: 'ms@gmail.com',
+            first_name: 'Benn',
+            last_name: 'Asabir',
+            email: 'ba@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/yogw0sg0or4zgojmixug",
             admin: false,
             address: {
                 street: '1st Street NW',
@@ -151,11 +151,11 @@ db.once('open', async () => {
 
     await Owner.create(
         {
-            first_name: 'Jim',
-            last_name: 'Anderson',
-            email: 'ja@gmail.com',
+            first_name: 'Alex',
+            last_name: 'Chung',
+            email: 'ac@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/cgfhllh4ggu3wnrjsvoe",
             admin: false,
             address: {
                 street: '1st Street NW',
@@ -194,7 +194,7 @@ db.once('open', async () => {
             last_name: 'Washington',
             email: 'pw@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
             neighbourhoods: ['East York', 'North York', 'Scarborough'],
             address: {
                 street: '1st Street NW',
@@ -288,7 +288,7 @@ db.once('open', async () => {
             last_name: 'Holt',
             email: 'eh@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
             neighbourhoods: ['North York', 'Scarborough'],
             address: {
                 street: '1st Street NW',
@@ -471,7 +471,7 @@ db.once('open', async () => {
             last_name: 'Turnbull',
             email: 'rt@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
             neighbourhoods: ['Vaughan', 'Richmond Hill', 'King'],
             address: {
                 street: '1st Street NW',
@@ -560,7 +560,7 @@ db.once('open', async () => {
             last_name: 'Hofman',
             email: 'rh@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
             neighbourhoods: ['Ajax', 'Pickering', 'whitby', 'Scugog', 'Durham'],
             address: {
                 street: '655 Lyndebrook road',
@@ -658,7 +658,7 @@ db.once('open', async () => {
             last_name: 'Costa',
             email: 'dc@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
             neighbourhoods: ['East Gwillimbury', 'Newmarket',  'Aurora', 'Georgina', 'Bradford West Gwillimbury', 'New Tecumseth' ],
             address: {
                 street: '1st Street NW',
@@ -756,7 +756,7 @@ db.once('open', async () => {
             last_name: 'MacArthurr',
             email: 'nm@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
             neighbourhoods: ['Brampton', 'Caledon', 'Mississauga', 'Peel'],
             address: {
                 street: '1st Street NW',
@@ -844,7 +844,7 @@ db.once('open', async () => {
             last_name: 'Evan',
             email: 'ce@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
             neighbourhoods: ['Halton', 'Halton Hills', 'Milton', 'Oakville', 'Burlington'],
             address: {
                 street: '1st Street NW',
@@ -932,7 +932,7 @@ db.once('open', async () => {
             last_name: 'Galli',
             email: 'cg@gmail.com',
             password: 'passs',
-            avatar: "/images/user-default.png",
+            avatar: "Avatar/pxkrwzzo0pzmdotbt1bo",
             neighbourhoods: ['Mono', 'Orangeville', 'Dufferin County', 'Shelburne'],
             address: {
                 street: '1st Street NW',

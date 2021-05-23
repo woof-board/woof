@@ -5,42 +5,49 @@ import '../css/WalkerProfile.css';
 import { QUERY_WALKER_ME, QUERY_WALKER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
+import { idbPromise } from "../utils/helpers";
 import WalkerTrackOrder from "../components/WalkerTrackWalks/WalkerTrackOrder"
-
 
 function WalkerTrackWalks() {
     const [state, dispatch] = useStoreContext();
-    const [orders, setOrders] = useState([]);
-    const [getWalkerProfile, { loading, data }] = useLazyQuery(QUERY_WALKER_ME);
     const { currentUser } = state;
-    const { data: walkerOrderData } = useQuery(QUERY_WALKER_ORDERS, {
-      variables: {
-          walker_id: currentUser._id
-      }
+
+    const [orders, setOrders] = useState([]);
+    const [getProfile, { data: profileData }] = useLazyQuery(QUERY_WALKER_ME, {
+        fetchPolicy: 'no-cache'
     });
     
-    // const totalOrders = orders?.length;
+    const [getWalkerOrders, { data: walkerOrderData }] = useLazyQuery(QUERY_WALKER_ORDERS, {
+        variables: {
+            walker_id: currentUser?._id
+        },
+        fetchPolicy: "no-cache"
+    });
     
     useEffect(() => {
-      // if not already in global store
-      if (!currentUser && !data) {
-        getWalkerProfile(); // get profile from database
-      } 
-      // retrieved from server
-      else if (!currentUser && data) {
-        dispatch({
-          type: UPDATE_CURRENT_USER,
-          currentUser: data.walkerMe
-        });
-      }
-    }, [currentUser, data, loading, dispatch, getWalkerProfile]);
-
+        if (!currentUser && !profileData) {
+            getProfile();
+        } 
+        // retrieved from server
+        else if (!currentUser && profileData) {
+            dispatch({
+                type: UPDATE_CURRENT_USER,
+                currentUser: { ...profileData.walkerMe}
+            });
+            idbPromise('user', 'put', profileData.walkerMe);
+        }
+    }, [currentUser, profileData, dispatch]);
+    
+    useEffect(() => {
+        if(currentUser) {
+            getWalkerOrders();
+        }
+    }, [currentUser]);
 
     useEffect(() => {
       if(walkerOrderData) {
         setOrders(walkerOrderData.walkerOrders);
       }
-      console.log(walkerOrderData);
     }, [walkerOrderData]);
 
   return (

@@ -456,6 +456,8 @@ const resolvers = {
            - updateWalkerPassword
            - updateWalkerAvailability
            - updateWalkerStatus
+           - updateWalkerAvatar
+           - addWalkerEarnings
         */
 
         addWalker: async (parent, { input }) => {
@@ -564,6 +566,17 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
 
+        addWalkerEarnings: async (parent, { earnings }, context) => {
+            // only executable by an admin
+            if (context.walker) {
+                const newWalker = await Walker.findById(context.walker._id);
+                newWalker.earnings += earnings;
+                return newWalker.save();
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
         /* Order mutations
            - addOrder
            - updateOrder
@@ -573,6 +586,15 @@ const resolvers = {
         addOrder: async (parent, { input }, context) => {
             // only owner can add order
             if (context.owner) {
+                // check if owner has payment info
+                const owner = await Owner.findById(context.owner._id);
+                if (!owner.stripe_customer_id || 
+                    owner.stripe_customer_id === "" || 
+                    !owner.stripe_setup_intent || 
+                    owner.stripe_setup_intent === "") {
+                        throw new ApolloError("paymentInfoError: Please complete payment info before completing any order!");
+                }
+
                 const order = await Order.create(input);
 
                 if( input.walker ){

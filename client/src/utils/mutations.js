@@ -322,6 +322,48 @@ export const UPDATE_WALKER_STATUS = gql`
     }
 `;
 
+export const ADD_WALKER_EARNINGS = gql`
+    mutation addWalkerEarnings($earnings: Float!) {
+        addWalkerEarnings(earnings: $earnings) {
+            _id
+            first_name
+            last_name
+            email
+            avatar
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
+            reviews{
+                owner_id{
+                    _id
+                    first_name
+                    last_name
+                  }
+                rating
+                review_text
+            }
+            earnings
+            average_rating
+            neighbourhoods
+            status
+            availability {
+                date
+                slot9am
+                slot11am
+                slot1pm
+                slot3pm
+                slot5pm
+                slot7pm
+                slot9pm
+            }
+        }
+    }
+`;
+
 /* OWNER mutations
     - ADD_OWNER
     - LOGIN_OWNER
