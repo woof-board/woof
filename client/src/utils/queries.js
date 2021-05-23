@@ -237,12 +237,18 @@ export const QUERY_WALKER_ORDERS = gql`
         _id
         first_name
         last_name
+        address {
+          street
+          city
+          postal_code
+        }
       }
       walker{
         _id
         first_name
         last_name
       }
+
       dogs {
         name
       }

@@ -61,7 +61,8 @@ function WalkerTrackWalks() {
                                 <div className="walks">
                                     <div>Walk Date: {order.service_date}</div>
                                     <div>Start time: {order.service_time}</div>
-                                    <div>Status: {order.status}</div>
+                                    <div>Name: {order.owner.first_name} {order.owner.last_name}</div>
+                                    <div>Address: {order.owner.address.street}, {order.owner.address.city}, {order.owner.address.postal_code}</div>
                                     <WalkerTrackOrder
                                         order_id={order._id}
                                         service_date={order.service_date}
@@ -82,7 +83,7 @@ function WalkerTrackWalks() {
                                 <div className="walks">
                                     <div>Walk Date: {order.service_date}</div>
                                     <div>Start time: {order.service_time}</div>
-                                    <div>Status: {order.status}</div>
+                                    <div>Name: {order.owner.first_name} {order.owner.last_name}</div>
                                 </div>
                             ))}
                         </div>
