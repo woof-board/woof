@@ -261,7 +261,7 @@ button:hover {
     .walker-update-form img  {
         margin: 5% 0 10% 22%;
     }   
-    .walker-contact-container {
+    .walker-contact-container, .walker-profile-container, .walker-details-container {
         width: 100%;
     }
     .average-rating {
