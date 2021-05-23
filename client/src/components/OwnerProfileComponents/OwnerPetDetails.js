@@ -7,6 +7,7 @@ import ModalDisplay from '../../components/ModalDisplay';
 import { validateInput } from '../../utils/helpers';
 import { UPDATE_DOG_AVATAR } from '../../utils/mutations';
 import { openUploadWidget } from '../../utils/CloudinaryService';
+import OwnerAddDog from './OwnerAddDog';
 
 function OwnerPetDetails({ user }) {
 
@@ -227,11 +228,12 @@ function OwnerPetDetails({ user }) {
                                     </select>
                                     
                                 </div>
-                                <div className="row-data">
+                                <div className="button-container">
                                 <button 
                                     type="button"
                                     onClick={uploadImageWithCloudinary}
                                     data-dogid={dog._id} 
+                                    className="update-walker-button"
                                 >
                                     Update Avatar
                                 </button>
@@ -239,6 +241,7 @@ function OwnerPetDetails({ user }) {
                                     type="button"
                                     onClick={handleUpdateDog}
                                     data-dogid={dog._id} 
+                                    className="update-walker-button right-button"
                                 >
                                     Update
                                 </button>
@@ -246,6 +249,7 @@ function OwnerPetDetails({ user }) {
                                     type="button"
                                     onClick={handleRemoveDog}
                                     data-dogid={dog._id} 
+                                    className="update-walker-button right-button"
                                 >
                                     Remove
                                 </button>
@@ -265,6 +269,8 @@ function OwnerPetDetails({ user }) {
                     </div> */}
                 </form>
                 <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
+
+                <OwnerAddDog />
             </div>
         </>
     )

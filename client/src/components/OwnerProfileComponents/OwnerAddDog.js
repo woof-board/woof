@@ -77,10 +77,13 @@ function OwnerAddDog() {
                 });
                 setModalJSX(<div>Dog has been added successfully!</div>);
                 setModalOpen(true);
+                document.getElementById('add-dog-form').reset();
             }
             else{
                 setModalJSX(<div>Dog has been added successfully!</div>);
                 setModalOpen(true);
+                document.getElementById('add-dog-form').reset();
+
             }
 
         } catch (e) {
@@ -96,27 +99,25 @@ function OwnerAddDog() {
     
     return (
         <>
-            <div className="walker-contact-container">
-                <div className="walker-header"><h2>Add a Dog</h2></div>
+                
                 <form
                     className="walker-update-form"
                     id="add-dog-form"
                     onSubmit={handleFormSubmit}
                 >
+                    <h3>Add a Dog</h3>
                     <div className="row-data">
                         <input
                             className="profile-input profile-name"
                             type="text"
                             name="name"
                             placeholder="Name"
-                            value={formData.name}
                             onChange={handleInputChange}
                         />
                         <input
                             className="profile-input profile-name"
                             type="text"
                             name="breed"
-                            value={formData.breed}
                             placeholder="Breed"
                             onChange={handleInputChange}
                         />
@@ -126,7 +127,6 @@ function OwnerAddDog() {
                             className="profile-input profile-name"
                             type="text"
                             name="weight"
-                            value={formData.weight}
                             placeholder="Weight in pounds"
                             onChange={handleInputChange}
                         />      
@@ -151,7 +151,6 @@ function OwnerAddDog() {
                     </div>
                 </form>
                 <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
-            </div>
         </>
     )
 }

@@ -1,18 +1,21 @@
-#owners {
-    /* display: flex; */
-    flex-direction: row;
+#owners, #walkers {
+
     padding: 2rem 5rem 1rem;
-    flex-wrap: wrap;
-    flex-direction: row;
+    width:fit-content;
+    margin: 0 auto;
+
 }
 .page-wrap {
     position: relative;
     display: flex;
     flex-direction: row;
-    width: 100%;
-    justify-content: center;
-    padding: 0rem 2rem 10rem;
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0 auto;
+    width: fit-content;
 }
+
+
 .walker-header {
     width: 100%;
     background-color: var(--tertiary);
@@ -20,21 +23,20 @@
     padding: 0 15px;
 }
 .walker-picture-container {
-    margin: 0 auto 0 0;
-    border: solid 1px black;
+    margin: 0 30px 0 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 20%;
+    width: 210px;
 }
 .walker-picture-container img, .walker-update-form img {
-    border: 8px solid var(--tertiary);
+    border: 4px solid var(--tertiary);
     border-radius: 50%;
     object-fit: cover;
     margin: 0 auto;
-    width: 80%;
-    aspect-ratio: 1 / 1;
+    width: 200px;
+    height: 200px;
 }
 
 .walker-update-form img  {
@@ -52,11 +54,11 @@
 .walker-profile-container {
     display: flex;
     flex-direction: column;
-    box-shadow: 5px 5px 10px rgb(0,0,0,0.3);
     padding: 1rem;
-    margin: 0rem 1rem 1rem 1rem;
+    margin: 0 1rem 1rem;
     min-width: 25rem;
     background-color: var(--secondary);
+    border-radius: 25px;
     align-items: center;
     overflow: hidden;
 }
@@ -64,12 +66,12 @@
 .walker-contact-container {
     display: flex;
     flex-direction: column;
-    width: 70vw;
     background-color: var(--secondary);
     border-radius: 15px;
     margin-bottom: 20px;
     overflow:hidden;
     padding-bottom: 15px;
+    width: 60vw;
 }
 .walker-contact-container form, .show-walkers {
     padding: 15px 7px 0 15px;
@@ -97,6 +99,11 @@
 .profile-input {
     width: 50%;
 }
+
+.street-line {
+    width: 100%;
+}
+
 .time-picker, .date-picker {
     width: fit-content;
 }
@@ -172,8 +179,6 @@
 }
 
 
-
-
 .walks {
     display: flex;
     flex-direction: column;
@@ -231,7 +236,7 @@ button:hover {
 }
 
 @media screen and (max-width: 650px) {
-    #owners {
+    #owners, #walkers {
         margin-top: 7rem;
     }
     .page-body {
@@ -242,6 +247,11 @@ button:hover {
         margin: 0 auto 25px;
         width: 90%;
   
+    }
+
+    .button-container {
+        width: 90%;
+        margin: 8px auto;
     }
 
     .upload-button {

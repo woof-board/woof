@@ -162,7 +162,6 @@ function OwnerProfile() {
             <OwnerDetails user={currentUser} />
             <OwnerPasswordForm />
             <OwnerPetDetails user={currentUser} />
-            <OwnerAddDog />
             {
                 currentUser && currentUser.status === "ACTIVE" &&
                 <OwnerReviews user={currentUser}/>

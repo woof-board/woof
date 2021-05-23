@@ -215,10 +215,13 @@ function WalkerDetails({ user }) {
                         onChange={handleInputChange}
                         value={formData.email}
                     />
+                </div>
+                <h3>Service Areas</h3>
+                <div className="row-data">
                     {
                         formData.address_city === "Toronto" &&
                         <Select 
-                            className="profile-input profile-name" 
+                            className="profile-input street-input" 
                             options={loadServiceArea()} 
                             isMulti={true}
                             placeholder="What areas can you serve?"
@@ -228,10 +231,10 @@ function WalkerDetails({ user }) {
                     }
                     
                 </div>
-                <div><h4>Address</h4></div>
+                <div><h3>Address</h3></div>
                 <div className="row-data">
                     <input
-                        className="profile-input"
+                        className="profile-input street-input"
                         type="text"
                         name="address_street"
                         onChange={handleInputChange}

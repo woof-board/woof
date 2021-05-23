@@ -3,6 +3,10 @@ import { useMutation, useQuery, useLazyQuery } from '@apollo/react-hooks';
 import { QUERY_OWNER_REVIEWS } from '../../utils/queries';
 import { REMOVE_REVIEW } from '../../utils/mutations';
 import ModalDisplay from '../ModalDisplay';
+import StarRatings from 'react-star-ratings';
+import { RatingIconSVG } from '../../utils/helpers'
+
+
 
 function OwnerReviews() {
     const [removeReview, {error}] = useMutation(REMOVE_REVIEW);
@@ -72,7 +76,16 @@ function OwnerReviews() {
                         <span className="medium-text">Review:</span> {review.review_text}
                     </div>
                     <div>
-                        <span className="medium-text">Rating:</span> {review.rating}
+                        <span className="medium-text">Rating: </span> 
+                        <StarRatings
+                            rating= {review.rating}
+                            starDimension="14px"
+                            starSpacing="2px"
+                            starRatedColor="#254e9b"
+                            starEmptyColor="#98b4e7"
+                            svgIconViewBox={RatingIconSVG.box}
+                            svgIconPath={RatingIconSVG.coords}
+                        />
                     </div>
                     <button 
                         type="button" 

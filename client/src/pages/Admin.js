@@ -52,6 +52,8 @@ function AdminPage() {
     };
 
     return (
+        <div id='owners'>
+            <div className='page-wrap'>
         <div className="walker-contact-container">
             <div className="walker-header">
                 <h2>Walkers to be approved</h2>
@@ -81,6 +83,8 @@ function AdminPage() {
                 }
             </div>
             <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
+        </div>
+        </div>
         </div>
     )
 };

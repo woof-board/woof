@@ -96,7 +96,7 @@ function WalkerProfile() {
           <div className="walker-picture-container">
             <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + currentUser.avatar} width="160" alt="profile-img"/>
             <div>
-                <button className="upload_button" onClick={uploadImageWithCloudinary}>Upload</button>
+                <button className="upload_button" onClick={uploadImageWithCloudinary}>Update your picture</button>
               </div>
           </div>        
         }

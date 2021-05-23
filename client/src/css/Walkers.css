@@ -1,10 +1,3 @@
-#walkers {
-    display: flex;
-    flex-direction: row;
-    padding: 2rem 5rem 1rem;
-    flex-wrap: wrap;
-    flex-direction: row;
-}
 
 h1 {
     color: var(--primary);
@@ -216,10 +209,7 @@ h1 {
 }
 
 @media screen and (max-width: 650px) {
-    #walkers {
-        flex-direction: column;
-        padding: 7rem 1rem 0;
-    }
+
     h1 {
         text-align: center;
     }

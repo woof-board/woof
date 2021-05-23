@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 
-import '../css/WalkerProfile.css';
+import '../css/Profile.css';
 import { QUERY_WALKER_ME, QUERY_WALKER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
@@ -51,7 +51,7 @@ function WalkerTrackWalks() {
     }, [walkerOrderData]);
 
   return (
-    <>
+    <div id="walkers">
       <h1>My Walks</h1>
       <div className='page-wrap'>
         <div className="walker-details-container">
@@ -104,7 +104,7 @@ function WalkerTrackWalks() {
           }
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

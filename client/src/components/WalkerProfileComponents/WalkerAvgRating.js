@@ -1,5 +1,4 @@
 import React from 'react';
-//import '../../css/WalkerProfile.css';
 import StarRatings from 'react-star-ratings';
 import { RatingIconSVG } from '../../utils/helpers'
 

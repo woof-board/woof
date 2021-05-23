@@ -1,5 +1,4 @@
 import React from 'react';
-//import '../../css/WalkerProfile.css';
 
 function WalkerNeighbourhoods({ neighbourhoods }) {
 
