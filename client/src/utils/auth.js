@@ -41,12 +41,10 @@ class AuthService {
     // Saves user token to localStorage
     localStorage.setItem('id_token', idToken);
 
-    if (this.getProfileType() === 'owner') {
+    if (this.getProfileType() === 'owner' || this.getProfileType() === 'admin') {
       window.location.assign('/ownerprofile');
     } else if (this.getProfileType() === 'walker') {
       window.location.assign('/walkerschedule');
-    } else if (this.getProfileType() === 'admin') {
-        window.location.assign('/adminprofile');
     }
   }
 

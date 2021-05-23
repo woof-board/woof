@@ -12,9 +12,9 @@ const PrivateRoute = ({ component:Component, usertype, ...rest }) => {
             <Component {...children} />
           ) : (
               <>
-            {Auth.getProfileType() === "owner" && <Redirect to="/ownerprofile"/>}
+            {(Auth.getProfileType() === "owner" || Auth.getProfileType() === "admin") && <Redirect to="/ownerprofile"/>}
             {Auth.getProfileType() === "walker" && <Redirect to="/walkerprofile"/>}
-            {Auth.getProfileType() === "admin" && <Redirect to="/adminprofile"/>}
+            {/* {Auth.getProfileType() === "admin" && <Redirect to="/adminprofile"/>} */}
             {Auth.getProfileType() === "guest" && <Redirect to="/"/>}
             </>
           )

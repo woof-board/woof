@@ -7,7 +7,7 @@ import StarRatings from 'react-star-ratings';
 
 import ModalDisplay from '../ModalDisplay';
 import { QUERY_WALKER_AVAILABILITY, QUERY_OWNER_ME } from "../../utils/queries";
-import { ADD_ORDER, UPDATE_ORDER } from "../../utils/mutations";
+import { ADD_ORDER } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import { formatDate, addDays } from '../../utils/helpers';
@@ -172,6 +172,14 @@ function OwnerWalkDetails() {
             );
             setModalOpen(true);
         }catch (e){
+            if(e.message.search("paymentInfoError") > -1) {
+                setModalJSX(
+                    <div>
+                        <h6>Please update your payment info before completing the order!</h6>
+                    </div>
+                );
+                setModalOpen(true);
+            }
             console.log(e);
         }
     };
@@ -186,7 +194,7 @@ function OwnerWalkDetails() {
 
     const closeModal = () => {
         setModalJSX(<div />);
-        setModalOpen(true);
+        setModalOpen(false);
     };
 
 
