@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import '../css/Profile.css'
-// import Auth from '../utils/auth';
 import WalkerDetails from '../components/WalkerProfileComponents/WalkerDetails';
 import WalkerReviews from '../components/WalkerProfileComponents/WalkerReviews';
 import WalkerOrders from '../components/WalkerProfileComponents/WalkerOrders';
@@ -18,7 +17,6 @@ function WalkerProfile() {
     const [state, dispatch] = useStoreContext();
     const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
     const [updateWalkerAvatar] = useMutation(UPDATE_WALKER_AVATAR);
-    // const { loading, data } = useQuery(QUERY_WALKER_ME);
     const { currentUser } = state;
 
     useEffect(() => {

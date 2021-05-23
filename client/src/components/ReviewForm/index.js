@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 
 import { useMutation } from '@apollo/react-hooks';
 import { ADD_REVIEW } from '../../utils/mutations';
 import StarRatings from 'react-star-ratings';
 import { RatingIconSVG } from '../../utils/helpers'
 import { useStoreContext } from "../../utils/GlobalState";
-import { UPDATE_CURRENT_USER } from "../../utils/actions";
+
 
 const ReviewForm = ({ walker_id, closeModal }) => {
     const [formData, setFormData] = useState({
         review_text: "",
         rating: 1
     });
-    const [state, dispatch] = useStoreContext();
+
     const [message, setMessage] = useState("");
     const [addReview, { error }] = useMutation(ADD_REVIEW);
 
@@ -25,12 +25,6 @@ const ReviewForm = ({ walker_id, closeModal }) => {
             [name]: value
         });
     };
-
-    // useEffect(() => {
-    //     if (formData.review_text) {
-    //         setMessage("");
-    //     }
-    // }, [formData]);
     
     // submit form
     const handleFormSubmit = async event => {
@@ -98,7 +92,6 @@ const ReviewForm = ({ walker_id, closeModal }) => {
                 </div>
                 
                 <button 
-                    // className="btn col-12 col-md-3" 
                     type="submit"
                 >
                     Submit

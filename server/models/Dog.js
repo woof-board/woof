@@ -15,7 +15,7 @@ const dogSchema = new Schema(
         weight: {
             type: Number,
             required: true,
-            min: 0.0 // have to use some reasonable weight constraints
+            min: 0.0 
         },
         treats: {
             type: Boolean,

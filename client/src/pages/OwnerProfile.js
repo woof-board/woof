@@ -20,15 +20,6 @@ function OwnerProfile() {
   const [state, dispatch] = useStoreContext();
   const { currentUser } = state;
 
-  /// pull upcoming walks ///
-
-  // const { data: ownerOrderData, loading: orderLoading } = useQuery(QUERY_OWNER_ORDERS, {
-  //   variables: {
-  //       owner_id: currentUser._id
-  //   }
-
-  // });
-
   const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
   const [updateOwnerAvatar] = useMutation(UPDATE_OWNER_AVATAR);
 
@@ -45,18 +36,6 @@ function OwnerProfile() {
       });
     }
   }, [currentUser, data, loading, dispatch]);
-
-  /// SHOW UPCOMING WALKS ///
-
-  // useEffect(() => {
-  //   if(ownerOrderData) {
-  //     console.log(ownerOrderData.ownerOrders);
-  //   }
-  // }, [ownerOrderData]);
-
-  // if (orderLoading) {
-  //     return (<div>Loading data...</div>);
-  // }
 
   const uploadImageWithCloudinary = async () => {
     const uploadOptions = {

@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const { AuthenticationError, UserInputError, ApolloError } = require('apollo-server-express');
-
 const { Owner, Walker, Order } = require('../models');
 const { signTokenOwner, signTokenWalker } = require('../utils/auth');
 const { getTimeSlot } = require('../utils/helpers');
@@ -35,6 +34,7 @@ const resolvers = {
 
         getOwnerReviews: async (parent, args, context) => {
             if (context.owner) {
+                // find walkers who have reviews from this owner
                 const walkers = await Walker.find(
                     {
                         reviews: {
@@ -45,7 +45,8 @@ const resolvers = {
                     }
                 );
                 let reviews = [];
-
+                
+                // generate owner's review list    
                 walkers.forEach(walker => {
                     walker.reviews.forEach(review => {
                         
@@ -142,9 +143,7 @@ const resolvers = {
             throw new AuthenticationError('Not logged in');
         },
         
-
         getCustomerSessionId: async (parent, args, context) => {
-    
 
             if (context.owner) {
                 const url = new URL(context.headers.referer).origin;
@@ -282,28 +281,7 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
-        },
-        // checkWalkerAvailability: async (parent, { date, time }, context) => {
-        //     if(context.owner){
-        //         // const owner = await Owner.findById(context.owner._id)
-        //         //     .select('-__v -password');
-        //         const timeSlot = getTimeSlot(time);
-                
-        //         const filteredWalker = await Walker.find(
-        //             {
-        //                 availability: {
-        //                     $elemMatch : { 
-        //                         date,
-        //                         [timeSlot]: true
-        //                     }
-        //                 }
-        //             }
-        //         );
-        //         return filteredWalker;
-        //     }
-
-        //     throw new AuthenticationError('Not logged in');
-        // },
+        }
     },
     Mutation: {
         /* Owner mutations
@@ -424,11 +402,6 @@ const resolvers = {
                 owner.password = new_password;
                 return await owner.save();
 
-                // return await Owner.findByIdAndUpdate(
-                //     context.owner._id, 
-                //     { password: new_password }, 
-                //     { new: true, runValidators: true }
-                // );
             }
       
             throw new AuthenticationError('Not logged in');
@@ -512,12 +485,6 @@ const resolvers = {
 
                 walker.password = new_password;
                 return await walker.save();
-
-                // return await Walker.findByIdAndUpdate(
-                //     context.walker._id, 
-                //     { password: new_password }, 
-                //     { new: true, runValidators: true }
-                // );
             }
       
             throw new AuthenticationError('Not logged in');
@@ -528,11 +495,6 @@ const resolvers = {
                 const walker = await Walker.findById(context.walker._id);
                 walker.availability = [...input];
                 return await walker.save();
-                // return await Walker.findByIdAndUpdate(
-                //     context.walker._id, 
-                //     { $set: { availability: [...input] } },
-                //     { new: true, runValidators: true }
-                // );
             }
       
             throw new AuthenticationError('Not logged in');
@@ -782,7 +744,6 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
-
         },
     }
 };

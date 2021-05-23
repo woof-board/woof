@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
     - ADD_ORDER
     - UPDATE_ORDER
     - UPDATE_ORDER_STATUS
+    - UPDATE_ORDER_COORDS
     - REMOVE_ORDER
 */
 export const ADD_ORDER = gql`
@@ -40,15 +41,6 @@ export const UPDATE_ORDER = gql`
         }
     }
 `;
-
-/* example query variables
-
-{
-  "order_id": "609d910d1342e402388e2a2f",
-  "status": "IN_PROGRESS"
-}
-
-*/
 
 export const UPDATE_ORDER_STATUS = gql`
     mutation updateOrderStatus($order_id: ID!, $status: String!) {
@@ -192,6 +184,8 @@ export const CLEAR_REVIEW = gql`
     - UPDATE_WALKER_PASSWORD
     - UPDATE_WALKER_AVAILABILITY
     - UPDATE_WALKER_STATUS
+    - ADD_WALKER_EARNINGS
+    - UPDATE_WALKER_AVATAR
 */
 
 export const ADD_WALKER = gql`
@@ -364,9 +358,58 @@ export const ADD_WALKER_EARNINGS = gql`
     }
 `;
 
+export const UPDATE_WALKER_AVATAR = gql`
+    mutation updateWalkerAvatar($avatar: String!) {
+        updateWalkerAvatar(avatar: $avatar) {
+            _id
+            first_name
+            last_name
+            email
+            avatar
+            address {
+                street
+                city
+                neighbourhood
+                province
+                postal_code
+            }
+            reviews{
+                owner_id{
+                  _id
+                  first_name
+                  last_name
+                }
+                rating
+                review_text
+            }
+            earnings
+            average_rating
+            neighbourhoods
+            status
+            availability {
+                date
+                slot9am
+                slot11am
+                slot1pm
+                slot3pm
+                slot5pm
+                slot7pm
+                slot9pm
+            }
+        }
+    }
+`;
+
 /* OWNER mutations
     - ADD_OWNER
     - LOGIN_OWNER
+    - UPDATE_OWNER_PROFILE
+    - UPDATE_OWNER_PASSWORD
+    - ADD_DOG
+    - UPDATE_DOG
+    - REMOVE_DOG
+    - UPDATE_OWNER_AVATAR
+    - UPDATE_DOG_AVATAR
 */
 
 export const ADD_OWNER = gql`
@@ -556,46 +599,4 @@ mutation updateDogAvatar($dog_id: ID!, $avatar: String!) {
         dog_count
     }
 }
-`;
-
-export const UPDATE_WALKER_AVATAR = gql`
-    mutation updateWalkerAvatar($avatar: String!) {
-        updateWalkerAvatar(avatar: $avatar) {
-            _id
-            first_name
-            last_name
-            email
-            avatar
-            address {
-                street
-                city
-                neighbourhood
-                province
-                postal_code
-            }
-            reviews{
-                owner_id{
-                  _id
-                  first_name
-                  last_name
-                }
-                rating
-                review_text
-            }
-            earnings
-            average_rating
-            neighbourhoods
-            status
-            availability {
-                date
-                slot9am
-                slot11am
-                slot1pm
-                slot3pm
-                slot5pm
-                slot7pm
-                slot9pm
-            }
-        }
-    }
 `;

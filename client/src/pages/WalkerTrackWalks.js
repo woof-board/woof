@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
-
+import { useLazyQuery } from '@apollo/react-hooks';
 import '../css/Profile.css';
 import { QUERY_WALKER_ME, QUERY_WALKER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
@@ -16,96 +15,82 @@ function WalkerTrackWalks() {
     const [getProfile, { data: profileData }] = useLazyQuery(QUERY_WALKER_ME, {
         fetchPolicy: 'no-cache'
     });
-    
+
     const [getWalkerOrders, { data: walkerOrderData }] = useLazyQuery(QUERY_WALKER_ORDERS, {
         variables: {
             walker_id: currentUser?._id
         },
         fetchPolicy: "no-cache"
     });
-    
+
     useEffect(() => {
         if (!currentUser && !profileData) {
             getProfile();
-        } 
+        }
         // retrieved from server
         else if (!currentUser && profileData) {
             dispatch({
                 type: UPDATE_CURRENT_USER,
-                currentUser: { ...profileData.walkerMe}
+                currentUser: { ...profileData.walkerMe }
             });
             idbPromise('user', 'put', profileData.walkerMe);
         }
     }, [currentUser, profileData, dispatch]);
-    
+
     useEffect(() => {
-        if(currentUser) {
+        if (currentUser) {
             getWalkerOrders();
         }
     }, [currentUser]);
 
     useEffect(() => {
-      if(walkerOrderData) {
-        setOrders(walkerOrderData.walkerOrders);
-      }
+        if (walkerOrderData) {
+            setOrders(walkerOrderData.walkerOrders);
+        }
     }, [walkerOrderData]);
 
-  return (
-    <div id="walkers">
-      <h1>My Walks</h1>
-      <div className='page-wrap'>
-        <div className="walker-details-container">
-          {currentUser && currentUser.status === "ACTIVE" &&   
-            <div className="walker-profile-container">
-              <h2>Upcoming Walks</h2>
-              {/* <div>
-                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
-                : 'You have no upcoming Walks'}
-              </div> */}
-              {orders.filter(order => order.status === "PENDING_PROGRESS" || order.status === "IN_PROGRESS" ).map((order) => (
-                <div className="walks">
-                  <div>Walk Date: {order.service_date}</div>
-                  <div>Start time: {order.service_time}</div>
-                  <div>Status: {order.status}</div>
-                  <WalkerTrackOrder 
-                order_id = {order._id}
-                service_date = {order.service_date}
-                service_time = {order.service_time}
-                status = {order.status}
-                />
+    return (
+        <div id="walkers">
+            <h1>My Walks</h1>
+            <div className='page-wrap'>
+                <div className="walker-details-container">
+                    {currentUser && currentUser.status === "ACTIVE" &&
+                        <div className="walker-profile-container">
+                            <h2>Upcoming Walks</h2>
+                            {orders.filter(order => order.status === "PENDING_PROGRESS" || order.status === "IN_PROGRESS").map((order) => (
+                                <div className="walks">
+                                    <div>Walk Date: {order.service_date}</div>
+                                    <div>Start time: {order.service_time}</div>
+                                    <div>Status: {order.status}</div>
+                                    <WalkerTrackOrder
+                                        order_id={order._id}
+                                        service_date={order.service_date}
+                                        service_time={order.service_time}
+                                        status={order.status}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                    }
                 </div>
-                
-              ))}
-
-              
-            </div>
-          }
-        </div>
-        {/* fulfilled walks */}
-        <div className="walker-details-container">
-          {currentUser && currentUser.status === "ACTIVE" &&   
-            <div className="walker-profile-container">
-              <h2>Completed Walks</h2>
-              {/* <div>
-                {totalOrders ? `You have ${totalOrders} fulfilled ${totalOrders === 1 ? 'walk' : 'walks'}:`
-                : 'You have no fulfilled Walks'}
-              </div> */}
-              {orders.filter(order => order.status === "FULLFILLED" || order.status === "DENIED").map((order) => (
-                <div className="walks">
-                  <div>Walk Date: {order.service_date}</div>
-                  <div>Start time: {order.service_time}</div>
-                  <div>Status: {order.status}</div>
+                {/* fulfilled walks */}
+                <div className="walker-details-container">
+                    {currentUser && currentUser.status === "ACTIVE" &&
+                        <div className="walker-profile-container">
+                            <h2>Completed Walks</h2>
+                            {orders.filter(order => order.status === "FULLFILLED" || order.status === "DENIED").map((order) => (
+                                <div className="walks">
+                                    <div>Walk Date: {order.service_date}</div>
+                                    <div>Start time: {order.service_time}</div>
+                                    <div>Status: {order.status}</div>
+                                </div>
+                            ))}
+                        </div>
+                    }
                 </div>
-                
-              ))}
-
-              
             </div>
-          }
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default WalkerTrackWalks;
