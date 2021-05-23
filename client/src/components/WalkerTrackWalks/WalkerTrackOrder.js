@@ -77,6 +77,7 @@ function WalkerTrackOrder(order) {
     // } catch (e) {
     //   console.log(e);
     // }
+    let interval;
     if (realTime) {
       changeStatusToProgress();
         const options = {
@@ -85,35 +86,49 @@ function WalkerTrackOrder(order) {
           maximumAge: 0
         };
 
-        navigator.geolocation.getCurrentPosition(
-          position => {
-            // push the coords to database
-            trackCoordinates.push([[position.coords.longitude, position.coords.latitude]]);
+        getGeolocation(options);
 
-            try {
-              updateOrderCoords({
-                variables: {
-                  // order_id: order_id,
-                  order_id: order_id,
-                  lon: position.coords.longitude,
-                  lat: position.coords.latitude,
-                }
-            });
-              // alert('Cords Updated !!!');
-            } catch (e) {
-              console.log(e);
-            }
-        }, 
-        error, 
-        options
-        );
+        interval = setInterval(() => {
+          getGeolocation(options);
+        }, 60000);
+
+
+
     } else {
       if (buttonClicked) {
         handleCharge();
         setButtonClicked(false);
       }
+      clearInterval(interval);
     }
+
+    return () => clearInterval(interval);
   }, [realTime]);
+
+  const getGeolocation = (options) => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        // push the coords to database
+        trackCoordinates.push([[position.coords.longitude, position.coords.latitude]]);
+
+        try {
+          updateOrderCoords({
+            variables: {
+              // order_id: order_id,
+              order_id: order_id,
+              lon: position.coords.longitude,
+              lat: position.coords.latitude,
+            }
+        });
+          // alert('Cords Updated !!!');
+        } catch (e) {
+          console.log(e);
+        }
+    }, 
+    error, 
+    options
+    );
+  }
 
   const manageRealTime = () => {
     setRealTime(!realTime);
