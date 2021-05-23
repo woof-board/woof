@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../css/Home.css';
 import '../css/About.css';
-import AboutOwner from '../components/About/AboutOwner';
-import AboutWalker from '../components/About/AboutWalker';
 import AboutDevelopers from '../components/About/AboutDevelopers';
 import AboutTechnology from '../components/About/AboutTechnology';
 import AboutSafety from '../components/About/AboutSafety';
@@ -11,8 +9,6 @@ import AboutUs from '../components/About/AboutUs';
 import AboutContact from '../components/About/AboutContact';
 import AboutContactForm from '../components/About/AboutContactForm';
 import ContactDetails from '../components/About/ContactDetails';
-// import AboutApp from '../components/About/AboutApp';
-
 
 function About() {
 
@@ -57,12 +53,9 @@ function About() {
         }
     ])
     
-    const [currentLink, setCurrentLink] = useState(links[0]);
     const [currentSafeLink, setCurrentSafeLink] = useState(safety[0])
     const [currentDevLink, setCurrentDevLink] = useState(dev[0])
     const [currentContactLink, setCurrentContactLink] = useState(contact[0])
-
-    // console.log(currentDevLink);
 
     return (
         <>
@@ -70,7 +63,6 @@ function About() {
             <div className="about-page-width">
                 <div className="about-imgholder">
                         <div className="about-banner">
-                            {/* <span className="about-caption">About us</span> */}
                         </div>
                 </div>
 
@@ -123,11 +115,7 @@ function About() {
                 <div className="component-section">
                 <h2 className="font-night">Technologies</h2>
                     <div className="content">
-                        <AboutTechnology
-                            safety={safety}
-                            currentSafeLink={currentSafeLink}
-                            setCurrentSafeLink={setCurrentSafeLink}
-                        />
+                        <AboutTechnology />
                     </div>
                 </div>
                 
@@ -151,11 +139,7 @@ function About() {
                 )}
 
                 <div className="about-us-container">
-                        <AboutContact 
-                            contact={contact}
-                            currentContactLink={currentContactLink}
-                            setCurrentContactLink={setCurrentContactLink}
-                        />
+                        <AboutContact />
                 </div>
 
                     <div className="component-section">
@@ -164,14 +148,6 @@ function About() {
                             <AboutContactForm />
                         </div>
                     </div>
-
-
-                {/* <div className="component-section">
-                <h2>Check out our App!</h2>
-                    <div className="content flex-r">
-                        <AboutApp />
-                    </div>
-                </div> */}
                 
             </div>
         </div>
