@@ -33,11 +33,6 @@ function OwnerProfile() {
   const [updateOwnerAvatar] = useMutation(UPDATE_OWNER_AVATAR);
 
   useEffect(() => {
-    let interval;
-    // interval = setInterval(() => {
-    //   // console.log('In setInterval');
-    //   window .location.reload();
-    // }, 10000);
     // if not already in global store
     if (!currentUser && !data) {
       getOwnerProfile(); // get profile from database
@@ -131,8 +126,8 @@ function OwnerProfile() {
             {currentUser && currentUser.status === "ACTIVE" &&
               <div className="walker-contact-container">
                 <div className="walker-header">
-                  {/* <h2>Welcome {currentUser.first_name}!</h2> */}
-                  <h2>Walks</h2>
+                  <h2>Welcome {currentUser.first_name}!</h2>
+                  {/* <h2>Walks</h2> */}
                 </div>
 
                 {/* SHOW UPCOMING WALKS */}
@@ -156,13 +151,12 @@ function OwnerProfile() {
                 ))} */}
 
 
-                <div className="button-container">
-                  <Link to="/bookwalk"><button>Book a walk</button></Link>
-                  <Link to="/ownertrackorder"><button>My Walks</button></Link>
-                  {/* Need to make a new page for past walk */}
-                  <Link to={"/ownerlivemap"}><button>View Tracker</button></Link>
-                </div>
-                {/* <div><OwnerLiveMap></OwnerLiveMap></div> */}
+              <div className="button-container">
+                <Link to="/bookwalk"><button>Book a walk</button></Link>
+                <Link to="/ownertrackorder"><button>My Walks</button></Link>
+                {/* Need to make a new page for past walk */}
+                <Link to={"/ownerlivemap"}><button>View Tracker</button></Link>
+              </div>
               </div>
             }
             <OwnerDetails user={currentUser} />

@@ -8,9 +8,6 @@ import { UPDATE_CURRENT_USER } from "../utils/actions";
 
 import Map from "../components/OwnerTrackOrder/Map";
 import { idbPromise } from "../utils/helpers";
-// import TestMap from "../components/OwnerTrackOrder/TestMap";
-// import { Link } from 'react-router-dom';
-
 
 function OwnerLiveMap() {
     const [state, dispatch] = useStoreContext();
@@ -27,6 +24,12 @@ function OwnerLiveMap() {
         },
         fetchPolicy: "no-cache"
     });
+
+    // function for refreshing the page on button click
+    function refreshWindow(event) {
+        event.preventDefault();
+        window.location.reload();
+    }
 
     useEffect(() => {
         if (!currentUser && !profileData) {
@@ -62,10 +65,8 @@ function OwnerLiveMap() {
                     {currentUser && currentUser.status === "ACTIVE" &&
                         <div className="walker-profile-container">
                             <h2>Live Tracker is active when the dog walk starts</h2>
-                            {/* <div>
-                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
-                : 'You have no upcoming Walks'}
-              </div> */}
+                            <h3>Please hit <span><button type="button" className="button" onClick={refreshWindow}>REFRESH</button></span> to watch the progress</h3>
+                            
                             {orders.map((order) => (
                                 order.status !== "IN_PROGRESS"
                                     ? null
@@ -74,15 +75,6 @@ function OwnerLiveMap() {
                                             <div>
                                                 <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
                                                 <div><span className="medium-text">Start time:</span> {order.service_time}</div>
-                                                {/* <div> Walker: {`${order.walker.first_name} ${order.walker.last_name}`} </div> */}
-                                                {/* Add map component */}
-                                                {/* <Link to={
-                              {
-                                pathname: '/map',
-                                order_id: order._id,
-                                coords: order.coords
-                            }
-                          }><button>See on Map</button></Link> */}
                                                 <Map
                                                     order_id={order._id}
                                                     coords={order.coords}
@@ -94,10 +86,6 @@ function OwnerLiveMap() {
                         </div>
                     }
                 </div>
-
-
-
-
             </div>
         </div>
     );

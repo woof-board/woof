@@ -1,15 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useStoreContext } from "../../utils/GlobalState";
 
 function WalkerOrders({ orders=[] }) {
-
-    const totalOrders = orders.length;
 
     return (
         <div className="walker-contact-container">
           <div className="walker-header">
-            <h3>My Woof <span className="light">{totalOrders ? `Viewing ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
-            : 'You have no upcoming walks'}</span></h3>
+            <h3>Welcome Walker!</h3>
           </div>
             {orders.map((order, ind) => (
               <div className="walks">
