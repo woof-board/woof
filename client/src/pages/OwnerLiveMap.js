@@ -11,7 +11,7 @@ import TestMap from "../components/OwnerTrackOrder/TestMap";
 import { Link } from 'react-router-dom';
 
 
-function OwnerTrackOrder() {
+function OwnerLiveMap() {
   const [state, dispatch] = useStoreContext();
   const [orders, setOrders] = useState([]);
   const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
@@ -65,7 +65,7 @@ function OwnerTrackOrder() {
 
   return (
     <>
-      <h1>Live Tracker</h1>
+      {/* <h1>Live Tracker</h1> */}
       <div className='page-wrap'>
         <div className="walker-details-container">
           {currentUser && currentUser.status === "ACTIVE" &&   
@@ -112,6 +112,6 @@ function OwnerTrackOrder() {
   );
 }
 
-export default OwnerTrackOrder;
+export default OwnerLiveMap;
 
 

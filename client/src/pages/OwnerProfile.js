@@ -13,6 +13,7 @@ import { UPDATE_CURRENT_USER } from "../utils/actions";
 import OwnerBookWalk from './OwnerBookWalk';
 import { Link } from 'react-router-dom';
 import { openUploadWidget } from '../utils/CloudinaryService';
+import OwnerLiveMap from './OwnerLiveMap';
 import OwnerReviews from '../components/OwnerProfileComponents/OwnerReviews';
 
 function OwnerProfile() {
@@ -32,6 +33,11 @@ function OwnerProfile() {
   const [updateOwnerAvatar] = useMutation(UPDATE_OWNER_AVATAR);
 
   useEffect(() => {
+    let interval;
+    interval = setInterval(() => {
+      // console.log('In setInterval');
+      window .location.reload();
+    }, 10000);
     // if not already in global store
     if (!currentUser && !data) {
       getOwnerProfile(); // get profile from database
@@ -156,6 +162,7 @@ function OwnerProfile() {
                 {/* Need to make a new page for past walk */}
                 <Link to={"/ownerlivemap"}><button>View Tracker</button></Link>
               </div>
+              <div><OwnerLiveMap></OwnerLiveMap></div>
               </div>
             }
             <OwnerDetails user={currentUser} />
