@@ -52,17 +52,18 @@ function WalkerTrackWalks() {
     return (
         <div id="walkers">
             <h1>My Walks</h1>
+            {console.log("order: ", orders[0])}
             <div className='page-wrap'>
-                <div className="walker-details-container">
+                <div className="walk-container">
                     {currentUser && currentUser.status === "ACTIVE" &&
-                        <div className="walker-profile-container">
-                            <h2>Upcoming Walks</h2>
+                        <>
+                            <div className="walker-header"><h2>Upcoming Walks</h2></div>
                             {orders.filter(order => order.status === "PENDING_PROGRESS" || order.status === "IN_PROGRESS").map((order) => (
                                 <div className="walks">
-                                    <div>Walk Date: {order.service_date}</div>
-                                    <div>Start time: {order.service_time}</div>
-                                    <div>Name: {order.owner.first_name} {order.owner.last_name}</div>
-                                    <div>Address: {order.owner.address.street}, {order.owner.address.city}, {order.owner.address.postal_code}</div>
+                                    <div><span class="medium-text">Walk Date: </span>{order.service_date}</div>
+                                    <div><span class="medium-text">Start time: </span>{order.service_time}</div>
+                                    <div><span class="medium-text">Name: </span>{order.owner.first_name} {order.owner.last_name}</div>
+                                    <div><span class="medium-text">Address: </span>{order.owner.address.street}, {order.owner.address.city}, {order.owner.address.postal_code}</div>
                                     <WalkerTrackOrder
                                         order_id={order._id}
                                         service_date={order.service_date}
@@ -71,22 +72,22 @@ function WalkerTrackWalks() {
                                     />
                                 </div>
                             ))}
-                        </div>
+                        </>
                     }
                 </div>
                 {/* fulfilled walks */}
-                <div className="walker-details-container">
+                <div className="walk-container">
                     {currentUser && currentUser.status === "ACTIVE" &&
-                        <div className="walker-profile-container">
-                            <h2>Completed Walks</h2>
+                        <>
+                            <div className="walker-header"><h2>Completed Walks</h2></div>
                             {orders.filter(order => order.status === "FULLFILLED" || order.status === "DENIED").map((order) => (
                                 <div className="walks">
-                                    <div>Walk Date: {order.service_date}</div>
-                                    <div>Start time: {order.service_time}</div>
-                                    <div>Name: {order.owner.first_name} {order.owner.last_name}</div>
+                                    <div><span class="medium-text">Walk Date: </span>{order.service_date}</div>
+                                    <div><span class="medium-text">Start time: </span>{order.service_time}</div>
+                                    <div><span class="medium-text">Name: </span>{order.owner.first_name} {order.owner.last_name}</div>
                                 </div>
                             ))}
-                        </div>
+                        </>
                     }
                 </div>
             </div>

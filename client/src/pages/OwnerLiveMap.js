@@ -59,13 +59,14 @@ function OwnerLiveMap() {
 
     return (
         <div id="owners">
+
             <h1>Live Tracker</h1>
             <div className='page-wrap'>
-                <div className="walker-details-container">
+                <div className="walker-contact-container">
                     {currentUser && currentUser.status === "ACTIVE" &&
-                        <div className="walker-profile-container">
-                            <h2>Live Tracker is active when the dog walk starts</h2>
-                            <h3>Please hit <span><button type="button" className="button" onClick={refreshWindow}>REFRESH</button></span> to watch the progress</h3>
+                        <>
+                            <div className="walker-header"><h2>Live Tracker is active when the dog walk starts</h2></div>
+                            <div className="map-refresh"><h3>Please press <span><button type="button" className="button" onClick={refreshWindow}>REFRESH</button></span> to watch the progress</h3></div>
                             
                             {orders.map((order) => (
                                 order.status !== "IN_PROGRESS"
@@ -78,12 +79,12 @@ function OwnerLiveMap() {
                                                 <Map
                                                     order_id={order._id}
                                                     coords={order.coords}
-                                                ></Map>
+                                                />
                                             </div>
                                         </div>
                                     )
                             ))}
-                        </div>
+                        </>
                     }
                 </div>
             </div>

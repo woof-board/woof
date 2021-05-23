@@ -131,7 +131,7 @@ function OwnerDetails({ user }) {
                         first_name,
                         last_name,
                         email,
-                        status: "ACTIVE",
+                        status: user.status === "PENDING_INFORMATION"? "ACTIVE" : user.status,
                         address: {
                             street: address_street,
                             city: address_city,

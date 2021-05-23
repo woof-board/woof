@@ -194,6 +194,16 @@
     width: 90%;
 }
 
+.map-refresh {
+    width: 100%;
+    margin: 10px 15px 0;
+}
+.map-refresh button {
+    margin: 0;
+    padding: 5px;
+    font-size: .85em;
+}
+
 .row-data {
     display: flex;
     flex-direction: row;
