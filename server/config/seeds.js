@@ -177,6 +177,34 @@ db.once('open', async () => {
             status: "SUSPENDED"
         }
     );
+    await Owner.create(
+        {
+            first_name: 'Joe',
+            last_name: 'Anderson',
+            email: 'ja@gmail.com',
+            password: 'passs',
+            avatar: "Avatar/cgfhllh4ggu3wnrjsvoe",
+            admin: false,
+            address: {
+                street: '1st Street NW',
+                city: 'Toronto',
+                neighbourhood: 'North York',
+                province: 'Ontario',
+                postal_code: 'AAA AAA'
+            },
+            phone: '111 111 1111',
+            dogs: [
+                {
+                    name: 'Bruen',
+                    breed: 'Poodle',
+                    weight: 70,
+                    treats: true,
+                    avatar: "/images/user-default.png"
+                }
+            ],
+            status: "ACTIVE"
+        }
+    );
 
     console.log('owners seeded');
 

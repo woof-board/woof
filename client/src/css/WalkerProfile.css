@@ -15,7 +15,10 @@
 
 }
 
-
+#live-map {
+    margin-left: 0;
+    margin-right: 0;
+}
 
 .profile-input {
     background:rgb(var(--rgb-quinary),0.5);
