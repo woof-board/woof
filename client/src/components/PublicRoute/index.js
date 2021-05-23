@@ -12,7 +12,7 @@ const PublicRoute = ({ component: Component, ...rest }) => {
                     <>
                         {Auth.getProfileType() === "owner" && <Redirect to="/ownerprofile" />}
                         {Auth.getProfileType() === "walker" && <Redirect to="/walkerprofile" />}
-                        {Auth.getProfileType() === "admin" && <Redirect to="/adminprofile" />}
+                        {Auth.getProfileType() === "admin" && <Redirect to="/ownerprofile" />}
                         {Auth.getProfileType() === "guest" && <Redirect to="/" />}
                     </>
                 ) : (

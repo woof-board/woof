@@ -23,7 +23,7 @@ function Header() {
         },
         {
             name: 'Profile',
-            href: '/adminprofile',
+            href: '/ownerprofile',
             for: 'admin'
         },
         {

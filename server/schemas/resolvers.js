@@ -586,6 +586,15 @@ const resolvers = {
         addOrder: async (parent, { input }, context) => {
             // only owner can add order
             if (context.owner) {
+                // check if owner has payment info
+                const owner = await Owner.findById(context.owner._id);
+                if (!owner.stripe_customer_id || 
+                    owner.stripe_customer_id === "" || 
+                    !owner.stripe_setup_intent || 
+                    owner.stripe_setup_intent === "") {
+                        throw new ApolloError("paymentInfoError: Please complete payment info before completing any order!");
+                }
+
                 const order = await Order.create(input);
 
                 if( input.walker ){
