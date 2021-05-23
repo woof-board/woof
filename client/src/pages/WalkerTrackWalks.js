@@ -60,9 +60,10 @@ function WalkerTrackWalks() {
                             <div className="walker-header"><h2>Upcoming Walks</h2></div>
                             {orders.filter(order => order.status === "PENDING_PROGRESS" || order.status === "IN_PROGRESS").map((order) => (
                                 <div className="walks">
-                                    <div>Walk Date: {order.service_date}</div>
-                                    <div>Start time: {order.service_time}</div>
-                                    <div>Status: {order.status}</div>
+                                    <div><span class="medium-text">Walk Date: </span>{order.service_date}</div>
+                                    <div><span class="medium-text">Start time: </span>{order.service_time}</div>
+                                    <div><span class="medium-text">Name: </span>{order.owner.first_name} {order.owner.last_name}</div>
+                                    <div><span class="medium-text">Address: </span>{order.owner.address.street}, {order.owner.address.city}, {order.owner.address.postal_code}</div>
                                     <WalkerTrackOrder
                                         order_id={order._id}
                                         service_date={order.service_date}
@@ -81,9 +82,9 @@ function WalkerTrackWalks() {
                             <div className="walker-header"><h2>Completed Walks</h2></div>
                             {orders.filter(order => order.status === "FULLFILLED" || order.status === "DENIED").map((order) => (
                                 <div className="walks">
-                                    <div>Walk Date: {order.service_date}</div>
-                                    <div>Start time: {order.service_time}</div>
-                                    <div>Status: {order.status}</div>
+                                    <div><span class="medium-text">Walk Date: </span>{order.service_date}</div>
+                                    <div><span class="medium-text">Start time: </span>{order.service_time}</div>
+                                    <div><span class="medium-text">Name: </span>{order.owner.first_name} {order.owner.last_name}</div>
                                 </div>
                             ))}
                         </>

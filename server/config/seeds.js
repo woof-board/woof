@@ -53,7 +53,7 @@ db.once('open', async () => {
             address: {
                 street: '1st Street NW',
                 city: 'Brampton',
-                neighbourhood: '',
+                neighbourhood: 'Brampton',
                 province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
@@ -380,7 +380,7 @@ db.once('open', async () => {
                     slot9pm: true
                 }
             ],
-            status: "PENDING_APPROVAL"
+            status: "ACTIVE"
         }
     );
 
@@ -593,7 +593,7 @@ db.once('open', async () => {
             address: {
                 street: '655 Lyndebrook road',
                 city: 'Whitby',
-                neighbourhood: 'Durham',
+                neighbourhood: 'Whitby',
                 province: 'Ontario',
                 postal_code: 'L1P 2A2'
             },
@@ -677,7 +677,7 @@ db.once('open', async () => {
                     slot9pm: true
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
     await Walker.create(
@@ -775,7 +775,7 @@ db.once('open', async () => {
                     slot9pm: true
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
     await Walker.create(
@@ -789,7 +789,7 @@ db.once('open', async () => {
             address: {
                 street: '1st Street NW',
                 city: 'Mississauga',
-                neighbourhood: 'Peel',
+                neighbourhood: 'Mississauga',
                 province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
@@ -863,7 +863,7 @@ db.once('open', async () => {
                     slot9pm: true
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
     await Walker.create(
@@ -876,8 +876,8 @@ db.once('open', async () => {
             neighbourhoods: ['Halton Hills', 'Milton', 'Oakville', 'Burlington'],
             address: {
                 street: '1st Street NW',
-                city: 'Halton',
-                neighbourhood: 'Halton',
+                city: 'Milton',
+                neighbourhood: 'Milton',
                 province: 'Ontario',
                 postal_code: 'AAA AAA'
             },
@@ -951,7 +951,7 @@ db.once('open', async () => {
                     slot9pm: true
                 }
             ],
-            status: "PENDING_INFORMATION"
+            status: "ACTIVE"
         }
     );
     await Walker.create(
@@ -1039,7 +1039,7 @@ db.once('open', async () => {
                     slot9pm: true
                 }
             ],
-            status: "PENDING_APPROVAL"
+            status: "ACTIVE"
         }
     );
 

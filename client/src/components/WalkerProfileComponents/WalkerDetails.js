@@ -80,8 +80,7 @@ function WalkerDetails({ user }) {
             address_province,
             address_postal_code,
          } = formData;
-
-         const neighbourhoodArr = address_city === "Toronto" ? neighbourhoods : []; 
+         
          // Validation
          const errors = validateInput([
             {input_title: 'First Name', input_val: first_name, criteria: ['required']},
@@ -109,8 +108,8 @@ function WalkerDetails({ user }) {
                         first_name,
                         last_name,
                         email,
-                        status: "ACTIVE",
-                        neighbourhoods: neighbourhoodArr,
+                        status: user.status === "PENDING_INFORMATION"? "PENDING_APPROVAL" : user.status,
+                        neighbourhoods,
                         address: {
                             street: address_street,
                             city: address_city,
@@ -138,31 +137,39 @@ function WalkerDetails({ user }) {
         return neighbourhoods.map(neighbourhood=> ({value: neighbourhood, label: neighbourhood }))
     };
 
-    
-    //// REPLACE getNeighbourhoodOptions IN FUTURE WHEN WE ARE PULLING FROM ALL AREAS ////
-    //// SAMIUL THIS IS THE FUNCTION I WAS TALKING ABOUT /////
 
-    // const loadServiceArea = () => {
-    //     let serviceArea =[]
-    //     cities.map(city => {
-    //         if (!city.group) {
-    //             if(city.name==='Toronto') {
-    //                 console.log (neighbourhoods);
-    //                 neighbourhoods.map(neighbourhood => 
-    //                     serviceArea.push({value: neighbourhood, label: 'Toronto: '+ neighbourhood}))
-    //             } else {
-    //                 serviceArea.push({value: city.name, label: city.name})
-    //             }
-    //         }
-    //     })
-    //     return serviceArea
-    // }
+    const loadServiceArea = () => {
+        let serviceArea =[]
+        cities.map(city => {
+            if (!city.group) {
+                if(city.name==='Toronto') {
+                    console.log (neighbourhoods);
+                    neighbourhoods.map(neighbourhood => 
+                        serviceArea.push({value: neighbourhood, label: 'Toronto: '+ neighbourhood}))
+                } else {
+                    serviceArea.push({value: city.name, label: city.name})
+                }
+            }
+        });
+      
+        return serviceArea
+    }
 
 
-
+    // const getNeighbourhoodDefaultValues = () => {
+    //     return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood, label: neighbourhood }))
+    // };
 
     const getNeighbourhoodDefaultValues = () => {
-        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood, label: neighbourhood }))
+        const formattedNeighbourhoods = formData?.neighbourhoods.map(neighbourhood=> {
+            if (neighbourhoods.findIndex(item => item === neighbourhood) < 0){
+                return {value: neighbourhood, label: neighbourhood };
+            } else {
+                return {value: neighbourhood, label: 'Toronto: ' + neighbourhood };
+            }
+        });
+
+        return formattedNeighbourhoods;
     };
 
     const closeModal = () => {
@@ -177,23 +184,6 @@ function WalkerDetails({ user }) {
             neighbourhoods: [...selectedNeighbourhoods]
         });
     };
-
-    // const loadServiceArea = () => {
-    //     let serviceArea =[]
-    //     cities.map(city => {
-    //         if (!city.group) {
-    //             if(city.name==='Toronto') {
-    //                 console.log (neighbourhoods);
-    //                 neighbourhoods.map(neighbourhood => 
-    //                     serviceArea.push({value: neighbourhood, label: 'Toronto: '+ neighbourhood}))
-    //             } else {
-    //                 serviceArea.push({value: city.name, label: city.name})
-    //             }
-    //         }
-    //     })
-    //     return serviceArea
-    // }
-
 
     return (
         <>
@@ -232,21 +222,21 @@ function WalkerDetails({ user }) {
                     />
                 </div>
                 {
-                formData.address_city === "Toronto" &&
+                
                     <>
                         <h3>Service Areas</h3>
                         <div className="row-data">
                         
                                 <Select 
-                                    className="profile-input street-input" 
-                                    options={getNeighbourhoodOptions()} 
+                                    className="profile-input street-input"
+                                    options={loadServiceArea()}
+                                    // options={getNeighbourhoodOptions()} 
                                     isMulti={true}
                                     placeholder="What areas can you serve?"
                                     onChange={handleNeighbourhoodSelect}
-                                    defaultValue={getNeighbourhoodDefaultValues()}
+                                    value={getNeighbourhoodDefaultValues()}
+                                    // defaultValue={getNeighbourhoodDefaultValues()}
                                 />
-                        
-                            
                         </div>
                     </> 
                 }
