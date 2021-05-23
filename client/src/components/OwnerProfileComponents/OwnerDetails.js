@@ -7,7 +7,7 @@ import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import { cities, neighbourhoods, validateInput } from '../../utils/helpers';
 import { loadStripe } from '@stripe/stripe-js';
 import ModalDisplay from '../ModalDisplay';
-const stripePromise = loadStripe('pk_test_51Ir7BPLlbUYQkEo2A2L6kb3YbdMv9jh8IJjshFAJOn3UXJEox2CDMpQoI8AS5HiTiccN6CzYnNbbCnaBJVgb8t08002TgJCE4p');
+const stripePromise = loadStripe('pk_test_51Ir7BPLlbUYQkEo2A2L6kb3YbdMv9jh8IJjshFAJOn3UXJEox2CDMpQoI8AS5HiTiccN6CzYnNbbCnaBJVgb8t08002TgJCE4p'); // Public Key
 
 function OwnerDetails({ user }) {
 
@@ -55,15 +55,6 @@ function OwnerDetails({ user }) {
         }
       }, [customer_data]);
 
-    
-    
-    // const amount = 3500; // in cents
-    // const [handleCharge, { called, loading: charging, data }] = useLazyQuery(CHARGE_OWNER, {
-    //   variables: { 
-    //     amount: amount,
-    //     description: 'testing brian2'
-    //    }
-    // });
 
     useEffect(() => {
         if (user) {
@@ -90,7 +81,6 @@ function OwnerDetails({ user }) {
     };
 
     const handleFormSubmit = async (e) => {
-        console.log("asdadasdadsadsassdasd");
         e.preventDefault();
 
         const { 
@@ -103,6 +93,17 @@ function OwnerDetails({ user }) {
             address_postal_code
          } = formData;
 
+         // validate neighbourhood
+         if (address_city === 'Toronto' && neighbourhoods.findIndex(item => item === address_neighbourhood) < 0){
+            setModalJSX(
+                <div>
+                    <p>Please select a valid neighbourhood</p>
+                </div>
+            );
+             setModalOpen(true);
+             return;
+         }
+
          // Validation
          const errors = validateInput([
             {input_title: 'First Name', input_val: first_name, criteria: ['required']},
@@ -114,7 +115,7 @@ function OwnerDetails({ user }) {
         ]);
          
          if (errors.length > 0) {
-             setModalJSX(
+            setModalJSX(
                 <div>
                     {errors.map((error, index) => <p key={index}>{error}</p>)}
                 </div>
@@ -122,7 +123,7 @@ function OwnerDetails({ user }) {
              setModalOpen(true);
              return;
          }
-
+         
          try {
             const { data: { updateOwnerProfile: newProfile } } = await updateOwnerProfile({
                 variables: {
@@ -237,7 +238,7 @@ function OwnerDetails({ user }) {
                         value={formData.address_neighbourhood}
                         onChange={handleInputChange}
                     >
-                        <option value="choose" disabled>Choose your neighbourhood</option>
+                        <option value="choose">Choose your neighbourhood</option>
                         {
                             neighbourhoods.map( (neighbourhood, index) =>
                             <option key={index} value={neighbourhood}>{neighbourhood}</option>
