@@ -63,7 +63,11 @@ Once all that is done, navigate to - http://localhost:3000 to begin!
 
 
 ## Usage
+<<<<<<< HEAD
 This application is deployed on Heroku at https://woof-2021.herokuapp.com/
+=======
+This application is deployed on Heroku at https://woof-2021.herokuapp.com
+>>>>>>> develop
 
 There are three types of access:
 * **Owner access**
@@ -88,8 +92,9 @@ There are three types of access:
 
 
 **Administrator access** 
-* 
-*  
+* Has both Owner and Walker Access
+* Able to approve pending walkers waiting approval.
+* Able to suspend walker and delete comments.
 
 ## Wireframe
 [wireframe.pdf](https://github.com/woof-board/woof/files/6524517/wireframe.pdf)
