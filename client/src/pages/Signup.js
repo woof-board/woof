@@ -12,7 +12,7 @@ function Signup() {
     function handleChange(e) {
         if (e.target.name === 'email') {
             const isValid = validateEmail(e.target.value);
-            console.log(isValid);
+            // console.log(isValid);
 
             // isValid conditional statement
             if (!isValid) {
@@ -30,15 +30,15 @@ function Signup() {
         setFormState({ ...formState, [e.target.name]: e.target.value });
         }
 
-        console.log('errorMessage', errorMessage);
+        // console.log('errorMessage', errorMessage);
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(formState);
+        // console.log(formState);
     }
       
-    console.log(formState);
+    // console.log(formState);
 
     return (
         <div className="login-page" id="signup">

@@ -62,7 +62,7 @@ function About() {
     const [currentDevLink, setCurrentDevLink] = useState(dev[0])
     const [currentContactLink, setCurrentContactLink] = useState(contact[0])
 
-    console.log(currentDevLink);
+    // console.log(currentDevLink);
 
     return (
         <>
