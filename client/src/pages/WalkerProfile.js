@@ -32,7 +32,6 @@ function WalkerProfile() {
                 type: UPDATE_CURRENT_USER,
                 currentUser: data.walkerMe
             });
-            
         }
         // get cache from idb
         // else if (!loading) {

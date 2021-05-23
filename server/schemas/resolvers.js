@@ -456,6 +456,8 @@ const resolvers = {
            - updateWalkerPassword
            - updateWalkerAvailability
            - updateWalkerStatus
+           - updateWalkerAvatar
+           - addWalkerEarnings
         */
 
         addWalker: async (parent, { input }) => {
@@ -559,6 +561,17 @@ const resolvers = {
                 ); 
                 
                 return walker;
+            }
+      
+            throw new AuthenticationError('Not logged in');
+        },
+
+        addWalkerEarnings: async (parent, { earnings }, context) => {
+            // only executable by an admin
+            if (context.walker) {
+                const newWalker = await Walker.findById(context.walker._id);
+                newWalker.earnings += earnings;
+                return newWalker.save();
             }
       
             throw new AuthenticationError('Not logged in');
