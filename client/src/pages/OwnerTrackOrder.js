@@ -76,14 +76,14 @@ function OwnerTrackOrder() {
            <h1>My Walks</h1>
             <div className='page-wrap'>
                 
-                <div className="walker-details-container">
+                <div className="walk-container">
                     {currentUser && currentUser.status === "ACTIVE" &&
-                        <div className="walker-profile-container">
-                            <h2>Upcoming Walks</h2>
+                        <>
+                            <div className="walker-header"><h2>Upcoming Walks</h2></div>
                             {/* <div>
-                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
-                : 'You have no upcoming Walks'}
-              </div> */}
+                                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
+                                : 'You have no upcoming Walks'}
+                            </div> */}
                             {orders.map((order) => (
                                 order.status !== "PENDING_PROGRESS"
                                     ? null
@@ -110,13 +110,13 @@ function OwnerTrackOrder() {
                                         </div>
                                     )
                             ))}
-                        </div>
+                        </>
                     }
                 </div>
-                <div className="walker-details-container">
+                <div className="walk-container">
                     {currentUser && currentUser.status === "ACTIVE" &&
-                        <div className="walker-profile-container">
-                            <h2>Past Walks</h2>
+                        <>
+                             <div className="walker-header"><h2>Past Walks</h2></div>
                             {/* <div>
                 {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
                 : 'You have no upcoming Walks'}
@@ -145,7 +145,7 @@ function OwnerTrackOrder() {
                                         </div>
                                     )
                             ))}
-                        </div>
+                        </>
                     }
                 </div>
                 <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal} />

@@ -134,20 +134,35 @@ function WalkerDetails({ user }) {
          }
     };
 
-    // const getNeighbourhoodOptions = () => {
-    //     return neighbourhoods.map(neighbourhood=> {({value: neighbourhood?.toLowerCase(), label: neighbourhood })})
-    // };
-    const capitalize = (string) => {
-        var neighbourhood = string.toLowerCase().split(" ");
-        let finalNeighbourhood = "";
-        for(var i = 0; i< neighbourhood.length; i++){
-            neighbourhood[i] = neighbourhood[i][0].toUpperCase() + neighbourhood[i].slice(1);
-            finalNeighbourhood += " " + neighbourhood[i]
-        }
-     return finalNeighbourhood.trim();
-    }
+    const getNeighbourhoodOptions = () => {
+        return neighbourhoods.map(neighbourhood=> ({value: neighbourhood, label: neighbourhood }))
+    };
+
+    
+    //// REPLACE getNeighbourhoodOptions IN FUTURE WHEN WE ARE PULLING FROM ALL AREAS ////
+    //// SAMIUL THIS IS THE FUNCTION I WAS TALKING ABOUT /////
+
+    // const loadServiceArea = () => {
+    //     let serviceArea =[]
+    //     cities.map(city => {
+    //         if (!city.group) {
+    //             if(city.name==='Toronto') {
+    //                 console.log (neighbourhoods);
+    //                 neighbourhoods.map(neighbourhood => 
+    //                     serviceArea.push({value: neighbourhood, label: 'Toronto: '+ neighbourhood}))
+    //             } else {
+    //                 serviceArea.push({value: city.name, label: city.name})
+    //             }
+    //         }
+    //     })
+    //     return serviceArea
+    // }
+
+
+
+
     const getNeighbourhoodDefaultValues = () => {
-        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood?.toLowerCase(), label: capitalize(neighbourhood) }))
+        return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood, label: neighbourhood }))
     };
 
     const closeModal = () => {
@@ -156,28 +171,28 @@ function WalkerDetails({ user }) {
     };
 
     const handleNeighbourhoodSelect = (selectedOption) => {
-        const selectedNieghbourhoods = selectedOption.map(option => option.value);
+        const selectedNeighbourhoods = selectedOption.map(option => option.value);
         setFormData({
             ...formData,
-            neighbourhoods: [...selectedNieghbourhoods]
+            neighbourhoods: [...selectedNeighbourhoods]
         });
     };
 
-    const loadServiceArea = () => {
-        let serviceArea =[]
-        cities.map(city => {
-            if (!city.group) {
-                if(city.name==='Toronto') {
-                    console.log (neighbourhoods);
-                    neighbourhoods.map(neighbourhood => 
-                        serviceArea.push({value: neighbourhood?.toLowerCase(), label: 'Toronto: '+ neighbourhood}))
-                } else {
-                    serviceArea.push({value: city.name?.toLowerCase(), label: city.name})
-                }
-            }
-        })
-        return serviceArea
-    }
+    // const loadServiceArea = () => {
+    //     let serviceArea =[]
+    //     cities.map(city => {
+    //         if (!city.group) {
+    //             if(city.name==='Toronto') {
+    //                 console.log (neighbourhoods);
+    //                 neighbourhoods.map(neighbourhood => 
+    //                     serviceArea.push({value: neighbourhood, label: 'Toronto: '+ neighbourhood}))
+    //             } else {
+    //                 serviceArea.push({value: city.name, label: city.name})
+    //             }
+    //         }
+    //     })
+    //     return serviceArea
+    // }
 
 
     return (
@@ -216,19 +231,25 @@ function WalkerDetails({ user }) {
                         value={formData.email}
                     />
                 </div>
-                <h3>Service Areas</h3>
-                <div className="row-data">
-                  
-                <Select 
-                    className="profile-input street-input" 
-                    options={loadServiceArea()} 
-                    isMulti={true}
-                    placeholder="What areas can you serve?"
-                    onChange={handleNeighbourhoodSelect}
-                    defaultValue={getNeighbourhoodDefaultValues()}
-                />
-                    
-                </div>
+                {
+                formData.address_city === "Toronto" &&
+                    <>
+                        <h3>Service Areas</h3>
+                        <div className="row-data">
+                        
+                                <Select 
+                                    className="profile-input street-input" 
+                                    options={getNeighbourhoodOptions()} 
+                                    isMulti={true}
+                                    placeholder="What areas can you serve?"
+                                    onChange={handleNeighbourhoodSelect}
+                                    defaultValue={getNeighbourhoodDefaultValues()}
+                                />
+                        
+                            
+                        </div>
+                    </> 
+                }
                 <div><h3>Address</h3></div>
                 <div className="row-data">
                     <input

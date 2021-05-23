@@ -7,7 +7,7 @@ function WalkerOrders({ orders=[] }) {
     return (
         <div className="walker-contact-container">
           <div className="walker-header">
-            <h3>Welcome Walker!</h3>
+            <h2>My Walks</h2>
           </div>
             {orders.map((order, ind) => (
               <div className="walks">

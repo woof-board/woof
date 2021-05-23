@@ -73,7 +73,7 @@ function WalkerProfile() {
 
   return (
     <div id="walkers">
-      <h1>My Walker Profile</h1>
+      <h1>My Profile</h1>
       <div className='page-wrap'>
       
         {currentUser && currentUser.status === "SUSPENDED" && 
