@@ -26,7 +26,7 @@ function OwnerPetDetails({ user }) {
     useEffect(() => {
         if (user) {
             const { dogs } = user;
-            console.log("dogs in useeffc", user, dogs);
+            // console.log("dogs in useeffc", user, dogs);
             setFormData({
                 dogs: [...dogs]
             })

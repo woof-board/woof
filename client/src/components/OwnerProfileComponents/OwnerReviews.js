@@ -21,14 +21,14 @@ function OwnerReviews() {
     useEffect(() => {
         // if not already in global store
         if (ownerReviews) {
-            console.log("ownerReviews", ownerReviews.getOwnerReviews, "reviewList", reviewList);
+            // console.log("ownerReviews", ownerReviews.getOwnerReviews, "reviewList", reviewList);
             setReviewtList([...ownerReviews.getOwnerReviews]);
         }
     }, [ownerReviews]);
 
     useEffect(() => {
         if (lazyQueryData) {
-            console.log("adfter lazy query", lazyQueryData.getOwnerReviews)
+            // console.log("adfter lazy query", lazyQueryData.getOwnerReviews)
             setReviewtList([...lazyQueryData.getOwnerReviews]);
         }
     }, [lazyQueryData])

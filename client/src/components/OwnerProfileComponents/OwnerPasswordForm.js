@@ -25,7 +25,7 @@ function OwnerPasswordForm() {
         e.preventDefault();
 
         // need to implement form validation here
-        console.log(formData);
+        // console.log(formData);
          try {
             await updateOwnerPassword({
                 variables: {

@@ -7,7 +7,6 @@ import Footer from './components/Footer';
 import About from './pages/About';
 import Header from './components/Header';
 import NoMatch from './pages/NoMatch';
-// import PaymentScreen from './pages/PaymentScreen';
 import Success from "./pages/Success";
 import WalkerSchedule from './pages/WalkerSchedule';
 import OwnerProfile from './pages/OwnerProfile.js';
@@ -54,7 +53,7 @@ function App() {
                             <PublicRoute exact path='/' component={Home} />
                             <Route exact path="/about" component={About} />
 
-                            <PrivateRoute exact path="/Success" usertype="owner_admin" component={Success} />                            
+                            <PrivateRoute exact path="/success" usertype="owner_admin" component={Success} />                            
                             <PrivateRoute exact path="/ownerprofile" usertype="owner_admin" component={OwnerProfile}/> 
                             <PrivateRoute exact path="/ownertrackorder" usertype="owner_admin" component={OwnerTrackOrder}/> 
                             <PrivateRoute exact path="/ownerlivemap" usertype="owner_admin" component={OwnerLiveMap}/> 

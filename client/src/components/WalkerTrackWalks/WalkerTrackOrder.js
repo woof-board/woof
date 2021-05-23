@@ -80,15 +80,20 @@ function WalkerTrackOrder(order) {
     let interval;
     if (realTime) {
       changeStatusToProgress();
-      interval = setInterval(() => {
-        // console.log('In setInterval');
-        var options = {
+        const options = {
           enableHighAccuracy: false,
           timeout: 240000,
           maximumAge: 0
         };
-        navigator.geolocation.getCurrentPosition(success, error, options);
-      }, 60000);
+
+        getGeolocation(options);
+
+        interval = setInterval(() => {
+          getGeolocation(options);
+        }, 60000);
+
+
+
     } else {
       if (buttonClicked) {
         handleCharge();
@@ -96,8 +101,34 @@ function WalkerTrackOrder(order) {
       }
       clearInterval(interval);
     }
+
     return () => clearInterval(interval);
   }, [realTime]);
+
+  const getGeolocation = (options) => {
+    navigator.geolocation.getCurrentPosition(
+      position => {
+        // push the coords to database
+        trackCoordinates.push([[position.coords.longitude, position.coords.latitude]]);
+
+        try {
+          updateOrderCoords({
+            variables: {
+              // order_id: order_id,
+              order_id: order_id,
+              lon: position.coords.longitude,
+              lat: position.coords.latitude,
+            }
+        });
+          // alert('Cords Updated !!!');
+        } catch (e) {
+          console.log(e);
+        }
+    }, 
+    error, 
+    options
+    );
+  }
 
   const manageRealTime = () => {
     setRealTime(!realTime);
@@ -155,31 +186,6 @@ function WalkerTrackOrder(order) {
         console.log(e);
       }
     }
-
-  // function for pushing the current position coordinates to Order
-  function success(position) {
-    // push the coords to database
-    console.log(order_id);
-    trackCoordinates.push([[position.coords.longitude, position.coords.latitude]]);
-    // const lastcoords = trackCoordinates.lastItem;
-    console.log(position.coords);
-
-
-    try {
-      updateOrderCoords({
-        variables: {
-          // order_id: order_id,
-          order_id: order_id,
-          lon: position.coords.longitude,
-          lat: position.coords.latitude,
-        }
-    });
-      // alert('Cords Updated !!!');
-    } catch (e) {
-      console.log(e);
-    }
-
-  }
  
   // render button for starting and stopping walk
   return (

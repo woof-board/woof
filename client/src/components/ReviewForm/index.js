@@ -10,7 +10,7 @@ import { useStoreContext } from "../../utils/GlobalState";
 const ReviewForm = ({ walker_id, closeModal }) => {
     const [formData, setFormData] = useState({
         review_text: "",
-        rating: 1
+        rating: 5
     });
 
     const [message, setMessage] = useState("");

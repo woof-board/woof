@@ -9,7 +9,7 @@ const Profile = () => {
 
     //gets the username from address bar localhost:3000/profile/:username?
     const { username: userParam } = useParams();
-    console.log(userParam);
+    // console.log(userParam);
   
     const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
       variables: { username: userParam }
@@ -17,7 +17,7 @@ const Profile = () => {
   
     const user = data?.me || data?.user || {};
 
-    console.log(user);
+    // console.log(user);
   
     // redirect to personal profile page if username is the logged-in user's
     if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {

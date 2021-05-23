@@ -52,7 +52,7 @@ function WalkerSchedule() {
 
     useEffect(() => {
         if (walkerOrderData) {
-            console.log("walker orders", walkerOrderData);
+            // console.log("walker orders", walkerOrderData);
             dispatch({
                 type: UPDATE_CURRENT_USER_ORDERS,
                 orders: walkerOrderData.walkerOrders

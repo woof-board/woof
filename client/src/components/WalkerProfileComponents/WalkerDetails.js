@@ -143,7 +143,7 @@ function WalkerDetails({ user }) {
         cities.map(city => {
             if (!city.group) {
                 if(city.name==='Toronto') {
-                    console.log (neighbourhoods);
+                    // console.log (neighbourhoods);
                     neighbourhoods.map(neighbourhood => 
                         serviceArea.push({value: neighbourhood, label: 'Toronto: '+ neighbourhood}))
                 } else {
