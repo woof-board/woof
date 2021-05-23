@@ -63,7 +63,7 @@ Once all that is done, navigate to - http://localhost:3000 to begin!
 
 
 ## Usage
-This application is deployed on Heroku at https://woof-2021.herokuapp.com
+This application is deployed on Heroku at https://woof-2021.herokuapp.com/
 
 There are three types of access:
 * **Owner access**
@@ -77,6 +77,7 @@ There are three types of access:
 * Able to track their dogs when walker is taking them for a walk-through GPS map.
 * Able to rate the walker.
 * Able to pay through a secured payment method.
+* Able to post comment and rate the walkers.
 
 
 **Walker access** allows one to 
@@ -89,6 +90,7 @@ There are three types of access:
 **Administrator access** 
 * Has both Owner and Walker Access
 * Able to approve pending walkers waiting approval.
+* Able to suspend walker and delete comments.
 
 ## Wireframe
 [wireframe.pdf](https://github.com/woof-board/woof/files/6524517/wireframe.pdf)
@@ -101,7 +103,7 @@ Upcoming features:
 
 
 ## Screenshot
-![Snap](https://user-images.githubusercontent.com/75001492/119169857-7f304b00-ba30-11eb-9477-e9ab8e3845b2.JPG)
+<a href="https://woof-2021.herokuapp.com/"> <img src="https://user-images.githubusercontent.com/75001492/119274358-79c43380-bbdd-11eb-8f54-9f1eeb1952e8.JPG"></a>
 
 ## License
 This repository is licensed under the MIT license.
