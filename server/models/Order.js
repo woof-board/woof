@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const dogSchema = require('./Dog');
 
 const coordsSchema = new Schema( 
     {

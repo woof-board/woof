@@ -23,9 +23,7 @@ function WalkerPasswordForm() {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-
-        // need to implement form validation here
-
+        
          try {
             await updateWalkerPassword({
                 variables: {

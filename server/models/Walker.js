@@ -1,7 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 const addressSchema = require('./Address');
-// const { formatDate }= require('../utils/helpers');
 
 const reviewSchema = new Schema( 
     {
@@ -70,10 +69,6 @@ const walkerSchema = new Schema(
         },
         availability: [
             {
-                // date: {
-                //     type: Date,
-                //     get: timestamp => formatDate(timestamp)
-                // },
                 date: String,
                 slot9am: Boolean,
                 slot11am: Boolean,
@@ -124,7 +119,6 @@ walkerSchema.virtual('average_rating').get(function () {
 
     return this.reviews.map(review => review.rating).reduce(reducer, 0);
 });
-
 
 
 const Walker = model('Walker', walkerSchema);

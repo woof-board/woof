@@ -231,13 +231,6 @@ export const validateInput = (inputArr) => {
                         errors.push(`"${input_title}" is a required field;`);
                     }
                     break;
-                // case 'url':
-                //     if(input_val) {
-                //         if (!validator.isURL(input_val)){
-                //             errors.push(`"${input_title}" must be a valid web url;`);
-                //         }
-                //     }
-                //     break;
                 case 'email':
                     if(input_val) {
                         if (!validateEmail(input_val)){
@@ -278,6 +271,7 @@ export const validateInput = (inputArr) => {
     return errors;
 };
 
+// indexedDB setup
 export function idbPromise(storeName, method, object) {
     return new Promise((resolve, reject) => {
       const request = window.indexedDB.open('woof', 1);
@@ -288,7 +282,6 @@ export function idbPromise(storeName, method, object) {
         // create object store for each type of data and set "primary" key index to be the `_id` of the data
         db.createObjectStore('user', { keyPath: '_id' });
         db.createObjectStore('orders', { keyPath: '_id' });
-        // db.createObjectStore('cart', { keyPath: '_id' });
       };
   
       request.onerror = function(e) {

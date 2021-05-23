@@ -10,7 +10,7 @@ const addressSchema = new Schema(
             type: String,
             required: false  
         },
-        neighbourhood: {   // is there any list of neighbourhoods with standard wording? 
+        neighbourhood: {  
             type: String,
             required: false,   
         },

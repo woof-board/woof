@@ -11,9 +11,6 @@ const Profile = () => {
     const { username: userParam } = useParams();
     console.log(userParam);
   
-    //address Bar: http://localhost:3000/profile/user
-    //logs: user
-  
     const { loading, data } = useQuery(userParam ? QUERY_USER : QUERY_ME, {
       variables: { username: userParam }
     })

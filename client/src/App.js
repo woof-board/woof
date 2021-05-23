@@ -7,21 +7,21 @@ import Footer from './components/Footer';
 import About from './pages/About';
 import Header from './components/Header';
 import NoMatch from './pages/NoMatch';
-import PaymentScreen from './pages/PaymentScreen';
+// import PaymentScreen from './pages/PaymentScreen';
 import Success from "./pages/Success";
 import WalkerSchedule from './pages/WalkerSchedule';
 import OwnerProfile from './pages/OwnerProfile.js';
 import OwnerTrackOrder from './pages/OwnerTrackOrder';
 import OwnerLiveMap from './pages/OwnerLiveMap';
-import OwnerBookWalk from './pages/OwnerBookWalk';
+// import OwnerBookWalk from './pages/OwnerBookWalk';
 import WalkerProfile from './pages/WalkerProfile.js';
 import WalkerTrackWalks from './pages/WalkerTrackWalks.js';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import { StoreProvider } from "./utils/GlobalState";
 import Home from './pages/Home';
-import Map from './components/OwnerTrackOrder/Map'
-import TestMap from './components/OwnerTrackOrder/TestMap'
+// import Map from './components/OwnerTrackOrder/Map'
+// import TestMap from './components/OwnerTrackOrder/TestMap'
 import OwnerWalkDetails from './components/OwnerWalkerForm/OwnerWalkDetails';
 import AdminPage from './pages/Admin';
 
@@ -54,19 +54,12 @@ function App() {
                             <PublicRoute exact path='/' component={Home} />
                             <Route exact path="/about" component={About} />
 
-                            <PrivateRoute exact path="/paymentScreen" usertype="owner_admin" component={PaymentScreen} />
-                            <PrivateRoute exact path="/Success" usertype="owner_admin" component={Success} />
-                            
+                            <PrivateRoute exact path="/Success" usertype="owner_admin" component={Success} />                            
                             <PrivateRoute exact path="/ownerprofile" usertype="owner_admin" component={OwnerProfile}/> 
                             <PrivateRoute exact path="/ownertrackorder" usertype="owner_admin" component={OwnerTrackOrder}/> 
                             <PrivateRoute exact path="/ownerlivemap" usertype="owner_admin" component={OwnerLiveMap}/> 
                             <PrivateRoute exact path="/bookwalk" usertype="owner_admin" component={OwnerWalkDetails}/> 
-                             
-                            <PrivateRoute exact path="/admindashboard" usertype="admin" component={AdminPage}/>
-                            {/* <PrivateRoute exact path="/map" usertype="owner" component={Map}/>
-                            <Route exact path="/testmap" usertype="owner" component={TestMap}/>  */}
-                            {/* <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/> */}
-                            
+                            <PrivateRoute exact path="/admindashboard" usertype="admin" component={AdminPage}/>  
                             
                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
                             <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
@@ -84,28 +77,3 @@ function App() {
     );
 }
 export default App;
-
-// <Switch>
-//                             <PublicRoute exact path='/' component={Home} />
-//                             <Route exact path="/about" component={About} />
-
-//                             <PrivateRoute exact path="/paymentScreen" usertype="owner" component={PaymentScreen} />
-//                             <PrivateRoute exact path="/Success" usertype="owner" component={Success} />
-                            
-//                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
-//                             <PrivateRoute exact path="/ownertrackorder" usertype="owner" component={OwnerTrackOrder}/> 
-//                             <PrivateRoute exact path="/ownerlivemap" usertype="owner" component={OwnerLiveMap}/> 
-//                             <PrivateRoute exact path="/bookwalk" usertype="owner" component={OwnerWalkDetails}/> 
-                             
-//                             <PrivateRoute exact path="/dashboard" usertype="admin" component={AdminPage}/>
-//                             {/* <PrivateRoute exact path="/map" usertype="owner" component={Map}/>
-//                             <Route exact path="/testmap" usertype="owner" component={TestMap}/>  */}
-//                             {/* <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/> */}
-                            
-                            
-//                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
-//                             <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
-//                             <PrivateRoute exact path="/walkertrackwalks" usertype="walker" component={WalkerTrackWalks} />
-
-//                             <Route component={NoMatch} />
-//                         </Switch>
