@@ -1,5 +1,5 @@
 #owners {
-    /* display: flex; */
+    display: flex;
     flex-direction: row;
     padding: 2rem 5rem 1rem;
     flex-wrap: wrap;
@@ -21,7 +21,7 @@
 }
 .walker-picture-container {
     margin: 0 auto 0 0;
-    border: solid 1px black;
+    /* border: solid 1px black; */
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

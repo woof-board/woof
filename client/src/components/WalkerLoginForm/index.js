@@ -63,7 +63,7 @@ function WalkerLoginForm(props) {
                 </div> : null
             }
             <div className="home-button-container">
-                <button onClick={() => { setFormCurrentLink(formLinks[1]) }} 
+                <button type="button" onClick={() => { setFormCurrentLink(formLinks[1]) }} 
                     className="home-form-button" 
                 >
                     SIGNUP

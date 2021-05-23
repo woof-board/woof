@@ -16,6 +16,8 @@ import ContactDetails from '../components/About/ContactDetails';
 
 function About() {
 
+    document.body.classList.remove('home-back');
+
     const [links] = useState([
         {
             name: 'owner'

@@ -85,6 +85,7 @@ function OwnerSignupForm(props) {
             <div className="home-button-container">
                 <button onClick={() => { setFormCurrentLink(formLinks[0]) }} 
                     className="home-form-button" 
+                    type="button"
                 >
                     LOGIN
                 </button>
