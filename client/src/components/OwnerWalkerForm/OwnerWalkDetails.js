@@ -31,14 +31,14 @@ function OwnerWalkDetails() {
     const [state, dispatch] = useStoreContext();
     const { currentUser } = state;
     const [getProfile, { data: profileData }] = useLazyQuery(QUERY_OWNER_ME, {
-        fetchPolicy: 'network-only'
+        fetchPolicy: 'no-cache'
     });
     
     const [checkWalkerAvailability, { called, loading, data: walkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY, {
         fetchPolicy: "no-cache"
     });
     const [addOrder, {error: addOrderError}] = useMutation(ADD_ORDER);
-    const [updateOrder, {error: updateOrderError}] = useMutation(UPDATE_ORDER);
+    // const [updateOrder, {error: updateOrderError}] = useMutation(UPDATE_ORDER);
     
     const [showWalkerList, setShowWalkerList] = useState(false);
     const [modalJSX, setModalJSX] = useState(<div />);
@@ -49,7 +49,7 @@ function OwnerWalkDetails() {
         dogIdList: [],
         dogListOptions: [] 
     });
-    const [orderId, setOrderId] = useState("");
+    // const [orderId, setOrderId] = useState("");
     const [startDate, setStartDate] = useState(new Date());
     const [redirect, setRedirect ] = useState(false);
 
@@ -148,7 +148,7 @@ function OwnerWalkDetails() {
             //     }
             // });
 
-            const { data } = await addOrder({
+            await addOrder({
                 variables: {
                     input: {
                         service_date: formData.date,
@@ -160,7 +160,6 @@ function OwnerWalkDetails() {
                     }
                 }
             });
-
 
             setModalJSX(
                 <div>
