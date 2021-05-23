@@ -252,36 +252,57 @@ const resolvers = {
                 const timeSlot = getTimeSlot(time);
                 const owner = await Owner.findById(context.owner._id);
 
-                if (owner.address.city === "Toronto") {
-                    const filteredWalker = await Walker.find(
-                        {
-                            'address.city': 'Toronto',
-                            availability: {
-                                $elemMatch : { 
-                                    date,
-                                    [timeSlot]: true
-                                }
+                const filteredWalker = await Walker.find(
+                    {
+                        availability: {
+                            $elemMatch : { 
+                                date,
+                                [timeSlot]: true
                             }
                         }
-                    );
-                    return filteredWalker.filter(walker => walker.neighbourhoods.includes(owner.address.neighbourhood));
-                } else {
-                    return await Walker.find(
-                        {
-                            'address.city': owner.address.city,
-                            availability: {
-                                $elemMatch : { 
-                                    date,
-                                    [timeSlot]: true
-                                }
-                            }
-                        }
-                    );
-                }
+                    }
+                );
+                return filteredWalker.filter(walker => walker.neighbourhoods.includes(owner.address.neighbourhood));
             }
 
             throw new AuthenticationError('Not logged in');
         }
+
+        // checkWalkerAvailability: async (parent, { date, time }, context) => {
+        //     if(context.owner){
+        //         const timeSlot = getTimeSlot(time);
+        //         const owner = await Owner.findById(context.owner._id);
+
+        //         if (owner.address.city === "Toronto") {
+        //             const filteredWalker = await Walker.find(
+        //                 {
+        //                     'address.city': 'Toronto',
+        //                     availability: {
+        //                         $elemMatch : { 
+        //                             date,
+        //                             [timeSlot]: true
+        //                         }
+        //                     }
+        //                 }
+        //             );
+        //             return filteredWalker.filter(walker => walker.neighbourhoods.includes(owner.address.neighbourhood));
+        //         } else {
+        //             return await Walker.find(
+        //                 {
+        //                     'address.city': owner.address.city,
+        //                     availability: {
+        //                         $elemMatch : { 
+        //                             date,
+        //                             [timeSlot]: true
+        //                         }
+        //                     }
+        //                 }
+        //             );
+        //         }
+        //     }
+
+        //     throw new AuthenticationError('Not logged in');
+        // }
     },
     Mutation: {
         /* Owner mutations
