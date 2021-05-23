@@ -301,7 +301,7 @@
 .component-section {
   width: 100%;
   height: auto;
-  padding: 2rem;
+  padding: 5rem;
   margin: 1rem 0;
   display: flex;
   align-items: center;
@@ -634,8 +634,31 @@ b {
     justify-content: center;
   }
 
-  .about-us-container, .about-banner, .about-imgholder {
-    height: 24rem;
+  .about-us-container, .about-imgholder {
+    height: 14rem;
+  }
+
+
+  .about-banner  {
+    margin-top: 20%;
+  }
+
+  .about-caption {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin: 40% 10% 25% 0;
+  }
+
+  .about-learn-more {
+    margin: 0 0 0 29%;
+  }
+
+  .about-learn-more:hover ~ .about-button-anim-black {
+    width: 13.4;
+    opacity: 1;
+    background-color: #DFD8D8;
+    transition: 1s;
   }
 
 }
