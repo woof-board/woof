@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-//import '../../css/WalkerProfile.css';
 
 function WalkerOrders({ orders=[] }) {
 
@@ -18,10 +17,10 @@ function WalkerOrders({ orders=[] }) {
                 <div>{order.service_time}</div>
               </div>
             ))}
-          <form className="user-update-form">
+          <div className="button-container">
             <Link to="/walkerschedule"><button>My Schedule</button></Link>
             <Link to="/walkertrackwalks"><button>My Walks</button></Link>
-          </form>
+          </div>
         </div>
     )
 }

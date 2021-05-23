@@ -156,19 +156,18 @@ function OwnerProfile() {
                 ))} */}
 
 
-              <div className="button-container">
-                <Link to="/bookwalk"><button>Book a walk</button></Link>
-                <Link to="/ownertrackorder"><button>My Walks</button></Link>
-                {/* Need to make a new page for past walk */}
-                <Link to={"/ownerlivemap"}><button>View Tracker</button></Link>
-              </div>
-              {/* <div><OwnerLiveMap></OwnerLiveMap></div> */}
+                <div className="button-container">
+                  <Link to="/bookwalk"><button>Book a walk</button></Link>
+                  <Link to="/ownertrackorder"><button>My Walks</button></Link>
+                  {/* Need to make a new page for past walk */}
+                  <Link to={"/ownerlivemap"}><button>View Tracker</button></Link>
+                </div>
+                {/* <div><OwnerLiveMap></OwnerLiveMap></div> */}
               </div>
             }
             <OwnerDetails user={currentUser} />
             <OwnerPasswordForm />
             <OwnerPetDetails user={currentUser} />
-            <OwnerAddDog />
             {
                 currentUser && currentUser.status === "ACTIVE" &&
                 <OwnerReviews user={currentUser}/>

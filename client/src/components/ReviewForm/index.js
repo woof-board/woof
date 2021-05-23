@@ -90,6 +90,7 @@ const ReviewForm = ({ walker_id, closeModal }) => {
                         starSpacing="2px"
                         starRatedColor="#254e9b"
                         starEmptyColor="#98b4e7"
+                        starHoverColor="#266e34"
                         svgIconViewBox={RatingIconSVG.box}
                         svgIconPath={RatingIconSVG.coords}
                         changeRating={newRating => setFormData({...formData, rating: newRating})}

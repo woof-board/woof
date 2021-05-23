@@ -1,7 +1,6 @@
 import React from 'react';
 import StarRatings from 'react-star-ratings';
 import { RatingIconSVG } from '../../utils/helpers'
-//import '../../css/WalkerProfile.css';
 
 
 function SingleReview( { review }) {

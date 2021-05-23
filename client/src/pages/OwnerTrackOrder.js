@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import {  useLazyQuery } from '@apollo/react-hooks';
 
-import '../css/WalkerProfile.css';
+import '../css/Profile.css';
 import { QUERY_OWNER_ME, QUERY_OWNER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
@@ -72,9 +72,10 @@ function OwnerTrackOrder() {
     };
 
     return (
-        <>
-            <h1>My Walks</h1>
+        <div id="owners">
+           <h1>My Walks</h1>
             <div className='page-wrap'>
+                
                 <div className="walker-details-container">
                     {currentUser && currentUser.status === "ACTIVE" &&
                         <div className="walker-profile-container">
@@ -91,7 +92,8 @@ function OwnerTrackOrder() {
                                             <div>
                                                 <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
                                                 <div><span className="medium-text">Start time:</span> {order.service_time}</div>
-                                                {/* <div> Walker: {`${order.walker.first_name} ${order.walker.last_name}`} </div> */}
+                                                
+                                                <div><span className="medium-text">Walker:</span> {`${order.walker?.first_name} ${order.walker?.last_name}`} </div>
                                                 {/* Add map component */}
                                                 {/* <Link to={
                               {
@@ -149,7 +151,7 @@ function OwnerTrackOrder() {
                 <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal} />
 
             </div>
-        </>
+        </div>
     );
 }
 

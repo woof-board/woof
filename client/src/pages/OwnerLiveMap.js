@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useLazyQuery } from '@apollo/react-hooks';
 
-import '../css/WalkerProfile.css';
+import '../css/Profile.css';
 import { QUERY_OWNER_ME, QUERY_OWNER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../utils/actions";
@@ -55,8 +55,8 @@ function OwnerLiveMap() {
     }, [ownerOrderData]);
 
     return (
-        <>
-            {/* <h1>Live Tracker</h1> */}
+        <div id="owners">
+            <h1>Live Tracker</h1>
             <div className='page-wrap'>
                 <div className="walker-details-container">
                     {currentUser && currentUser.status === "ACTIVE" &&
@@ -99,7 +99,7 @@ function OwnerLiveMap() {
 
 
             </div>
-        </>
+        </div>
     );
 }
 
