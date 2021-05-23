@@ -54,15 +54,15 @@ function App() {
                             <PublicRoute exact path='/' component={Home} />
                             <Route exact path="/about" component={About} />
 
-                            <PrivateRoute exact path="/paymentScreen" usertype="owner" component={PaymentScreen} />
-                            <PrivateRoute exact path="/Success" usertype="owner" component={Success} />
+                            <PrivateRoute exact path="/paymentScreen" usertype="owner_admin" component={PaymentScreen} />
+                            <PrivateRoute exact path="/Success" usertype="owner_admin" component={Success} />
                             
-                            <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
-                            <PrivateRoute exact path="/ownertrackorder" usertype="owner" component={OwnerTrackOrder}/> 
-                            <PrivateRoute exact path="/ownerlivemap" usertype="owner" component={OwnerLiveMap}/> 
-                            <PrivateRoute exact path="/bookwalk" usertype="owner" component={OwnerWalkDetails}/> 
+                            <PrivateRoute exact path="/ownerprofile" usertype="owner_admin" component={OwnerProfile}/> 
+                            <PrivateRoute exact path="/ownertrackorder" usertype="owner_admin" component={OwnerTrackOrder}/> 
+                            <PrivateRoute exact path="/ownerlivemap" usertype="owner_admin" component={OwnerLiveMap}/> 
+                            <PrivateRoute exact path="/bookwalk" usertype="owner_admin" component={OwnerWalkDetails}/> 
                              
-                            <PrivateRoute exact path="/dashboard" usertype="admin" component={AdminPage}/>
+                            <PrivateRoute exact path="/admindashboard" usertype="admin" component={AdminPage}/>
                             {/* <PrivateRoute exact path="/map" usertype="owner" component={Map}/>
                             <Route exact path="/testmap" usertype="owner" component={TestMap}/>  */}
                             {/* <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/> */}
@@ -84,3 +84,28 @@ function App() {
     );
 }
 export default App;
+
+// <Switch>
+//                             <PublicRoute exact path='/' component={Home} />
+//                             <Route exact path="/about" component={About} />
+
+//                             <PrivateRoute exact path="/paymentScreen" usertype="owner" component={PaymentScreen} />
+//                             <PrivateRoute exact path="/Success" usertype="owner" component={Success} />
+                            
+//                             <PrivateRoute exact path="/ownerprofile" usertype="owner" component={OwnerProfile}/> 
+//                             <PrivateRoute exact path="/ownertrackorder" usertype="owner" component={OwnerTrackOrder}/> 
+//                             <PrivateRoute exact path="/ownerlivemap" usertype="owner" component={OwnerLiveMap}/> 
+//                             <PrivateRoute exact path="/bookwalk" usertype="owner" component={OwnerWalkDetails}/> 
+                             
+//                             <PrivateRoute exact path="/dashboard" usertype="admin" component={AdminPage}/>
+//                             {/* <PrivateRoute exact path="/map" usertype="owner" component={Map}/>
+//                             <Route exact path="/testmap" usertype="owner" component={TestMap}/>  */}
+//                             {/* <PrivateRoute exact path="/adminprofile" usertype="admin" component={OwnerProfile}/> */}
+                            
+                            
+//                             <PrivateRoute exact path="/walkerprofile" usertype="walker" component={WalkerProfile} />
+//                             <PrivateRoute exact path="/walkerschedule" usertype="walker" component={WalkerSchedule} />
+//                             <PrivateRoute exact path="/walkertrackwalks" usertype="walker" component={WalkerTrackWalks} />
+
+//                             <Route component={NoMatch} />
+//                         </Switch>
