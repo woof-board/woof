@@ -68,25 +68,34 @@ function About() {
             <div className="about-page-width">
                 <div className="about-imgholder">
                         <div className="about-banner">
-                            <span className="about-caption">About us</span>
+                            {/* <span className="about-caption">About us</span> */}
                         </div>
                 </div>
 
                 <div className="learn-more-container">
                     <h1>Servicing the Greater Toronto Area</h1>
-                    <div clasName="learn-more-links">
-                        <span className={`aboutLink ${currentLink.name === 'owner' && `aboutActive`}`} onClick={() => { setCurrentLink(links[0]); }} >Owner</span>
-                        <span className={`aboutLink ${currentLink.name === 'walker' && `aboutActive`}`} onClick={() => { setCurrentLink(links[1]); }} >Walker</span>
-                    </div>
 
                     <div className="component-section">
                         <div className="content">
-                            {currentLink.name === 'owner' && (
-                                <AboutOwner />
-                            )}
-                            {currentLink.name === 'walker' && (
-                                <AboutWalker />
-                            )}
+                        <p>
+                            You need a break. So do your dogs. We will help both! 
+                            Woof connects dog owners with dog walkers who’ll treat your dog like family.
+                            You can trust us to keep your pet happy, healthy, and sweet as ever.
+                        </p>
+                        <p>
+                            We understand that life can be hectic and it may be hard to fit in a lengthy walk for your furry friend. 
+                            We are here to take that stress away from you to give your pal the exercise and 
+                            relief that it needs so you can focus on other tasks at hand.
+                        </p>
+                        <p>
+                            We are dog lovers and our dog walkers have lots of experience taking care of dogs. 
+                            Walkers are responsible and caring. They take care of your pet with respect. 
+                            They offer affection and attention to your pet, when you can’t be there.
+                        </p>
+                        <p>
+                            Woof is also a cutting edge technology business committed to making pet care safe, 
+                            easy, and affordable so that everyone can experience the unconditional love of a pet.
+                        </p>
                         </div>
                     </div>
                 </div>
@@ -147,14 +156,13 @@ function About() {
                         />
                 </div>
 
-                {currentContactLink.name === 'contact' && (
                     <div className="component-section">
                         <div className="contact-container flex-r-nospace">
                             <ContactDetails />
                             <AboutContactForm />
                         </div>
                     </div>
-                )}
+
 
                 {/* <div className="component-section">
                 <h2>Check out our App!</h2>
