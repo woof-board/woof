@@ -1,4 +1,4 @@
-# <img src="client/public/images/woof-logo.svg" height="90" alt="Woof" title="Woof">
+# <img src="client/public/images/woof-logo.svg" height="120" alt="Woof" title="Woof">
 
 
 You need a break. So do your dogs. We will help both! Woof connects dog owners with dog walkers who’ll treat your dog like family. You can trust us to keep your pet happy, healthy, and sweet as ever!
@@ -9,7 +9,7 @@ You need a break. So do your dogs. We will help both! Woof connects dog owners w
 * [Technologies](#technologies)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Wireframe](#wireframe)
+* [Documents](#documents)
 * [Future Development](#future-development)
 * [Screenshot](#screenshot)
 * [License](#license)
@@ -28,8 +28,8 @@ The application follows the MERN paradigm in its architectural structure, using 
 
 ## Technologies
 Project is created with 
-* [Javascript](https://www.javascript.com/)
-* [Css](https://developer.mozilla.org/en-US/docs/Web/CSS)
+* Javascript
+* [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 * [GraphQL](https://graphql.org/)
 * [Apollo Server](https://www.apollographql.com/docs/apollo-server/)
 * [React](https://reactjs.org/)
@@ -75,35 +75,36 @@ There are three types of access:
 * Edit their profile as well as dog profile as needed.
 * Able to request a walk, select a available walker and see the progress on their order.
 * Able to track their dogs when walker is taking them for a walk-through GPS map.
-* Able to rate the walker.
+* Able to rate and review the walker.
 * Able to pay through a secured payment method.
-* Able to post comment and rate the walkers.
 
 
 **Walker access** allows one to 
-* Submit a Signup form for create profile then signin in order to get employed. 
+* Submit a Signup form to create profile then signin in order to get employed. 
 * Able to mark their availability in the schedule calender for next two weeks.
 * Able to see their confirmed schedule for next 14 days.
 * Able to get payout through a secured payment method.
 
 
 **Administrator access** 
-* Has both Owner and Walker Access
+* Has Owner access
 * Able to approve pending walkers waiting approval.
-* Able to suspend walker and delete comments.
 
-## Wireframe
-[wireframe.pdf](https://github.com/woof-board/woof/files/6524517/wireframe.pdf)
+## Documents
+* [Presentation](./client/public/images/presentation.pdf)
+* [Wireframe](https://github.com/woof-board/woof/files/6524517/wireframe.pdf)
 
 ## Future Development
 Upcoming features:
 * Ability for owners to pick favorite walkers
+* Expand admin abilities so that they can suspend users and delete/edit inapprpriate comments.
 * Owners can purchase pet related items and have it delivered by the walkers
 * Expansion into wider geographical locations
+* Full development of mobile app version
 
 
 ## Screenshot
-<a href="https://woof-2021.herokuapp.com/"> <img src="https://user-images.githubusercontent.com/75001492/119274358-79c43380-bbdd-11eb-8f54-9f1eeb1952e8.JPG"></a>
+<a href="https://woof-2021.herokuapp.com/"> <img src="./client/public/images/screenshot.jpg"></a>
 
 ## License
 This repository is licensed under the MIT license.
