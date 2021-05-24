@@ -37,11 +37,6 @@ function About() {
     
     const [currentSafeLink] = useState(safety[0])
     const [currentDevLink, setCurrentDevLink] = useState(dev[0])
-<<<<<<< HEAD
-=======
-    const [currentContactLink, setCurrentContactLink] = useState(contact[0])
-
->>>>>>> develop
 
     return (
         <>
