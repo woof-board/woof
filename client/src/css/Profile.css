@@ -77,6 +77,7 @@
 .walk-container {
     width: 35vw;
     margin-right: 15px;
+    height: fit-content;
 }
 .walker-contact-container form, .show-walkers {
     padding: 15px 7px 0 15px;

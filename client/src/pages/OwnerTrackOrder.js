@@ -84,6 +84,7 @@ function OwnerTrackOrder() {
                                 {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
                                 : 'You have no upcoming Walks'}
                             </div> */}
+
                             {orders.map((order) => (
                                 order.status !== "PENDING_PROGRESS"
                                     ? null
