@@ -80,10 +80,7 @@ function OwnerTrackOrder() {
                     {currentUser && currentUser.status === "ACTIVE" &&
                         <>
                             <div className="walker-header"><h2>Upcoming Walks</h2></div>
-                            {/* <div>
-                                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
-                                : 'You have no upcoming Walks'}
-                            </div> */}
+
                             {orders.map((order) => (
                                 order.status !== "PENDING_PROGRESS"
                                     ? null
@@ -92,20 +89,7 @@ function OwnerTrackOrder() {
                                             <div>
                                                 <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
                                                 <div><span className="medium-text">Start time:</span> {order.service_time}</div>
-                                                
                                                 <div><span className="medium-text">Walker:</span> {`${order.walker?.first_name} ${order.walker?.last_name}`} </div>
-                                                {/* Add map component */}
-                                                {/* <Link to={
-                              {
-                                pathname: '/map',
-                                order_id: order._id,
-                                coords: order.coords
-                            }
-                          }><button>See on Map</button></Link> */}
-                                                {/* <Map
-                            order_id = {order._id}
-                            coords = {order.coords}
-                            ></Map> */}
                                             </div>
                                         </div>
                                     )
@@ -117,10 +101,7 @@ function OwnerTrackOrder() {
                     {currentUser && currentUser.status === "ACTIVE" &&
                         <>
                              <div className="walker-header"><h2>Past Walks</h2></div>
-                            {/* <div>
-                {totalOrders ? `You have ${totalOrders} upcoming ${totalOrders === 1 ? 'walk' : 'walks'}:`
-                : 'You have no upcoming Walks'}
-              </div> */}
+                            
                             {orders.map((order) => (
                                 order.status !== "FULLFILLED"
                                     ? null
