@@ -13,7 +13,7 @@ function OwnerReviews() {
     const [getOwnerReviewsByLazyQuery, { data: lazyQueryData }] = useLazyQuery(QUERY_OWNER_REVIEWS, {
         fetchPolicy: 'network-only'
       });
-    const { data: ownerReviews, loading } = useQuery(QUERY_OWNER_REVIEWS);
+    const { data: ownerReviews } = useQuery(QUERY_OWNER_REVIEWS);
     const [ reviewList, setReviewtList ] = useState([]);
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState();

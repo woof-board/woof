@@ -9,14 +9,14 @@ function Map(order) {
     const coordinates = useRef(null);
     // get coords object
     const {
-        order_id,
         coords
     } = order;
     // convert to array
-    const coordinateArr = coords?.map((coord, ind) => {
+    const coordinateArr = coords?.map((coord) => {
         if (coord) {
             return objectToArray(coord);
         }
+        return null;
     });
     
     useEffect(() => {

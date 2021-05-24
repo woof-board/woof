@@ -4,7 +4,6 @@ import { useMutation } from '@apollo/react-hooks';
 import { ADD_REVIEW } from '../../utils/mutations';
 import StarRatings from 'react-star-ratings';
 import { RatingIconSVG } from '../../utils/helpers'
-import { useStoreContext } from "../../utils/GlobalState";
 
 
 const ReviewForm = ({ walker_id, closeModal }) => {

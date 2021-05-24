@@ -13,9 +13,9 @@ import '../css/Walkers.css';
 function WalkerSchedule() {
     const [state, dispatch] = useStoreContext();
     const { currentUser, currentUserOrders } = state;
-    const [updateWalkerAvailability, { error }] = useMutation(UPDATE_WALKER_AVAILABILITY);
-    const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
-    const [ getWalkerOrders, { called: calledWalkerOrder, loading: orderDataLoading, data: walkerOrderData } ] = useLazyQuery(QUERY_WALKER_ORDERS, {
+    const [updateWalkerAvailability] = useMutation(UPDATE_WALKER_AVAILABILITY);
+    const [getWalkerProfile, { loading, data }] = useLazyQuery(QUERY_WALKER_ME);
+    const [ getWalkerOrders, { called: calledWalkerOrder, data: walkerOrderData } ] = useLazyQuery(QUERY_WALKER_ORDERS, {
         variables: {
             walker_id: currentUser?._id
         },
@@ -32,6 +32,7 @@ function WalkerSchedule() {
         if(currentUserOrders?.length === 0  && !calledWalkerOrder) {
             getWalkerOrders();
         }
+        // eslint-disable-next-line
     }, [currentUserOrders]);
 
     useEffect(() => {
@@ -48,6 +49,7 @@ function WalkerSchedule() {
             idbPromise('user', 'put', data.walkerMe);
             getWalkerOrders();
         }
+        // eslint-disable-next-line
     }, [currentUser, data, loading, dispatch]);
 
     useEffect(() => {
@@ -62,6 +64,7 @@ function WalkerSchedule() {
                 idbPromise('orders', 'put', order);
             });
         }
+        // eslint-disable-next-line
     }, [walkerOrderData, calledWalkerOrder]);
 
     useEffect(()=>{
@@ -81,6 +84,7 @@ function WalkerSchedule() {
 
             setSchedule([...tempSchedule]);
         }
+        // eslint-disable-next-line
     }, [currentUser]);
 
     const changeAvailability = event => {
