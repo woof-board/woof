@@ -60,7 +60,7 @@ function WalkerPasswordForm() {
 
             <form
                 className="user-update-form"
-                id="walker-update-form"
+                // id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
                 <div className="row-data">
@@ -69,7 +69,7 @@ function WalkerPasswordForm() {
                         type="password"
                         name="old_password"
                         placeholder="Current Password"
-
+                        autoComplete="off"
                         onChange={handleInputChange}
                         value={formData.old_password}
                     />
@@ -78,6 +78,7 @@ function WalkerPasswordForm() {
                         className="profile-input"
                         type="password"
                         placeholder="New Password"
+                        autoComplete="off"
                         name="new_password"
                         onChange={handleInputChange}
                         value={formData.new_password}

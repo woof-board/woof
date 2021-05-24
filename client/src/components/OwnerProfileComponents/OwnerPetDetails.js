@@ -37,11 +37,10 @@ function OwnerPetDetails({ user }) {
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         const dogId = event.target.getAttribute("data-dogid");
-
         let oldState = [...formData.dogs];
         let newState = oldState.map((item)=>{
             if(item._id === dogId) {
-                item[name] = value;        
+                item[name] = name === 'treats' ? (value === 'true' ? true : false) : value;        
             }
             return item;
         });
@@ -168,7 +167,7 @@ function OwnerPetDetails({ user }) {
                 <div className="walker-header"><h2>Dog Information</h2></div>
                 <form
                     className="walker-update-form"
-                    id="walker-update-form"
+                    // id="walker-update-form"
                     // onSubmit={handleFormSubmit}
                 >
                     {
@@ -209,7 +208,6 @@ function OwnerPetDetails({ user }) {
                                     <label className="treats-label">Dog Treats allowed</label>
                                     <select 
                                         className="treats-input" 
-                                        id="walker-cities" 
                                         name="treats"
                                         data-dogid={dog._id} 
                                         value={dog.treats ? "true" : "false"}
@@ -219,11 +217,6 @@ function OwnerPetDetails({ user }) {
                                             <option value="true">Yes</option>
                                             <option value="false">No</option>
                                         </>
-                                        {/* {console.log(dog.treats)}
-                                        {dog.treats
-                                            ? <><option selected value="true">Yes</option><option value="false">No</option></>
-                                            : <><option value="true">Yes</option><option selected value="false">No</option></>
-                                        } */}
                                     </select>
                                     
                                 </div>
@@ -255,17 +248,6 @@ function OwnerPetDetails({ user }) {
                                 </div>
                             </div>
                         )}
-
-
-                    {/* <div className="button-container">
-                        <button
-                            type="submit"
-                            className="update-walker-button"
-                            id="update-owner-profile-button"
-                        >
-                            UPDATE
-                </button>
-                    </div> */}
                 </form>
                 <ModalDisplay component={modalJSX} isOpen={modalOpen} closeModal={closeModal}/>
 

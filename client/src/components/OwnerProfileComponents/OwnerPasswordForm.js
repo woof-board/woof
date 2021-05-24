@@ -61,7 +61,7 @@ function OwnerPasswordForm() {
 
             <form
                 className="user-update-form"
-                id="walker-update-form"
+                // id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
                 <div className="row-data">
@@ -70,7 +70,7 @@ function OwnerPasswordForm() {
                         type="password"
                         name="old_password"
                         placeholder="Current Password"
-
+                        autoComplete="off"
                         onChange={handleInputChange}
                         value={formData.old_password}
                     />
@@ -80,6 +80,7 @@ function OwnerPasswordForm() {
                         type="password"
                         placeholder="New Password"
                         name="new_password"
+                        autoComplete="off"
                         onChange={handleInputChange}
                         value={formData.new_password}
                     />
