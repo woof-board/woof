@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import DatePicker from 'react-datepicker';
 import Select from 'react-select';
 import { Redirect } from 'react-router';
@@ -34,11 +34,10 @@ function OwnerWalkDetails() {
         fetchPolicy: 'no-cache'
     });
     
-    const [checkWalkerAvailability, { called, loading, data: walkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY, {
+    const [checkWalkerAvailability, { loading, data: walkerData }] = useLazyQuery(QUERY_WALKER_AVAILABILITY, {
         fetchPolicy: "no-cache"
     });
-    const [addOrder, {error: addOrderError}] = useMutation(ADD_ORDER);
-    // const [updateOrder, {error: updateOrderError}] = useMutation(UPDATE_ORDER);
+    const [addOrder] = useMutation(ADD_ORDER);
     
     const [showWalkerList, setShowWalkerList] = useState(false);
     const [modalJSX, setModalJSX] = useState(<div />);
@@ -66,6 +65,7 @@ function OwnerWalkDetails() {
             });
             idbPromise('user', 'put', profileData.ownerMe);
         }
+        // eslint-disable-next-line
     }, [currentUser, profileData, dispatch]);
 
     useEffect(() => {
@@ -85,6 +85,7 @@ function OwnerWalkDetails() {
                 dogListOptions: dogOptions
             });
         }
+        // eslint-disable-next-line
     }, [currentUser]);
 
     const handleInputChange = (event) => {
@@ -270,7 +271,7 @@ function OwnerWalkDetails() {
                  showWalkerList && 
                     <div className="walker-list-container"
                     >
-                        {(!loading && (walkerData?.checkWalkerAvailability === undefined || walkerData.checkWalkerAvailability.length == 0)) 
+                        {(!loading && (walkerData?.checkWalkerAvailability === undefined || walkerData.checkWalkerAvailability.length === 0)) 
                         ? <div> Sorry, no walker available at your selected time </div>
                         : (
                             <>
@@ -278,7 +279,7 @@ function OwnerWalkDetails() {
                                 <h4> Available Walkers</h4>
                                 { walkerData?.checkWalkerAvailability.map((data) => 
                                 <div className = "walker-container">
-                                    <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + data.avatar} width="85" />
+                                    <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + data.avatar} width="85" alt="walker_avatar" />
                                     <h5>Walker: <span className="regText">{data.first_name} {data.last_name}</span></h5>
                                     <h6>Rating: <span className="regText">{data.average_rating > 0
                                                 ? <>

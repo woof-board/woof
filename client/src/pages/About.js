@@ -14,15 +14,6 @@ function About() {
 
     document.body.classList.remove('home-back');
 
-    const [links] = useState([
-        {
-            name: 'owner'
-        },
-        {
-            name: 'walker'
-        }
-    ])
-
     const [safety] = useState([
         {
             name: 'null'
@@ -43,19 +34,9 @@ function About() {
             name: 'dev'
         }
     ])
-
-    const [contact] = useState([
-        {
-            name: 'null'
-        },
-        {
-            name: 'contact'
-        }
-    ])
     
-    const [currentSafeLink, setCurrentSafeLink] = useState(safety[0])
+    const [currentSafeLink] = useState(safety[0])
     const [currentDevLink, setCurrentDevLink] = useState(dev[0])
-    const [currentContactLink, setCurrentContactLink] = useState(contact[0])
 
     return (
         <>

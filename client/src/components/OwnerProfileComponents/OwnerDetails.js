@@ -10,7 +10,6 @@ import ModalDisplay from '../ModalDisplay';
 const stripePromise = loadStripe('pk_test_51Ir7BPLlbUYQkEo2A2L6kb3YbdMv9jh8IJjshFAJOn3UXJEox2CDMpQoI8AS5HiTiccN6CzYnNbbCnaBJVgb8t08002TgJCE4p'); // Public Key
 
 function OwnerDetails({ user }) {
-
     const [updateOwnerProfile] = useMutation(UPDATE_OWNER_PROFILE);
     const [, dispatch] = useStoreContext();
     const [modalJSX, setModalJSX] = useState(<div />);

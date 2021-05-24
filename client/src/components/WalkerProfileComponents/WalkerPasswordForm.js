@@ -4,7 +4,7 @@ import { UPDATE_WALKER_PASSWORD } from "../../utils/mutations";
 import ModalDisplay from '../../components/ModalDisplay';
 
 function WalkerPasswordForm() {
-    const [updateWalkerPassword, { error }] = useMutation(UPDATE_WALKER_PASSWORD);
+    const [updateWalkerPassword] = useMutation(UPDATE_WALKER_PASSWORD);
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState();
     

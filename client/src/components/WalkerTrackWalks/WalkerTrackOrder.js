@@ -2,21 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 import { CHARGE_OWNER } from '../../utils/queries';
 import { UPDATE_ORDER_COORDS, UPDATE_ORDER_STATUS, ADD_WALKER_EARNINGS } from "../../utils/mutations";
-import Auth from '../../utils/auth';
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 
 
 function WalkerTrackOrder(order) {
-  const [state, dispatch] = useStoreContext();
+  const [, dispatch] = useStoreContext();
   const [updateOrderCoords, { error }] = useMutation(UPDATE_ORDER_COORDS);
   const [realTime, setRealTime] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
   const {
     order_id,
-    service_date,
-    service_time,
-    status
   } = order;
   const [updateOrderStatus] = useMutation(UPDATE_ORDER_STATUS);
   const [addWalkerEarnings] = useMutation(ADD_WALKER_EARNINGS);
@@ -103,6 +99,7 @@ function WalkerTrackOrder(order) {
     }
 
     return () => clearInterval(interval);
+    // eslint-disable-next-line
   }, [realTime]);
 
   const getGeolocation = (options) => {

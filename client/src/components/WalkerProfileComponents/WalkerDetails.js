@@ -9,8 +9,8 @@ import { cities, neighbourhoods, validateInput } from '../../utils/helpers';
 
 
 function WalkerDetails({ user }) {
-    const [updateWalkerProfile, { error }] = useMutation(UPDATE_WALKER_PROFILE);
-    const [state, dispatch] = useStoreContext();
+    const [updateWalkerProfile] = useMutation(UPDATE_WALKER_PROFILE);
+    const [, dispatch] = useStoreContext();
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState();
 
@@ -133,32 +133,22 @@ function WalkerDetails({ user }) {
          }
     };
 
-    const getNeighbourhoodOptions = () => {
-        return neighbourhoods.map(neighbourhood=> ({value: neighbourhood, label: neighbourhood }))
-    };
-
-
     const loadServiceArea = () => {
         let serviceArea =[]
         cities.map(city => {
             if (!city.group) {
                 if(city.name==='Toronto') {
-                    // console.log (neighbourhoods);
                     neighbourhoods.map(neighbourhood => 
                         serviceArea.push({value: neighbourhood, label: 'Toronto: '+ neighbourhood}))
                 } else {
                     serviceArea.push({value: city.name, label: city.name})
                 }
             }
+            return null;
         });
       
         return serviceArea
     }
-
-
-    // const getNeighbourhoodDefaultValues = () => {
-    //     return formData?.neighbourhoods.map(neighbourhood=> ({value: neighbourhood, label: neighbourhood }))
-    // };
 
     const getNeighbourhoodDefaultValues = () => {
         const formattedNeighbourhoods = formData?.neighbourhoods.map(neighbourhood=> {

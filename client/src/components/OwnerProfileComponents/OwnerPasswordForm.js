@@ -4,7 +4,7 @@ import { UPDATE_OWNER_PASSWORD } from "../../utils/mutations";
 import ModalDisplay from '../../components/ModalDisplay';
 
 function OwnerPasswordForm() {
-    const [updateOwnerPassword, { error }] = useMutation(UPDATE_OWNER_PASSWORD);
+    const [updateOwnerPassword] = useMutation(UPDATE_OWNER_PASSWORD);
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState();
 
@@ -25,7 +25,6 @@ function OwnerPasswordForm() {
         e.preventDefault();
 
         // need to implement form validation here
-        // console.log(formData);
          try {
             await updateOwnerPassword({
                 variables: {

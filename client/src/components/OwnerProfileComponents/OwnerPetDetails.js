@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { UPDATE_OWNER_PROFILE, UPDATE_DOG, REMOVE_DOG } from "../../utils/mutations";
+import { UPDATE_DOG, REMOVE_DOG } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
 import ModalDisplay from '../../components/ModalDisplay';
@@ -11,7 +11,6 @@ import OwnerAddDog from './OwnerAddDog';
 
 function OwnerPetDetails({ user }) {
 
-    const [updateOwnerProfile, { error }] = useMutation(UPDATE_OWNER_PROFILE);
     const [updateDog] = useMutation(UPDATE_DOG);
     const [removeDog] = useMutation(REMOVE_DOG);
     const [updateDogAvatar] = useMutation(UPDATE_DOG_AVATAR);
@@ -175,7 +174,7 @@ function OwnerPetDetails({ user }) {
                     {
                         dogs.map((dog, index) =>
                             <div key={index}>
-                                <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + dog.avatar} width="150"></img>
+                                <img src={'https://res.cloudinary.com/w-oo-f/image/upload/v1/' + dog.avatar} width="150" alt="dog_avatar"></img>
                                 <div className="row-data">
 
                                     <input
