@@ -6,7 +6,6 @@ const OrderCard = ({orderItem}) => {
         service_time,
         owner: { first_name: ownerFirstName, last_name: ownerLastName},
         walker: { first_name: walkerFirstName, last_name: walkerLastName},
-        dogs
     } = orderItem;
     
     return (

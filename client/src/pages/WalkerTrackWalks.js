@@ -35,12 +35,14 @@ function WalkerTrackWalks() {
             });
             idbPromise('user', 'put', profileData.walkerMe);
         }
+        // eslint-disable-next-line
     }, [currentUser, profileData, dispatch]);
 
     useEffect(() => {
         if (currentUser) {
             getWalkerOrders();
         }
+        // eslint-disable-next-line
     }, [currentUser]);
 
     useEffect(() => {

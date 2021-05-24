@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../css/Home.css';
 import '../css/About.css';
 import AboutDevelopers from '../components/About/AboutDevelopers';
@@ -10,19 +10,9 @@ import AboutContact from '../components/About/AboutContact';
 import AboutContactForm from '../components/About/AboutContactForm';
 import ContactDetails from '../components/About/ContactDetails';
 
-
 function About() {
 
     document.body.classList.remove('home-back');
-
-    const [links] = useState([
-        {
-            name: 'owner'
-        },
-        {
-            name: 'walker'
-        }
-    ])
 
     const [safety] = useState([
         {
@@ -44,21 +34,9 @@ function About() {
             name: 'dev'
         }
     ])
-
-    const [contact] = useState([
-        {
-            name: 'null'
-        },
-        {
-            name: 'contact'
-        }
-    ])
     
-    const [currentLink, setCurrentLink] = useState(links[0]);
-    const [currentSafeLink, setCurrentSafeLink] = useState(safety[0])
+    const [currentSafeLink] = useState(safety[0])
     const [currentDevLink, setCurrentDevLink] = useState(dev[0])
-    const [currentContactLink, setCurrentContactLink] = useState(contact[0])
-
 
     return (
         <>
@@ -66,7 +44,6 @@ function About() {
             <div className="about-page-width">
                 <div className="about-imgholder">
                         <div className="about-banner">
-                            {/* <span className="about-caption">About us</span> */}
                         </div>
                 </div>
 
@@ -119,11 +96,7 @@ function About() {
                 <div className="component-section">
                 <h2 className="font-night">Technologies</h2>
                     <div className="content">
-                        <AboutTechnology
-                            safety={safety}
-                            currentSafeLink={currentSafeLink}
-                            setCurrentSafeLink={setCurrentSafeLink}
-                        />
+                        <AboutTechnology />
                     </div>
                 </div>
                 
@@ -147,11 +120,7 @@ function About() {
                 )}
 
                 <div className="about-us-container">
-                        <AboutContact 
-                            contact={contact}
-                            currentContactLink={currentContactLink}
-                            setCurrentContactLink={setCurrentContactLink}
-                        />
+                        <AboutContact />
                 </div>
 
                     <div className="component-section">

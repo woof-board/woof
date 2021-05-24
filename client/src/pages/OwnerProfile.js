@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/Profile.css';
@@ -6,7 +6,7 @@ import OwnerDetails from '../components/OwnerProfileComponents/OwnerDetails';
 import OwnerPetDetails from '../components/OwnerProfileComponents/OwnerPetDetails';
 import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswordForm';
 import { useStoreContext } from "../utils/GlobalState";
-import { QUERY_OWNER_ME, QUERY_OWNER_ORDERS } from '../utils/queries';
+import { QUERY_OWNER_ME } from '../utils/queries';
 import { UPDATE_OWNER_AVATAR } from '../utils/mutations';
 import { UPDATE_CURRENT_USER } from "../utils/actions";
 import { Link } from 'react-router-dom';
@@ -17,7 +17,7 @@ function OwnerProfile() {
   const [state, dispatch] = useStoreContext();
   const { currentUser } = state;
 
-  const [getOwnerProfile, { called, loading, data }] = useLazyQuery(QUERY_OWNER_ME);
+  const [getOwnerProfile, { loading, data }] = useLazyQuery(QUERY_OWNER_ME);
   const [updateOwnerAvatar] = useMutation(UPDATE_OWNER_AVATAR);
 
   useEffect(() => {
@@ -32,6 +32,7 @@ function OwnerProfile() {
         currentUser: data.ownerMe
       });
     }
+    // eslint-disable-next-line
   }, [currentUser, data, loading, dispatch]);
 
   const uploadImageWithCloudinary = async () => {
@@ -104,8 +105,6 @@ function OwnerProfile() {
                 <div className="walker-header">
                   <h2>Welcome {currentUser.first_name}!</h2>
                 </div>
-
-
 
               <div className="button-container">
                 <Link to="/bookwalk"><button>Book a walk</button></Link>

@@ -15,7 +15,7 @@ import { openUploadWidget } from '../utils/CloudinaryService';
 
 function WalkerProfile() {
     const [state, dispatch] = useStoreContext();
-    const [getWalkerProfile, { called, loading, data }] = useLazyQuery(QUERY_WALKER_ME);
+    const [getWalkerProfile, { loading, data }] = useLazyQuery(QUERY_WALKER_ME);
     const [updateWalkerAvatar] = useMutation(UPDATE_WALKER_AVATAR);
     const { currentUser } = state;
 
@@ -31,6 +31,7 @@ function WalkerProfile() {
                 currentUser: data.walkerMe
             });
         }
+        // eslint-disable-next-line
     }, [currentUser, data, loading, dispatch]);
 
     const uploadImageWithCloudinary = async () => {

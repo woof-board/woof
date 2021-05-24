@@ -4,7 +4,7 @@ import { UPDATE_WALKER_PASSWORD } from "../../utils/mutations";
 import ModalDisplay from '../../components/ModalDisplay';
 
 function WalkerPasswordForm() {
-    const [updateWalkerPassword, { error }] = useMutation(UPDATE_WALKER_PASSWORD);
+    const [updateWalkerPassword] = useMutation(UPDATE_WALKER_PASSWORD);
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState();
     
@@ -60,7 +60,7 @@ function WalkerPasswordForm() {
 
             <form
                 className="user-update-form"
-                id="walker-update-form"
+                // id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
                 <div className="row-data">
@@ -69,7 +69,7 @@ function WalkerPasswordForm() {
                         type="password"
                         name="old_password"
                         placeholder="Current Password"
-
+                        autoComplete="off"
                         onChange={handleInputChange}
                         value={formData.old_password}
                     />
@@ -78,6 +78,7 @@ function WalkerPasswordForm() {
                         className="profile-input"
                         type="password"
                         placeholder="New Password"
+                        autoComplete="off"
                         name="new_password"
                         onChange={handleInputChange}
                         value={formData.new_password}

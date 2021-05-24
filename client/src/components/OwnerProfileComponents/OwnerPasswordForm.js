@@ -4,7 +4,7 @@ import { UPDATE_OWNER_PASSWORD } from "../../utils/mutations";
 import ModalDisplay from '../../components/ModalDisplay';
 
 function OwnerPasswordForm() {
-    const [updateOwnerPassword, { error }] = useMutation(UPDATE_OWNER_PASSWORD);
+    const [updateOwnerPassword] = useMutation(UPDATE_OWNER_PASSWORD);
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState();
 
@@ -25,7 +25,6 @@ function OwnerPasswordForm() {
         e.preventDefault();
 
         // need to implement form validation here
-        // console.log(formData);
          try {
             await updateOwnerPassword({
                 variables: {
@@ -62,7 +61,7 @@ function OwnerPasswordForm() {
 
             <form
                 className="user-update-form"
-                id="walker-update-form"
+                // id="walker-update-form"
                 onSubmit={handleFormSubmit}
             >
                 <div className="row-data">
@@ -71,7 +70,7 @@ function OwnerPasswordForm() {
                         type="password"
                         name="old_password"
                         placeholder="Current Password"
-
+                        autoComplete="off"
                         onChange={handleInputChange}
                         value={formData.old_password}
                     />
@@ -81,6 +80,7 @@ function OwnerPasswordForm() {
                         type="password"
                         placeholder="New Password"
                         name="new_password"
+                        autoComplete="off"
                         onChange={handleInputChange}
                         value={formData.new_password}
                     />

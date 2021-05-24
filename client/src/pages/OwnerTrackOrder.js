@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {  useLazyQuery } from '@apollo/react-hooks';
-
 import '../css/Profile.css';
 import { QUERY_OWNER_ME, QUERY_OWNER_ORDERS } from '../utils/queries';
 import { useStoreContext } from "../utils/GlobalState";
@@ -42,18 +41,21 @@ function OwnerTrackOrder() {
             });
             idbPromise('user', 'put', profileData.ownerMe);
         }
+        // eslint-disable-next-line
     }, [currentUser, profileData, dispatch]);
 
     useEffect(() => {
         if(currentUser) {
             getOwnerOrders();
         }
+        // eslint-disable-next-line
     }, [currentUser]);
 
     useEffect(() => {
         if (ownerOrderData) {
             setOrders(ownerOrderData.ownerOrders);
         }
+        // eslint-disable-next-line
     }, [ownerOrderData]);
 
     const handleReview = (e) => {
