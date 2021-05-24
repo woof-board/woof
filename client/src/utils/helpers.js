@@ -265,6 +265,9 @@ export const validateInput = (inputArr) => {
                             errors.push(`Please select at least one "${input_title}";`);
                         }
                     }
+                    break;
+                default:
+                    break;
             }
         });
     });

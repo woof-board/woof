@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
-import { GET_CUSTOMER_SESSION_ID, CHARGE_OWNER } from '../../utils/queries';
+import { GET_CUSTOMER_SESSION_ID } from '../../utils/queries';
 import { UPDATE_OWNER_PROFILE } from "../../utils/mutations";
 import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_CURRENT_USER } from "../../utils/actions";
@@ -11,8 +11,8 @@ const stripePromise = loadStripe('pk_test_51Ir7BPLlbUYQkEo2A2L6kb3YbdMv9jh8IJjsh
 
 function OwnerDetails({ user }) {
 
-    const [updateOwnerProfile, { error }] = useMutation(UPDATE_OWNER_PROFILE);
-    const [state, dispatch] = useStoreContext();
+    const [updateOwnerProfile] = useMutation(UPDATE_OWNER_PROFILE);
+    const [, dispatch] = useStoreContext();
     const [modalJSX, setModalJSX] = useState(<div />);
     const [modalOpen, setModalOpen] = useState();
     const [formData, setFormData] = useState({ 
