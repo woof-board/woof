@@ -91,7 +91,7 @@ There are three types of access:
 * Able to approve pending walkers waiting approval.
 
 ## Documents
-* [Presentation](./client/public/images/presentation.pdf)
+* [Presentation](https://github.com/woof-board/woof/blob/feature/update-readme/client/public/images/woof-presentation.pdf)
 * [Wireframe](https://github.com/woof-board/woof/files/6524517/wireframe.pdf)
 
 ## Future Development
