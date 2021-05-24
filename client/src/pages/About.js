@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Home.css';
 import '../css/About.css';
-import AboutOwner from '../components/About/AboutOwner';
-import AboutWalker from '../components/About/AboutWalker';
 import AboutDevelopers from '../components/About/AboutDevelopers';
 import AboutTechnology from '../components/About/AboutTechnology';
 import AboutSafety from '../components/About/AboutSafety';
@@ -11,7 +9,6 @@ import AboutUs from '../components/About/AboutUs';
 import AboutContact from '../components/About/AboutContact';
 import AboutContactForm from '../components/About/AboutContactForm';
 import ContactDetails from '../components/About/ContactDetails';
-// import AboutApp from '../components/About/AboutApp';
 
 
 function About() {
@@ -62,7 +59,6 @@ function About() {
     const [currentDevLink, setCurrentDevLink] = useState(dev[0])
     const [currentContactLink, setCurrentContactLink] = useState(contact[0])
 
-    // console.log(currentDevLink);
 
     return (
         <>
@@ -164,14 +160,6 @@ function About() {
                             <AboutContactForm />
                         </div>
                     </div>
-
-
-                {/* <div className="component-section">
-                <h2>Check out our App!</h2>
-                    <div className="content flex-r">
-                        <AboutApp />
-                    </div>
-                </div> */}
                 
             </div>
         </div>

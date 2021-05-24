@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useMutation, useLazyQuery } from '@apollo/react-hooks';
 
 import '../css/Profile.css';
-import OwnerAddDog from '../components/OwnerProfileComponents/OwnerAddDog';
 import OwnerDetails from '../components/OwnerProfileComponents/OwnerDetails';
 import OwnerPetDetails from '../components/OwnerProfileComponents/OwnerPetDetails';
 import OwnerPasswordForm from '../components/OwnerProfileComponents/OwnerPasswordForm';
@@ -10,10 +9,8 @@ import { useStoreContext } from "../utils/GlobalState";
 import { QUERY_OWNER_ME, QUERY_OWNER_ORDERS } from '../utils/queries';
 import { UPDATE_OWNER_AVATAR } from '../utils/mutations';
 import { UPDATE_CURRENT_USER } from "../utils/actions";
-import OwnerBookWalk from './OwnerBookWalk';
 import { Link } from 'react-router-dom';
 import { openUploadWidget } from '../utils/CloudinaryService';
-import OwnerLiveMap from './OwnerLiveMap';
 import OwnerReviews from '../components/OwnerProfileComponents/OwnerReviews';
 
 function OwnerProfile() {
@@ -106,34 +103,13 @@ function OwnerProfile() {
               <div className="walker-contact-container">
                 <div className="walker-header">
                   <h2>Welcome {currentUser.first_name}!</h2>
-                  {/* <h2>Walks</h2> */}
                 </div>
 
-                {/* SHOW UPCOMING WALKS */}
-
-                {/* <h4 className="indent-text">Upcoming Walks</h4>
-              {currentUser && currentUser.status === "ACTIVE" }
-              {
-                ownerOrderData?.ownerOrders.map((order) => (
-                  order.status !== "PENDING_PROGRESS" 
-                  ? null 
-                  : (
-                    <div className="walks">
-                        <div>
-                            <div><span className="medium-text">Walk Date:</span> {order.service_date}</div>
-                            <div><span className="medium-text">Start time:</span> {order.service_time}</div>
-                            <div><span className="medium-text">Walker:</span> {`${order.walker.first_name} ${order.walker.last_name}`} </div>
-                            
-                            </div>
-                        </div>
-                    )
-                ))} */}
 
 
               <div className="button-container">
                 <Link to="/bookwalk"><button>Book a walk</button></Link>
                 <Link to="/ownertrackorder"><button>My Walks</button></Link>
-                {/* Need to make a new page for past walk */}
                 <Link to={"/ownerlivemap"}><button>View Tracker</button></Link>
               </div>
               </div>
