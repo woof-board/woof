@@ -1,0 +1,120 @@
+.form-title {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-bottom: 0;
+    width: 300px;
+
+}
+
+.form-link {
+
+    font-weight: 700;
+    font-size: 1.5rem;
+    padding: .25rem 1rem;
+    margin: .5rem 1rem;
+    border-radius: 15px;
+    border: 5px solid var(--secondary);
+    background-color: var(--secondary);
+    color: var(--tertiary);
+    cursor: pointer;
+}
+
+.walker .form-link {
+    border: 5px solid var(--secondary);
+    background-color: var(--secondary);
+    color: var(--tertiary);    
+}
+.owner .form-link {
+    border: 5px solid var(--quatenary);
+    background-color: var(--quatenary);
+    color: var(--primary);
+}
+
+.form-link h3 {
+    margin: 0;
+    padding: 0;
+}
+.walker .form-link:hover {
+    background-color: var(--tertiary);
+    color: var(--secondary);    
+}
+.owner .form-link:hover {
+    background-color: var(--primary);
+    color: var(--quatenary);
+}
+
+.walker .formActive {
+    background-color:var(--tertiary);
+    border: 5px solid var(--tertiary);
+    color: white;
+}
+
+.owner .formActive {
+    background-color:var(--primary);
+    border: 5px solid var(--primary);
+    color: white;
+}
+
+.walker .formActive:hover, .owner .formActive:hover {
+    color: white;
+}
+
+.form-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
+    width:300px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.owner-form {
+    background-color: var(--quatenary);
+}
+
+.walker-form {
+    background-color: var(--secondary);
+}
+
+
+.signup-login-input {
+    margin-bottom: .5rem;
+    width: 90%;
+    padding: .2rem .5rem;
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+
+.smaller-font {
+    font-size: .85rem;
+}
+
+
+
+@media screen and (max-width: 650px) {
+    .signup-login-input {
+        width: 90%
+    }
+
+    .form-link {
+        font-size: 1.5rem;
+    }
+
+    .form-title {
+        margin-top: 1rem;
+    }
+}
+
+@media screen and (max-width: 350px) {
+
+    .form-title {
+        width: 90%;
+    }
+}

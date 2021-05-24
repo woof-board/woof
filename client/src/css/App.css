@@ -1,0 +1,90 @@
+:root {
+  --primary: #254e9b;
+  --secondary: #bad1a4;
+  --tertiary: #266e34;
+  --quatenary: #98b4e7;
+  --quinary:  #DFD8D8;
+  --rgb-primary: 38, 79, 156;
+  --rgb-secondary: 186, 209, 164;
+  --rgb-tertiary: 38, 110, 52;
+  --rgb-quatemary: 128, 71, 31;
+  --rgb-quinary:  223, 216, 216;
+}
+/* if adding opacity to VAR, rgb(var(--color), <opacity>); */
+
+
+.error-page {
+  padding: 5rem;
+}
+
+.error-text {
+  background-color: black;
+  color: white;
+  padding: 0 .5rem 0 .5rem;
+  border-radius: 25px;
+}
+
+
+html, body, main {
+  height: 100%;
+}
+
+body {
+  background-color: var(--quinary);
+ 
+  font-family: 'Ubuntu', 'sans-serif';
+   /* possible font weights for ubuntu
+  300: light
+  400: regular
+  500: medium
+  700: bold */
+  font-weight:300;
+
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.page {
+  padding-top: 80px;
+  flex: 1 0 auto;
+  
+}
+
+.regText {
+  font-family: 'Ubuntu', 'sans-serif';
+  font-weight: 300;
+  font-size: .85em;
+}
+
+.normal-text {
+  font-size: 15px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Rokkitt', 'serif'; 
+
+  /* possible font weights for Rokkit
+  300: light
+  400: regular
+  500: medium
+  600: semi-bold
+  700: bold
+  800: extra bold
+  900: black */
+  font-weight:700;
+
+}
+.medium-text {
+  font-weight: 500;
+}
+
+.checkbox {
+ margin-top: 12px;
+}
+.checkbox input {
+  margin: 0 6px;
+}
